@@ -1,16 +1,22 @@
-var SezzleJS = function() {}
+
+/**
+ *
+ * @param {Array of path to the price tag (example: ['.price-class', '#product-price', 'span'])} targetXPath
+ */
+var SezzleJS = function(targetXPath) {
+  this.xpath = targetXPath.split('/');
+}
 
 /**
  * This function fetches all the elements that has price in it based on the given x-path
- * @param xpath - Array of path to the price tag (example: ['.price-class', '#product-price', 'span'])
  * @param xindex - Current xpath index value to be resolved [initial value is always 0]
  * @param elements - Array of current elements to be resolved [initial value is always null]
  *
  * @return All the elements with price in it that matches the xpath
  */
-SezzleJS.prototype.getAllPriceElements = function(xpath = [], xindex = 0, elements = null) {
+SezzleJS.prototype.getAllPriceElements = function(xindex = 0, elements = null) {
   // Break condition
-  if (xindex === xpath.length) {
+  if (xindex === this.xpath.length) {
     return elements;
   }
 
@@ -22,13 +28,13 @@ SezzleJS.prototype.getAllPriceElements = function(xpath = [], xindex = 0, elemen
   var children = [];
   for(var elemnt of Array.from(elements)) {
     // If this is an ID
-    if (xpath[xindex][0] === '#') {
-      children.push(elemnt.getElementById(xpath[xindex].substr(1)));
+    if (this.xpath[xindex][0] === '#') {
+      children.push(elemnt.getElementById(this.xpath[xindex].substr(1)));
     } else
     // If this is a class
-    if (xpath[xindex][0] === '.') {
+    if (this.xpath[xindex][0] === '.') {
       Array.from(
-        elemnt.getElementsByClassName(xpath[xindex].substr(1))
+        elemnt.getElementsByClassName(this.xpath[xindex].substr(1))
       )
       .forEach(function(el) {
           children.push(el);
@@ -37,13 +43,13 @@ SezzleJS.prototype.getAllPriceElements = function(xpath = [], xindex = 0, elemen
     // If this is a tag
     {
       var indexToTake = 0;
-      if (xpath[xindex].split('-').length > 1) {
-        if (xpath[xindex].split('-')[1] >= 0) {
-          indexToTake = parseInt(xpath[xindex].split('-')[1]);
+      if (this.xpath[xindex].split('-').length > 1) {
+        if (this.xpath[xindex].split('-')[1] >= 0) {
+          indexToTake = parseInt(this.xpath[xindex].split('-')[1]);
         }
       }
       Array.from(
-        elemnt.getElementsByTagName(xpath[xindex].split('-')[0])
+        elemnt.getElementsByTagName(this.xpath[xindex].split('-')[0])
       )
       .forEach(function(el, index) {
           if (index === indexToTake) children.push(el);
@@ -51,7 +57,7 @@ SezzleJS.prototype.getAllPriceElements = function(xpath = [], xindex = 0, elemen
     }
   }
   children = children.filter(function(c) {return c !== null});
-  return this.getAllPriceElements(xpath, xindex + 1, children);
+  return this.getAllPriceElements(xindex + 1, children);
 }
 
 /**
@@ -208,9 +214,9 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
 // Example
 
-var targetXPath = '.product-price';
-var targetXPathArray = targetXPath.split('/');
-var s = new SezzleJS();
+var s = new SezzleJS(
+  '.price/span'
+);
 // s.loadCSS();
-var els = s.getAllPriceElements(targetXPathArray);
+var els = s.getAllPriceElements();
 els.forEach((el, index) => s.renderAwesomeSezzle(el, index));
