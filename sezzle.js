@@ -164,10 +164,11 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // Loge node first child level - 1.1.1
   var logoNode1 = document.createElement("div");
-  logoNode1.classname = "sezzle-inline-text";
+  logoNode1.className = "sezzle-inline-text";
 
   // Logo node first child text - 1.1.1.1
   var logoNode1Text = document.createTextNode('with ');
+  logoNode1Text.className = "sezzle-inline-text"
   logoNode1.appendChild(logoNode1Text); // 1.1.1
 
   // Add logeNode1 to logoNode level - 1.1
@@ -175,7 +176,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // Logo node second child level - 1.1.2
   var logoNode2 = document.createElement("img");
-  logoNode2.classname = "szl-light-image";
+  logoNode2.className = "szl-light-image";
   logoNode2.src = "https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png";
 
   // Add logeNode1 to logoNode level - 1.1
@@ -183,7 +184,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // // Logo node third child level - 1.1.3
   // var logoNode3 = document.createElement("img");
-  // logoNode3.classname = "szl-dark-image";
+  // logoNode3.className = "szl-dark-image";
   // logoNode3.src = "https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-all-black-sm-100w.png";
 
   // Add logeNode1 to logoNode level - 1.1
@@ -191,7 +192,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // Loge node first child level - 1.1.4
   var logoNode4 = document.createElement("div");
-  logoNode4.classname = "sezzle-know-more";
+  logoNode4.className = "sezzle-know-more";
 
   // Logo node first child text - 1.1.4.1
   var logoNode4Text = document.createTextNode(' Learn more');
@@ -217,6 +218,6 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 var s = new SezzleJS(
   '.price/span'
 );
-// s.loadCSS();
+s.loadCSS();
 var els = s.getAllPriceElements();
 els.forEach((el, index) => s.renderAwesomeSezzle(el, index));
