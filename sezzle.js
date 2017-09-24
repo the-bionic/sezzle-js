@@ -3,8 +3,9 @@
  *
  * @param {Array of path to the price tag (example: ['.price-class', '#product-price', 'span'])} targetXPath
  */
-var SezzleJS = function(targetXPath) {
+var SezzleJS = function(targetXPath = '') {
   this.xpath = targetXPath.split('/');
+  this._config = { attributes: true, childList: true, characterData: true };
 }
 
 /**
@@ -146,7 +147,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // price value text node level - 1.1.1.1
   var priceValueText = document.createTextNode(
-    " of $" + Math.round((price / 4) * 100) / 100
+    ' of $' + Math.round((price / 4) * 100) / 100
   );
 
   // Adding price value to priceSpanNode - level - 1.1.2
@@ -211,13 +212,45 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
   parent.appendChild(sezzle);
 }
 
+/**
+ * Mutation observer
+ * This observer observe for any change in a
+ * given DOM element (Price element in our case)
+ * and act on that
+ */
+SezzleJS.prototype.observer = new MutationObserver(function(mutations) {
+  mutations
+    .filter(function(mutation) { return mutation.type === 'childList' })
+    .forEach(function(mutation) {
+      var s = new SezzleJS();
+      var price = s.parsePrice(mutation.target.innerText);
+      delete s;
+      var priceIndex = mutation.target.dataset.sezzleindex;
+      document.getElementsByClassName('sezzleindex-' + priceIndex)[0]
+        .innerText = ' of $' + Math.round((price / 4) * 100) / 100;
+    });
+});
+
+/**
+ * This function start observing for change
+ * in given Price element
+ * @param element to be observed
+ * @return void
+ */
+SezzleJS.prototype.startObserve = function(element) {
+  // TODO : Need a way to unsubscribe to prevent memory leak
+  this.observer.observe(element, this._config);
+}
 
 
 // Example
 
 var s = new SezzleJS(
-  '.price/span'
+  '.product-price'
 );
 s.loadCSS();
 var els = s.getAllPriceElements();
-els.forEach((el, index) => s.renderAwesomeSezzle(el, index));
+els.forEach((el, index) => {
+  s.renderAwesomeSezzle(el, index);
+  s.startObserve(el);
+});
