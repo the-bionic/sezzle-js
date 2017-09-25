@@ -242,6 +242,40 @@ SezzleJS.prototype.startObserve = function(element) {
   this.observer.observe(element, this._config);
 }
 
+/**
+ * This function renders the Sezzle modal
+ * Also adds the event for open and close modals
+ * to respective buttons
+ */
+SezzleJS.prototype.renderModal = function() {
+  if (!document.getElementsByClassName('sezzle-checkout-modal-lightbox').length) {
+    var modalNode = document.createElement('div');
+    modalNode.className = "sezzle-checkout-modal-lightbox close-sezzle-modal";
+    modalNode.style.display = 'none';
+    modalNode.innerHTML = '<div class="sezzle-checkout-modal sezzle-checkout-modal-hidden"> <div class="sezzle-no-thanks close-sezzle-modal"> x </div><div class="sezzle-modal-title"> <div class="sezzle-title-text-left"> How does </div><img class="sezzle-modal-logo" src="https://us.hideproxy.me/go.php?u=ahj%2F4iYOQRpedu%2Bd0gk4SRWy5JT4tNIbZU9%2BVdb0%2FIVMlARxjTdPzZ8f1vlc%2F9prz4RVq49ozLk8iqP0TdI7NK7xFOw0Fw%3D%3D&amp;b=5"> <div class="sezzle-title-text-right"> work? </div></div><div class="sezzle-header-text"> We have partnered with Sezzle to give you the ability to Buy Now and Pay Later. </div><div class="sezzle-sub-header-text"></div><div class="sezzle-modal-flex"> <div class="sezzle-modal-half"> <img src="https://us.hideproxy.me/go.php?u=ahj%2F4jFYSBZddLaM2hhtU1P25Jb5ut0QbVxmSIy5%2FY0X2QV4jCNPxYEdxOxWqtd9kY1Ov894gqZr3qn2Tw%3D%3D&amp;b=5"> <p><b>Simple Installments</b> Sezzle splits your purchase into 4 automatic installments. Only 25% is due today. The remaining installments occur every 2 weeks.</p></div><div class="sezzle-modal-half"> <img src="https://us.hideproxy.me/go.php?u=ahj%2F4jFYSBZddLaM2hhtU1P25Jb5ut0QbVxmSIy5%2FY0X2QV4jCNPxYEdxOxWqtd9kY1Ov89viqc8wvfoRpg%3D&amp;b=5"> <p><b>Quick and Easy</b> It takes only 1-2 minutes to checkout with Sezzle the first time. Future checkouts take seconds.</p></div></div><div class="sezzle-simply-select"> <div class="sezzle-inline-text-left"> Just select </div><img src="https://us.hideproxy.me/go.php?u=ahj%2F4iYOQRpedu%2Bd0gk4SRWy5JT4tNIbZU9%2BVdb0%2FIVMlARxjTdPzZ8f1vlc%2F9prz4RVq49ozLk8iqP0TdI7NK7xFOw0Fw%3D%3D&amp;b=5"> <div class="sezzle-inline-text-right"> at checkout. </div></div><div class="sezzle-footer-text"> Subject to approval. Estimated payment amount excludes taxes and shipping fees. Your actual installment payments will be presented for confirmation in your checkout with Sezzle. </div></div>';
+    document.getElementsByTagName('html')[0].appendChild(modalNode);
+
+    // Event listenr for click in know more button
+    Array.from(document.getElementsByClassName('sezzle-know-more'))
+      .forEach(function(el) {
+        el.addEventListener('click', function() {
+          // Show modal node
+          modalNode.style.display = 'block';
+          // Remove hidden class to show the item
+          modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
+        })
+      });
+    // Event listenr for close in modal
+    document.getElementsByClassName('close-sezzle-modal')[0]
+      .addEventListener('click', function() {
+        // Display the modal node
+        modalNode.style.display = 'none';
+        // Add hidden class hide the item
+        modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal sezzle-checkout-modal-hidden";
+      });
+  }
+}
+
 
 // Example
 
@@ -254,3 +288,4 @@ els.forEach((el, index) => {
   s.renderAwesomeSezzle(el, index);
   s.startObserve(el);
 });
+s.renderModal();
