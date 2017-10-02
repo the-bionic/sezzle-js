@@ -1,19 +1,28 @@
 
 /**
  *
- * @param {Array of path to the price tag (example: ['.price-class', '#product-price', 'span'])} targetXPath
+ * @param targetXPath {String of path to the price tag separated by '/' (example: '.price-class/#product-price/span')}
+ * @param forcedShow Show the widget even if the country is not supported
+ * @param alignment Alignment of the widget [left, right] default : centre
+ * @param merchantNameID This name ID is used to add to CSS classes for merchant specific CSS
+ * @param theme Widget theme - light or dark
+ * @param widthType Widget font width - thin / bold. Default : bold
  */
-var SezzleJS = function(targetXPath = '', forcedShow = false) {
+var SezzleJS = function(targetXPath = '', forcedShow = false, alignment = '', merchantID = '', theme = '', widthType = '') {
   // Configurable options
   this.xpath = targetXPath.split('/');
-  this.forcedShow = forcedShow
+  this.forcedShow = forcedShow;
+  this.alignment = alignment;
+  this.merchantID = merchantID;
+  this.theme = theme;
+  this.widthType = widthType;
   
   // Non configurable options
   this._config = { attributes: true, childList: true, characterData: true };
   // URL to request to get ip of request
   this.countryFromIPRequestURL = 'https://freegeoip.net/json/';
   // Countries supported by sezzle pay. To test your country, add here. Don't commit.
-  this.supportedCountryCodes = ['US'];
+  this.supportedCountryCodes = ['US', 'IN'];
 
   // Variables set by the js
   this.countryCode = null;
@@ -28,7 +37,7 @@ var SezzleJS = function(targetXPath = '', forcedShow = false) {
  */
 SezzleJS.prototype.getAllPriceElements = function(xindex = 0, elements = null) {
   // Break condition
-  if (xindex === this.xpath.length - 1) {
+  if (xindex === this.xpath.length) {
     return elements;
   }
 
@@ -87,13 +96,22 @@ SezzleJS.prototype.isNumeric = function(n) {
  * @return float
  */
 SezzleJS.prototype.parsePrice = function(price) {
+  return parseFloat(this.parsePriceString(price));
+}
+
+/**
+ * This function will return the price string
+ * @param price - string value
+ * @return string
+ */
+SezzleJS.prototype.parsePriceString = function(price) {
   var formattedPrice = '';
   for (var i = 0; i < price.length; i++) {
     if (this.isNumeric(price[i]) || price[i] == '.') {
       formattedPrice += price[i];
     }
   }
-  return parseFloat(formattedPrice);
+  return formattedPrice;
 }
 
 /**
@@ -128,9 +146,6 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
   // Set data index to each price element for tracking
   element.dataset.sezzleindex = index;
 
-  // Get the price from the element
-  var price = this.parsePrice(element.innerHTML);
-
   // Get parent elelemnt
   var parent = element.parentElement;
 
@@ -156,9 +171,10 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
   var priceSpanNode = document.createElement("span");
   priceSpanNode.className = "payment-amount sezzleindex-" + index;
 
+
   // price value text node level - 1.1.1.1
   var priceValueText = document.createTextNode(
-    ' of $' + Math.round((price / 4) * 100) / 100
+    ' of ' + this.getFormattedPrice(element.innerText)
   );
 
   // Adding price value to priceSpanNode - level - 1.1.2
@@ -224,6 +240,29 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 }
 
 /**
+ * Formats a price as Sezzle needs it
+ * @param priceText Complete price test Eg: $120.00 USD
+ */
+SezzleJS.prototype.getFormattedPrice = function(priceText) {
+  // Get the price string - useful for formtting Eg: 120.00(string)
+  var priceString = this.parsePriceString(priceText);
+  
+  // Get the price in float from the element - useful for calculation Eg : 120.00(float)
+  var price = this.parsePrice(priceText);
+
+  // Will be used later to replace {price} with price / 4.0 Eg: ${price} USD
+  var formatter = priceText.replace(priceString, '{price}');
+
+  // get the sezzle instalment price
+  var sezzleInstalmentPrice = (price / 4.0).toFixed(2);
+  
+  // format the string
+  var sezzleInstalmentFormattedPrice = formatter.replace('{price}', sezzleInstalmentPrice);
+
+  return sezzleInstalmentFormattedPrice;
+}
+
+/**
  * Mutation observer
  * This observer observes for any change in a
  * given DOM element (Price element in our case)
@@ -233,12 +272,9 @@ SezzleJS.prototype.observer = new MutationObserver(function(mutations) {
   mutations
     .filter(function(mutation) { return mutation.type === 'childList' })
     .forEach(function(mutation) {
-      var s = new SezzleJS();
-      var price = s.parsePrice(mutation.target.innerText);
-      delete s;
       var priceIndex = mutation.target.dataset.sezzleindex;
       document.getElementsByClassName('sezzleindex-' + priceIndex)[0]
-        .innerText = ' of $' + Math.round((price / 4) * 100) / 100;
+        .innerText = ' of ' + this.getFormattedPrice(mutation.target.innerText);
     });
 });
 
@@ -350,5 +386,9 @@ SezzleJS.prototype.initWidget = function() {
 var s = new SezzleJS(
   '.product-price',
   false,
+  'left',
+  'haatichai',
+  'light',
+  'thin'
 );
 s.init();
