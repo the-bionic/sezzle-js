@@ -17,7 +17,7 @@ var SezzleJS = function(targetXPath = '') {
  */
 SezzleJS.prototype.getAllPriceElements = function(xindex = 0, elements = null) {
   // Break condition
-  if (xindex === this.xpath.length) {
+  if (xindex === this.xpath.length - 1) {
     return elements;
   }
 
