@@ -3,9 +3,20 @@
  *
  * @param {Array of path to the price tag (example: ['.price-class', '#product-price', 'span'])} targetXPath
  */
-var SezzleJS = function(targetXPath = '') {
+var SezzleJS = function(targetXPath = '', forcedShow = false) {
+  // Configurable options
   this.xpath = targetXPath.split('/');
+  this.forcedShow = forcedShow
+  
+  // Non configurable options
   this._config = { attributes: true, childList: true, characterData: true };
+  // URL to request to get ip of request
+  this.countryFromIPRequestURL = 'https://freegeoip.net/json/';
+  // Countries supported by sezzle pay. To test your country, add here. Don't commit.
+  this.supportedCountryCodes = ['US'];
+
+  // Variables set by the js
+  this.countryCode = null;
 }
 
 /**
@@ -214,7 +225,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
 /**
  * Mutation observer
- * This observer observe for any change in a
+ * This observer observes for any change in a
  * given DOM element (Price element in our case)
  * and act on that
  */
@@ -232,7 +243,7 @@ SezzleJS.prototype.observer = new MutationObserver(function(mutations) {
 });
 
 /**
- * This function start observing for change
+ * This function starts observing for change
  * in given Price element
  * @param element to be observed
  * @return void
@@ -276,16 +287,68 @@ SezzleJS.prototype.renderModal = function() {
   }
 }
 
+/**
+ * This function will return the ISO 3166-1 alpha-2 country code
+ * from the user's IP
+ * @param callback what happens after country is received
+ */
+SezzleJS.prototype.getCountryCodeFromIP = function(callback) {
+  // make request
+  var httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = function() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        var body = httpRequest.response;
+        this.countryCode = body.country_code;
+        callback(this.countryCode);
+      }
+    }
+  };
+
+  httpRequest.open('GET', this.countryFromIPRequestURL);
+  httpRequest.responseType = 'json';
+  httpRequest.send();
+}
+
+/**
+ * Initialise the widget if the
+ * country is supported or the widget
+ * is forced to be shown
+ */
+
+SezzleJS.prototype.init = function() {
+  // Check if the widget should be shown
+  if (this.forcedShow) {
+    // show the widget
+    this.initWidget();
+  } else {
+    // get the country and show the widget if supported
+    this.getCountryCodeFromIP(function(countryCode) {
+      if (this.supportedCountryCodes.indexOf(countryCode) !== -1) {
+        this.initWidget();
+      }
+    }.bind(this));
+  }
+}
+
+/**
+ * All steps required to show the widget
+ */
+SezzleJS.prototype.initWidget = function() {
+  this.loadCSS();
+  var els = this.getAllPriceElements();
+  els.forEach(function (el, index) {
+    this.renderAwesomeSezzle(el, index);
+    this.startObserve(el);
+  }.bind(this));
+  this.renderModal();
+}
+
 
 // Example
 
 var s = new SezzleJS(
-  '.product-price'
+  '.product-price',
+  false,
 );
-s.loadCSS();
-var els = s.getAllPriceElements();
-els.forEach((el, index) => {
-  s.renderAwesomeSezzle(el, index);
-  s.startObserve(el);
-});
-s.renderModal();
+s.init();
