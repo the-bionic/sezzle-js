@@ -91,6 +91,13 @@ SezzleJS.prototype.isNumeric = function(n) {
 }
 
 /**
+ * This is helper function for formatPrice
+ */
+SezzleJS.prototype.isAlpha = function(n) {
+  return /^[A-Z]$/i.test(n);
+}
+
+/**
  * This function will format the price
  * @param price - string value
  * @return float
@@ -108,6 +115,9 @@ SezzleJS.prototype.parsePriceString = function(price) {
   var formattedPrice = '';
   for (var i = 0; i < price.length; i++) {
     if (this.isNumeric(price[i]) || price[i] == '.') {
+      // If current is a . and previous is a character, it can be something like Rs.
+      // so ignore it
+      if (i > 0 && price[i] == '.' && this.isAlpha(price[i - 1])) continue;
       formattedPrice += price[i];
     }
   }
@@ -136,6 +146,58 @@ SezzleJS.prototype.loadCSS = function() {
 }
 
 /**
+ * Add CSS alignment class as required
+ * @param cssString CSS string attached to an element
+ */
+SezzleJS.prototype.addCSSAlignment = function(cssString = '') {
+  switch(this.alignment) {
+    case 'left':
+      return cssString + " sezzle-left";
+    case 'right':
+      return cssString + " sezzle-right";
+    default:
+      return cssString;
+  }
+}
+
+/**
+ * Add CSS width class as required
+ * @param cssString CSS string attached to an element
+ */
+SezzleJS.prototype.addCSSWidth = function(cssString = '') {
+  switch(this.widthType) {
+    case 'thin':
+      return cssString + " sezzle-thin";
+    default:
+      return cssString;
+  }
+}
+
+/**
+ * Add CSS theme class as required
+ * @param cssString CSS string attached to an element
+ */
+SezzleJS.prototype.addCSSTheme = function(cssString = '') {
+  switch(this.theme) {
+    case 'dark':
+      return cssString + " szl-dark";
+    default:
+      return cssString + " szl-light";
+  }
+}
+
+/**
+ * Add CSS customisation class as required
+ * @param cssString CSS string attached to an element
+ */
+SezzleJS.prototype.addCSSCustomisation = function(cssString = '') {
+  var cssStringCust = this.addCSSAlignment(cssString);
+  cssStringCust = this.addCSSWidth(cssStringCust);
+  cssStringCust = this.addCSSTheme(cssStringCust);
+  return cssStringCust;
+}
+
+/**
  * This function will set Sezzle's elements with
  * the price element in parallel
  * @param element - This is the price element
@@ -155,11 +217,11 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // node level - 1
   var node = document.createElement("div");
-  node.className = "sezzle-checkout-button-wrapper sezzle-left sezzle-haatichai";
+  node.className = this.addCSSAlignment("sezzle-checkout-button-wrapper sezzle-haatichai");
 
   // price node level - 1.1
   var priceNode = document.createElement("div");
-  priceNode.className = "sezzle-button-text sezzle-left";
+  priceNode.className = this.addCSSAlignment("sezzle-button-text");
 
   // price text node level - 1.1.1
   var priceText = document.createTextNode("or 4 automatic, interest free payments");
@@ -188,7 +250,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // Logo node level - 1.1
   var logoNode = document.createElement("div");
-  logoNode.className = "sezzle-checkout-button open-sezzle-modal sezzle-left szl-light";
+  logoNode.className = this.addCSSCustomisation("sezzle-checkout-button open-sezzle-modal");
 
   // Loge node first child level - 1.1.1
   var logoNode1 = document.createElement("div");
