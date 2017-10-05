@@ -217,7 +217,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
   // Set data index to each price element for tracking
   element.dataset.sezzleindex = index;
 
-  // Get parent elelemnt
+  // Get parent element
   var parent = element.parentElement;
 
   // root node for sezzle
