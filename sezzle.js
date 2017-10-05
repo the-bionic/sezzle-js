@@ -307,7 +307,16 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
   sezzle.appendChild(node);
 
   // Adding sezzle to parent node
-  parent.appendChild(sezzle);
+  this.insertAfter(sezzle, parent);
+}
+
+/**
+ * Insert child after a given element
+ * @param el Element to insert
+ * @param referenceNode Element to insert after
+ */
+SezzleJS.prototype.insertAfter = function(el, referenceNode) {
+  referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 }
 
 /**
