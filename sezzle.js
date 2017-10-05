@@ -28,6 +28,8 @@ var SezzleJS = function(
   this._config = { attributes: true, childList: true, characterData: true };
   // URL to request to get ip of request
   this.countryFromIPRequestURL = 'https://freegeoip.net/json/';
+  // URL to request to get css details
+  this.cssForMerchantURL = 'https://shopify.sezzle.com/v1/button/css?merchant-id=' + this.merchantID;
   // Countries supported by sezzle pay. To test your country, add here. Don't commit.
   this.supportedCountryCodes = ['US', 'IN'];
 
@@ -138,20 +140,11 @@ SezzleJS.prototype.parsePriceString = function(price) {
  * @return void
  */
 SezzleJS.prototype.loadCSS = function() {
-  // Check if the CSS is already there
-  var links = document.getElementsByTagName('link');
-
-  var url = 'https://d3svog4tlx445w.cloudfront.net/shopify-app/assets/sezzle-shopify-styles-global0.1.120.css';
-  if (!Array.from(links).find(function(link) {
-    return link.href === url;
-  })) {
-    var link = document.createElement( "link" );
-    link.href = url;
-    link.type = "text/css";
-    link.rel = "stylesheet";
-    link.media = "screen,print";
-    document.getElementsByTagName( "head" )[0].appendChild( link );
-  }
+  this.getCSSVersionForMerchant(function(version) {
+    var head = document.getElementsByTagName('head')[0];
+    var linkElement = "<link rel='stylesheet' href='https://d3svog4tlx445w.cloudfront.net/shopify-app/assets/" + version + "' type='text/css' media='screen'>";
+    head.appendChild(linkElement);
+  }.bind(this));
 }
 
 /**
@@ -422,6 +415,27 @@ SezzleJS.prototype.getCountryCodeFromIP = function(callback) {
   };
 
   httpRequest.open('GET', this.countryFromIPRequestURL);
+  httpRequest.responseType = 'json';
+  httpRequest.send();
+}
+
+/**
+ * This function will fetch the css file version to use for given merchant
+ * @param callback What to do with the css version received
+ */
+SezzleJS.prototype.getCSSVersionForMerchant = function(callback) {
+  // make request
+  var httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = function() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        var body = httpRequest.response;
+        callback(body.version);
+      }
+    }
+  };
+
+  httpRequest.open('GET', this.cssForMerchantURL);
   httpRequest.responseType = 'json';
   httpRequest.send();
 }
