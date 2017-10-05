@@ -413,7 +413,6 @@ SezzleJS.prototype.getCountryCodeFromIP = function(callback) {
  * country is supported or the widget
  * is forced to be shown
  */
-
 SezzleJS.prototype.init = function() {
   // Check if the widget should be shown
   if (this.forcedShow) {
