@@ -471,9 +471,8 @@ SezzleJS.prototype.getCountryCodeFromIP = function(callback) {
  */
 SezzleJS.prototype.getCSSVersionForMerchant = function(callback) {
   // make request
-  if (css_version_override) {
-    callback(css_version_override)
-    return
+  if (document.sezzleCssVersionOverride !== undefined) {
+    callback(document.sezzleCssVersionOverride);
   } else {
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function() {
