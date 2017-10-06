@@ -15,7 +15,7 @@ var SezzleJS = function(options) {
   this.minPrice = options.minPrice || 0;
   this.maxPrice = options.maxPrice || 100000;
   this.imageUrl = options.imageUrl || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
-  
+
   // Non configurable options
   this._config = { attributes: true, childList: true, characterData: true };
   // URL to request to get ip of request
@@ -131,7 +131,7 @@ SezzleJS.prototype.parsePriceString = function(price) {
  * This function loads up CSS dynamically to clients page
  * @return void
  */
-SezzleJS.prototype.loadCSS = function() {
+SezzleJS.prototype.loadCSS = function(callback) {
   this.getCSSVersionForMerchant(function(version) {
     var head = document.head;
     var link = document.createElement('link');
@@ -139,6 +139,7 @@ SezzleJS.prototype.loadCSS = function() {
     link.rel = 'stylesheet'
     link.href = 'https://d3svog4tlx445w.cloudfront.net/shopify-app/assets/' + version + '';
     head.appendChild(link);
+    link.onload = callback;
   }.bind(this));
 }
 
@@ -361,7 +362,7 @@ SezzleJS.prototype.isProductEligible = function(priceText) {
 SezzleJS.prototype.getFormattedPrice = function(priceText) {
   // Get the price string - useful for formtting Eg: 120.00(string)
   var priceString = this.parsePriceString(priceText);
-  
+
   // Get the price in float from the element - useful for calculation Eg : 120.00(float)
   var price = this.parsePrice(priceText);
 
@@ -370,7 +371,7 @@ SezzleJS.prototype.getFormattedPrice = function(priceText) {
 
   // get the sezzle instalment price
   var sezzleInstalmentPrice = (price / 4.0).toFixed(2);
-  
+
   // format the string
   var sezzleInstalmentFormattedPrice = formatter.replace('{price}', sezzleInstalmentPrice);
 
@@ -506,13 +507,15 @@ SezzleJS.prototype.init = function() {
  * All steps required to show the widget
  */
 SezzleJS.prototype.initWidget = function() {
-  this.loadCSS();
-  var els = this.getAllPriceElements();
-  els.forEach(function (el, index) {
-    this.renderAwesomeSezzle(el, index);
-    this.startObserve(el);
-  }.bind(this));
-  this.renderModal();
+  this.loadCSS(function() {
+      var els = this.getAllPriceElements();
+      els.forEach(function (el, index) {
+        this.renderAwesomeSezzle(el, index);
+        this.startObserve(el);
+      }.bind(this));
+      this.renderModal();
+    }.bind(this)
+  );
 }
 
 // Assumes document.sezzleConfig is present
