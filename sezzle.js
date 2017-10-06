@@ -514,10 +514,16 @@ SezzleJS.prototype.initWidget = function() {
   this.renderModal();
 }
 
+// Assumes document.sezzleConfig is present
+window.onload = new SezzleJS(document.sezzleConfig).init();
 
 // Example
 
-// var s = new SezzleJS(
+// Add this to the header of any website you want
+// <script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=1"></script>
+
+// Set the document config like so
+// document.sezzleConfig =
 //   {
 //     targetXPath: '.product-price',
 //     forcedShow: false,
@@ -530,5 +536,3 @@ SezzleJS.prototype.initWidget = function() {
 //     maxPrice: 100000,
 //     imageUrl: ''
 //   }
-// );
-window.onload = document.sezzle.init();
