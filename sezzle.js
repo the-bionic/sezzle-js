@@ -21,7 +21,7 @@ var SezzleJS = function(options) {
   // URL to request to get ip of request
   this.countryFromIPRequestURL = 'https://freegeoip.net/json/';
   // URL to request to get css details
-  this.cssForMerchantURL = 'https://widget.sezzle.com/v1/button/css?uuid=' + this.merchantID;
+  this.cssForMerchantURL = 'https://widget.sezzle.com/v1/css?uuid=' + this.merchantID;
   // Countries supported by sezzle pay. To test your country, add here.
   this.supportedCountryCodes = ['US', 'IN'];
 
@@ -234,7 +234,7 @@ SezzleJS.prototype.insertWidgetTypeCSSClassInElement = function(element) {
 SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
   // Do not render this product if it is not eligible
   if (!this.isProductEligible(element)) return false;
-  
+
   // Set data index to each price element for tracking
   element.dataset.sezzleindex = index;
 
