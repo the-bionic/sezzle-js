@@ -731,6 +731,9 @@
   float: left;
 }
 
+.sezzle-shopify-info-button {
+  overflow: auto;
+}
 .sezzle-shopify-info-button.sezzle-right {
   text-align: right;
   -ms-flex-pack: right;
