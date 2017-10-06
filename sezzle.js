@@ -517,18 +517,18 @@ SezzleJS.prototype.initWidget = function() {
 
 // Example
 
-var s = new SezzleJS(
-  {
-    targetXPath: '.product-price',
-    forcedShow: false,
-    alignment: 'left',
-    merchantID: '1',
-    theme: 'light',
-    widthType: 'thin',
-    widgetType: 'product-page',
-    minPrice: 0,
-    maxPrice: 100000,
-    imageUrl: ''
-  }
-);
-s.init();
+// var s = new SezzleJS(
+//   {
+//     targetXPath: '.product-price',
+//     forcedShow: false,
+//     alignment: 'left',
+//     merchantID: '1',
+//     theme: 'light',
+//     widthType: 'thin',
+//     widgetType: 'product-page',
+//     minPrice: 0,
+//     maxPrice: 100000,
+//     imageUrl: ''
+//   }
+// );
+window.onload = document.sezzle.init();
