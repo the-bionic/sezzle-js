@@ -1,0 +1,50 @@
+{
+  "name": "sezzle-js",
+  "version": "1.0.0",
+  "description": "Sezzle Sales Widget Price Watcher",
+  "main": "sezzle.js",
+  "scripts": {
+    "deploy-widget": "gulp deploywidget",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sezzle/sezzle-js.git"
+  },
+  "author": "dev@sezzle.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sezzle/sezzle-js/issues"
+  },
+  "homepage": "https://github.com/sezzle/sezzle-js#readme",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "fs": "0.0.1-security",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-cache": "^0.4.5",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-html2string": "^0.1.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-inline-source": "^3.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-livereload": "^3.8.1",
+    "gulp-notify": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-rimraf": "^0.2.1",
+    "gulp-ruby-sass": "^2.1.1",
+    "gulp-s3-upload": "^1.6.4",
+    "gulp-uglify": "^2.0.1",
+    "gulp-webserver": "^0.9.1",
+    "pump": "^1.0.2",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
+    "rimraf": "^2.6.0",
+		"stylelint-config-standard": "^17.0.0",
+		"gulp-html-to-js": "0.0.5",
+    "gulp-stylelint": "^4.0.0"
+  }
+}
