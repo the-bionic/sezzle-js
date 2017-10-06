@@ -1,36 +1,28 @@
 
 /**
  *
- * @param targetXPath {String of path to the price tag separated by '/' (example: '.price-class/#product-price/span')}
- * @param forcedShow Show the widget even if the country is not supported
- * @param alignment Alignment of the widget [left, right] default : centre
- * @param merchantID This name ID is used to add to CSS classes for merchant specific CSS
- * @param theme Widget theme - light or dark
- * @param widthType Widget font width - thin / bold. Default : bold
+ * @param options All widget options
  */
-var SezzleJS = function(
-    targetXPath = '',
-    forcedShow = false,
-    alignment = '',
-    merchantID = '',
-    theme = '',
-    widthType = ''
-  ) {
+var SezzleJS = function(options) {
   // Configurable options
-  this.xpath = targetXPath.split('/');
-  this.forcedShow = forcedShow;
-  this.alignment = alignment;
-  this.merchantID = merchantID;
-  this.theme = theme;
-  this.widthType = widthType;
+  this.xpath = options.targetXPath ? options.targetXPath.split('/') : null;
+  this.forcedShow = options.forcedShow || false;
+  this.alignment = options.alignment || '';
+  this.merchantID = options.merchantID || '';
+  this.theme = options.theme || '';
+  this.widthType = options.widthType || '';
+  this.widgetType = options.widthType || 'product';
+  this.minPrice = this.minPrice || 0;
+  this.maxPrice = this.maxPrice || 100000;
+  this.imageUrl = this.imageUrl || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
   
   // Non configurable options
   this._config = { attributes: true, childList: true, characterData: true };
   // URL to request to get ip of request
   this.countryFromIPRequestURL = 'https://freegeoip.net/json/';
   // URL to request to get css details
-  this.cssForMerchantURL = 'https://shopify.sezzle.com/v1/button/css?merchant-id=' + this.merchantID;
-  // Countries supported by sezzle pay. To test your country, add here. Don't commit.
+  this.cssForMerchantURL = 'https://widget.sezzle.com/v1/button/css?uuid=' + this.merchantID;
+  // Countries supported by sezzle pay. To test your country, add here.
   this.supportedCountryCodes = ['US', 'IN'];
 
   // Variables set by the js
@@ -149,54 +141,87 @@ SezzleJS.prototype.loadCSS = function() {
 
 /**
  * Add CSS alignment class as required
- * @param cssString CSS string attached to an element
+ * @param element Element to add to
  */
-SezzleJS.prototype.addCSSAlignment = function(cssString = '') {
+SezzleJS.prototype.addCSSAlignment = function(element) {
   switch(this.alignment) {
     case 'left':
-      return cssString + " sezzle-left";
+      element.className += " sezzle-left";
+      break;
     case 'right':
-      return cssString + " sezzle-right";
+      element.className += " sezzle-right";
+      break;
     default:
-      return cssString;
+      break;
   }
 }
 
 /**
  * Add CSS width class as required
- * @param cssString CSS string attached to an element
+ * @param element Element to add to
  */
-SezzleJS.prototype.addCSSWidth = function(cssString = '') {
+SezzleJS.prototype.addCSSWidth = function(element) {
   switch(this.widthType) {
     case 'thin':
-      return cssString + " sezzle-thin";
+      element.className += " sezzle-thin";
+      break;
     default:
-      return cssString;
+      break;
   }
 }
 
 /**
  * Add CSS theme class as required
- * @param cssString CSS string attached to an element
+ * @param element Element to add to
  */
-SezzleJS.prototype.addCSSTheme = function(cssString = '') {
+SezzleJS.prototype.addCSSTheme = function(element) {
   switch(this.theme) {
     case 'dark':
-      return cssString + " szl-dark";
+      element.className += " szl-dark";
+      break;
     default:
-      return cssString + " szl-light";
+      element.className += " szl-light";
+      break;
   }
 }
 
 /**
  * Add CSS customisation class as required
- * @param cssString CSS string attached to an element
+ * @param element Element to add to
  */
-SezzleJS.prototype.addCSSCustomisation = function(cssString = '') {
-  var cssStringCust = this.addCSSAlignment(cssString);
-  cssStringCust = this.addCSSWidth(cssStringCust);
-  cssStringCust = this.addCSSTheme(cssStringCust);
-  return cssStringCust;
+SezzleJS.prototype.addCSSCustomisation = function(element) {
+  this.addCSSAlignment(element);
+  this.addCSSWidth(element);
+  this.addCSSTheme(element);
+}
+
+/**
+ * Insert css class name in element
+ * @param element to add class to
+ */
+SezzleJS.prototype.insertStoreCSSClassInElement = function(element) {
+  element.className += " " + this.merchantID;
+}
+
+/**
+ * Insert css class name in element
+ * @param element to add class to
+ */
+SezzleJS.prototype.insertWidgetTypeCSSClassInElement = function(element) {
+  switch (this.widgetType) {
+    case 'cart':
+      element.className += " sezzle-cart-page-widget";
+      break;
+    case 'product-page':
+      element.className += " sezzle-product-page-widget"
+      break;
+    case 'product-preview':
+      element.className += " sezzle-product-preview-widget"
+      break;
+    default:
+      element.className += " sezzle-product-page-widget"
+      break;
+  }
 }
 
 /**
@@ -207,6 +232,9 @@ SezzleJS.prototype.addCSSCustomisation = function(cssString = '') {
  * @return void
  */
 SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
+  // Do not render this product if it is not eligible
+  if (!this.isProductEligible(element)) return false;
+  
   // Set data index to each price element for tracking
   element.dataset.sezzleindex = index;
 
@@ -215,15 +243,20 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // root node for sezzle
   var sezzle = document.createElement('div');
-  sezzle.className = "sezzle-shopify-info-button sezzle-product-page-widget sezzle-haatichai"
+  sezzle.className = "sezzle-shopify-info-button sezzle-product-page-widget"
+  this.insertWidgetTypeCSSClassInElement(sezzle);
+  this.insertStoreCSSClassInElement(sezzle);
 
   // node level - 1
   var node = document.createElement("div");
-  node.className = this.addCSSAlignment("sezzle-checkout-button-wrapper sezzle-haatichai");
+  node.className = "sezzle-checkout-button-wrapper";
+  this.insertStoreCSSClassInElement(node);
+  this.addCSSAlignment(node);
 
   // price node level - 1.1
   var priceNode = document.createElement("div");
-  priceNode.className = this.addCSSAlignment("sezzle-button-text");
+  priceNode.className = "sezzle-button-text";
+  this.addCSSAlignment(priceNode);
 
   // price text node level - 1.1.1
   var priceText = document.createTextNode("or 4 automatic, interest free payments");
@@ -252,7 +285,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // Logo node level - 1.1
   var logoNode = document.createElement("div");
-  logoNode.className = this.addCSSCustomisation("sezzle-checkout-button open-sezzle-modal");
+  this.addCSSCustomisation(logoNode);
 
   // Loge node first child level - 1.1.1
   var logoNode1 = document.createElement("div");
@@ -269,18 +302,10 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
   // Logo node second child level - 1.1.2
   var logoNode2 = document.createElement("img");
   logoNode2.className = "szl-light-image";
-  logoNode2.src = "https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png";
+  logoNode2.src = this.imageUrl;
 
   // Add logeNode1 to logoNode level - 1.1
   logoNode.appendChild(logoNode2);
-
-  // // Logo node third child level - 1.1.3
-  // var logoNode3 = document.createElement("img");
-  // logoNode3.className = "szl-dark-image";
-  // logoNode3.src = "https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-all-black-sm-100w.png";
-
-  // Add logeNode1 to logoNode level - 1.1
-  // logoNode.appendChild(logoNode3);
 
   // Loge node first child level - 1.1.4
   var logoNode4 = document.createElement("div");
@@ -310,6 +335,20 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
  */
 SezzleJS.prototype.insertAfter = function(el, referenceNode) {
   referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+}
+
+/**
+ * Is the product eligible for sezzle pay
+ * @param price Price of product
+ */
+SezzleJS.prototype.isProductEligible = function(priceText) {
+  var price = this.parsePrice(priceText);
+  var priceInCents = price * 100;
+  if (price >= this.minPrice && price <= this.maxPrice) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -477,11 +516,17 @@ SezzleJS.prototype.initWidget = function() {
 // Example
 
 var s = new SezzleJS(
-  '.product-price',
-  false,
-  'left',
-  'haatichai',
-  'light',
-  'thin'
+  {
+    targetXPath: '.product-price',
+    forcedShow: false,
+    alignment: 'left',
+    merchantID: '',
+    theme: 'light',
+    widthType: 'thin',
+    widgetType: 'product-page',
+    minPrice: 0,
+    maxPrice: 100000,
+    imageUrl: ''
+  }
 );
 s.init();
