@@ -131,7 +131,7 @@ SezzleJS.prototype.parsePriceString = function(price) {
  * This function loads up CSS dynamically to clients page
  * @return void
  */
-SezzleJS.prototype.loadCSS = function() {
+SezzleJS.prototype.loadCSS = function(callback) {
   this.getCSSVersionForMerchant(function(version) {
     var head = document.head;
     var link = document.createElement('link');
@@ -139,6 +139,7 @@ SezzleJS.prototype.loadCSS = function() {
     link.rel = 'stylesheet'
     link.href = 'https://d3svog4tlx445w.cloudfront.net/shopify-app/assets/' + version + '';
     head.appendChild(link);
+    link.onload = callback;
   }.bind(this));
 }
 
@@ -506,13 +507,15 @@ SezzleJS.prototype.init = function() {
  * All steps required to show the widget
  */
 SezzleJS.prototype.initWidget = function() {
-  this.loadCSS();
-  var els = this.getAllPriceElements();
-  els.forEach(function (el, index) {
-    this.renderAwesomeSezzle(el, index);
-    this.startObserve(el);
-  }.bind(this));
-  this.renderModal();
+  this.loadCSS(function() {
+      var els = this.getAllPriceElements();
+      els.forEach(function (el, index) {
+        this.renderAwesomeSezzle(el, index);
+        this.startObserve(el);
+      }.bind(this));
+      this.renderModal();
+    }.bind(this)
+  );
 }
 
 // Assumes document.sezzleConfig is present
