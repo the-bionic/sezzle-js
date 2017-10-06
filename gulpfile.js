@@ -23,7 +23,7 @@ var gulp = require('gulp'),
 
 var buttonUploadName = 'sezzle-widget0.0.1.js';
 var bannerUploadName = 'sezzle-banner2.1.1.js';
-var globalCssUploadName = 'sezzle-shopify-styles-global0.1.158.css';
+var globalCssUploadName = 'sezzle-shopify-styles-global1.0.0.css';
 
 gulp.task("cssupload", function() {
     // bucket base url https://d3svog4tlx445w.cloudfront.net/
@@ -54,7 +54,7 @@ gulp.task("upload-widget", function() {
 gulp.task("post-button-to-widget-server", function() {
     var options = {
         method: 'POST',
-        uri: 'https://widget.sezzle.com/v1/javascript',
+        uri: 'https://widget.sezzle.com/v1/javascript/price-widget/version',
         body: {
             'version_name': buttonUploadName
         },
@@ -74,7 +74,7 @@ gulp.task('post-button-css-to-wrapper', function() {
 	console.log("Posting css version to shopify gateway")
 	  var options = {
 		  method: 'POST',
-		  uri: 'https://shopify.sezzle.com/v1/button/css',
+		  uri: 'https://widget.sezzle.com/v1/css/price-widget/version',
 		  body: {
 			  'version_name': globalCssUploadName
 		  },
@@ -91,3 +91,4 @@ gulp.task('post-button-css-to-wrapper', function() {
   })
 
 gulp.task("deploywidget", ["upload-widget", "post-button-to-widget-server"])
+gulp.task("deploycss", ["cssupload", "post-button-css-to-wrapper"])

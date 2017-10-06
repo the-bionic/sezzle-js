@@ -4,7 +4,8 @@
   "description": "Sezzle Sales Widget Price Watcher",
   "main": "sezzle.js",
   "scripts": {
-    "deploy-widget": "gulp deploywidget",
+		"deploy-widget": "gulp deploywidget",
+		"deploy-css": "gulp deploycss",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
