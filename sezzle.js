@@ -471,19 +471,23 @@ SezzleJS.prototype.getCountryCodeFromIP = function(callback) {
  */
 SezzleJS.prototype.getCSSVersionForMerchant = function(callback) {
   // make request
-  var httpRequest = new XMLHttpRequest();
-  httpRequest.onreadystatechange = function() {
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-      if (httpRequest.status === 200) {
-        var body = httpRequest.response;
-        callback(body.version);
+  if (document.sezzleCssVersionOverride !== undefined) {
+    callback(document.sezzleCssVersionOverride);
+  } else {
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+          var body = httpRequest.response;
+          callback(body.version);
+        }
       }
-    }
-  };
-
-  httpRequest.open('GET', this.cssForMerchantURL);
-  httpRequest.responseType = 'json';
-  httpRequest.send();
+    };
+  
+    httpRequest.open('GET', this.cssForMerchantURL);
+    httpRequest.responseType = 'json';
+    httpRequest.send();
+  }
 }
 
 /**
