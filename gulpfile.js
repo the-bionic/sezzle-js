@@ -1,4 +1,7 @@
 var gulp = require('gulp'),
+    sass = require('gulp-ruby-sass'),
+    autoprefixer = require('gulp-autoprefixer'),
+    cssnano = require('gulp-cssnano'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
@@ -23,11 +26,11 @@ var gulp = require('gulp'),
 
 var buttonUploadName = 'sezzle-widget0.0.4.js';
 var bannerUploadName = 'sezzle-banner2.1.1.js';
-var globalCssUploadName = 'sezzle-shopify-styles-global1.0.0.css';
+var globalCssUploadName = 'sezzle-shopify-styles-global1.0.1.css';
 
 gulp.task("cssupload", function() {
     // bucket base url https://d3svog4tlx445w.cloudfront.net/
-    var indexPath = './css/sezzle-common.css'
+    var indexPath = './dist/global-css/global.min.css'
     gulp.src(indexPath)
         .pipe(rename('shopify-app/assets/' + globalCssUploadName))
         .pipe(s3({
@@ -72,23 +75,45 @@ gulp.task("post-button-to-widget-server", function() {
 
 gulp.task('post-button-css-to-wrapper', function() {
 	console.log("Posting css version to shopify gateway")
-	  var options = {
-		  method: 'POST',
-		  uri: 'https://widget.sezzle.com/v1/css/price-widget/version',
-		  body: {
-			  'version_name': globalCssUploadName
-		  },
-		  json: true
-	  }
-	  rp(options)
-		  .then(function(body) {
-			  console.log("Posted new version to shopify wrapper")
-		  })
-		  .catch(function(err) {
-			  console.log("Post failed with sezzle pay, ")
-			  console.log(err);
-		  })
-  })
+    var options = {
+        method: 'POST',
+        uri: 'https://widget.sezzle.com/v1/css/price-widget/version',
+        body: {
+            'version_name': globalCssUploadName
+        },
+        json: true
+    }
+    rp(options)
+    .then(function(body) {
+        console.log("Posted new version to shopify wrapper")
+    })
+    .catch(function(err) {
+        console.log("Post failed with sezzle pay, ")
+        console.log(err);
+    })
+});
 
+// compiles scss and minifies
+gulp.task('csscompile', function() {
+    return sass('./styles/global.scss', {
+        style: 'expanded'
+    })
+    .pipe(autoprefixer('last 2 version'))
+    .pipe(gulp.dest('dist/global-css'))
+    .pipe(rename({
+        suffix: '.min'
+    }))
+    .pipe(cssnano({
+        zindex: false
+    }))
+    .pipe(gulp.dest('dist/global-css'))
+});
+
+// cleans up dist directory
+gulp.task('cleancss', function() {
+    return del(['dist/global-css/**']);
+});
+
+gulp.task('styles', ['cleancss', 'csscompile']);
 gulp.task("deploywidget", ["upload-widget", "post-button-to-widget-server"])
-gulp.task("deploycss", ["cssupload", "post-button-css-to-wrapper"])
+gulp.task("deploycss", ["styles", "cssupload", "post-button-css-to-wrapper"])

@@ -287,6 +287,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // Logo node level - 1.1
   var logoNode = document.createElement("div");
+  logoNode.className = "sezzle-checkout-button";
   this.addCSSCustomisation(logoNode);
 
   // Loge node first child level - 1.1.1
