@@ -15,7 +15,7 @@ var SezzleJS = function(options) {
   this.minPrice = options.minPrice || 0;
   this.maxPrice = options.maxPrice || 100000;
   this.imageUrl = options.imageUrl || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
-  
+
   // Non configurable options
   this._config = { attributes: true, childList: true, characterData: true };
   // URL to request to get ip of request
@@ -361,7 +361,7 @@ SezzleJS.prototype.isProductEligible = function(priceText) {
 SezzleJS.prototype.getFormattedPrice = function(priceText) {
   // Get the price string - useful for formtting Eg: 120.00(string)
   var priceString = this.parsePriceString(priceText);
-  
+
   // Get the price in float from the element - useful for calculation Eg : 120.00(float)
   var price = this.parsePrice(priceText);
 
@@ -370,7 +370,7 @@ SezzleJS.prototype.getFormattedPrice = function(priceText) {
 
   // get the sezzle instalment price
   var sezzleInstalmentPrice = (price / 4.0).toFixed(2);
-  
+
   // format the string
   var sezzleInstalmentFormattedPrice = formatter.replace('{price}', sezzleInstalmentPrice);
 
@@ -517,23 +517,3 @@ SezzleJS.prototype.initWidget = function() {
 
 // Assumes document.sezzleConfig is present
 window.onload = new SezzleJS(document.sezzleConfig).init();
-
-// Example
-
-// Add this to the header of any website you want
-// <script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=1"></script>
-
-// Set the document config like so
-// document.sezzleConfig =
-//   {
-//     targetXPath: '.product-price',
-//     forcedShow: false,
-//     alignment: 'left',
-//     merchantID: '1',
-//     theme: 'light',
-//     widthType: 'thin',
-//     widgetType: 'product-page',
-//     minPrice: 0,
-//     maxPrice: 100000,
-//     imageUrl: ''
-//   }
