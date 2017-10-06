@@ -12,9 +12,9 @@ var SezzleJS = function(options) {
   this.theme = options.theme || '';
   this.widthType = options.widthType || '';
   this.widgetType = options.widthType || 'product';
-  this.minPrice = this.minPrice || 0;
-  this.maxPrice = this.maxPrice || 100000;
-  this.imageUrl = this.imageUrl || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
+  this.minPrice = options.minPrice || 0;
+  this.maxPrice = options.maxPrice || 100000;
+  this.imageUrl = options.imageUrl || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
   
   // Non configurable options
   this._config = { attributes: true, childList: true, characterData: true };
@@ -287,6 +287,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // Logo node level - 1.1
   var logoNode = document.createElement("div");
+  logoNode.className = "sezzle-checkout-button";
   this.addCSSCustomisation(logoNode);
 
   // Loge node first child level - 1.1.1
