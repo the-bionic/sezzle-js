@@ -133,9 +133,12 @@ SezzleJS.prototype.parsePriceString = function(price) {
  */
 SezzleJS.prototype.loadCSS = function() {
   this.getCSSVersionForMerchant(function(version) {
-    var head = document.getElementsByTagName('head')[0];
-    var linkElement = "<link rel='stylesheet' href='https://d3svog4tlx445w.cloudfront.net/shopify-app/assets/" + version + "' type='text/css' media='screen'>";
-    head.appendChild(linkElement);
+    var head = document.head;
+    var link = document.createElement('link');
+    link.type = 'text/css'
+    link.rel = 'stylesheet'
+    link.href = 'https://d3svog4tlx445w.cloudfront.net/shopify-app/assets/' + version + '';
+    head.appendChild(link);
   }.bind(this));
 }
 
@@ -200,7 +203,7 @@ SezzleJS.prototype.addCSSCustomisation = function(element) {
  * @param element to add class to
  */
 SezzleJS.prototype.insertStoreCSSClassInElement = function(element) {
-  element.className += " " + this.merchantID;
+  element.className += " sezzle-" + this.merchantID;
 }
 
 /**
@@ -233,8 +236,7 @@ SezzleJS.prototype.insertWidgetTypeCSSClassInElement = function(element) {
  */
 SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
   // Do not render this product if it is not eligible
-  if (!this.isProductEligible(element)) return false;
-
+  if (!this.isProductEligible(element.innerText)) return false;
   // Set data index to each price element for tracking
   element.dataset.sezzleindex = index;
 
@@ -243,7 +245,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // root node for sezzle
   var sezzle = document.createElement('div');
-  sezzle.className = "sezzle-shopify-info-button sezzle-product-page-widget"
+  sezzle.className = "sezzle-shopify-info-button"
   this.insertWidgetTypeCSSClassInElement(sezzle);
   this.insertStoreCSSClassInElement(sezzle);
 
