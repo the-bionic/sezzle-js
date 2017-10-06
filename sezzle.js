@@ -21,7 +21,7 @@ var SezzleJS = function(options) {
   // URL to request to get ip of request
   this.countryFromIPRequestURL = 'https://freegeoip.net/json/';
   // URL to request to get css details
-  this.cssForMerchantURL = 'https://widget.sezzle.com/v1/css?uuid=' + this.merchantID;
+  this.cssForMerchantURL = 'https://widget.sezzle.com/v1/css/price-widget?uuid=' + this.merchantID;
   // Countries supported by sezzle pay. To test your country, add here.
   this.supportedCountryCodes = ['US', 'IN'];
 
@@ -520,7 +520,7 @@ var s = new SezzleJS(
     targetXPath: '.product-price',
     forcedShow: false,
     alignment: 'left',
-    merchantID: '',
+    merchantID: '1',
     theme: 'light',
     widthType: 'thin',
     widgetType: 'product-page',
