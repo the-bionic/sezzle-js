@@ -26,7 +26,7 @@ var gulp = require('gulp'),
 
 var buttonUploadName = 'sezzle-widget0.0.12.js';
 var bannerUploadName = 'sezzle-banner2.1.1.js';
-var globalCssUploadName = 'sezzle-styles-global1.0.9.css';
+var globalCssUploadName = 'sezzle-styles-global1.0.10.css';
 
 gulp.task("cssupload", function() {
     // bucket base url https://d3svog4tlx445w.cloudfront.net/
