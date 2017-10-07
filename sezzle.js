@@ -5,7 +5,17 @@
  */
 var SezzleJS = function(options) {
   // Configurable options
-  this.xpath = options.targetXPath ? options.targetXPath.split('/') : null;
+  this.xpath = [];
+  if (options.targetXPath) {
+    if (typeof(options.targetXPath) === 'string') {
+      // Only one x-path is given
+      this.xpath.push(options.targetXPath.split('/'));
+    } else {
+      // options.targetXPath is an array of x-paths
+      this.xpath = options.targetXPath.map(path => path.split('/'));
+    }
+  }
+
   this.forcedShow = options.forcedShow || false;
   this.alignment = options.alignment || '';
   this.merchantID = options.merchantID || '';
@@ -36,9 +46,9 @@ var SezzleJS = function(options) {
  *
  * @return All the elements with price in it that matches the xpath
  */
-SezzleJS.prototype.getAllPriceElements = function(xindex = 0, elements = null) {
+SezzleJS.prototype.getAllPriceElements = function(xpath = '', xindex = 0, elements = null) {
   // Break condition
-  if (xindex === this.xpath.length) {
+  if (xindex === xpath.length) {
     return elements;
   }
 
@@ -50,13 +60,13 @@ SezzleJS.prototype.getAllPriceElements = function(xindex = 0, elements = null) {
   var children = [];
   for(var elemnt of Array.from(elements)) {
     // If this is an ID
-    if (this.xpath[xindex][0] === '#') {
-      children.push(elemnt.getElementById(this.xpath[xindex].substr(1)));
+    if (xpath[xindex][0] === '#') {
+      children.push(elemnt.getElementById(xpath[xindex].substr(1)));
     } else
     // If this is a class
-    if (this.xpath[xindex][0] === '.') {
+    if (xpath[xindex][0] === '.') {
       Array.from(
-        elemnt.getElementsByClassName(this.xpath[xindex].substr(1))
+        elemnt.getElementsByClassName(xpath[xindex].substr(1))
       )
       .forEach(function(el) {
           children.push(el);
@@ -65,13 +75,13 @@ SezzleJS.prototype.getAllPriceElements = function(xindex = 0, elements = null) {
     // If this is a tag
     {
       var indexToTake = 0;
-      if (this.xpath[xindex].split('-').length > 1) {
-        if (this.xpath[xindex].split('-')[1] >= 0) {
-          indexToTake = parseInt(this.xpath[xindex].split('-')[1]);
+      if (xpath[xindex].split('-').length > 1) {
+        if (xpath[xindex].split('-')[1] >= 0) {
+          indexToTake = parseInt(xpath[xindex].split('-')[1]);
         }
       }
       Array.from(
-        elemnt.getElementsByTagName(this.xpath[xindex].split('-')[0])
+        elemnt.getElementsByTagName(xpath[xindex].split('-')[0])
       )
       .forEach(function(el, index) {
           if (index === indexToTake) children.push(el);
@@ -79,7 +89,7 @@ SezzleJS.prototype.getAllPriceElements = function(xindex = 0, elements = null) {
     }
   }
   children = children.filter(function(c) {return c !== null});
-  return this.getAllPriceElements(xindex + 1, children);
+  return this.getAllPriceElements(xpath, xindex + 1, children);
 }
 
 /**
@@ -484,7 +494,7 @@ SezzleJS.prototype.getCSSVersionForMerchant = function(callback) {
         }
       }
     };
-  
+
     httpRequest.open('GET', this.cssForMerchantURL);
     httpRequest.responseType = 'json';
     httpRequest.send();
@@ -528,7 +538,13 @@ SezzleJS.prototype.init = function() {
  */
 SezzleJS.prototype.initWidget = function() {
   this.loadCSS(function() {
-      var els = this.getAllPriceElements();
+      var els = [];
+      this.xpath.forEach(function(path) {
+        this.getAllPriceElements(path)
+          .forEach(function(e) {
+            els.push(e);
+          });
+      }.bind(this));
       els.forEach(function (el, index) {
         this.renderAwesomeSezzle(el, index);
         this.startObserve(el);
