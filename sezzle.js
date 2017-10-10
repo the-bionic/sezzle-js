@@ -318,12 +318,13 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   priceNode.appendChild(priceSpanNode);
 
   // Adding priceNode to main node level - 1
-  node.appendChild(priceNode);
+	node.appendChild(priceNode);
+	this.addCSSCustomisation(priceNode)
 
   // Logo node level - 1.1
   var logoNode = document.createElement("div");
   logoNode.className = "sezzle-checkout-button";
-  this.addCSSCustomisation(logoNode);
+	this.addCSSCustomisation(logoNode);
 
   // Loge node first child level - 1.1.1
   var logoNode1 = document.createElement("div");
