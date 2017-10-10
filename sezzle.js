@@ -16,6 +16,29 @@ var SezzleJS = function(options) {
     }
   }
 
+  this.rendertopath = [];
+  if (options.renderToPath) {
+    if (typeof(options.renderToPath) === 'string') {
+      // Only one respective render location is given
+      this.rendertopath.push(options.renderToPath);
+    } else {
+      // options.renderToPath is an array of x-paths
+      this.rendertopath = options.renderToPath;
+    }
+  }
+  // Sync up the rendertopath array with
+  // xpath array, place null for not defined indices
+  // to follow the default behaviour
+  this.xpath.forEach(function(value, index) {
+    if (index in this.rendertopath) {
+      this.rendertopath[index] =
+        this.rendertopath[index].trim() != '' ?
+          this.rendertopath[index].trim() : null;
+    } else {
+      this.rendertopath.push(null);
+    }
+  }.bind(this));
+
   this.forcedShow = options.forcedShow || false;
   this.alignment = options.alignment || '';
   this.merchantID = options.merchantID || '';
@@ -246,14 +269,14 @@ SezzleJS.prototype.insertWidgetTypeCSSClassInElement = function(element) {
  * @param index - Index of the element in the page
  * @return void
  */
-SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
+SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index = 0) {
   // Do not render this product if it is not eligible
   if (!this.isProductEligible(element.innerText)) return false;
   // Set data index to each price element for tracking
   element.dataset.sezzleindex = index;
 
-  // Get parent element
-  var parent = element.parentElement;
+  // Get element to be rendered with sezzle's widget
+  var parent = renderelement;
 
   // root node for sezzle
   var sezzle = document.createElement('div');
@@ -341,6 +364,64 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, index = 0) {
 
   // Adding sezzle to parent node
   this.insertAfter(sezzle, parent);
+}
+
+/**
+ * This function finds out the element where Sezzle's widget
+ * will be rendered. By default it would return the parent element
+ * of the given price element. If the over ride path is found and
+ * it leads to a valid element then that element will be returned
+ * @param element - This is the price element
+ * @param index - Index of the price element in this.xpath array
+ * @return the element where Sezzle's widget will be rendered
+ */
+SezzleJS.prototype.getElementToRender = function(element, index = 0) {
+  var toRenderElement = null;
+  if (this.rendertopath[index] !== null) {
+    var path = this.rendertopath[index].split('/');
+    var toRenderElement = element;
+    for(var i = 0; i < path.length; i++) {
+      var p = path[i];
+      if (toRenderElement == null) {
+        break;
+      } else if (p === '.') {
+        continue;
+      } else if (p === '..') {
+        // One level back
+        toRenderElement = toRenderElement.parentElement;
+      } else if (p[0] === '.') {
+        // The class in the element
+        toRenderElement =
+          toRenderElement.getElementsByClassName(p.substr(1)).length ?
+            toRenderElement.getElementsByClassName(p.substr(1))[0] :
+            null ;
+      } else if (p[0] === '#') {
+        // The ID in the element
+        toRenderElement =
+          toRenderElement.getElementById(p.substr(1));
+      } else {
+        // If this is a tag
+        // e.g. span-2 means second span
+        var indexToTake = 0;
+        if (p.split('-').length > 1) {
+          if (p.split('-')[1] >= 0) {
+            indexToTake = parseInt(p.split('-')[1]);
+          }
+        }
+        toRenderElement =
+          toRenderElement.getElementsByTagName(p.split('-')[0]).length > indexToTake ?
+          toRenderElement.getElementsByTagName(p.split('-')[0])[indexToTake] :
+            null;
+      }
+    }
+  }
+  if (toRenderElement === null) {
+    // No path defined
+    // return the parent elelment
+    return element.parentElement;
+  } else {
+    return toRenderElement;
+  }
 }
 
 /**
@@ -502,13 +583,13 @@ SezzleJS.prototype.getCSSVersionForMerchant = function(callback) {
 }
 
 /**
- * 
+ *
  */
 SezzleJS.prototype.hideSezzleHideDivs = function() {
   Array
   .from(document.getElementsByClassName('sezzle-hide'))
   .forEach(function(el) {
-    el.className += " sezzle-hidden"; 
+    el.className += " sezzle-hidden";
   });
 }
 
@@ -539,14 +620,19 @@ SezzleJS.prototype.init = function() {
 SezzleJS.prototype.initWidget = function() {
   this.loadCSS(function() {
       var els = [];
-      this.xpath.forEach(function(path) {
+      var toRenderEls = [];
+      this.xpath.forEach(function(path, index) {
         this.getAllPriceElements(path)
           .forEach(function(e) {
             els.push(e);
-          });
+            console.log(index);
+            toRenderEls.push(this.getElementToRender(
+              e, index
+            ))
+          }.bind(this));
       }.bind(this));
       els.forEach(function (el, index) {
-        this.renderAwesomeSezzle(el, index);
+        this.renderAwesomeSezzle(el, toRenderEls[index], index);
         this.startObserve(el);
       }.bind(this));
       this.renderModal();
