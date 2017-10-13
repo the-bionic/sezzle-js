@@ -718,6 +718,14 @@
   text-align: left;
   margin: 0
 }
+.sezzle-button-text.sezzle-center {
+	text-align: center;
+	margin: none;
+}
+.sezzle-checkout-button.sezzle-center {
+	float: none;
+	text-align: center;
+}
 .sezzle-thick-quality-glass .sezzle-know-more {
   padding-top: 0
 }
@@ -800,6 +808,9 @@
 }
 .sezzle-a-yogi-lifestyle.sezzle-product-page-widget .szl-light-image {
   opacity: .7
+}
+.sezzle-bca5e8cd-0737-4f9b-9216-272ef313ed3f .szl-ligh-image {
+	width: unset!important;
 }
 @media (max-width: 740px) {
   .sezzle-haatichai.sezzle-product-page-widget .sezzle-checkout-button-wrapper .sezzle-button-text {

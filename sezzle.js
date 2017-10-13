@@ -188,7 +188,9 @@ SezzleJS.prototype.addCSSAlignment = function(element) {
       break;
     case 'right':
       element.className += " sezzle-right";
-      break;
+			break;
+		case 'center':
+		  element.className += " sezzle-center";
     default:
       break;
   }
