@@ -1221,3 +1221,31 @@
 		font-size: 14px;
 	}
 }
+
+//GlamSeamless
+.sezzle-aac8ea9c-3495-4725-b748-3e72356c8181 {
+	&.sezzle-checkout-button-wrapper {
+		.sezzle-button-text.sezzle-thin {
+			width: 300px;
+		}
+	}
+}
+
+//OM Goth
+.sezzle-fc0f4be0-aaed-44ad-907e-2149cb23681e {
+		&.sezzle-shopify-info-button {
+			padding-top: 8px;
+		}
+	}
+
+	// FERNWEH Boutique
+	.sezzle-bca5e8cd-0737-4f9b-9216-272ef313ed3f {
+		&.sezzle-shopify-info-button {
+			.sezzle-checkout-button {
+				img {
+					width: unset !important;
+				}
+			};
+		}
+}
+
