@@ -628,7 +628,7 @@
 .sezzle-checkout-button-wrapper .szl-light-image, .sezzle-checkout-button-wrapper .szl-dark-image {
   display: inline-block;
   height: 23px !important;
-  width: auto;
+  width: auto !important;
   box-sizing: border-box;
   padding-right: 7px;
   margin-top: 3px;
@@ -840,6 +840,14 @@
 .sezzle-a-yogi-lifestyle.sezzle-cart-page-widget .sezzle-checkout-button-wrapper .sezzle-checkout-button .szl-light-image {
   width: unset !important;
 }
+.sezzle-a-yogi-lifestyle .sezzle-button-text.sezzle-center {
+  text-align: center;
+  margin: none;
+}
+.sezzle-a-yogi-lifestyle .sezzle-checkout-button.sezzle-center {
+  float: none;
+  text-align: center;
+}
 .sezzle-a-yogi-lifestyle.sezzle-product-page-widget {
   zoom: 0.86;
   color: #5f5f5f;
@@ -863,6 +871,7 @@
     -ms-flex-pack: center;
         justify-content: center;
     float: unset;
+    width: unset;
   }
 }
 
@@ -1032,4 +1041,8 @@
 
 .sezzle-fc0f4be0-aaed-44ad-907e-2149cb23681e.sezzle-shopify-info-button {
   padding-top: 8px;
+}
+
+.sezzle-bca5e8cd-0737-4f9b-9216-272ef313ed3f.sezzle-shopify-info-button .sezzle-checkout-button img {
+  width: unset !important;
 }

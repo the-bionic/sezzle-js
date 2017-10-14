@@ -612,7 +612,7 @@
   .szl-light-image, .szl-dark-image {
     display: inline-block;
     height: 23px !important;
-    width: auto;
+    width: auto !important;
     box-sizing: border-box;
     padding-right: 7px;
     margin-top: 3px;
@@ -949,7 +949,16 @@
         }
       }
     }
-  }
+	}
+
+	.sezzle-button-text.sezzle-center {
+		text-align: center;
+		margin: none;
+	}
+	.sezzle-checkout-button.sezzle-center {
+		float: none;
+		text-align: center;
+	}
 
   &.sezzle-product-page-widget {
     zoom: 0.86;
@@ -980,7 +989,8 @@
 
         .sezzle-checkout-button {
           justify-content: center;
-          float: unset;
+					float: unset;
+					width: unset;
         }
       }
     }
@@ -1223,7 +1233,19 @@
 
 //OM Goth
 .sezzle-fc0f4be0-aaed-44ad-907e-2149cb23681e {
-	&.sezzle-shopify-info-button {
-		padding-top: 8px;
+		&.sezzle-shopify-info-button {
+			padding-top: 8px;
+		}
 	}
+
+	// FERNWEH Boutique
+	.sezzle-bca5e8cd-0737-4f9b-9216-272ef313ed3f {
+		&.sezzle-shopify-info-button {
+			.sezzle-checkout-button {
+				img {
+					width: unset !important;
+				}
+			};
+		}
 }
+
