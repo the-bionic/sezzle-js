@@ -1034,3 +1034,18 @@
 .sezzle-7f7a0fca-1157-4a4c-99fc-a0d95fa1b436.sezzle-checkout-button-wrapper {
   font-size: 14px;
 }
+
+.sezzle-aac8ea9c-3495-4725-b748-3e72356c8181.sezzle-checkout-button-wrapper .sezzle-button-text.sezzle-thin {
+  width: 300px;
+}
+
+.sezzle-fc0f4be0-aaed-44ad-907e-2149cb23681e.sezzle-shopify-info-button {
+  padding-top: 8px;
+}
+
+.sezzle-bca5e8cd-0737-4f9b-9216-272ef313ed3f.sezzle-shopify-info-button .sezzle-checkout-button-wrapper {
+  width: 200px;
+}
+.sezzle-bca5e8cd-0737-4f9b-9216-272ef313ed3f.sezzle-shopify-info-button .sezzle-checkout-button img {
+  width: unset !important;
+}

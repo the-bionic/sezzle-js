@@ -383,7 +383,7 @@ SezzleJS.prototype.getElementToRender = function(element, index = 0) {
   var toRenderElement = null;
   if (this.rendertopath[index] !== null) {
     var path = this.rendertopath[index].split('/');
-    var toRenderElement = element;
+    var toRenderElement = document;
     for(var i = 0; i < path.length; i++) {
       var p = path[i];
       if (toRenderElement == null) {
@@ -629,7 +629,6 @@ SezzleJS.prototype.initWidget = function() {
         this.getAllPriceElements(path)
           .forEach(function(e) {
             els.push(e);
-            console.log(index);
             toRenderEls.push(this.getElementToRender(
               e, index
             ))
