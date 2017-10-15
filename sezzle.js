@@ -383,7 +383,7 @@ SezzleJS.prototype.getElementToRender = function(element, index = 0) {
   var toRenderElement = null;
   if (this.rendertopath[index] !== null) {
     var path = this.rendertopath[index].split('/');
-    var toRenderElement = document;
+    var toRenderElement = element;
     for(var i = 0; i < path.length; i++) {
       var p = path[i];
       if (toRenderElement == null) {
