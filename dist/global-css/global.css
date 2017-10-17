@@ -748,6 +748,20 @@
       justify-content: left;
 }
 
+.sezzle-payment .sezzle-logo {
+  height: 25px;
+}
+.sezzle-payment .sezzle-text {
+  margin-top: 4px;
+  float: left;
+  margin-left: 10px;
+}
+.sezzle-payment .sezzle-know-more {
+  font-size: 12px;
+  padding-top: 0px;
+  margin-top: 5px;
+}
+
 .sezzle-button-text.sezzle-left {
   text-align: left;
   margin: 0;
