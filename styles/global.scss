@@ -778,6 +778,27 @@
   }
 }
 
+// Magento styles
+.sezzle-payment {
+  .sezzle-logo {
+    height: 25px;
+  }
+
+  .sezzle-text {
+    margin-top: 4px;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .sezzle-know-more {
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 12px;
+    padding-top: 0px;
+    margin-top: 5px;
+  }
+}
+
 // .sezzle-checkout-button {
 //   &.sezzle-right {
 //     margin-right: 0px;
