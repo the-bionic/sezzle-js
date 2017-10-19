@@ -1281,4 +1281,12 @@
 		font-size: 16px !important;
 		padding-left: 4px;
 	}
+
+  &.sezzle-cart-page-widget {
+    .sezzle-checkout-button-wrapper {
+			.sezzle-button-text {
+				width: 220px;
+			}
+		}
+	}
 }
