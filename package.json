@@ -5,7 +5,7 @@
   "main": "sezzle.js",
   "scripts": {
     "deploy-widget": "gulp deploywidget",
-    "deploy-css": "gulp deploycss",
+		"deploy-css": "gulp styles && gulp deploycss",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

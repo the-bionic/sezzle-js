@@ -1273,8 +1273,12 @@
 
 //Gretty Rose
 .sezzle-2103d939-976a-46c0-b612-b4a43987f99b {
-		&.payment_amount {
-			font-size: 15px;
-			padding-left: 4px;
-		}
+	.sezzle-checkout-button-wrapper {
+		font-size: 13px;
+	}
+
+	span {
+		font-size: 16px !important;
+		padding-left: 4px;
+	}
 }
