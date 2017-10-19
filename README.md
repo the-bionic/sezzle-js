@@ -21,3 +21,15 @@ document.sezzleConfig = {
     hideClasses: ['class-to-hide']
   }
 ```
+
+**When you need to update the CSS or the widget js records**
+We have a system running on redis off of our DB that keeps track of site specific js and css.
+
+The table is widget_server_production.merchant_button_versions - update the records there using the merchant UUID as the key identifier.
+
+Once set, you need to refresh redis for the widget server as such:
+```
+https://widget.sezzle.com/v1/redis/refresh
+```
+
+Done!
