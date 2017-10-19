@@ -1063,3 +1063,8 @@
 .sezzle-bca5e8cd-0737-4f9b-9216-272ef313ed3f.sezzle-shopify-info-button .sezzle-checkout-button img {
   width: unset !important;
 }
+
+.sezzle-2103d939-976a-46c0-b612-b4a43987f99b.payment_amount {
+  font-size: 15px;
+  padding-left: 4px;
+}
