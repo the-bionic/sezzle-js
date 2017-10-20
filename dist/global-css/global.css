@@ -742,6 +742,12 @@
   margin: 0;
 }
 
+.sezzle-checkout-button.sezzle-right {
+  float: right;
+  clear: both;
+  -ms-flex-pack: end;
+      justify-content: flex-end;
+}
 .sezzle-checkout-button.sezzle-left {
   float: left;
   -ms-flex-pack: left;
@@ -762,6 +768,10 @@
   margin-top: 5px;
 }
 
+.sezzle-button-text.sezzle-right {
+  float: right;
+  text-align: right;
+}
 .sezzle-button-text.sezzle-left {
   text-align: left;
   margin: 0;
