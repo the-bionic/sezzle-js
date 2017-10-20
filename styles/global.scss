@@ -772,6 +772,10 @@
 }
 
 .sezzle-checkout-button {
+  &.sezzle-right {
+    float: right;
+  }
+  
   &.sezzle-left {
     float: left;
     justify-content: left;
@@ -805,6 +809,11 @@
 // }
 
 .sezzle-button-text {
+  &.sezzle-right {
+    float: right;
+    clear: both;
+  }
+
   &.sezzle-left {
     text-align: left;
     margin: 0;
