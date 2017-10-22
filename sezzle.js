@@ -494,6 +494,73 @@ SezzleJS.prototype.observer = new MutationObserver(function(mutations) {
     });
 });
 
+SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
+  // Get the mutations which have both added and removed nodes
+  var removedAddedMutations = mutations
+    .filter(function(mutation) { 
+      return mutation.removedNodes.length && mutation.addedNodes.length
+    });
+
+  // if there is at least on removed added mutation
+  if (removedAddedMutations.length) {
+    // Assuming this is the mutation we need
+    var removedAddedMutation = removedAddedMutations[0];
+    var removedNodes = Array.from(removedAddedMutation.removedNodes);
+    var removedNodesMutated = Array.from([]);
+    removedNodesMutated = removedNodesMutated.concat(removedNodes);
+
+    // Get all the removed children of deleted nodes
+    for (var i=0; i<removedNodes.length; i++) {
+      var removedNode = removedNodes[i];
+      if ('getElementsByTagName' in removedNode) {
+        var removedChildren = Array.from(removedNode.getElementsByTagName('*'));
+        removedNodesMutated = removedNodesMutated.concat(removedChildren);
+      }
+    }
+
+    // Get the node which we need
+    var removedSezzleNode;
+    for (var i=0; i<removedNodesMutated.length; i++) {
+      var removedNode = removedNodesMutated[i];
+      if (removedNode.dataset && removedNode.dataset.hasOwnProperty('sezzleindex')) {
+        removedSezzleNode = removedNode;
+      }
+    }
+
+    // If the node is found, find the node corresponding node which got added
+    if (removedSezzleNode) {
+      var s = new SezzleJS(document.sezzleConfig);
+      var addedNodes = removedAddedMutation.addedNodes;
+
+      // Store all the children of the added nodes
+      var addedNodesMutated = Array.from([]);
+      addedNodesMutated = addedNodesMutated.concat(addedNodes);
+      for (var i=0; i<addedNodes.length; i++) {
+        var addedNode = addedNodes[i];
+        if ('getElementsByTagName' in addedNode) {
+          var addedChildren = Array.from(addedNode.getElementsByTagName('*'));
+          addedNodesMutated = addedNodesMutated.concat(addedChildren);
+        }
+      }
+      // change the innertext
+      var addedSezzleNode = s.findSameClassElement(removedSezzleNode, addedNodesMutated);
+      addedSezzleNode.dataset.sezzleindex = removedSezzleNode.dataset.sezzleindex;
+      var price = s.getFormattedPrice(addedSezzleNode.innerText);
+      delete s;
+      document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
+      .innerText = ' of ' + price;
+    }
+  }
+});
+
+SezzleJS.prototype.findSameClassElement = function(element, similarElements) {
+  for (var i=0; i<similarElements.length; i++) {
+    var similarElement = similarElements[i];
+    if (similarElement.className === element.className) return similarElement;
+  }
+  return null;
+}
+
 /**
  * This function starts observing for change
  * in given Price element
@@ -503,6 +570,10 @@ SezzleJS.prototype.observer = new MutationObserver(function(mutations) {
 SezzleJS.prototype.startObserve = function(element) {
   // TODO : Need a way to unsubscribe to prevent memory leak
   this.observer.observe(element, this._config);
+  this.deleteObserver.observe(element.parentNode.parentNode, {
+    childList: true,
+    subtree: true
+  });
 }
 
 /**
