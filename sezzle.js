@@ -530,7 +530,7 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
     // If the node is found, find the node corresponding node which got added
     if (removedSezzleNode) {
       var s = new SezzleJS(document.sezzleConfig);
-      var addedNodes = removedAddedMutation.addedNodes;
+      var addedNodes = Array.from(removedAddedMutation.addedNodes);
 
       // Store all the children of the added nodes
       var addedNodesMutated = Array.from([]);
@@ -542,6 +542,7 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
           addedNodesMutated = addedNodesMutated.concat(addedChildren);
         }
       }
+      console.log(removedSezzleNode, );
       // change the innertext
       var addedSezzleNode = s.findSameClassElement(removedSezzleNode, addedNodesMutated);
       addedSezzleNode.dataset.sezzleindex = removedSezzleNode.dataset.sezzleindex;
