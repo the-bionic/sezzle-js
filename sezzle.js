@@ -542,7 +542,7 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
           addedNodesMutated = addedNodesMutated.concat(addedChildren);
         }
       }
-      console.log(removedSezzleNode, );
+
       // change the innertext
       var addedSezzleNode = s.findSameClassElement(removedSezzleNode, addedNodesMutated);
       addedSezzleNode.dataset.sezzleindex = removedSezzleNode.dataset.sezzleindex;
