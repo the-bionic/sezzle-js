@@ -1088,3 +1088,11 @@
 .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-shopify-info-button {
   overflow: unset;
 }
+
+.sezzle-0b3af874-ac87-42a0-8e8f-617b84319cb0.sezzle-product-page-widget {
+  margin-top: -25px;
+}
+.sezzle-0b3af874-ac87-42a0-8e8f-617b84319cb0 .sezzle-checkout-button-wrapper .sezzle-button-text.sezzle-thin {
+  width: 200px;
+  line-height: 28px;
+}
