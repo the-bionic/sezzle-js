@@ -1308,3 +1308,20 @@
 		overflow: unset;
 	}
 }
+
+//VikaJewels
+.sezzle-85a6d729-4a6d-4039-96d3-98efa328e244 {
+  .szl-light-image {
+    padding-bottom: 0px !important;
+  }
+  @media (max-width: 740px) {
+    .sezzle-button-text {
+      text-align: center;
+      margin: auto;
+    }
+    .sezzle-checkout-button {
+      float: none;
+      justify-content: center;
+    }
+  }
+}
