@@ -1308,3 +1308,21 @@
 		overflow: unset;
 	}
 }
+
+//Louella Deville
+.sezzle-ce80b032-c5cf-4bfc-93a4-e16854ff1d79 {
+  .sezzle-button-text {
+    width: 215px !important;
+  }
+  @media (max-width: 740px) {
+    .sezzle-button-text {
+      text-align: center;
+      margin: auto;
+      width: 215px;
+    }
+    .sezzle-checkout-button {
+      float: unset;
+      justify-content: center;
+    }
+  }
+}

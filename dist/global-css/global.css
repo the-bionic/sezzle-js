@@ -1088,3 +1088,19 @@
 .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-shopify-info-button {
   overflow: unset;
 }
+
+.sezzle-ce80b032-c5cf-4bfc-93a4-e16854ff1d79 .sezzle-button-text {
+  width: 215px !important;
+}
+@media (max-width: 740px) {
+  .sezzle-ce80b032-c5cf-4bfc-93a4-e16854ff1d79 .sezzle-button-text {
+    text-align: center;
+    margin: auto;
+    width: 215px;
+  }
+  .sezzle-ce80b032-c5cf-4bfc-93a4-e16854ff1d79 .sezzle-checkout-button {
+    float: unset;
+    -ms-flex-pack: center;
+        justify-content: center;
+  }
+}
