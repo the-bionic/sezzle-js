@@ -1177,3 +1177,17 @@
     justify-content: center !important;
   }
 }
+
+@media screen and (max-width: 740px) {
+   .sezzle-fdda360c-4999-4e10-bfbe-49a742ac3728 .sezzle-button-text {
+     text-align: center !important;
+     margin: auto !important;
+   }
+ }
+ @media screen and (max-width: 740px) {
+   .sezzle-fdda360c-4999-4e10-bfbe-49a742ac3728 .sezzle-checkout-button {
+     float: none !important;
+     -ms-flex-pack: center !important;
+         justify-content: center !important;
+   }
+ }
