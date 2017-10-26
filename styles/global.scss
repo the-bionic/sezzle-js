@@ -1363,3 +1363,19 @@
     }
   }
 }
+
+// Karen-Hurley
+.sezzle-fdda360c-4999-4e10-bfbe-49a742ac3728 {
+  .sezzle-button-text {
+    @media screen and (max-width: 740px) {
+      text-align: center !important;
+      margin: auto !important;
+    }
+  }
+  .sezzle-checkout-button {
+    @media screen and (max-width: 740px) {        
+      float: none !important;
+      justify-content: center !important;
+    }
+  }
+}
