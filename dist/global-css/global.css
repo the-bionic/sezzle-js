@@ -1089,6 +1089,13 @@
   overflow: unset;
 }
 
+.sezzle-0b3af874-ac87-42a0-8e8f-617b84319cb0.sezzle-product-page-widget {
+  margin-top: -25px;
+}
+.sezzle-0b3af874-ac87-42a0-8e8f-617b84319cb0 .sezzle-checkout-button-wrapper .sezzle-button-text.sezzle-thin {
+  width: 200px;
+  line-height: 28px;
+}
 .sezzle-85a6d729-4a6d-4039-96d3-98efa328e244 .szl-light-image {
   padding-bottom: 0px !important;
 }
