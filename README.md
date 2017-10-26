@@ -33,3 +33,23 @@ https://widget.sezzle.com/v1/redis/refresh
 ```
 
 Done!
+
+## Deploying a new version
+
+1) Update version of js or css (based on new version updating) in the gulpfile.js
+
+1) For js updates:
+
+```bash
+
+npm run deploy-widget
+
+```
+
+For CSS Updates:
+
+```bash
+
+npm run deploy-css
+
+```
