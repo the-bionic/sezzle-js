@@ -559,7 +559,8 @@
   font-size: 15px;
 
   .sezzle-button-text {
-    width: 340px;
+    max-width: 340px;
+    line-height: 28px;
     margin: 0 auto;
     text-align: center;
     word-wrap: normal;
@@ -568,11 +569,11 @@
     }
 
     &.sezzle-thin {
-      width: 240px;
+      max-width: 240px;
       line-height: 28px;
 
       &.sezzle-hide-amount {
-        width: 180px;
+        max-width: 180px;
       }
     }
   }
@@ -600,12 +601,12 @@
     padding-left: 0;
     display: flex;
     justify-content: center;
-    width: 320px;
+    max-width: 320px;
     margin: 0 auto;
     line-height: 25px;
 
     &.sezzle-thin {
-      width: 185px;
+      max-width: 185px;
     }
   }
 
