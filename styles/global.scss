@@ -1309,6 +1309,24 @@
 	}
 }
 
+//Louella Deville
+.sezzle-ce80b032-c5cf-4bfc-93a4-e16854ff1d79 {
+  .sezzle-button-text {
+    width: 215px !important;
+  }
+  @media (max-width: 740px) {
+    .sezzle-button-text {
+      text-align: center;
+      margin: auto;
+      width: 215px;
+    }
+    .sezzle-checkout-button {
+      float: unset;
+      justify-content: center;
+    }
+  }
+}
+
 //KittBae
 .sezzle-0b3af874-ac87-42a0-8e8f-617b84319cb0 {
   &.sezzle-product-page-widget {
