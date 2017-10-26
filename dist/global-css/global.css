@@ -1089,6 +1089,16 @@
   overflow: unset;
 }
 
+.sezzle-d7ed30fc-8eb8-4c0b-85cb-05ca86bfb4c6 .sezzle-button-text {
+  min-width: 50px;
+  max-width: 320px;
+  width: unset;
+}
+.sezzle-d7ed30fc-8eb8-4c0b-85cb-05ca86bfb4c6 .sezzle-checkout-button {
+  min-width: 50px;
+  max-width: 320px;
+  width: unset;
+}
 .sezzle-ce80b032-c5cf-4bfc-93a4-e16854ff1d79 .sezzle-button-text {
   width: 215px !important;
 }
