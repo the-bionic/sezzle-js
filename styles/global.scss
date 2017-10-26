@@ -742,7 +742,7 @@
 }
 
 .sezzle-hidden {
-  display: none;
+  display: none !important; // needs to be important in case there are styles added inline
 }
 
 .sezzle-test {
@@ -1338,7 +1338,7 @@
   &.sezzle-shopify-info-button{
 		overflow: unset;
   }
-  
+
   .sezzle-button-text {
     display: inline;
   }
