@@ -742,7 +742,7 @@
 }
 
 .sezzle-hidden {
-  display: none;
+  display: none !important; // needs to be important in case there are styles added inline
 }
 
 .sezzle-test {
@@ -1317,5 +1317,79 @@
   .sezzle-checkout-button-wrapper .sezzle-button-text.sezzle-thin {
     width: 200px;
     line-height: 28px;
+  }
+}
+
+//VikaJewels
+.sezzle-85a6d729-4a6d-4039-96d3-98efa328e244 {
+  .szl-light-image {
+    padding-bottom: 0px !important;
+  }
+  @media (max-width: 740px) {
+    .sezzle-button-text {
+      text-align: center;
+      margin: auto;
+    }
+    .sezzle-checkout-button {
+      float: none;
+      justify-content: center;
+    }
+  }
+}
+
+// zalahair
+.sezzle-b0f15ab6-c4be-442a-acac-3f3b387833b4 {
+  &.sezzle-product-page-widget {
+    .sezzle-checkout-button-wrapper {
+      margin-top: -45px !important;
+      font-size: 12px;
+    }
+  }
+
+  &.sezzle-shopify-info-button{
+		overflow: unset;
+  }
+
+  .sezzle-button-text {
+    display: inline;
+  }
+
+  .sezzle-checkout-button {
+    display: inline !important;
+    float: none !important;
+
+    .sezzle-inline-text {
+      display: inline !important;
+      padding-left: 5px;
+    }
+
+    .szl-light-image {
+      display: inherit !important;
+      margin-top: -5px !important;
+      vertical-align: middle !important;
+    }
+
+    .sezzle-know-more {
+      display: inline;
+    }
+  }
+}
+
+// Kiraswim
+.sezzle-a95f39c2-4481-4561-b163-64f28788f53a {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {        
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
   }
 }

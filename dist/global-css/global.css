@@ -716,7 +716,7 @@
 }
 
 .sezzle-hidden {
-  display: none;
+  display: none !important;
 }
 
 .sezzle-test {
@@ -1095,4 +1095,60 @@
 .sezzle-0b3af874-ac87-42a0-8e8f-617b84319cb0 .sezzle-checkout-button-wrapper .sezzle-button-text.sezzle-thin {
   width: 200px;
   line-height: 28px;
+}
+.sezzle-85a6d729-4a6d-4039-96d3-98efa328e244 .szl-light-image {
+  padding-bottom: 0px !important;
+}
+@media (max-width: 740px) {
+  .sezzle-85a6d729-4a6d-4039-96d3-98efa328e244 .sezzle-button-text {
+    text-align: center;
+    margin: auto;
+  }
+  .sezzle-85a6d729-4a6d-4039-96d3-98efa328e244 .sezzle-checkout-button {
+    float: none;
+    -ms-flex-pack: center;
+        justify-content: center;
+  }
+}
+
+.sezzle-b0f15ab6-c4be-442a-acac-3f3b387833b4.sezzle-product-page-widget .sezzle-checkout-button-wrapper {
+  margin-top: -45px !important;
+  font-size: 12px;
+}
+.sezzle-b0f15ab6-c4be-442a-acac-3f3b387833b4.sezzle-shopify-info-button {
+  overflow: unset;
+}
+.sezzle-b0f15ab6-c4be-442a-acac-3f3b387833b4 .sezzle-button-text {
+  display: inline;
+}
+.sezzle-b0f15ab6-c4be-442a-acac-3f3b387833b4 .sezzle-checkout-button {
+  display: inline !important;
+  float: none !important;
+}
+.sezzle-b0f15ab6-c4be-442a-acac-3f3b387833b4 .sezzle-checkout-button .sezzle-inline-text {
+  display: inline !important;
+  padding-left: 5px;
+}
+.sezzle-b0f15ab6-c4be-442a-acac-3f3b387833b4 .sezzle-checkout-button .szl-light-image {
+  display: inherit !important;
+  margin-top: -5px !important;
+  vertical-align: middle !important;
+}
+.sezzle-b0f15ab6-c4be-442a-acac-3f3b387833b4 .sezzle-checkout-button .sezzle-know-more {
+  display: inline;
+}
+
+@media screen and (max-width: 740px) {
+  .sezzle-a95f39c2-4481-4561-b163-64f28788f53a.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 740px) {
+  .sezzle-a95f39c2-4481-4561-b163-64f28788f53a.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
 }
