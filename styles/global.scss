@@ -1363,3 +1363,22 @@
     }
   }
 }
+
+// Kiraswim
+.sezzle-a95f39c2-4481-4561-b163-64f28788f53a {
+  .sezzle-checkout-button-wrapper {
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {        
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
