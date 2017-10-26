@@ -95,7 +95,7 @@ SezzleJS.prototype.getAllPriceElements = function(xpath = '', xindex = 0, elemen
       .forEach(function(el) {
           children.push(el);
       })
-    } else
+		}
     // If this is a tag
     {
       var indexToTake = 0;
@@ -497,7 +497,7 @@ SezzleJS.prototype.observer = new MutationObserver(function(mutations) {
 SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
   // Get the mutations which have both added and removed nodes
   var removedAddedMutations = mutations
-    .filter(function(mutation) { 
+    .filter(function(mutation) {
       return mutation.removedNodes.length && mutation.addedNodes.length
     });
 
