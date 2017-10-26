@@ -1195,3 +1195,10 @@
         justify-content: center !important;
   }
 }
+
+.sezzle-655fd71d-19fd-41a6-a62f-2e635d3c9e08.sezzle-product-page-widget {
+  margin-top: -25px;
+}
+.sezzle-655fd71d-19fd-41a6-a62f-2e635d3c9e08.sezzle-product-page-widget .sezzle-button-text {
+  width: unset;
+}
