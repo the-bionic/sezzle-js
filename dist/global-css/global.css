@@ -1203,6 +1203,28 @@
   width: unset;
 }
 
+<<<<<<< HEAD
+.sezzle-82394a65-a832-4262-a3aa-c8dd9c754709 .sezzle-button-text {
+  zoom: .86;
+  color: #5f5f5f;
+}
+.sezzle-82394a65-a832-4262-a3aa-c8dd9c754709 .sezzle-checkout-button {
+  zoom: .86;
+  color: #5f5f5f;
+}
+.sezzle-82394a65-a832-4262-a3aa-c8dd9c754709.sezzle-product-page-widget .sezzle-checkout-button-wrapper {
+  font-size: 13px;
+  padding-top: 8px;
+}
+.sezzle-82394a65-a832-4262-a3aa-c8dd9c754709.sezzle-product-page-widget .sezzle-checkout-button-wrapper .payment-amount {
+  font-weight: 500;
+}
+.sezzle-82394a65-a832-4262-a3aa-c8dd9c754709.sezzle-cart-page-widget .sezzle-checkout-button-wrapper {
+  font-size: 13px;
+}
+.sezzle-82394a65-a832-4262-a3aa-c8dd9c754709.sezzle-cart-page-widget .sezzle-checkout-button-wrapper .payment-amount {
+  font-weight: 500;
+=======
 @media screen and (max-width: 749px) {
   .sezzle-ea52483c-5f5e-4153-80fd-3055b63b49b4 .sezzle-button-text {
     float: none !important;
@@ -1216,4 +1238,5 @@
     -ms-flex-pack: center !important;
         justify-content: center !important;
   }
+>>>>>>> master
 }
