@@ -1202,3 +1202,18 @@
 .sezzle-655fd71d-19fd-41a6-a62f-2e635d3c9e08.sezzle-product-page-widget .sezzle-button-text {
   width: unset;
 }
+
+@media screen and (max-width: 749px) {
+  .sezzle-ea52483c-5f5e-4153-80fd-3055b63b49b4 .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 749px) {
+  .sezzle-ea52483c-5f5e-4153-80fd-3055b63b49b4 .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
