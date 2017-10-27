@@ -560,6 +560,7 @@
 
   .sezzle-button-text {
     max-width: 340px;
+    width: unset;
     line-height: 28px;
     margin: 0 auto;
     text-align: center;
@@ -570,10 +571,12 @@
 
     &.sezzle-thin {
       max-width: 240px;
+      width: unset;
       line-height: 28px;
 
       &.sezzle-hide-amount {
         max-width: 180px;
+        width: unset;
       }
     }
   }
@@ -602,11 +605,13 @@
     display: flex;
     justify-content: center;
     max-width: 320px;
+    width: unset;
     margin: 0 auto;
     line-height: 25px;
 
     &.sezzle-thin {
       max-width: 185px;
+      width: unset;
     }
   }
 
