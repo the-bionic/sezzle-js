@@ -1417,7 +1417,7 @@
     }
   }
   .sezzle-checkout-button {
-    @media screen and (max-width: 740px) {        
+    @media screen and (max-width: 740px) {
       float: none !important;
       justify-content: center !important;
     }
@@ -1435,7 +1435,7 @@
       }
     }
     .sezzle-checkout-button {
-      @media screen and (max-width: 740px) {        
+      @media screen and (max-width: 740px) {
         float: none !important;
         justify-content: center !important;
       }
@@ -1453,3 +1453,39 @@
     }
   }
 }
+
+// Joah Brown
+.sezzle-82394a65-a832-4262-a3aa-c8dd9c754709 {
+	.sezzle-button-text {
+		zoom: .86;
+		color: #5f5f5f;
+	}
+
+	.sezzle-checkout-button {
+		zoom: .86;
+		color: #5f5f5f;
+	}
+
+	&.sezzle-product-page-widget {
+		.sezzle-checkout-button-wrapper {
+			font-size: 13px;
+			padding-top: 8px;
+
+			.payment-amount {
+				font-weight: 500;
+			}
+		}
+	}
+
+	&.sezzle-cart-page-widget {
+		.sezzle-checkout-button-wrapper {
+			font-size: 13px;
+
+			.payment-amount {
+				font-weight: 500;
+			}
+		}
+	}
+}
+
+
