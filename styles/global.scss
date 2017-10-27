@@ -1453,3 +1453,20 @@
     }
   }
 }
+
+// Abs2b Fitness Apparel
+.sezzle-ea52483c-5f5e-4153-80fd-3055b63b49b4 {
+  .sezzle-button-text {
+    @media screen and (max-width: 749px) {
+      float: none !important;
+      text-align: center !important;
+      margin: auto !important;
+    }
+  }
+  .sezzle-checkout-button {
+    @media screen and (max-width: 749px) {        
+      float: none !important;
+      justify-content: center !important;
+    }
+  }
+}
