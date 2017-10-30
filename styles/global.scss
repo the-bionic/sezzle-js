@@ -1510,3 +1510,39 @@
     }
   }
 }
+
+// Harlyn Summer
+.sezzle-a12a43c8-a8cc-4dd2-ae95-3d6496fc4b69 {
+  &.sezzle-product-page-widget {
+    margin-top: -25px;
+
+    .sezzle-button-text {
+      @media screen and (max-width: 770px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 770px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 770px) {
+        float: left;
+        text-align: left;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 770px) {
+        float: left;
+        justify-content: left;
+      }
+    }
+  }
+}
