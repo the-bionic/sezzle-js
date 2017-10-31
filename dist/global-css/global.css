@@ -1290,3 +1290,22 @@
         justify-content: center !important;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .sezzle-2ac79df0-6e55-41f6-86b0-6e54844768a6.sezzle-product-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 767px) {
+  .sezzle-2ac79df0-6e55-41f6-86b0-6e54844768a6.sezzle-product-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
+.sezzle-2ac79df0-6e55-41f6-86b0-6e54844768a6.sezzle-cart-page-widget {
+  margin-bottom: 30px;
+  margin-top: -35px;
+}

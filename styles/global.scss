@@ -1565,3 +1565,26 @@
     }
   }
 }
+
+// Sneaker Oven
+.sezzle-2ac79df0-6e55-41f6-86b0-6e54844768a6 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 767px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 767px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    margin-bottom: 30px;
+    margin-top: -35px;
+  }
+}
