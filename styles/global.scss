@@ -1628,3 +1628,41 @@
     }
   }
 }
+
+// Wolves Stuff
+.sezzle-2993fde2-31c6-40ec-965f-c17d466e0cfa {
+  &.sezzle-product-page-widget {
+    color: black;
+    .sezzle-button-text {
+      max-width: unset;
+      @media screen and (max-width: 1023px) {
+        text-align: right;
+      }
+    }
+    .sezzle-checkout-button {
+      font-size: 12px;
+      @media screen and (max-width: 1023px) {    
+        float: right;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    color: black;
+    white-space: normal;
+    @media screen and (max-width: 1023px) {
+      margin-left: -155px;
+    }
+    .sezzle-button-text {
+      @media screen and (max-width: 1023px) {
+        text-align: right;
+        float: right;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 1023px) {    
+        float: right;
+        clear: both;
+      }
+    }
+  }
+}
