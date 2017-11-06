@@ -1312,7 +1312,22 @@
 .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad {
 	&.sezzle-shopify-info-button{
 		overflow: unset;
-	}
+  }
+  
+  &.sezzle-cart-page-widget {
+    @media screen and (min-width: 768px) and (max-width: 979px) {
+      margin-right: -280%;
+    }
+    @media screen and (max-width: 996px) and (min-width: 980px){
+      margin-right: -353%;
+    }
+    @media screen and (max-width: 1199px) and (min-width: 997px){
+      margin-right: -185%;
+    }
+    @media screen and (min-width: 1200px){
+      margin-right: -250%;
+    }
+  }
 }
 
 //Eau Paix Vie
