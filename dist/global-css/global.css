@@ -1094,6 +1094,26 @@
 .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-shopify-info-button {
   overflow: unset;
 }
+@media screen and (min-width: 768px) and (max-width: 979px) {
+  .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-cart-page-widget {
+    margin-right: -280%;
+  }
+}
+@media screen and (max-width: 996px) and (min-width: 980px) {
+  .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-cart-page-widget {
+    margin-right: -353%;
+  }
+}
+@media screen and (max-width: 1199px) and (min-width: 997px) {
+  .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-cart-page-widget {
+    margin-right: -185%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-cart-page-widget {
+    margin-right: -250%;
+  }
+}
 
 .sezzle-d7ed30fc-8eb8-4c0b-85cb-05ca86bfb4c6 .sezzle-button-text {
   min-width: 50px;
