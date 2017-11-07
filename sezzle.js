@@ -51,6 +51,7 @@ var SezzleJS = function(options) {
   this.hideClasses = options.hideClasses || [];
   this.bannerURL = options.bannerUrl || '';
   this.bannerClass = options.bannerClass || '';
+  this.bannerLink = options.bannerLink || '';
 
   // Non configurable options
   this._config = { attributes: true, childList: true, characterData: true };
@@ -680,18 +681,26 @@ SezzleJS.prototype.hideSezzleHideDivs = function() {
  * 
  */
 SezzleJS.prototype.replaceBanner = function() {
-  var url = this.bannerURL;
+  var imgurl = this.bannerURL;
+  var linkpath = this.bannerLink;
   var bannerClass = this.bannerClass;
-  var element = document.getElementsByClassName(bannerClass)[0];
-  
-  var link = element.getElementsByTagName("a");
-  if(link[0] != null) {
-    link[0].setAttribute('href', "/pages/sezzle");
-  }
 
-  var img = element.getElementsByTagName("img");
-  if(img[0] != null) {
-    img[0].setAttribute('src', url);
+  if (bannerClass != '') {
+    var element = document.getElementsByClassName(bannerClass)[0];
+    
+    if (linkpath != '') {
+      var link = element.getElementsByTagName("a");
+      if(link[0] != null) {
+        link[0].setAttribute('href', linkpath);
+      }
+    }
+
+    if (imgurl != '') {
+      var img = element.getElementsByTagName("img");
+      if(img[0] != null) {
+        img[0].setAttribute('src', imgurl);
+      }
+    }
   }
 }
 
