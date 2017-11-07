@@ -1721,3 +1721,24 @@
     margin-top: -5px;
     margin-bottom: 10px;
 }
+
+// Generation Outcast Clothing 
+.sezzle-d157dcc9-ad3b-4f15-b4ba-2d80b5b2081e {
+  &.sezzle-cart-page-widget {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) { 
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
