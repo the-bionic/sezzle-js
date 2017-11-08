@@ -1750,3 +1750,24 @@
     margin-bottom: 20px;
   }
 }
+
+// RYLA Pack
+.sezzle-ccc3912c-6857-4802-b50a-fce34fcb2369 {
+  &.sezzle-cart-page-widget {
+    margin-top: -20px;
+    margin-bottom: 15px;
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) { 
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
