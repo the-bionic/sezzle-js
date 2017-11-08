@@ -1771,3 +1771,18 @@
     }
   }
 }
+
+// Dank Geek
+.sezzle-78f740bb-2279-4b6a-8c36-7e56f6a9bc52 {
+  &.sezzle-product-preview-widget {
+    overflow: unset;
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
+  }
+  &.sezzle-product-page-widget {
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+}
