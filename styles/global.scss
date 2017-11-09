@@ -1313,7 +1313,7 @@
 	&.sezzle-shopify-info-button{
 		overflow: unset;
   }
-  
+
   &.sezzle-cart-page-widget {
     @media screen and (min-width: 768px) and (max-width: 979px) {
       margin-right: -280%;
@@ -1656,7 +1656,7 @@
     }
     .sezzle-checkout-button {
       font-size: 12px;
-      @media screen and (max-width: 1023px) {    
+      @media screen and (max-width: 1023px) {
         float: right;
       }
     }
@@ -1674,7 +1674,7 @@
       }
     }
     .sezzle-checkout-button {
-      @media screen and (max-width: 1023px) {    
+      @media screen and (max-width: 1023px) {
         float: right;
         clear: both;
       }
@@ -1708,7 +1708,7 @@
       }
     }
     .sezzle-checkout-button {
-      @media screen and (max-width: 749px) { 
+      @media screen and (max-width: 749px) {
         float: none !important;
         justify-content: center !important;
       }
@@ -1722,7 +1722,7 @@
     margin-bottom: 10px;
 }
 
-// Generation Outcast Clothing 
+// Generation Outcast Clothing
 .sezzle-d157dcc9-ad3b-4f15-b4ba-2d80b5b2081e {
   &.sezzle-cart-page-widget {
     margin-top: -10px;
@@ -1735,7 +1735,7 @@
       }
     }
     .sezzle-checkout-button {
-      @media screen and (max-width: 740px) { 
+      @media screen and (max-width: 740px) {
         float: none !important;
         justify-content: center !important;
       }
@@ -1764,7 +1764,7 @@
       }
     }
     .sezzle-checkout-button {
-      @media screen and (max-width: 749px) { 
+      @media screen and (max-width: 749px) {
         float: none !important;
         justify-content: center !important;
       }
@@ -1797,4 +1797,31 @@
     margin-top: -30px;
     margin-bottom: 15px;
   }
+}
+
+// Luxe Boutique
+.sezzle-d7eb5afd-619a-4967-8c15-6cbd4b42e3a7 {
+  &.sezzle-product-page-widget {
+    margin-top: -35px;
+		margin-bottom: 15px;
+		.sezzle-checkout-button-wrapper {
+			font-size: 12px;
+		}
+	}
+}
+
+// Truck Mount Forums
+.sezzle-98f20758-ae4f-4a67-8bb5-cecbb79cc0c3 {
+  &.sezzle-product-page-widget {
+    margin-top: -15px;
+		margin-bottom: 10px;
+		.sezzle-checkout-button-wrapper {
+			font-size: 12px;
+		}
+	}
+  &.sezzle-cart-page-widget {
+		.sezzle-checkout-button-wrapper {
+			font-size: 12px;
+		}
+	}
 }
