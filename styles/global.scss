@@ -1832,3 +1832,24 @@
     margin-right: -20px;
   }
 }
+
+// Pierced n Proud
+.sezzle-aa91fd5f-1a38-4de0-95ae-eb350089b5a7 {
+  &.sezzle-cart-page-widget {
+    margin-top: 15px;
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      max-width: unset;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
