@@ -1871,3 +1871,68 @@
 		}
 	}
 }
+// Temples and Markets
+.sezzle-be5a2115-e664-4fc6-a1bc-9d38328b33c9 {
+  &.sezzle-cart-page-widget {
+    margin-right: -20px;
+  }
+}
+
+// Pierced n Proud
+.sezzle-aa91fd5f-1a38-4de0-95ae-eb350089b5a7 {
+  &.sezzle-cart-page-widget {
+    margin-top: 15px;
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      max-width: unset;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+// Crystal Kicks
+.sezzle-9b63f422-8273-490e-80de-bfb1f88b25c5 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+// The Basin
+.sezzle-3ff6e591-9f2f-471e-92f0-a0ea4235a0db {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}

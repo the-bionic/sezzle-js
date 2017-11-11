@@ -1540,3 +1540,65 @@
 .sezzle-0e7cda03-ac77-4038-9fc8-17db122b145b.sezzle-cart-page-widget .sezzle-checkout-button-wrapper {
   font-size: 10px;
 }
+
+.sezzle-272fdb1e-11e1-47ea-8adb-17cf79013635.sezzle-product-page-widget .sezzle-checkout-button-wrapper {
+  font-size: 12px;
+}
+.sezzle-272fdb1e-11e1-47ea-8adb-17cf79013635.sezzle-cart-page-widget .sezzle-checkout-button-wrapper {
+  font-size: 12px;
+}
+
+.sezzle-be5a2115-e664-4fc6-a1bc-9d38328b33c9.sezzle-cart-page-widget {
+  margin-right: -20px;
+}
+
+.sezzle-aa91fd5f-1a38-4de0-95ae-eb350089b5a7.sezzle-cart-page-widget {
+  margin-top: 15px;
+}
+@media screen and (max-width: 740px) {
+  .sezzle-aa91fd5f-1a38-4de0-95ae-eb350089b5a7.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+.sezzle-aa91fd5f-1a38-4de0-95ae-eb350089b5a7.sezzle-cart-page-widget .sezzle-checkout-button {
+  max-width: unset;
+}
+@media screen and (max-width: 740px) {
+  .sezzle-aa91fd5f-1a38-4de0-95ae-eb350089b5a7.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .sezzle-9b63f422-8273-490e-80de-bfb1f88b25c5.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 749px) {
+  .sezzle-9b63f422-8273-490e-80de-bfb1f88b25c5.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .sezzle-3ff6e591-9f2f-471e-92f0-a0ea4235a0db.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 749px) {
+  .sezzle-3ff6e591-9f2f-471e-92f0-a0ea4235a0db.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
