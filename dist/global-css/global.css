@@ -1602,3 +1602,18 @@
         justify-content: center !important;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .sezzle-937dca02-2f49-453f-9e8d-cc12cc9b0e54 .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 480px) {
+  .sezzle-937dca02-2f49-453f-9e8d-cc12cc9b0e54 .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
