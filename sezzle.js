@@ -712,9 +712,16 @@ SezzleJS.prototype.replaceBanner = function() {
 * Post Event
 */
 SezzleJS.prototype.postEvent = function(eventName) {
-  var url = "https://shopify.sezzle.com/v1/log/button/event";
-  var fingerprint = "";
+  var url = "https://widget.sezzle.com/v1/event/log";
   
+  if(typeof window.Fingerprint2 === 'undefined' || window.Fingerprint2.VERSION != "1.4.1") {
+    var script = document.createElement("script")
+    script.type = "text/javascript";
+    script.src = 'https://cdn.jsdelivr.net/fingerprintjs2/1.4.1/fingerprint2.min.js';
+    document.getElementsByTagName("head")[0].appendChild(script);
+  }
+
+  var fingerprint = "";
   new Fingerprint2().get(function(result, components){
     fingerprint = result;
   });
