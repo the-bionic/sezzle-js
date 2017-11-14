@@ -372,6 +372,8 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
 
   // Adding sezzle to parent node
   this.insertAfter(sezzle, parent);
+
+  this.postEvent('onload');
 }
 
 /**
@@ -601,6 +603,8 @@ SezzleJS.prototype.renderModal = function() {
           modalNode.style.display = 'block';
           // Remove hidden class to show the item
           modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
+          // log on click event
+          this.postEvent('onclick');
         })
       });
     // Event listenr for close in modal
@@ -709,6 +713,11 @@ SezzleJS.prototype.replaceBanner = function() {
 */
 SezzleJS.prototype.postEvent = function(eventName) {
   var url = "https://shopify.sezzle.com/v1/log/button/event";
+  var fingerprint = "";
+  
+  new Fingerprint2().get(function(result, components){
+    fingerprint = result;
+  });
     
   var httpRequest = new XMLHttpRequest();
   httpRequest.onreadystatechange = function() {
@@ -725,7 +734,7 @@ SezzleJS.prototype.postEvent = function(eventName) {
       "button_version": sezzleButtonVersion,
       "event_name": eventName,
       "cart_id": this.getCookie('cart'),
-      "fingerprint": this.getCookie('_sezzle_fingerprint'),
+      "fingerprint": fingerprint,
       "merchant_site": window.location.hostname,
       "is_mobile_browser": this.isMobileBrowser(),
       "user_agent": navigator.userAgent
@@ -777,6 +786,7 @@ SezzleJS.prototype.init = function() {
  * All steps required to show the widget
  */
 SezzleJS.prototype.initWidget = function() {
+  this.postEvent("request");
   this.loadCSS(function() {
       var els = [];
       var toRenderEls = [];
