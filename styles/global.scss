@@ -108,6 +108,12 @@
   @media (max-width: 600px) {
     margin: 30px 10px 20px;
   }
+
+  .modal-icon {
+    max-width: 80px;
+    display: block;
+    margin: 0 auto 1em;
+  }
 }
 
 .sezzle-checkout-modal-lightbox .sezzle-modal-title {
@@ -294,23 +300,10 @@
 }
 
 .modal-description {
-  margin-left: 1em;
+  text-align: center;
 
   @media (max-width: 768px) {
     margin: 0 auto;
-  }
-}
-
-.modal-icon {
-  text-align: right;
-  max-width: 80px;
-  margin-left: 2em;
-  padding: 0 0.1rem;
-  display: block;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    max-width: 80px;
   }
 }
 
@@ -371,9 +364,9 @@
 }
 @media (max-width: 450px) {
   .sezzle-checkout-modal-lightbox .sezzle-checkout-modal p {
-    font-size: 10pt;
+    font-size: 11pt;
     text-align: center;
-    letter-spacing: 0.25px;
+    letter-spacing: .5px;
     line-height: 18px;
   }
 }
@@ -381,8 +374,7 @@
 .sezzle-checkout-modal-lightbox .sezzle-checkout-modal p small {
   display: block;
   box-sizing: border-box;
-  padding: 12px 0;
-  font-size: 8.5pt;
+  font-size: 11pt;
   opacity: 0.8;
 }
 @media (max-width: 450px) {
