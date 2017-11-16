@@ -1979,3 +1979,33 @@
     margin-bottom: 10px;
   }
 }
+
+// Honeysuckle Clothing
+.sezzle-6abb4eb9-9a51-4baf-8ad1-43a590b5af51 {
+  &.sezzle-product-page-widget {
+    @media screen and (min-width: 450px){
+      .sezzle-button-text {
+        font-size: 14px;
+        max-width: 340px;
+      }
+      .sezzle-checkout-button {
+        font-size: 14px;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
