@@ -1,3 +1,16 @@
+.sezzle-checkout-modal-lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999998;
+  background-color: rgba(5, 31, 52, 0.57);
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 // CSS Reset on the modal-lightbox
 .sezzle-checkout-modal-lightbox a,
 .sezzle-checkout-modal-lightbox abbr,
@@ -90,7 +103,7 @@
 }
 
 .point {
-  margin: 35px 10px 20px 40px;
+  margin: 35px 10px 35px 40px;
 
   @media (max-width: 600px) {
     margin: 30px 10px 20px;
@@ -293,11 +306,11 @@
   max-width: 80px;
   margin-left: 2em;
   padding: 0 0.1rem;
+  display: block;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
     max-width: 80px;
-    display: block;
-    margin: 0 auto;
   }
 }
 
