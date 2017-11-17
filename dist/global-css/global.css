@@ -1649,3 +1649,12 @@
         justify-content: center !important;
   }
 }
+
+.sezzle-0e755a63-71bf-4923-8757-35822b6d56e5.sezzle-product-page-widget {
+  margin-top: 0px;
+}
+@media screen and (max-width: 479px) {
+  .sezzle-0e755a63-71bf-4923-8757-35822b6d56e5.sezzle-product-page-widget .sezzle-button-text {
+    zoom: 0.9;
+  }
+}
