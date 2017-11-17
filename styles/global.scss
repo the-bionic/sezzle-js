@@ -347,8 +347,7 @@
 
 .sezzle-checkout-modal-lightbox .sezzle-checkout-modal p {
   display: block;
-  text-align: left;
-  max-width: 450px;
+  text-align: center;
   text-transform: none;
   font-size: 12pt;
   line-height: 25px;
@@ -410,7 +409,7 @@
 
 .sezzle-checkout-modal-lightbox .sezzle-checkout-modal h2 {
   font-size: 18px;
-  text-align: left;
+  text-align: center;
   margin: 0 auto;
 
   @media (max-width: 768px) {
