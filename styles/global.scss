@@ -2012,3 +2012,23 @@
     }
   }
 }
+
+//Source Vapes
+.sezzle-fdd253ee-7262-4d31-83ed-0dac03ed61e1{
+  &.sezzle-product-page-widget {
+    margin-top: 15px;
+  }
+  &.sezzle-cart-page-widget {
+    margin-top: 10px;
+    .sezzle-button-text {
+      @media screen and (max-width: 1199px) and (min-width: 992px) {
+        max-width: 240px;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 1199px) and (min-width: 992px) {
+        max-width: 240px;
+      }
+    }
+  }
+}
