@@ -722,7 +722,6 @@ SezzleJS.prototype.logEvent = function(eventName) {
       this.fingerprint = fingerprint
 
       this.postEvent(JSON.stringify({
-          "button_version": sezzleButtonVersion,
           "event_name": eventName,
           "cart_id": this.getCookie('cart'),
           "fingerprint": fingerprint,
@@ -735,7 +734,6 @@ SezzleJS.prototype.logEvent = function(eventName) {
     }.bind(this));
   }else{
       this.postEvent(JSON.stringify({
-          "button_version": sezzleButtonVersion,
           "event_name": eventName,
           "cart_id": this.getCookie('cart'),
           "fingerprint": this.fingerprint,
