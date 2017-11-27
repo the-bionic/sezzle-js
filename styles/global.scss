@@ -2044,3 +2044,38 @@
     }
   }
 }
+
+// Adrenaline Junkie Racing
+.sezzle-b780621a-ebb8-4a77-8bae-9cedaad96649 {
+  &.sezzle-product-page-widget {
+    margin-top: 5px;
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
