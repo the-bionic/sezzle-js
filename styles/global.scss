@@ -1734,14 +1734,6 @@
   }
 }
 
-// Opes Robur
-.sezzle-abef9ebb-524a-43b8-8f98-9e10a7846bec {
-  &.sezzle-product-page-widget {
-    margin-top: -20px;
-    margin-bottom: 20px;
-  }
-}
-
 // RYLA Pack
 .sezzle-ccc3912c-6857-4802-b50a-fce34fcb2369 {
   &.sezzle-cart-page-widget {
@@ -2028,6 +2020,26 @@
     .sezzle-checkout-button {
       @media screen and (max-width: 1199px) and (min-width: 992px) {
         max-width: 240px;
+      }
+    }
+  }
+}
+
+// opes robur
+.sezzle-abef9ebb-524a-43b8-8f98-9e10a7846bec {
+  &.sezzle-cart-page-widget {
+    margin-top: 10px;
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
       }
     }
   }
