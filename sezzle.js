@@ -775,12 +775,17 @@ SezzleJS.prototype.getFingerprint = function(callback) {
     var script = document.createElement("script")
     script.type = "text/javascript";
     script.src = 'https://cdn.jsdelivr.net/fingerprintjs2/1.4.1/fingerprint2.min.js';
+    script.onload = function() {
+      new Fingerprint2().get(function(result, components){
+        callback(result);
+      });
+    };
     document.getElementsByTagName("head")[0].appendChild(script);
+  } else {
+    new Fingerprint2().get(function(result, components){
+      callback(result);
+    });
   }
-
-  new Fingerprint2().get(function(result, components){
-    callback(result);
-  }); 
 }
 
 /*
