@@ -2108,3 +2108,26 @@
     }
   }
 }
+
+// Eva's Sunday
+.sezzle-617f392f-3875-4a41-8aa4-8e9a3b296df3 {
+  &.sezzle-product-page-widget {
+    margin-top: -15px;
+    .sezzle-button-text {
+      @media screen and (max-width: 767px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 767px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    margin-top: -30px;
+  }
+}
