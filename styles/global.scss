@@ -103,7 +103,7 @@
 }
 
 .point {
-  margin: 35px 10px 35px 40px;
+  margin: 35px 20px;
 
   @media (max-width: 600px) {
     margin: 30px 10px 20px;
@@ -220,6 +220,7 @@
   text-align: center;
   padding: 0 40px 40px;
   display: block;
+  border-radius: 0 0 20px 20px;
   background-color: #f1f4f6;
 }
 
