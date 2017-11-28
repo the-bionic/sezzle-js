@@ -2081,11 +2081,30 @@
   }
 }
 
-// mr bean body care america 
+// Mr. Bean Body Care america 
 .sezzle-89293438-c971-404e-8f3d-22e7ca2c548c {
   &.sezzle-product-page-widget {
     @media screen and (max-width: 479px) {
       zoom: 0.8;
+    }
+  }
+}
+
+// Mr. Bright Smile
+.sezzle-abaf0578-b7d0-4801-8e59-be80c61d488d {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 550px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 550px) {
+        float: none !important;
+        justify-content: center !important;
+      }
     }
   }
 }
