@@ -470,7 +470,7 @@ SezzleJS.prototype.getElementToRender = function(element, index = 0) {
       } else if (p[0] === '#') {
         // The ID in the element
         toRenderElement =
-          toRenderElement.getElementById(p.substr(1));
+          document.getElementById(p.substr(1));
       } else {
         // If this is a tag
         // e.g. span-2 means second span
