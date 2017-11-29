@@ -299,7 +299,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   this.insertStoreCSSClassInElement(node);
   this.addCSSAlignment(node);
 
-  if (this.altVersionTemplate != '') {
+  if (this.altVersionTemplate == '') {
     // price node level - 1.1
     var priceNode = document.createElement("div");
     priceNode.className = "sezzle-button-text";
@@ -357,8 +357,8 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
     var pricePresent = false;
 
     if (i > -1) {
-      beforePrice = text.substring(0,n);
-      afterPrice = text.substring(n+7);
+      beforePrice = text.substring(0,i);
+      afterPrice = text.substring(i+7);
       pricePresent = true;
     }
 
@@ -386,8 +386,11 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
 
       // price value text node level - 1.1.1.1
       var priceValueText = document.createTextNode(
-        ' of ' + this.getFormattedPrice(element.innerText)
+        ' ' + this.getFormattedPrice(element.innerText) + ' '
       );
+
+      // Adding price value to priceSpanNode - level - 1.1.2
+      priceSpanNode.appendChild(priceValueText)
 
       logoNode.appendChild(priceSpanNode);
 
