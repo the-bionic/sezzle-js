@@ -2131,3 +2131,23 @@
     margin-top: -30px;
   }
 }
+
+// Beau Hudson
+.sezzle-6d8d0bf6-75b5-42e2-af51-6f85b18c9a7e {
+  &.sezzle-cart-page-widget {
+    margin-top: -10px;
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
