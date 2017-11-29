@@ -1586,6 +1586,15 @@
   }
 }
 
+.sezzle-937dca02-2f49-453f-9e8d-cc12cc9b0e54.sezzle-product-page-widget {
+  color: black;
+  display: inline;
+}
+.sezzle-937dca02-2f49-453f-9e8d-cc12cc9b0e54.sezzle-cart-page-widget {
+  color: gray;
+  margin-top: -25px;
+  margin-bottom: -20px;
+}
 @media screen and (max-width: 480px) {
   .sezzle-937dca02-2f49-453f-9e8d-cc12cc9b0e54 .sezzle-button-text {
     float: none !important;
