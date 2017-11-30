@@ -2090,7 +2090,7 @@
   }
 }
 
-// Mr. Bean Body Care america 
+// Mr. Bean Body Care america
 .sezzle-89293438-c971-404e-8f3d-22e7ca2c548c {
   &.sezzle-product-page-widget {
     @media screen and (max-width: 479px) {
@@ -2158,5 +2158,26 @@
         justify-content: center !important;
       }
     }
-  }
+	}
+}
+
+// BananasAtLarge
+.sezzle-3e36d099-1da3-4c10-8d2c-722704c00e90 {
+	font-weight: normal;
+	font-size: 12px;
+	.payment-amount{
+		font-weight: 900;
+	}
+	@media (max-width: 350px) {
+		.sezzle-checkout-button-wrapper .sezzle-button-text {
+			font-size: 12px;
+		}
+	}
+	@media (max-width: 320px) {
+		.sezzle-button-text{
+			width: unset;
+			max-width: 200px;
+			font-size: 14px !important;
+		}
+	}
 }
