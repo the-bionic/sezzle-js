@@ -1,5 +1,5 @@
 node_modules
 
-.sass-cache
+.sass-cache*
 modal.html
 modal.min.html

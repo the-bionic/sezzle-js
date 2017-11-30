@@ -155,7 +155,7 @@ SezzleJS.prototype.parsePrice = function(price) {
  * @return string
  */
 SezzleJS.prototype.parsePriceString = function(price, includeComma) {
-  var formattedPrice = '';
+	var formattedPrice = '';
   for (var i = 0; i < price.length; i++) {
     if (this.isNumeric(price[i]) || price[i] == '.' || (includeComma && price[i] == ',')) {
       // If current is a . and previous is a character, it can be something like Rs.
@@ -163,7 +163,7 @@ SezzleJS.prototype.parsePriceString = function(price, includeComma) {
       if (i > 0 && price[i] == '.' && this.isAlpha(price[i - 1])) continue;
       formattedPrice += price[i];
     }
-  }
+	}
   return formattedPrice;
 }
 
@@ -685,7 +685,7 @@ SezzleJS.prototype.hideSezzleHideDivs = function() {
 
 /**
  * Replaces the afterpay banner
- * 
+ *
  */
 SezzleJS.prototype.replaceBanner = function() {
   var imgurl = this.bannerURL;
@@ -694,7 +694,7 @@ SezzleJS.prototype.replaceBanner = function() {
 
   if (bannerClass != '') {
     var element = document.getElementsByClassName(bannerClass)[0];
-    
+
     if (linkpath != '') {
       var link = element.getElementsByTagName("a");
       if(link[0] != null) {
