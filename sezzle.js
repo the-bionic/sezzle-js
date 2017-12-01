@@ -301,7 +301,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   this.insertStoreCSSClassInElement(node);
   this.addCSSAlignment(node);
 
-  if ((this.altVersionTemplate == '') && (this.altVersionTemplateWithLogo == '')) {
+  if ((this.altVersionTemplate == '') && (this.altVersionTemplate2 == '')) {
     // price node level - 1.1
     var priceNode = document.createElement("div");
     priceNode.className = "sezzle-button-text";
@@ -382,14 +382,14 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
       this.addCSSCustomisation(textNode);
 
       if(this.altVersionTemplate2.includes('%price%')) {
-        this.putPriceInElement(textNode, this.altVersionTemplate2)
+        this.putPriceInElement(textNode, this.altVersionTemplate2, index, 1, element)
       }else{
         // Loge node first child level - 1.1.1
         var logoNode1 = document.createElement("div");
         logoNode1.className = "sezzle-inline-text";
 
         // Logo node first child text - 1.1.1.1
-        var logoNode1Text = document.createTextNode(this.altVersionTemplate);
+        var logoNode1Text = document.createTextNode(this.altVersionTemplate2);
         logoNode1Text.className = "sezzle-inline-text"
         logoNode1.appendChild(logoNode1Text); // 1.1.1
 
@@ -408,7 +408,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
       this.addCSSCustomisation(logoNode);
 
       if(this.altVersionTemplate.includes('%price')) {
-        this.putPriceInElement(logoNode, this.altVersionTemplate)
+        this.putPriceInElement(logoNode, this.altVersionTemplate, index, 2, element)
       }else{
         // Loge node first child level - 1.1.1
         var logoNode1 = document.createElement("div");
@@ -464,7 +464,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
         // Add logeNode1 to logoNode level - 1.1
         logoNode.appendChild(logoNode4);
       }
-      
+
       node.appendChild(logoNode);
     }
   }
@@ -478,22 +478,30 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   this.logEvent('onload');
 }
 
-SezzleJS.prototype.putPriceInElement = function(element, text) {
+SezzleJS.prototype.putPriceInElement = function(element, text, index, line, priceElement) {
   var priceIndex = text.indexOf('%price%');
   var beforePrice = text.substring(0,priceIndex);
   var afterPrice = text.substring(priceIndex+7);
 
-  // Loge node first child level - 1.1.1
-  var logoNode1 = document.createElement("div");
-  logoNode1.className = "sezzle-inline-text";
+  if(line == 2){
+    // Loge node first child level - 1.1.1
+    var logoNode1 = document.createElement("div");
+    logoNode1.className = "sezzle-inline-text";
 
-  // Logo node first child text - 1.1.1.1
-  var logoNode1Text = document.createTextNode(beforePrice);
-  logoNode1Text.className = "sezzle-inline-text"
-  logoNode1.appendChild(logoNode1Text); // 1.1.1
+    // Logo node first child text - 1.1.1.1
+    var logoNode1Text = document.createTextNode(beforePrice);
+    logoNode1Text.className = "sezzle-inline-text"
+    logoNode1.appendChild(logoNode1Text); // 1.1.1
 
-  // Add logeNode1 to logoNode level - 1.1
-  element.appendChild(logoNode1);
+    // Add logeNode1 to logoNode level - 1.1
+    element.appendChild(logoNode1);
+  }else{
+     // price text node level - 1.1.1
+    var priceText = document.createTextNode(beforePrice);
+
+    // Adding priceText node to priceNode level - 1.1
+    element.appendChild(priceText);
+  } 
 
   // price value span node level - 1.1.1
   var priceSpanNode = document.createElement("span");
@@ -501,7 +509,7 @@ SezzleJS.prototype.putPriceInElement = function(element, text) {
 
   // price value text node level - 1.1.1.1
   var priceValueText = document.createTextNode(
-    ' of ' + this.getFormattedPrice(element.innerText) + ' '
+    ' of ' + this.getFormattedPrice(priceElement.innerText) + ' '
   );
 
   // Adding price value to priceSpanNode - level - 1.1.2
@@ -510,17 +518,25 @@ SezzleJS.prototype.putPriceInElement = function(element, text) {
   element.appendChild(priceSpanNode);
 
   if (afterPrice != ''){
-    // Loge node first child level - 1.1.1
-    var logoNode2 = document.createElement("div");
-    logoNode2.className = "sezzle-inline-text";
+    if(line == 2){
+      // Loge node first child level - 1.1.1
+      var logoNode2 = document.createElement("div");
+      logoNode2.className = "sezzle-inline-text";
 
-    // Logo node first child text - 1.1.1.1
-    var logoNode2Text = document.createTextNode(afterPrice);
-    logoNode2Text.className = "sezzle-inline-text"
-    logoNode2.appendChild(logoNode2Text); // 1.1.1
+      // Logo node first child text - 1.1.1.1
+      var logoNode2Text = document.createTextNode(afterPrice);
+      logoNode2Text.className = "sezzle-inline-text"
+      logoNode2.appendChild(logoNode2Text); // 1.1.1
 
-    // Add logeNode1 to logoNode level - 1.1
-    element.appendChild(logoNode2);
+      // Add logeNode1 to logoNode level - 1.1
+      element.appendChild(logoNode2);
+    }else{
+      // price text node level - 1.1.1
+      var priceText = document.createTextNode(beforePrice);
+
+      // Adding priceText node to priceNode level - 1.1
+      element.appendChild(priceText);
+    }
   }
 
   return;
