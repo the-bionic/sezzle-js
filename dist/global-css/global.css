@@ -1809,3 +1809,9 @@
     font-size: 14px !important;
   }
 }
+
+@media (max-width: 479px) {
+  .sezzle-5c7f042b-62f1-4607-8df8-553dd8ecb5d5.sezzle-product-page-widget {
+    zoom: 0.9;
+  }
+}
