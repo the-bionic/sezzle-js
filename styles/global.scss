@@ -1556,19 +1556,10 @@
 
 //Future Bikini
 .sezzle-f8b9b207-c70d-4f04-99f7-4494525689d9 {
-  &.sezzle-cart-page-widget {
-    .sezzle-button-text {
-      @media screen and (max-width: 749px) {
-        float: none !important;
-        text-align: center !important;
-        margin: auto !important;
-      }
-    }
-    .sezzle-checkout-button {
-      @media screen and (max-width: 749px) {
-        float: none !important;
-        justify-content: center !important;
-      }
+  &.sezzle-product-page-widget {
+    margin-top: -10px;
+    @media screen and (max-width: 479px) {
+      zoom: 0.9;
     }
   }
 }
@@ -2180,4 +2171,13 @@
 			font-size: 14px !important;
 		}
 	}
+}
+
+// Liberated Heart
+.sezzle-5c7f042b-62f1-4607-8df8-553dd8ecb5d5 {
+  &.sezzle-product-page-widget {
+    @media (max-width: 479px) {
+      zoom: 0.9;
+    }
+  }
 }
