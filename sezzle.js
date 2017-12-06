@@ -517,6 +517,14 @@ SezzleJS.prototype.putPriceInElement = function(element, text, index, line, pric
 
   element.appendChild(priceSpanNode);
 
+        // Logo node second child level - 1.1.2
+        var logo = document.createElement("img");
+        logo.className = "szl-light-image";
+        logo.src = this.imageUrl;
+
+        // Add logeNode1 to logoNode level - 1.1
+        element.appendChild(logo);
+
   if (afterPrice != ''){
     if(line == 2){
       // Loge node first child level - 1.1.1
@@ -532,7 +540,7 @@ SezzleJS.prototype.putPriceInElement = function(element, text, index, line, pric
       element.appendChild(logoNode2);
     }else{
       // price text node level - 1.1.1
-      var priceText = document.createTextNode(beforePrice);
+      var priceText = document.createTextNode(afterPrice);
 
       // Adding priceText node to priceNode level - 1.1
       element.appendChild(priceText);
