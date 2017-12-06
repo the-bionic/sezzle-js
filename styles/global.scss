@@ -2186,3 +2186,21 @@
     }
   }
 }
+
+// Indira Active
+.sezzle-2a65dea8-7ad4-4cd9-8798-9ab2d7946608 {
+  &.sezzle-product-page-widget {
+    margin-top: -15px;
+    @media (max-width: 959px) {
+      zoom: 0.9;
+    }
+  }
+	&.sezzle-cart-page-widget {
+    @media (min-width: 1200px) {
+      zoom: 0.9;
+    }
+    @media (max-width: 479px) {
+      zoom: 0.9;
+    }
+  }
+}
