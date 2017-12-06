@@ -1831,3 +1831,27 @@
     zoom: 0.9;
   }
 }
+
+.sezzle-c401bb72-8dd2-417d-b44b-754a4425a739.sezzle-product-page-widget {
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+@media (max-width: 500px) {
+  .sezzle-c401bb72-8dd2-417d-b44b-754a4425a739.sezzle-product-page-widget {
+    zoom: 0.8;
+  }
+}
+@media screen and (max-width: 740px) {
+  .sezzle-c401bb72-8dd2-417d-b44b-754a4425a739.sezzle-product-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 740px) {
+  .sezzle-c401bb72-8dd2-417d-b44b-754a4425a739.sezzle-product-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
