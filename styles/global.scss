@@ -2164,6 +2164,11 @@
 			font-size: 12px;
 		}
 	}
+
+	&.sezzle-cart-page-widget {
+		width: 160px;
+	}
+
 	@media (max-width: 320px) {
 		.sezzle-button-text{
 			width: unset;
