@@ -2228,3 +2228,35 @@
     }
   }
 }
+
+// Im with the Band
+.sezzle-bb33b52a-8f59-4549-9e22-4c80a5b5c30f {
+  &.sezzle-product-page-widget { 
+    @media (max-width: 887px) and (min-width: 753px) {
+      zoom: 0.8;
+    }
+    @media (max-width: 356px) {
+      zoom: 0.9;
+    }
+  }
+	&.sezzle-cart-page-widget {
+    margin-top: -15px;
+    margin-bottom: 10px;
+    @media (max-width: 927px) and (min-width: 769px) {
+      zoom: 0.8;
+    }
+    .sezzle-button-text {
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
