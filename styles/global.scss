@@ -2268,3 +2268,25 @@
     margin-left: 5px;
   }
 }
+
+// EOD Style
+.sezzle-6a67da03-4358-468f-8593-cd303928acd3 {
+  &.sezzle-product-page-widget { 
+    overflow: unset;
+    margin-top: -15px;
+    zoom: 0.9;
+    .sezzle-button-text {
+      @media screen and (max-width: 768px) {
+        max-width: unset;
+      }
+      @media screen and (min-width: 944px) {
+        max-width: unset;
+      }
+    }
+  }
+	&.sezzle-cart-page-widget {
+    zoom: 0.8;
+    margin-top: -12px;
+    margin-bottom: 15px;
+  }
+}
