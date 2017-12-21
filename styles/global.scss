@@ -2110,6 +2110,15 @@
 }
 
 // Eva's Sunday
+.h4-style {
+  &.price {
+    .sezzle-617f392f-3875-4a41-8aa4-8e9a3b296df3 {
+      &.sezzle-product-page-widget {
+        display: none;
+      }
+    }
+  }
+}
 .sezzle-617f392f-3875-4a41-8aa4-8e9a3b296df3 {
   &.sezzle-product-page-widget {
     margin-top: -15px;
