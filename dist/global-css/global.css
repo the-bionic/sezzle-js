@@ -1745,29 +1745,12 @@
   }
 }
 
-.h4-style.price .sezzle-617f392f-3875-4a41-8aa4-8e9a3b296df3.sezzle-product-page-widget {
-  display: none;
-}
-
 .sezzle-617f392f-3875-4a41-8aa4-8e9a3b296df3.sezzle-product-page-widget {
-  margin-top: -15px;
-}
-@media screen and (max-width: 767px) {
-  .sezzle-617f392f-3875-4a41-8aa4-8e9a3b296df3.sezzle-product-page-widget .sezzle-button-text {
-    float: none !important;
-    text-align: center !important;
-    margin: auto !important;
-  }
-}
-@media screen and (max-width: 767px) {
-  .sezzle-617f392f-3875-4a41-8aa4-8e9a3b296df3.sezzle-product-page-widget .sezzle-checkout-button {
-    float: none !important;
-    -ms-flex-pack: center !important;
-        justify-content: center !important;
-  }
+  margin-top: 5px;
 }
 .sezzle-617f392f-3875-4a41-8aa4-8e9a3b296df3.sezzle-cart-page-widget {
-  margin-top: -30px;
+  margin-top: -10px;
+  margin-bottom: 15px;
 }
 
 .sezzle-6d8d0bf6-75b5-42e2-af51-6f85b18c9a7e.sezzle-cart-page-widget {
