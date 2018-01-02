@@ -2364,3 +2364,32 @@
     margin-top: -15px;
   }
 }
+
+// Contemporary Furniture Warehouse
+.sezzle-668014e6-61ce-41be-b733-119488b1d53d {
+  &.sezzle-product-page-widget { 
+    margin-top: 10px;
+  }
+	&.sezzle-cart-page-widget {
+    margin-top: -10px;   
+    margin-bottom: 15px;
+    .sezzle-checkout-button-wrapper {
+      .sezzle-button-text {
+        .payment-amount {
+          line-height: 28px;
+        }
+      }
+    }
+    .sezzle-checkout-button {
+      .sezzle-inline-text {
+        line-height: 28px;
+      }
+      .szl-light-image {
+        line-height: 28px;
+      }
+      .sezzle-know-more {
+        line-height: 28px;
+      }
+    }
+  }
+}
