@@ -2303,3 +2303,30 @@
     }
   }
 }
+
+// 420 Science
+.sezzle-546f351b-0c7a-4cd7-b557-91ad748ec601 {
+  &.sezzle-product-page-widget { 
+    .sezzle-checkout-button-wrapper {
+      display: block !important;
+      margin-bottom: 15px
+    }
+  }
+	&.sezzle-cart-page-widget {
+    margin-top: -15px;
+    margin-bottom: 10px;
+    .sezzle-button-text {
+      @media screen and (max-width: 800px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 800px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
