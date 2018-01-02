@@ -1973,3 +1973,14 @@
   font-weight: 300;
   margin-bottom: 5px;
 }
+.sezzle-4dc6025c-a41c-482d-a472-3defa238e610.sezzle-product-page-widget {
+  padding-left: 0.35em;
+}
+@media screen and (max-width: 479px) {
+  .sezzle-4dc6025c-a41c-482d-a472-3defa238e610.sezzle-product-page-widget {
+    zoom: 0.9;
+  }
+}
+.sezzle-4dc6025c-a41c-482d-a472-3defa238e610.sezzle-cart-page-widget {
+  margin-top: -15px;
+}
