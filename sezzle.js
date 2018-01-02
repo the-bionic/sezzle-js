@@ -161,6 +161,7 @@ SezzleJS.prototype.parsePriceString = function(price, includeComma) {
       // If current is a . and previous is a character, it can be something like Rs.
       // so ignore it
       if (i > 0 && price[i] == '.' && this.isAlpha(price[i - 1])) continue;
+
       formattedPrice += price[i];
     }
 	}
@@ -472,6 +473,16 @@ SezzleJS.prototype.getFormattedPrice = function(priceText) {
 
   // Will be used later to replace {price} with price / 4.0 Eg: ${price} USD
   var formatter = priceText.replace(priceString, '{price}');
+
+	// array of strings that come up inside of elements that we want to make sure to strip out
+	var ignoredPriceStrings = [
+		"Subtotal",
+	]
+
+	// replace other strings not wanted in text
+	ignoredPriceStrings.forEach(function(ignoredString) {
+		formatter = formatter.replace(ignoredString, '');
+	}, this);
 
   // get the sezzle instalment price
   var sezzleInstalmentPrice = (price / 4.0).toFixed(2);
