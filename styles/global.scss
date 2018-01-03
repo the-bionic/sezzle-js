@@ -2461,3 +2461,31 @@
     margin-top: -10px;
   }
 }
+
+// Gypsy 05
+.sezzle-bfe25ce5-fe67-418f-8838-b0b470059a67 {
+  &.sezzle-product-page-widget { 
+    margin-bottom: 1.6em;
+    border-bottom: 1px solid;
+    margin-top: -45px;
+    z-index: 100;
+    background: white;
+  }
+	&.sezzle-cart-page-widget {    
+    margin-bottom: 20px;
+    margin-top: -15px;
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
