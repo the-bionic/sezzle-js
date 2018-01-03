@@ -1974,6 +1974,25 @@
   font-weight: 300;
   margin-bottom: 5px;
 }
+.sezzle-a0bad0c2-e5bc-4a7c-980f-f814c455f745.sezzle-cart-page-widget {
+  margin-top: -15px;
+  margin-bottom: 10px;
+}
+@media screen and (max-width: 740px) {
+  .sezzle-a0bad0c2-e5bc-4a7c-980f-f814c455f745.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 740px) {
+  .sezzle-a0bad0c2-e5bc-4a7c-980f-f814c455f745.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
+
 .sezzle-4dc6025c-a41c-482d-a472-3defa238e610.sezzle-product-page-widget {
   padding-left: 0.35em;
 }

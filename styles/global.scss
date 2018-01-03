@@ -2359,6 +2359,23 @@
     font-weight: 300;
     margin-bottom: 5px;
   }
+	&.sezzle-cart-page-widget {
+    margin-top: -15px;
+    margin-bottom: 10px;
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
 }
 
 // Life Token
