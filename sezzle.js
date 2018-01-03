@@ -473,16 +473,17 @@ SezzleJS.prototype.getFormattedPrice = function(priceText) {
 
   // Will be used later to replace {price} with price / 4.0 Eg: ${price} USD
   var formatter = priceText.replace(priceString, '{price}');
-
+  
 	// array of strings that come up inside of elements that we want to make sure to strip out
 	var ignoredPriceStrings = [
-		"Subtotal",
+    "Subtotal",
+    "Total:",
 	]
 
 	// replace other strings not wanted in text
 	ignoredPriceStrings.forEach(function(ignoredString) {
 		formatter = formatter.replace(ignoredString, '');
-	}, this);
+  }, this);
 
   // get the sezzle instalment price
   var sezzleInstalmentPrice = (price / 4.0).toFixed(2);

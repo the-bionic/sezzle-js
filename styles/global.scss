@@ -110,6 +110,7 @@
   }
 
   .modal-icon {
+    float: unset;
     max-width: 80px;
     display: block;
     margin: 0 auto 1em;
@@ -2391,5 +2392,20 @@
         line-height: 28px;
       }
     }
+  }
+}
+
+// Hellfire Offroad Lighting
+.sezzle-4d30fa7a-70ae-454d-9943-f15645d2d345 {
+  &.sezzle-product-page-widget { 
+    margin-left: 30px;
+    overflow: unset;
+    @media screen and (max-width: 480px) {
+      margin-left: 15px;
+    }
+
+  }
+	&.sezzle-cart-page-widget {
+    margin-bottom: 10px;
   }
 }
