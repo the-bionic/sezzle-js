@@ -110,6 +110,7 @@
   }
 
   .modal-icon {
+    float: unset;
     max-width: 80px;
     display: block;
     margin: 0 auto 1em;
@@ -2370,5 +2371,49 @@
   }
 	&.sezzle-cart-page-widget {
     margin-top: -15px;
+  }
+}
+
+// Contemporary Furniture Warehouse
+.sezzle-668014e6-61ce-41be-b733-119488b1d53d {
+  &.sezzle-product-page-widget { 
+    margin-top: 10px;
+  }
+	&.sezzle-cart-page-widget {
+    margin-top: -10px;   
+    margin-bottom: 15px;
+    .sezzle-checkout-button-wrapper {
+      .sezzle-button-text {
+        .payment-amount {
+          line-height: 28px;
+        }
+      }
+    }
+    .sezzle-checkout-button {
+      .sezzle-inline-text {
+        line-height: 28px;
+      }
+      .szl-light-image {
+        line-height: 28px;
+      }
+      .sezzle-know-more {
+        line-height: 28px;
+      }
+    }
+  }
+}
+
+// Hellfire Offroad Lighting
+.sezzle-4d30fa7a-70ae-454d-9943-f15645d2d345 {
+  &.sezzle-product-page-widget { 
+    margin-left: 30px;
+    overflow: unset;
+    @media screen and (max-width: 480px) {
+      margin-left: 15px;
+    }
+
+  }
+	&.sezzle-cart-page-widget {
+    margin-bottom: 10px;
   }
 }
