@@ -16,6 +16,17 @@ var SezzleJS = function(options) {
     }
   }
 
+  this.ignoredPriceXPaths =[];
+  if (options.ignoredPriceXPaths) {
+    if (typeof(options.ignoredPriceXPaths) === 'string') {
+      // Only one x-path is given
+      this.ignoredPriceXPaths.push(options.ignoredPriceXPaths.split('/'));
+    } else {
+      // options.targetXPath is an array of x-paths
+      this.ignoredPriceXPaths = options.ignoredPriceXPaths.map(path => path.split('/'));
+    }
+  }
+
   this.rendertopath = [];
   if (options.renderToPath) {
     if (typeof(options.renderToPath) === 'string') {
@@ -317,7 +328,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
 
   // price value text node level - 1.1.1.1
   var priceValueText = document.createTextNode(
-    ' of ' + this.getFormattedPrice(element.innerText)
+    ' of ' + this.getFormattedPrice(element)
   );
 
   // Adding price value to priceSpanNode - level - 1.1.2
@@ -461,10 +472,56 @@ SezzleJS.prototype.isProductEligible = function(priceText) {
 }
 
 /**
- * Formats a price as Sezzle needs it
- * @param priceText Complete price test Eg: $120.00 USD
+ * Gets price text
+ * @param element Element that contains the price text
  */
-SezzleJS.prototype.getFormattedPrice = function(priceText) {
+SezzleJS.prototype.getPriceText = function(element) {
+  if (this.ignoredPriceXPaths == []){
+    return element.innerText;
+  } else {
+    clone = element.cloneNode(true);
+    this.ignoredPriceXPaths.forEach(function(ipath) {
+        // If this is an ID
+        if (ipath[0] === '#') {
+          clone.removeChild(clone.getElementById(ipath.substr(1)));
+        } else
+        // If this is a class
+        if (ipath[0] === '.') {
+          Array.from(
+            clone.getElementsByClassName(ipath.substr(1))
+          )
+          .forEach(function(el) {
+              clone.removeChild(el);
+          })
+        }
+        // If this is a tag
+        {
+          var indexToTake = 0;
+          if (ipath[0].split('-').length > 1) {
+            if (ipath[0].split('-')[1] >= 0) {
+              indexToTake = parseInt(ipath[0].split('-')[1]);
+            }
+          }
+          Array.from(
+            clone.getElementsByTagName(ipath[0].split('-')[0])
+          )
+          .forEach(function(el, index) {
+              if (index === indexToTake) clone.removeChild(el);
+          });
+        }
+      })
+
+    return clone.innerText;
+  }
+}
+
+/**
+ * Formats a price as Sezzle needs it
+ * @param element Element that contains price text
+ */
+SezzleJS.prototype.getFormattedPrice = function(element) {
+  priceText = this.getPriceText(element);
+
   // Get the price string - useful for formtting Eg: 120.00(string)
   var priceString = this.parsePriceString(priceText, true);
 
@@ -506,7 +563,7 @@ SezzleJS.prototype.observer = new MutationObserver(function(mutations) {
     .forEach(function(mutation) {
       var priceIndex = mutation.target.dataset.sezzleindex;
       var s = new SezzleJS(document.sezzleConfig);
-      var price = s.getFormattedPrice(mutation.target.innerText);
+      var price = s.getFormattedPrice(mutation.target);
       delete s;
       document.getElementsByClassName('sezzleindex-' + priceIndex)[0]
         .innerText = ' of ' + price;
@@ -565,7 +622,7 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
       // change the innertext
       var addedSezzleNode = s.findSameClassElement(removedSezzleNode, addedNodesMutated);
       addedSezzleNode.dataset.sezzleindex = removedSezzleNode.dataset.sezzleindex;
-      var price = s.getFormattedPrice(addedSezzleNode.innerText);
+      var price = s.getFormattedPrice(addedSezzleNode);
       delete s;
       document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
       .innerText = ' of ' + price;
