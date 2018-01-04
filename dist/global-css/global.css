@@ -1083,6 +1083,22 @@
 .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-product-page-widget {
   margin-top: 10px;
 }
+@media screen and (max-width: 910px) {
+  .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-product-page-widget {
+    display: none;
+  }
+}
+.sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-product-page-widget .sezzle-checkout-button-wrapper {
+  margin-bottom: 10px;
+}
+@media screen and (min-width: 911px) {
+  .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-product-preview-widget {
+    display: none;
+  }
+}
+.sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-product-preview-widget .sezzle-checkout-button-wrapper {
+  margin-bottom: 15px;
+}
 .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad.sezzle-shopify-info-button {
   overflow: unset;
 }
