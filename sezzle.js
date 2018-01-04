@@ -53,16 +53,23 @@ var SezzleJS = function(options) {
   this.forcedShow = options.forcedShow || false;
   this.alignment = options.alignment || '';
   this.merchantID = options.merchantID || '';
-  this.theme = options.theme || '';
   this.widthType = options.widthType || '';
   this.widgetType = options.widgetType || 'product';
   this.minPrice = options.minPrice || 0;
   this.maxPrice = options.maxPrice || 100000;
-  this.imageUrl = options.imageUrl || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
   this.hideClasses = options.hideClasses || [];
   this.bannerURL = options.bannerUrl || '';
   this.bannerClass = options.bannerClass || '';
   this.bannerLink = options.bannerLink || '';
+
+  this.theme = options.theme || '';
+  if(this.theme == 'dark') {
+    this.imageUrl = options.imageUrl || 'https://d34uoa9py2cgca.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-white-sm-100w.png';
+    this.imageClassName = 'szl-dark-image';
+  } else {
+    this.imageUrl = options.imageUrl || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
+    this.imageClassName = 'szl-light-image';
+  }
 
   // Non configurable options
   this._config = { attributes: true, childList: true, characterData: true };
@@ -361,7 +368,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
 
   // Logo node second child level - 1.1.2
   var logoNode2 = document.createElement("img");
-  logoNode2.className = "szl-light-image";
+  logoNode2.className = this.imageClassName;
   logoNode2.src = this.imageUrl;
 
   // Add logeNode1 to logoNode level - 1.1
