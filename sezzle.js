@@ -53,12 +53,10 @@ var SezzleJS = function(options) {
   this.forcedShow = options.forcedShow || false;
   this.alignment = options.alignment || '';
   this.merchantID = options.merchantID || '';
-  this.theme = options.theme || '';
   this.widthType = options.widthType || '';
   this.widgetType = options.widgetType || 'product';
   this.minPrice = options.minPrice || 0;
   this.maxPrice = options.maxPrice || 100000;
-  this.imageUrl = options.imageUrl || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
   this.hideClasses = options.hideClasses || [];
   this.bannerURL = options.bannerUrl || '';
   this.bannerClass = options.bannerClass || '';
@@ -66,6 +64,15 @@ var SezzleJS = function(options) {
   this.altVersionTemplate = options.altVersionTemplate || '';
   this.altVersionTemplate2 = options.altVersionTemplate2 || '';
   this.altVersionEnd = options.altVersionEnd || '';
+
+  this.theme = options.theme || '';
+  if(this.theme == 'dark') {
+    this.imageUrl = options.imageUrl || 'https://d34uoa9py2cgca.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-white-sm-100w.png';
+    this.imageClassName = 'szl-dark-image';
+  } else {
+    this.imageUrl = options.imageUrl || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
+    this.imageClassName = 'szl-light-image';
+  }
 
   // Non configurable options
   this._config = { attributes: true, childList: true, characterData: true };
@@ -456,11 +463,10 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
         // Add logeNode1 to logoNode level - 1.1
         logoNode.appendChild(logoNode4);
 
-      }else if(this.altVersionEnd == 'both') {
-        // Logo node second child level - 1.1.2
-        var logoNode2 = document.createElement("img");
-        logoNode2.className = "szl-light-image";
-        logoNode2.src = this.imageUrl;
+  // Logo node second child level - 1.1.2
+  var logoNode2 = document.createElement("img");
+  logoNode2.className = this.imageClassName;
+  logoNode2.src = this.imageUrl;
 
         // Add logeNode1 to logoNode level - 1.1
         logoNode.appendChild(logoNode2);
@@ -835,7 +841,7 @@ SezzleJS.prototype.renderModal = function() {
     var modalNode = document.createElement('div');
     modalNode.className = "sezzle-checkout-modal-lightbox close-sezzle-modal";
     modalNode.style.display = 'none';
-    modalNode.innerHTML = '<div class="sezzle-checkout-modal sezzle-checkout-modal-hidden"><div class="top-content"><div class="sezzle-no-thanks close-sezzle-modal">×</div><div class="sezzle-modal-title"><div class="sezzle-title-text-center">How Sezzle Works</div></div><div class="sezzle-header-text">We have partnered with Sezzle to give you the ability to Buy Now and Pay Later.</div><div class="row point"><div class="col-xs-12 col-sm-12 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/no-interest-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>No interest or fees</h2><p>You only pay the purchase price with Sezzle, as long as you have the installment amount in your bank account.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/shipped-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Your order is shipped right away</h2><p>We ship your order immediately, like we would for any other payment method.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 col-md-2 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/payments-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Easy, automatic payments</h2><p>Sezzle splits your purchase into 4 payments, automatically deducted from your bank account every two weeks.</p></div></div></div><div class="sezzle-simply-select"><div class="sezzle-inline-text-left">Just select</div><img src="https://sezzlemedia.s3.amazonaws.com/branding/sezzle-logos/sezzle-logo.svg"><div class="sezzle-inline-text-right">at checkout.</div></div><div class="sezzle-footer-text">Subject to approval. Estimated payment amount excludes taxes and shipping fees. Your actual installment payments will be presented for confirmation in your checkout with Sezzle.</div></div>';
+    modalNode.innerHTML = '<div class="sezzle-checkout-modal sezzle-checkout-modal-hidden"><div class="top-content"><div class="sezzle-no-thanks close-sezzle-modal">×</div><div class="sezzle-modal-title"><div class="sezzle-title-text-center">How Sezzle Works</div></div><div class="sezzle-header-text">We have partnered with Sezzle to give you the ability to Buy Now and Pay Later.</div><div class="row point"><div class="col-xs-12 col-sm-12 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/0interest.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>No interest or fees</h2><p>You only pay the purchase price with Sezzle, as long as you have the installment amount in your bank account.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/shipped-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Your order is shipped right away</h2><p>We ship your order immediately, like we would for any other payment method.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 col-md-2 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/payments-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Easy, automatic payments</h2><p>Sezzle splits your purchase into 4 payments, automatically deducted from your bank account every two weeks.</p></div></div></div><div class="sezzle-simply-select"><div class="sezzle-inline-text-left">Just select</div><img src="https://sezzlemedia.s3.amazonaws.com/branding/sezzle-logos/sezzle-logo.svg"><div class="sezzle-inline-text-right">at checkout.</div></div><div class="sezzle-footer-text">Subject to approval. Estimated payment amount excludes taxes and shipping fees. Your actual installment payments will be presented for confirmation in your checkout with Sezzle.</div></div>';
     document.getElementsByTagName('html')[0].appendChild(modalNode);
 {/* <div class="sezzle-checkout-modal-lightbox"><div class="sezzle-checkout-modal"></div></div> */}
     // Event listenr for click in know more button

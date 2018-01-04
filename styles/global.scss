@@ -99,21 +99,21 @@
 }
 
 .top-content {
-  padding: 50px 30px 20px;
+  padding: 30px 30px 20px;
 }
 
 .point {
-  margin: 35px 20px;
+  margin: 10px 25px 5px;
 
   @media (max-width: 600px) {
     margin: 30px 10px 20px;
   }
 
   .modal-icon {
+    width: 62px;
     float: unset;
-    max-width: 80px;
     display: block;
-    margin: 0 auto 1em;
+    margin: 0 auto 2px;
   }
 }
 
@@ -174,7 +174,7 @@
   letter-spacing: 0;
   line-height: 30px;
   text-align: center;
-  margin: 12px 70px 40px;
+  margin: 10px 70px 13px;
   color: #909699;
   font-weight: 300;
 }
@@ -219,10 +219,15 @@
   line-height: 16pt;
   color: #666;
   text-align: center;
-  padding: 0 40px 40px;
+  padding: 0 40px 21px;
   display: block;
   border-radius: 0 0 20px 20px;
   background-color: #f1f4f6;
+}
+@media (max-width: 650px) {
+  .sezzle-checkout-modal-lightbox .sezzle-footer-text {
+    border-radius: 0px;
+  }
 }
 
 .sezzle-checkout-modal-lightbox .sezzle-simply-select {
@@ -230,14 +235,13 @@
   display: flex;
   -ms-flex-pack: center;
   justify-content: center;
-  margin-top: 25px;
+  margin-top: 5px;
   font-size: 20px;
   background-color: #f1f4f6;
-  padding: 30px 30px 10px;
+  padding: 15px 30px 10px;
 }
 @media (max-width: 690px) {
   .sezzle-checkout-modal-lightbox .sezzle-simply-select {
-    margin-top: 35px;
     font-size: 15px;
   }
 }
@@ -277,7 +281,12 @@
 }
 
 .sezzle-checkout-modal-lightbox .sezzle-checkout-modal {
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -384px;
+  margin-left: -325px;
+
   z-index: 99999998;
   background-color: #fff;
   box-shadow: 0 10px 20px rgba(5, 31, 52, 0.19), 0 6px 6px rgba(5, 31, 52, 0.2);
@@ -286,10 +295,12 @@
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   transition: all 0.4s ease;
   width: 650px;
-  margin: 120px auto;
 }
 @media (max-width: 650px) {
   .sezzle-checkout-modal-lightbox .sezzle-checkout-modal {
+    position: relative;
+    top: 0px;
+    left: 0px;
     padding: 50px 20px;
     margin: 0;
     border-radius: 0;
@@ -298,6 +309,14 @@
     max-width: 100%;
     min-width: 320px;
     overflow: auto;
+  }
+}
+@media (max-height: 767px) and (min-width: 651px) {
+  .sezzle-checkout-modal-lightbox .sezzle-checkout-modal {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    margin: 20px auto;
   }
 }
 
@@ -2506,5 +2525,22 @@
         justify-content: center !important;
       }
     }
+  }
+}
+
+// Apollo 440
+.fancybox-inner {
+  .sezzle-01c858b9-ce61-4d21-88cd-637c100a2900 {
+    &.sezzle-product-page-widget { 
+      display: none !important;
+    }
+    &.sezzle-product-preview-widget {
+      display: block !important;
+    }
+  }
+}
+.sezzle-01c858b9-ce61-4d21-88cd-637c100a2900 {
+  &.sezzle-product-preview-widget {
+    display: none;
   }
 }
