@@ -2120,3 +2120,14 @@
         justify-content: center !important;
   }
 }
+
+.fancybox-inner .sezzle-01c858b9-ce61-4d21-88cd-637c100a2900.sezzle-product-page-widget {
+  display: none !important;
+}
+.fancybox-inner .sezzle-01c858b9-ce61-4d21-88cd-637c100a2900.sezzle-product-preview-widget {
+  display: block !important;
+}
+
+.sezzle-01c858b9-ce61-4d21-88cd-637c100a2900.sezzle-product-preview-widget {
+  display: none;
+}
