@@ -1304,7 +1304,22 @@
 // Freddyshop
 .sezzle-4a35c6be-04a2-48a6-9299-84a28a979dad {
   &.sezzle-product-page-widget { 
-    margin-top: 10px
+    margin-top: 10px;
+    @media screen and (max-width: 910px) {
+      display: none;
+    }
+    .sezzle-checkout-button-wrapper {
+      margin-bottom: 10px;
+    }
+  }
+
+	&.sezzle-product-preview-widget {
+    @media screen and (min-width: 911px) {
+      display: none;
+    }
+    .sezzle-checkout-button-wrapper {
+      margin-bottom: 15px;
+    }
   }
 
 	&.sezzle-shopify-info-button{
