@@ -9,6 +9,7 @@
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
+  color: unset;
 }
 
 .sezzle-checkout-modal-lightbox a,
@@ -433,6 +434,7 @@
   font-size: 18px;
   text-align: center;
   margin: 0 auto;
+  color: unset;
 }
 @media (max-width: 768px) {
   .sezzle-checkout-modal-lightbox .sezzle-checkout-modal h2 {
