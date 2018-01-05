@@ -9,6 +9,7 @@
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
+  color: unset;
 }
 
 // CSS Reset on the modal-lightbox
@@ -434,6 +435,7 @@
   font-size: 18px;
   text-align: center;
   margin: 0 auto;
+  color: unset;
 
   @media (max-width: 768px) {
     text-align: center;
