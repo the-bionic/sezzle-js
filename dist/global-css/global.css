@@ -2135,3 +2135,30 @@
 .sezzle-01c858b9-ce61-4d21-88cd-637c100a2900.sezzle-product-preview-widget {
   display: none;
 }
+
+.sezzle-6fed7fc5-6ad2-400f-8062-896675f3f6c0.sezzle-cart-page-widget {
+  margin-top: 10px;
+}
+@media screen and (max-width: 1219px) and (min-width: 980px) {
+  .sezzle-6fed7fc5-6ad2-400f-8062-896675f3f6c0.sezzle-cart-page-widget {
+    zoom: 0.9;
+  }
+}
+@media screen and (max-width: 740px) {
+  .sezzle-6fed7fc5-6ad2-400f-8062-896675f3f6c0.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 740px) {
+  .sezzle-6fed7fc5-6ad2-400f-8062-896675f3f6c0.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
+.sezzle-6fed7fc5-6ad2-400f-8062-896675f3f6c0.sezzle-cart-page-widget .payment-amount {
+  color: black !important;
+  font-size: 18px !important;
+}

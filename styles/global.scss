@@ -2548,3 +2548,31 @@
     display: none;
   }
 }
+
+// Two Tags
+.sezzle-6fed7fc5-6ad2-400f-8062-896675f3f6c0 {
+	&.sezzle-cart-page-widget {   
+    margin-top: 10px;
+    @media screen and (max-width: 1219px) and (min-width: 980px) {
+      zoom: 0.9;
+      
+    }
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+    .payment-amount {
+      color: black !important;
+      font-size: 18px !important;
+    }
+  }
+}
