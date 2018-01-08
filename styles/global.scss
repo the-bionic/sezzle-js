@@ -2576,3 +2576,24 @@
     }
   }
 }
+
+// Alamour The Label
+.sezzle-8c73e34a-a8c3-46de-b939-6d52b8c5d8a4 {
+	&.sezzle-cart-page-widget {   
+    margin-bottom: 15px;
+    margin-top: -15px;
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}

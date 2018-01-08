@@ -16,14 +16,14 @@ var SezzleJS = function(options) {
     }
   }
 
-  this.ignoredPriceXPaths =[];
-  if (options.ignoredPriceXPaths) {
-    if (typeof(options.ignoredPriceXPaths) === 'string') {
+  this.ignoredPriceElements =[];
+  if (options.ignoredPriceElements) {
+    if (typeof(options.ignoredPriceElements) === 'string') {
       // Only one x-path is given
-      this.ignoredPriceXPaths.push(options.ignoredPriceXPaths.split('/'));
+      this.ignoredPriceElements.push(options.ignoredPriceElements);
     } else {
       // options.targetXPath is an array of x-paths
-      this.ignoredPriceXPaths = options.ignoredPriceXPaths.map(path => path.split('/'));
+      this.ignoredPriceElements = options.ignoredPriceElements;
     }
   }
 
@@ -483,19 +483,19 @@ SezzleJS.prototype.isProductEligible = function(priceText) {
  * @param element Element that contains the price text
  */
 SezzleJS.prototype.getPriceText = function(element) {
-  if (this.ignoredPriceXPaths == []){
+  if (this.ignoredPriceElements == []){
     return element.innerText;
   } else {
     clone = element.cloneNode(true);
-    this.ignoredPriceXPaths.forEach(function(ipath) {
+    this.ignoredPriceElements.forEach(function(ignoredEl) {
         // If this is an ID
-        if (ipath[0] === '#') {
-          clone.removeChild(clone.getElementById(ipath.substr(1)));
+        if (ignoredEl[0] === '#') {
+          clone.removeChild(clone.getElementById(ignoredEl.substr(1)));
         } else
         // If this is a class
-        if (ipath[0] === '.') {
+        if (ignoredEl[0] === '.') {
           Array.from(
-            clone.getElementsByClassName(ipath.substr(1))
+            clone.getElementsByClassName(ignoredEl.substr(1))
           )
           .forEach(function(el) {
               clone.removeChild(el);
@@ -504,13 +504,13 @@ SezzleJS.prototype.getPriceText = function(element) {
         // If this is a tag
         {
           var indexToTake = 0;
-          if (ipath[0].split('-').length > 1) {
-            if (ipath[0].split('-')[1] >= 0) {
-              indexToTake = parseInt(ipath[0].split('-')[1]);
+          if (ignoredEl[0].split('-').length > 1) {
+            if (ignoredEl[0].split('-')[1] >= 0) {
+              indexToTake = parseInt(ignoredEl[0].split('-')[1]);
             }
           }
           Array.from(
-            clone.getElementsByTagName(ipath[0].split('-')[0])
+            clone.getElementsByTagName(ignoredEl[0].split('-')[0])
           )
           .forEach(function(el, index) {
               if (index === indexToTake) clone.removeChild(el);
