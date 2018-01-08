@@ -504,13 +504,13 @@ SezzleJS.prototype.getPriceText = function(element) {
         // If this is a tag
         {
           var indexToTake = 0;
-          if (ignoredEl[0].split('-').length > 1) {
-            if (ignoredEl[0].split('-')[1] >= 0) {
-              indexToTake = parseInt(ignoredEl[0].split('-')[1]);
+          if (ignoredEl.split('-').length > 1) {
+            if (ignoredEl.split('-')[1] >= 0) {
+              indexToTake = parseInt(ignoredEl.split('-')[1]);
             }
           }
           Array.from(
-            clone.getElementsByTagName(ignoredEl[0].split('-')[0])
+            clone.getElementsByTagName(ignoredEl.split('-')[0])
           )
           .forEach(function(el, index) {
               if (index === indexToTake) clone.removeChild(el);
