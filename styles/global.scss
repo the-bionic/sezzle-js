@@ -2597,3 +2597,26 @@
     }
   }
 }
+
+// Natasha Marie Clothing
+.sezzle-c88fed9c-66e9-41f3-8654-ed931ec0d436 {
+  &.sezzle-product-page-widget { 
+    .sezzle-button-text {
+      @media screen and (max-width: 767px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 767px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+	&.sezzle-cart-page-widget {   
+    margin-bottom: 20px;
+    margin-top: -40px;
+  }
+}
