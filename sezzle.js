@@ -16,14 +16,14 @@ var SezzleJS = function(options) {
     }
   }
 
-  this.ignoredPriceXPaths =[];
-  if (options.ignoredPriceXPaths) {
-    if (typeof(options.ignoredPriceXPaths) === 'string') {
+  this.ignoredPriceElements =[];
+  if (options.ignoredPriceElements) {
+    if (typeof(options.ignoredPriceElements) === 'string') {
       // Only one x-path is given
-      this.ignoredPriceXPaths.push(options.ignoredPriceXPaths.split('/'));
+      this.ignoredPriceElements.push(options.ignoredPriceElements);
     } else {
       // options.targetXPath is an array of x-paths
-      this.ignoredPriceXPaths = options.ignoredPriceXPaths.map(path => path.split('/'));
+      this.ignoredPriceElements = options.ignoredPriceElements;
     }
   }
 
@@ -654,19 +654,19 @@ SezzleJS.prototype.isProductEligible = function(priceText) {
  * @param element Element that contains the price text
  */
 SezzleJS.prototype.getPriceText = function(element) {
-  if (this.ignoredPriceXPaths == []){
+  if (this.ignoredPriceElements == []){
     return element.innerText;
   } else {
     clone = element.cloneNode(true);
-    this.ignoredPriceXPaths.forEach(function(ipath) {
+    this.ignoredPriceElements.forEach(function(ignoredEl) {
         // If this is an ID
-        if (ipath[0] === '#') {
-          clone.removeChild(clone.getElementById(ipath.substr(1)));
+        if (ignoredEl[0] === '#') {
+          clone.removeChild(clone.getElementById(ignoredEl.substr(1)));
         } else
         // If this is a class
-        if (ipath[0] === '.') {
+        if (ignoredEl[0] === '.') {
           Array.from(
-            clone.getElementsByClassName(ipath.substr(1))
+            clone.getElementsByClassName(ignoredEl.substr(1))
           )
           .forEach(function(el) {
               clone.removeChild(el);
@@ -675,13 +675,13 @@ SezzleJS.prototype.getPriceText = function(element) {
         // If this is a tag
         {
           var indexToTake = 0;
-          if (ipath[0].split('-').length > 1) {
-            if (ipath[0].split('-')[1] >= 0) {
-              indexToTake = parseInt(ipath[0].split('-')[1]);
+          if (ignoredEl.split('-').length > 1) {
+            if (ignoredEl.split('-')[1] >= 0) {
+              indexToTake = parseInt(ignoredEl.split('-')[1]);
             }
           }
           Array.from(
-            clone.getElementsByTagName(ipath[0].split('-')[0])
+            clone.getElementsByTagName(ignoredEl.split('-')[0])
           )
           .forEach(function(el, index) {
               if (index === indexToTake) clone.removeChild(el);
@@ -713,6 +713,7 @@ SezzleJS.prototype.getFormattedPrice = function(element) {
 	var ignoredPriceStrings = [
     "Subtotal",
     "Total:",
+    "Sold Out",
 	]
 
 	// replace other strings not wanted in text
@@ -743,6 +744,13 @@ SezzleJS.prototype.observer = new MutationObserver(function(mutations) {
       var s = new SezzleJS(document.sezzleConfig);
       var price = s.getFormattedPrice(mutation.target);
       delete s;
+      if (!/\d/.test(price)) {
+        document.getElementsByClassName('sezzleindex-' + priceIndex)[0]
+          .parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
+      } else {
+        document.getElementsByClassName('sezzleindex-' + priceIndex)[0]
+          .parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
+      }
       document.getElementsByClassName('sezzleindex-' + priceIndex)[0]
         .innerText = ' of ' + price;
     });
@@ -802,6 +810,13 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
       addedSezzleNode.dataset.sezzleindex = removedSezzleNode.dataset.sezzleindex;
       var price = s.getFormattedPrice(addedSezzleNode);
       delete s;
+      if (!/\d/.test(price)) {
+        document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
+          .parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
+      } else {
+        document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
+          .parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
+      }
       document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
       .innerText = ' of ' + price;
     }
@@ -844,27 +859,29 @@ SezzleJS.prototype.renderModal = function() {
     modalNode.innerHTML = '<div class="sezzle-checkout-modal sezzle-checkout-modal-hidden"><div class="top-content"><div class="sezzle-no-thanks close-sezzle-modal">×</div><div class="sezzle-modal-title"><div class="sezzle-title-text-center">How Sezzle Works</div></div><div class="sezzle-header-text">We have partnered with Sezzle to give you the ability to Buy Now and Pay Later.</div><div class="row point"><div class="col-xs-12 col-sm-12 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/0interest.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>No interest or fees</h2><p>You only pay the purchase price with Sezzle, as long as you have the installment amount in your bank account.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/shipped-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Your order is shipped right away</h2><p>We ship your order immediately, like we would for any other payment method.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 col-md-2 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/payments-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Easy, automatic payments</h2><p>Sezzle splits your purchase into 4 payments, automatically deducted from your bank account every two weeks.</p></div></div></div><div class="sezzle-simply-select"><div class="sezzle-inline-text-left">Just select</div><img src="https://sezzlemedia.s3.amazonaws.com/branding/sezzle-logos/sezzle-logo.svg"><div class="sezzle-inline-text-right">at checkout.</div></div><div class="sezzle-footer-text">Subject to approval. Estimated payment amount excludes taxes and shipping fees. Your actual installment payments will be presented for confirmation in your checkout with Sezzle.</div></div>';
     document.getElementsByTagName('html')[0].appendChild(modalNode);
 {/* <div class="sezzle-checkout-modal-lightbox"><div class="sezzle-checkout-modal"></div></div> */}
-    // Event listenr for click in know more button
-    Array.from(document.getElementsByClassName('sezzle-know-more'))
-      .forEach(function(el) {
-        el.addEventListener('click', function() {
-          // Show modal node
-          modalNode.style.display = 'block';
-          // Remove hidden class to show the item
-          modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
-          // log on click event
-          this.logEvent('onclick');
-        }.bind(this))
-      }.bind(this));
-    // Event listenr for close in modal
-    document.getElementsByClassName('close-sezzle-modal')[0]
-      .addEventListener('click', function() {
-        // Display the modal node
-        modalNode.style.display = 'none';
-        // Add hidden class hide the item
-        modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal sezzle-checkout-modal-hidden";
-      });
-  }
+  } else {
+    modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
+  } 
+  // Event listenr for click in know more button
+  Array.from(document.getElementsByClassName('sezzle-know-more'))
+    .forEach(function(el) {
+      el.addEventListener('click', function() {
+        // Show modal node
+        modalNode.style.display = 'block';
+        // Remove hidden class to show the item
+        modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
+        // log on click event
+        this.logEvent('onclick');
+      }.bind(this))
+    }.bind(this));
+  // Event listenr for close in modal
+  document.getElementsByClassName('close-sezzle-modal')[0]
+    .addEventListener('click', function() {
+      // Display the modal node
+      modalNode.style.display = 'none';
+      // Add hidden class hide the item
+      modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal sezzle-checkout-modal-hidden";
+    });
 }
 
 /**
