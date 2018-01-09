@@ -885,6 +885,7 @@ SezzleJS.prototype.logEvent = function(eventName) {
 
       this.postEvent(JSON.stringify({
           "event_name": eventName,
+          "button_version": document.sezzleButtonVersion,
           "cart_id": this.getCookie('cart'),
           "fingerprint": fingerprint,
           "ip_address": this.ip,
@@ -897,6 +898,7 @@ SezzleJS.prototype.logEvent = function(eventName) {
   }else{
       this.postEvent(JSON.stringify({
           "event_name": eventName,
+          "button_version": document.sezzleButtonVersion,
           "cart_id": this.getCookie('cart'),
           "fingerprint": this.fingerprint,
           "ip_address": this.ip,
