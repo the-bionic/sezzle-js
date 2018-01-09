@@ -50,6 +50,12 @@ var SezzleJS = function(options) {
     }
   }.bind(this));
 
+  this.altVersionTemplate = [];
+  if (options.altVersionTemplate) {
+    this.altVersionTemplate = options.altVersionTemplate.split('%%');
+  }
+
+
   this.forcedShow = options.forcedShow || false;
   this.alignment = options.alignment || '';
   this.merchantID = options.merchantID || '';
@@ -317,76 +323,122 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   this.insertStoreCSSClassInElement(node);
   this.addCSSAlignment(node);
 
-  // price node level - 1.1
-  var priceNode = document.createElement("div");
-  priceNode.className = "sezzle-button-text";
-  this.addCSSAlignment(priceNode);
+  if (this.altVersionTemplate.length == 0) {
+    // price node level - 1.1
+    var priceNode = document.createElement("div");
+    priceNode.className = "sezzle-button-text";
+    this.addCSSAlignment(priceNode);
 
-  // price text node level - 1.1.1
-  var priceText = document.createTextNode("or 4 automatic, interest free payments");
+    // price text node level - 1.1.1
+    var priceText = document.createTextNode("or 4 automatic, interest free payments");
 
-  // Adding priceText node to priceNode level - 1.1
-  priceNode.appendChild(priceText);
+    // Adding priceText node to priceNode level - 1.1
+    priceNode.appendChild(priceText);
 
-  // price value span node level - 1.1.1
-  var priceSpanNode = document.createElement("span");
-  priceSpanNode.className = "payment-amount sezzleindex-" + index;
+    // price value span node level - 1.1.1
+    var priceSpanNode = document.createElement("span");
+    priceSpanNode.className = "payment-amount sezzleindex-" + index;
 
 
-  // price value text node level - 1.1.1.1
-  var priceValueText = document.createTextNode(
-    ' of ' + this.getFormattedPrice(element)
-  );
+    // price value text node level - 1.1.1.1
+    var priceValueText = document.createTextNode(
+      ' of ' + this.getFormattedPrice(element)
+    );
 
-  // Adding price value to priceSpanNode - level - 1.1.2
-  priceSpanNode.appendChild(priceValueText)
+    // Adding price value to priceSpanNode - level - 1.1.2
+    priceSpanNode.appendChild(priceValueText)
 
-  // Adding priceSpanNode to priceNode level - 1.1
-  priceNode.appendChild(priceSpanNode);
+    // Adding priceSpanNode to priceNode level - 1.1
+    priceNode.appendChild(priceSpanNode);
 
-  // Adding priceNode to main node level - 1
-	node.appendChild(priceNode);
-	this.addCSSCustomisation(priceNode)
+    // Adding priceNode to main node level - 1
+    node.appendChild(priceNode);
+    this.addCSSCustomisation(priceNode)
 
-  // Logo node level - 1.1
-  var logoNode = document.createElement("div");
-	logoNode.className = "sezzle-checkout-button";
-	this.insertStoreCSSClassInElement(logoNode);
-	this.addCSSCustomisation(logoNode);
+    // Logo node level - 1.1
+    var logoNode = document.createElement("div");
+    logoNode.className = "sezzle-checkout-button";
+    this.insertStoreCSSClassInElement(logoNode);
+    this.addCSSCustomisation(logoNode);
 
-  // Loge node first child level - 1.1.1
-  var logoNode1 = document.createElement("div");
-  logoNode1.className = "sezzle-inline-text";
+    // Loge node first child level - 1.1.1
+    var logoNode1 = document.createElement("div");
+    logoNode1.className = "sezzle-inline-text";
 
-  // Logo node first child text - 1.1.1.1
-  var logoNode1Text = document.createTextNode('with ');
-  logoNode1Text.className = "sezzle-inline-text"
-  logoNode1.appendChild(logoNode1Text); // 1.1.1
+    // Logo node first child text - 1.1.1.1
+    var logoNode1Text = document.createTextNode('with ');
+    logoNode1Text.className = "sezzle-inline-text"
+    logoNode1.appendChild(logoNode1Text); // 1.1.1
 
-  // Add logeNode1 to logoNode level - 1.1
-  logoNode.appendChild(logoNode1);
+    // Add logeNode1 to logoNode level - 1.1
+    logoNode.appendChild(logoNode1);
 
-  // Logo node second child level - 1.1.2
-  var logoNode2 = document.createElement("img");
-  logoNode2.className = this.imageClassName;
-  logoNode2.src = this.imageUrl;
+    // Logo node second child level - 1.1.2
+    var logoNode2 = document.createElement("img");
+    logoNode2.className = this.imageClassName;
+    logoNode2.src = this.imageUrl;
 
-  // Add logeNode1 to logoNode level - 1.1
-  logoNode.appendChild(logoNode2);
+    // Add logeNode1 to logoNode level - 1.1
+    logoNode.appendChild(logoNode2);
 
-  // Loge node first child level - 1.1.4
-  var logoNode4 = document.createElement("div");
-  logoNode4.className = "sezzle-know-more";
+    // Loge node first child level - 1.1.4
+    var logoNode4 = document.createElement("div");
+    logoNode4.className = "sezzle-know-more";
 
-  // Logo node first child text - 1.1.4.1
-  var logoNode4Text = document.createTextNode(' Learn more');
-  logoNode4.appendChild(logoNode4Text); // 1.1.4
+    // Logo node first child text - 1.1.4.1
+    var logoNode4Text = document.createTextNode(' Learn more');
+    logoNode4.appendChild(logoNode4Text); // 1.1.4
 
-  // Add logeNode1 to logoNode level - 1.1
-  logoNode.appendChild(logoNode4);
+    // Add logeNode1 to logoNode level - 1.1
+    logoNode.appendChild(logoNode4);
 
-  // Adding logoNode to main node
-  node.appendChild(logoNode);
+    // Adding logoNode to main node
+    node.appendChild(logoNode);
+
+  } else {
+    var customNode = document.createElement("div");
+    customNode.className = "sezzle-custom-widget-wrapper sezzle-button-text";
+    this.addCSSAlignment(customNode);
+
+    this.altVersionTemplate.forEach(function(customLine) {
+      switch (customLine) {
+        case 'price':
+          var customPriceSpanNode = document.createElement("span");
+          customPriceSpanNode.className = "payment-amount sezzle-button-text sezzleindex-" + index;
+
+          var customPriceValueText = document.createTextNode(
+            ' of ' + this.getFormattedPrice(element)
+          );    
+          
+          customPriceSpanNode.appendChild(customPriceValueText)
+
+          customNode.appendChild(customPriceSpanNode);
+          break;
+        case 'logo':
+          var customLogoNode = document.createElement("img");
+          customLogoNode.className = this.imageClassName + " sezzle-custom-logo";
+          customLogoNode.src = this.imageUrl;
+
+          customNode.appendChild(customLogoNode);
+          break;
+        case 'link':
+          var customLink = document.createElement("div");
+          customLink.className = "sezzle-know-more custom-sezzle-know-more";
+
+          var customLinkText = document.createTextNode(' Learn more');
+          customLink.appendChild(customLinkText);
+          customNode.appendChild(customLink);
+          break;
+        default:
+          var customText = document.createTextNode(customLine);
+
+          customNode.appendChild(customText);
+          break;
+      }
+    }.bind(this));
+
+    node.appendChild(customNode);
+  }
 
   // Adding main node to sezzel node
   sezzle.appendChild(node);
@@ -691,18 +743,35 @@ SezzleJS.prototype.renderModal = function() {
   } else {
     modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
   } 
-  // Event listenr for click in know more button
-  Array.from(document.getElementsByClassName('sezzle-know-more'))
-    .forEach(function(el) {
-      el.addEventListener('click', function() {
-        // Show modal node
-        modalNode.style.display = 'block';
-        // Remove hidden class to show the item
-        modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
-        // log on click event
-        this.logEvent('onclick');
-      }.bind(this))
-    }.bind(this));
+
+  if (document.getElementsByClassName('sezzle-know-more').length > 0){
+    // Event listenr for click in know more button
+    Array.from(document.getElementsByClassName('sezzle-know-more'))
+      .forEach(function(el) {
+        el.addEventListener('click', function() {
+          // Show modal node
+          modalNode.style.display = 'block';
+          // Remove hidden class to show the item
+          modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
+          // log on click event
+          this.logEvent('onclick');
+        }.bind(this))
+      }.bind(this));
+  } else {
+    // Event listenr for click in know more button
+    Array.from(document.getElementsByClassName('sezzle-custom-widget-wrapper'))
+      .forEach(function(el) {
+        el.addEventListener('click', function() {
+          // Show modal node
+          modalNode.style.display = 'block';
+          // Remove hidden class to show the item
+          modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
+          // log on click event
+          this.logEvent('onclick');
+        }.bind(this))
+      }.bind(this));
+  }
+
   // Event listenr for close in modal
   document.getElementsByClassName('close-sezzle-modal')[0]
     .addEventListener('click', function() {

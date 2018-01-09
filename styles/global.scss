@@ -806,6 +806,25 @@
   }
 }
 
+/*
+
+  CSS for custom widget template
+
+*/
+.sezzle-custom-widget-wrapper {
+  line-height: 30px;
+  .sezzle-custom-logo {
+    margin-bottom: -5px;
+    margin-left: 5px;
+  }
+  .custom-sezzle-know-more {
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+}
+
+
 // Magento styles
 .sezzle-payment {
   .sezzle-logo {

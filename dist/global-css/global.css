@@ -771,6 +771,24 @@
       justify-content: left;
 }
 
+/*
+
+  CSS for custom widget template
+
+*/
+.sezzle-custom-widget-wrapper {
+  line-height: 30px;
+}
+.sezzle-custom-widget-wrapper .sezzle-custom-logo {
+  margin-bottom: -5px;
+  margin-left: 5px;
+}
+.sezzle-custom-widget-wrapper .custom-sezzle-know-more {
+  display: inline-block;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
 .sezzle-payment .sezzle-logo {
   height: 25px;
 }
