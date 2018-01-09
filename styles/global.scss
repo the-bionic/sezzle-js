@@ -2620,3 +2620,25 @@
     margin-top: -40px;
   }
 }
+
+// Unlucky Lingerie 
+.sezzle-0bc10a5b-27fa-4f9a-b135-fefd98057510 {
+  &.sezzle-product-page-widget { 
+    @media screen and (max-width: 500px) {
+      zoom: 0.9;
+    }
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
