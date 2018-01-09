@@ -573,6 +573,13 @@ SezzleJS.prototype.observer = new MutationObserver(function(mutations) {
       var s = new SezzleJS(document.sezzleConfig);
       var price = s.getFormattedPrice(mutation.target);
       delete s;
+      if (!/\d/.test(price)) {
+        document.getElementsByClassName('sezzleindex-' + priceIndex)[0]
+          .parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
+      } else {
+        document.getElementsByClassName('sezzleindex-' + priceIndex)[0]
+          .parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
+      }
       document.getElementsByClassName('sezzleindex-' + priceIndex)[0]
         .innerText = ' of ' + price;
     });
@@ -632,6 +639,13 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
       addedSezzleNode.dataset.sezzleindex = removedSezzleNode.dataset.sezzleindex;
       var price = s.getFormattedPrice(addedSezzleNode);
       delete s;
+      if (!/\d/.test(price)) {
+        document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
+          .parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
+      } else {
+        document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
+          .parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
+      }
       document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
       .innerText = ' of ' + price;
     }
