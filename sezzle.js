@@ -542,6 +542,7 @@ SezzleJS.prototype.getFormattedPrice = function(element) {
 	var ignoredPriceStrings = [
     "Subtotal",
     "Total:",
+    "Sold Out",
 	]
 
 	// replace other strings not wanted in text
