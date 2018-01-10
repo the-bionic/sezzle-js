@@ -968,7 +968,7 @@ SezzleJS.prototype.getCookie = function(name) {
 * Create cookie of fingerprint
 */
 SezzleJS.prototype.createFingerprintCookie = function(fingerprint) {
-  document.cookie = '_sezzle_fingerprint='+fingerprint+';';
+  document.cookie = '_sezzle_fingerprint='+fingerprint+'; domain=".sezzle.com"';
 }
 
 /*
