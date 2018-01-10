@@ -2238,3 +2238,17 @@
         justify-content: center !important;
   }
 }
+
+.sezzle-bdb38da1-e230-4de2-9c48-5603777421e3.sezzle-product-page-widget {
+  margin-top: -10px;
+}
+@media screen and (max-width: 509px) {
+  .sezzle-bdb38da1-e230-4de2-9c48-5603777421e3.sezzle-product-page-widget {
+    zoom: 0.8;
+  }
+}
+@media screen and (max-width: 350px) {
+  .sezzle-bdb38da1-e230-4de2-9c48-5603777421e3.sezzle-cart-page-widget {
+    max-width: 230px;
+  }
+}

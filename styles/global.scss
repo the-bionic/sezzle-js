@@ -2661,3 +2661,18 @@
     }
   }
 }
+
+// Trendy Treehouse
+.sezzle-bdb38da1-e230-4de2-9c48-5603777421e3 {
+  &.sezzle-product-page-widget { 
+    margin-top: -10px;
+    @media screen and (max-width: 509px) {
+      zoom: 0.8;
+    }
+  }
+	&.sezzle-cart-page-widget {   
+    @media screen and (max-width: 350px) {
+      max-width: 230px;
+    }
+  }
+}
