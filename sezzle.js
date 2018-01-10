@@ -881,6 +881,7 @@ SezzleJS.prototype.logEvent = function(eventName) {
   if(this.fingerprint == null){
     this.getFingerprint(function(fingerprint) {
 
+      this.createFingerprintCookie(fingerprint);
       this.fingerprint = fingerprint
 
       this.postEvent(JSON.stringify({
@@ -961,6 +962,13 @@ SezzleJS.prototype.getCookie = function(name) {
     if (parts.length === 2) {
         return parts.pop().split(";").shift();
     }
+}
+
+/*
+* Create cookie of fingerprint
+*/
+SezzleJS.prototype.createFingerprintCookie = function(fingerprint) {
+  document.cookie = '_sezzle_fingerprint='+fingerprint+'; domain=".sezzle.com"';
 }
 
 /*
