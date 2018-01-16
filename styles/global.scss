@@ -1280,10 +1280,12 @@
 
 // BlackIvyLingerie
 .sezzle-f9c7402e-0a58-4909-b15e-c920c573e86a {
-	&.sezzle-checkout-button-wrapper {
-		font-size: 14px;
-		padding-top: 8px;
-	}
+  &.sezzle-product-page-widget {
+    margin-top: -10px;
+    @media screen and (max-width: 479px) {
+      zoom: 0.9;
+    }
+  }
 }
 
 //Elle-louise
