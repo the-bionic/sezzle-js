@@ -2715,3 +2715,23 @@
 		}
 	}
 }
+
+// Gear Bunch
+.sezzle-b29695e4-c74d-49c5-88a6-094ccc601fcb {
+	&.sezzle-cart-page-widget {
+    overflow: unset;
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+	&.sezzle-product-preview-widget {
+    overflow: unset;
+    display: none;
+    @media screen and (max-width: 767px) {
+      display: block;
+    }
+    .sezzle-button-text {
+      display: initial !important;
+    }
+  }
+}
