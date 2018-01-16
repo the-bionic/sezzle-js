@@ -2684,3 +2684,13 @@
     margin-top: -15px;
   }
 }
+
+// Honey Couture
+.sezzle-c5756d44-01e2-433f-a532-4d21ed2647e3 {
+  &.sezzle-product-page-widget { 
+    margin-top: -15px;
+    @media screen and (max-width: 362px) {
+      zoom: 0.9;
+    }
+  }
+}
