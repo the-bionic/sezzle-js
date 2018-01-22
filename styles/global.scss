@@ -2845,3 +2845,24 @@
     }
   }
 }
+
+// GoodieCo
+.sezzle-7000315d-5bc7-4cd2-b1a6-e58cc103e368 {
+  &.sezzle-cart-page-widget {
+    margin-bottom: 10px;
+    margin-top: -10px;
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
