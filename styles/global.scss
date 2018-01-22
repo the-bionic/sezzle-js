@@ -2779,6 +2779,69 @@
 	}
 }
 
+// m-amore.myshopify.com
 .sezzle-a95f39c2-4481-4561-b163-64f28788f53a {
   font-weight: 400;
+
+}
+// Uncle Jacks
+.sezzle-efb906ac-a703-4d3b-8f2a-37acc13ebe84 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (min-width: 768px) and (max-width: 991px) {
+        max-width: 240px;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (min-width: 768px) and (max-width: 991px) {
+        max-width: 185px;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    margin-top: -15px;
+    .sezzle-button-text {
+      @media screen and (min-width: 768px) and (max-width: 1199px) {
+        max-width: 240px;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (min-width: 768px) and (max-width: 1199px) {
+        max-width: 185px;
+      }
+    }
+	}
+}
+
+// Sky High Smoke Shop
+.sezzle-c025acfb-30b7-41e0-a901-29a9fe658e5d {
+  &.sezzle-product-page-widget {
+    margin-left: 20px;
+    @media screen and (max-width: 480px) {
+      display: none;
+    }
+  }
+	&.sezzle-product-preview-widget {
+    display: none;
+    @media screen and (max-width: 480px) {
+      display: block;
+      margin-top: -5px;
+      margin-bottom: 10px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 480px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 480px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
 }
