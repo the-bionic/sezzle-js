@@ -2340,3 +2340,27 @@
 .sezzle-dca5cb84-d79b-4de8-970c-d7512cad1202.sezzle-cart-page-widget .sezzle-button-text {
   padding-top: 10px;
 }
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .sezzle-efb906ac-a703-4d3b-8f2a-37acc13ebe84.sezzle-product-page-widget .sezzle-button-text {
+    max-width: 240px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .sezzle-efb906ac-a703-4d3b-8f2a-37acc13ebe84.sezzle-product-page-widget .sezzle-checkout-button {
+    max-width: 185px;
+  }
+}
+.sezzle-efb906ac-a703-4d3b-8f2a-37acc13ebe84.sezzle-cart-page-widget {
+  margin-top: -15px;
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .sezzle-efb906ac-a703-4d3b-8f2a-37acc13ebe84.sezzle-cart-page-widget .sezzle-button-text {
+    max-width: 240px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .sezzle-efb906ac-a703-4d3b-8f2a-37acc13ebe84.sezzle-cart-page-widget .sezzle-checkout-button {
+    max-width: 185px;
+  }
+}
