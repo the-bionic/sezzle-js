@@ -2779,6 +2779,7 @@
 	}
 }
 
+// Uncle Jacks
 .sezzle-efb906ac-a703-4d3b-8f2a-37acc13ebe84 {
   &.sezzle-product-page-widget {
     .sezzle-button-text {
@@ -2805,4 +2806,37 @@
       }
     }
 	}
+}
+
+// Sky High Smoke Shop
+.sezzle-c025acfb-30b7-41e0-a901-29a9fe658e5d {
+  &.sezzle-product-page-widget {
+    margin-left: 20px;
+    @media screen and (max-width: 480px) {
+      display: none;
+    }
+  }
+	&.sezzle-product-preview-widget {
+    display: none;
+    @media screen and (max-width: 480px) {
+      display: block;
+      margin-top: -5px;
+      margin-bottom: 10px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 480px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 480px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
 }
