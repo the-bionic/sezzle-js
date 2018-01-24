@@ -744,33 +744,32 @@ SezzleJS.prototype.renderModal = function() {
     modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
   } 
 
-  if (document.getElementsByClassName('sezzle-know-more').length > 0){
-    // Event listenr for click in know more button
-    Array.from(document.getElementsByClassName('sezzle-know-more'))
-      .forEach(function(el) {
-        el.addEventListener('click', function() {
+  // Event listenr for click in know more button
+  Array.from(document.getElementsByClassName('sezzle-know-more'))
+    .forEach(function(el) {
+      el.addEventListener('click', function() {
+        // Show modal node
+        modalNode.style.display = 'block';
+        // Remove hidden class to show the item
+        modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
+        // log on click event
+        this.logEvent('onclick');
+      }.bind(this))
+    }.bind(this));
+
+  Array.from(document.getElementsByClassName('sezzle-custom-widget-wrapper'))
+    .forEach(function(el) {
+      if(el.getElementsByClassName('sezzle-know-more').length == 0) {
+        el.parentElement.parentElement.addEventListener('click', function() {
           // Show modal node
           modalNode.style.display = 'block';
           // Remove hidden class to show the item
           modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
           // log on click event
           this.logEvent('onclick');
-        }.bind(this))
-      }.bind(this));
-  } else {
-    // Event listenr for click in know more button
-    Array.from(document.getElementsByClassName('sezzle-custom-widget-wrapper'))
-      .forEach(function(el) {
-        el.addEventListener('click', function() {
-          // Show modal node
-          modalNode.style.display = 'block';
-          // Remove hidden class to show the item
-          modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
-          // log on click event
-          this.logEvent('onclick');
-        }.bind(this))
-      }.bind(this));
-  }
+        }.bind(this));
+      }
+    }.bind(this));
 
   // Event listenr for close in modal
   document.getElementsByClassName('close-sezzle-modal')[0]
@@ -891,7 +890,8 @@ SezzleJS.prototype.logEvent = function(eventName) {
           "ip_address": this.ip,
           "merchant_site": window.location.hostname,
           "is_mobile_browser": this.isMobileBrowser(),
-          "user_agent": navigator.userAgent
+          "user_agent": navigator.userAgent,
+          "merchant_uuid": this.merchantID,
       }));
 
     }.bind(this));
@@ -904,7 +904,8 @@ SezzleJS.prototype.logEvent = function(eventName) {
           "ip_address": this.ip,
           "merchant_site": window.location.hostname,
           "is_mobile_browser": this.isMobileBrowser(),
-          "user_agent": navigator.userAgent
+          "user_agent": navigator.userAgent,
+          "merchant_uuid": this.merchantID,
       }));
   }
 }
