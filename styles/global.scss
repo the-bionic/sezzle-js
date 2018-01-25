@@ -2893,3 +2893,14 @@
 
   }
 } 
+
+// La Luna Rose
+.sezzle-be05f5c1-1b32-460a-82fb-c5677f3a5e5d {
+  &.sezzle-product-page-widget {
+    .sezzle-checkout-button-wrapper {
+      @media screen and (max-width: 879px) {
+        zoom: 0.9;
+      }
+    }
+  }
+}

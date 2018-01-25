@@ -2440,3 +2440,9 @@
         justify-content: center !important;
   }
 }
+
+@media screen and (max-width: 879px) {
+  .sezzle-be05f5c1-1b32-460a-82fb-c5677f3a5e5d.sezzle-product-page-widget .sezzle-checkout-button-wrapper {
+    zoom: 0.9;
+  }
+}
