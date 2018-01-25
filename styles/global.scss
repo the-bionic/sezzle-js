@@ -2869,3 +2869,27 @@
     zoom: 0.8;
   }
 }
+
+// Sally Ann
+.sezzle-b6022e45-6ddb-498d-a8a8-7777296d805b {
+  &.sezzle-product-page-widget {
+    margin-top: -25px;
+    margin-bottom: 10px;
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+
+  }
+} 
