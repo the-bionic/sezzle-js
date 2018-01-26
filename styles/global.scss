@@ -2859,16 +2859,14 @@
 
 // Andrea Iyamah
 .sezzle-ec3928e6-981c-499a-a42d-48d1b5404147 {
-  &.sezzle-original-widget{
-    &.sezzle-product-page-widget {
-      zoom: 0.8;
-      .sezzle-button-text {
-        max-width: 370px;
-      }
+  &.sezzle-product-page-widget {
+    zoom: 0.8;
+    .sezzle-button-text {
+      max-width: 370px;
     }
-    &.sezzle-cart-page-widget {
-      zoom: 0.8;
-    }
+  }
+  &.sezzle-cart-page-widget {
+    zoom: 0.8;
   }
   &.sezzle-a-widget-link {
     &.sezzle-product-page-widget {
