@@ -2410,7 +2410,10 @@
 .sezzle-a0bad0c2-e5bc-4a7c-980f-f814c455f745 {
   &.sezzle-product-page-widget {
     font-weight: 300;
-    margin-bottom: 5px;
+		margin-bottom: 5px;
+		.sezzle-button-text {
+			max-width: 180px;
+		}
   }
 	&.sezzle-cart-page-widget {
     margin-top: -15px;
@@ -2892,7 +2895,7 @@
     }
 
   }
-} 
+}
 
 // La Luna Rose
 .sezzle-be05f5c1-1b32-460a-82fb-c5677f3a5e5d {
