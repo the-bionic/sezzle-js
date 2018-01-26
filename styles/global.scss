@@ -2863,45 +2863,36 @@
 // Andrea Iyamah
 .sezzle-ec3928e6-981c-499a-a42d-48d1b5404147 {
   &.sezzle-product-page-widget {
-    zoom: 0.8;
+    transform: scale(0.8,0.8);
+    transform-origin: top left;
     .sezzle-button-text {
       max-width: 370px;
     }
   }
   &.sezzle-cart-page-widget {
-    zoom: 0.8;
+    transform: scale(0.8,0.8);
+    transform-origin: top left;
   }
-  &.sezzle-a-widget-link {
-    &.sezzle-product-page-widget {
-      .sezzle-checkout-button-wrapper {
-        zoom: 0.8;
-      }
-    }
-  }
+  // &.sezzle-a-widget-link {
+  // }
   &.sezzle-a-widget-no-link {
-    &.sezzle-product-page-widget {
-      .sezzle-checkout-button-wrapper {
-        zoom: 0.8;
-        .sezzle-custom-widget-wrapper {
-            width: 300px;
-        }
+    .sezzle-checkout-button-wrapper {
+      .sezzle-custom-widget-wrapper {
+          width: 300px;
       }
     }
   }
   &.sezzle-b-widget-link {
-    &.sezzle-product-page-widget {
-      .sezzle-checkout-button-wrapper {
-        zoom: 0.8;
-        .sezzle-custom-widget-wrapper {
-            width: 300px;
-        }
+    .sezzle-checkout-button-wrapper {
+      .sezzle-custom-widget-wrapper {
+          width: 300px;
       }
     }
   }
   &.sezzle-b-widget-no-link {
-    &.sezzle-product-page-widget {
-      .sezzle-checkout-button-wrapper {
-        zoom: 0.8;
+    .sezzle-checkout-button-wrapper {
+      .sezzle-custom-widget-wrapper {
+          width: 400px;
       }
     }
   }

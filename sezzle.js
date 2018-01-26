@@ -52,10 +52,10 @@ var SezzleJS = function(options) {
 
   //this.altVersionTemplate = [];
   //if (options.altVersionTemplate) {
-  var altVersionTemplate = '';
+  var altVersionTemplate = 'or 4 payments %%price%% with%%logo%%';
   this.altVersionTemplate = altVersionTemplate.split('%%');
   //}
-  this.ABTestClass = " ";
+  this.ABTestClass = " sezzle-b-widget-no-link";
 
   this.forcedShow = options.forcedShow || false;
   this.alignment = options.alignment || '';
