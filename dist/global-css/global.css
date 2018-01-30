@@ -2481,3 +2481,9 @@
         justify-content: center !important;
   }
 }
+
+@media screen and (max-width: 479px) {
+  .sezzle-aa244d42-0ffc-42cf-b700-a4d7e1e5228e.sezzle-product-page-widget {
+    zoom: 0.9;
+  }
+}
