@@ -3013,3 +3013,23 @@
     }
   }
 }
+
+// Lotus Boutique
+.sezzle-cd14eff9-49f2-4f0d-a965-7c4b29b94595 {
+  &.sezzle-product-page-widget {
+    width: 200px;
+    @media screen and (max-width: 380px) {
+      display: none;
+    }
+  }
+	&.sezzle-product-preview-widget {
+    display: none;
+    @media screen and (max-width: 380px) {
+      display: block;;
+    }
+  }
+  &.sezzle-cart-page-widget {   
+    margin-top: -30px;
+    margin-bottom: 20px; 
+  }
+}
