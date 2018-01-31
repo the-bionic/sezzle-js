@@ -3033,3 +3033,23 @@
     margin-bottom: 20px; 
   }
 }
+
+// Paws Rest
+.sezzle-26689f8f-5240-4c87-9c33-3790ae57de8c {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 720px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 720px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+
+  }
+}
