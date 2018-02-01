@@ -2996,7 +2996,7 @@
       }
     }
   }
-  &.sezzle-cart-page-widget {    
+  &.sezzle-cart-page-widget {
     margin-top: -20px;
     .sezzle-button-text {
       @media screen and (max-width: 1009px) {
@@ -3028,9 +3028,9 @@
       display: block;;
     }
   }
-  &.sezzle-cart-page-widget {   
+  &.sezzle-cart-page-widget {
     margin-top: -30px;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
   }
 }
 
@@ -3051,5 +3051,14 @@
       }
     }
 
+  }
+}
+
+// Lomdi
+.sezzle-6317a521-1c1f-4e7a-b768-2be0cc3636dd {
+  &.sezzle-cart-page-widget {
+    .sezzle-checkout-button {
+      padding-bottom: 15px !important;
+    }
   }
 }
