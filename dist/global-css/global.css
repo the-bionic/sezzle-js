@@ -2082,17 +2082,8 @@
   line-height: 28px;
 }
 
-.sezzle-4d30fa7a-70ae-454d-9943-f15645d2d345.sezzle-product-page-widget {
-  margin-left: 30px;
-  overflow: unset;
-}
-@media screen and (max-width: 480px) {
-  .sezzle-4d30fa7a-70ae-454d-9943-f15645d2d345.sezzle-product-page-widget {
-    margin-left: 15px;
-  }
-}
 .sezzle-4d30fa7a-70ae-454d-9943-f15645d2d345.sezzle-cart-page-widget {
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
 }
 
 @media screen and (max-width: 749px) {
