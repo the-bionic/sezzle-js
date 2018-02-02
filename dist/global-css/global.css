@@ -2571,3 +2571,8 @@
 .sezzle-61a590c2-b977-48e8-97cb-92fe0b6a7aa4.sezzle-cart-page-widget .sezzle-button-text {
   padding-top: 10px !important;
 }
+
+.sezzle-603582b9-4ec7-4020-a0e8-637074afdb9d.sezzle-cart-page-widget {
+  position: relative;
+  top: -25px;
+}
