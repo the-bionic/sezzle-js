@@ -2633,3 +2633,18 @@
   margin-bottom: 10px;
   margin-top: -10px;
 }
+
+@media screen and (max-width: 749px) {
+  .sezzle-0bf55913-46b6-4d57-86c4-86eea96d4190.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 749px) {
+  .sezzle-0bf55913-46b6-4d57-86c4-86eea96d4190.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}

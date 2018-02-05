@@ -3150,3 +3150,22 @@
     margin-top: -10px;
   }
 }
+
+// Lunar Threadz
+.sezzle-0bf55913-46b6-4d57-86c4-86eea96d4190 {
+  &.sezzle-cart-page-widget {   
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
