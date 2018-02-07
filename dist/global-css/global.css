@@ -2678,3 +2678,27 @@
         justify-content: center !important;
   }
 }
+
+.sezzle-8743e2ce-7649-4ca6-84ff-cf7858200686.sezzle-cart-page-widget {
+  margin-bottom: 15px;
+  margin-top: -15px;
+}
+@media screen and (min-width: 741px) {
+  .sezzle-8743e2ce-7649-4ca6-84ff-cf7858200686.sezzle-cart-page-widget {
+    margin-left: -130px;
+  }
+}
+@media screen and (max-width: 740px) {
+  .sezzle-8743e2ce-7649-4ca6-84ff-cf7858200686.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 740px) {
+  .sezzle-8743e2ce-7649-4ca6-84ff-cf7858200686.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
