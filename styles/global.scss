@@ -3271,3 +3271,28 @@
     margin-top: -10px;
   }
 }
+
+// A&N Boutique
+.sezzle-a95b0c4e-a75a-47c7-93eb-42c24720ebd5 {
+	&.sezzle-product-page-widget {
+    color:black;
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			color: black;
+			@media screen and (max-width: 740px) {
+        float: none !important;
+				text-align: center !important;
+				margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			color: black;
+			margin-bottom: 10px;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+				text-align: center !important;
+      }
+    }
+  }
+}
