@@ -3228,3 +3228,30 @@
     }
   }
 }
+
+// Wolfe The Label
+.sezzle-95469fc9-5d3b-4350-8f52-0c591716e2a2 {
+  &.sezzle-product-page-widget {
+    zoom: 0.9;
+  }
+  &.sezzle-cart-page-widget {      
+    margin-top: -15px;
+    margin-bottom: 15px;
+    .sezzle-button-text {
+      @media screen and (min-width: 980px) {
+        width: 200px;
+      }
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }  
+  }
+}
