@@ -3163,7 +3163,7 @@
     margin-top: -15px;
     margin-bottom: 10px;
   }
-  &.sezzle-cart-page-widget {    
+  &.sezzle-cart-page-widget {
     margin-top: -10px;
     margin-bottom: 10px;
   }
@@ -3171,7 +3171,7 @@
 
 // Just A Small Town Girl
 .sezzle-39bc362b-4d67-4989-9697-4572234c706e {
-  &.sezzle-cart-page-widget {    
+  &.sezzle-cart-page-widget {
     margin-bottom: 10px;
     margin-top: -10px;
   }
@@ -3179,7 +3179,7 @@
 
 // Lunar Threadz
 .sezzle-0bf55913-46b6-4d57-86c4-86eea96d4190 {
-  &.sezzle-cart-page-widget {   
+  &.sezzle-cart-page-widget {
     .sezzle-button-text {
       @media screen and (max-width: 749px) {
         float: none !important;
@@ -3198,10 +3198,10 @@
 
 // Sunny and Finn
 .sezzle-8743e2ce-7649-4ca6-84ff-cf7858200686 {
-  &.sezzle-cart-page-widget {     
+  &.sezzle-cart-page-widget {
     margin-bottom: 15px;
     margin-top: -15px;
-    @media screen and (min-width: 741px) {   
+    @media screen and (min-width: 741px) {
       margin-left: -130px;
     }
     .sezzle-button-text {
@@ -3222,8 +3222,8 @@
 
 // Active Style
 .sezzle-74824d73-f63a-489d-b69f-99955e5c8339 {
-  &.sezzle-cart-page-widget {    
-    .sezzle-button-text { 
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
       max-width: 200px;
     }
   }
@@ -3234,7 +3234,7 @@
   &.sezzle-product-page-widget {
     zoom: 0.9;
   }
-  &.sezzle-cart-page-widget {      
+  &.sezzle-cart-page-widget {
     margin-top: -15px;
     margin-bottom: 15px;
     .sezzle-button-text {
@@ -3252,6 +3252,15 @@
         float: none !important;
         justify-content: center !important;
       }
-    }  
+    }
+  }
+}
+
+// Ell and Jacobs
+.sezzle-eaa9994a-5b51-48c7-a747-d2208ab9b73f {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			color: black;
+    }
   }
 }
