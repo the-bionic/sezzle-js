@@ -3303,3 +3303,35 @@
     }
   }
 }
+
+
+// DBA Michigan & Madis
+.sezzle-da50f6fa-6647-4412-82ef-cd6154cd32e8 {
+	&.sezzle-product-page-widget {
+		.sezzle-button-text {
+			color: black;
+			@media screen and (max-width: 768px) {
+        float: none !important;
+				text-align: center !important;
+				margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			color: black;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+				text-align: center !important;
+				margin: auto !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+		color: black;
+		.sezzle-checkout-button {
+			margin-bottom: 30px;
+    }
+	}
+	&.subtotal {
+		margin-bottom: 0px !important;
+	}
+}
