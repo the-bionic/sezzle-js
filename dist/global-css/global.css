@@ -2734,6 +2734,11 @@
   }
 }
 
+@media screen and (max-width: 479px) {
+  .sezzle-eaa9994a-5b51-48c7-a747-d2208ab9b73f.sezzle-product-page-widget {
+    zoom: 0.9;
+  }
+}
 .sezzle-eaa9994a-5b51-48c7-a747-d2208ab9b73f.sezzle-cart-page-widget .sezzle-button-text {
   color: black;
 }
