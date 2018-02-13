@@ -3378,3 +3378,44 @@
     }
   }
 }
+
+// 437 Swimwear
+.sezzle-1704aca7-0d48-479f-ac1f-dd6a3393aee8 {
+	&.sezzle-product-page-widget {
+    @media screen and (min-width: 451px) {
+      padding-right: 35px;
+    }
+    .sezzle-button-text {
+      @media screen and (max-width: 450px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 450px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    overflow: unset;
+    @media screen and (min-width: 1024px) {
+      margin-right: 10px;
+    }
+    .sezzle-button-text {
+      @media screen and (max-width: 1023px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 1023px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
