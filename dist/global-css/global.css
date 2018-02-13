@@ -2904,3 +2904,17 @@
     text-align: center !important;
   }
 }
+
+@media screen and (max-width: 750px) {
+  .sezzle-ef07c9fa-791d-47e2-8484-7e94027a8e17.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 750px) {
+  .sezzle-ef07c9fa-791d-47e2-8484-7e94027a8e17.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    text-align: center !important;
+  }
+}

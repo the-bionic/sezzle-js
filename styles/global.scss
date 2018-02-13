@@ -3441,3 +3441,22 @@
     }
   }
 }
+
+// The Cambria Collection LLC
+.sezzle-ef07c9fa-791d-47e2-8484-7e94027a8e17 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 750px) {
+        float: none !important;
+				text-align: center !important;
+				margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 750px) {
+        float: none !important;
+				text-align: center !important;
+      }
+    }
+  }
+}
