@@ -2934,3 +2934,22 @@
 .sezzle-4eebb93e-d6e6-48b3-a6ec-4ceb68c7e5f2.sezzle-cart-page-widget .sezzle-checkout-button {
   color: black;
 }
+
+.sezzle-fa43b7f6-ad67-4183-8eca-0d9538874297.sezzle-cart-page-widget {
+  margin-bottom: 15px;
+  margin-top: -15px;
+}
+@media screen and (max-width: 740px) {
+  .sezzle-fa43b7f6-ad67-4183-8eca-0d9538874297.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 740px) {
+  .sezzle-fa43b7f6-ad67-4183-8eca-0d9538874297.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
