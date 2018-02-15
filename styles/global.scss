@@ -2146,20 +2146,11 @@
 
 // Mr. Bright Smile
 .sezzle-abaf0578-b7d0-4801-8e59-be80c61d488d {
+  &.sezzle-product-page-widget {
+    margin-top: -25px;
+  }
   &.sezzle-cart-page-widget {
-    .sezzle-button-text {
-      @media screen and (max-width: 550px) {
-        float: none !important;
-        text-align: center !important;
-        margin: auto !important;
-      }
-    }
-    .sezzle-checkout-button {
-      @media screen and (max-width: 550px) {
-        float: none !important;
-        justify-content: center !important;
-      }
-    }
+    margin-top: -40px;
   }
 }
 
