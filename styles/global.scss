@@ -3564,3 +3564,17 @@
     }
   }
 }
+
+.sezzle-ef900b8f-de4f-4d0e-a0d5-fccbd071767c {
+	&.sezzle-product-page-widget {    
+    margin-top: -20px;
+    @media screen and (max-width: 479px) {
+      zoom: 0.9;
+    }
+    .sezzle-button-text {
+      @media screen and (min-width: 960px) and (max-width: 1199px) {
+        width: 200px;
+      }
+    }
+  }
+}
