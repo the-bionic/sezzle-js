@@ -3316,8 +3316,7 @@
 			color: black;
       @media screen and (max-width: 768px) {
         float: none !important;
-				text-align: center !important;
-				margin: auto !important;
+        justify-content: center !important;
       }
     }
   }
