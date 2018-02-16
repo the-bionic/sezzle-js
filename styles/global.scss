@@ -3547,3 +3547,21 @@
     }
   }
 }
+
+.sezzle-e02b1e5d-1a9e-4900-bd3f-6d8def352104 {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
