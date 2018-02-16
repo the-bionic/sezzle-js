@@ -3446,7 +3446,8 @@
     .sezzle-checkout-button {
       @media screen and (max-width: 750px) {
         float: none !important;
-				text-align: center !important;
+        text-align: center !important;    
+        justify-content: center !important;
       }
     }
   }
