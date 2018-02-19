@@ -3586,3 +3586,24 @@
     zoom: 0.9;
   }
 }
+
+.sezzle-4b22c5fb-ce82-41e7-a2cf-10681912c433 {
+	&.sezzle-product-page-widget {  
+    .sezzle-button-text {
+      @media screen and (max-width: 800px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 800px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }  
+  }
+  &.sezzle-cart-page-widget {    
+    margin-top: -10px;
+  }
+}
