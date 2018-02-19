@@ -3051,3 +3051,22 @@
 .sezzle-4b22c5fb-ce82-41e7-a2cf-10681912c433.sezzle-cart-page-widget {
   margin-top: -10px;
 }
+
+.sezzle-3ed3617b-fded-412c-a0c0-9a8be672a687.sezzle-cart-page-widget {
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+@media screen and (max-width: 800px) {
+  .sezzle-3ed3617b-fded-412c-a0c0-9a8be672a687.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 800px) {
+  .sezzle-3ed3617b-fded-412c-a0c0-9a8be672a687.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
