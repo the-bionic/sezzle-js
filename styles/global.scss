@@ -3627,3 +3627,15 @@
     }  
   }
 }
+
+.sezzle-bd832e84-a0a4-450b-b7b1-19a9b1a37af5 {
+	&.sezzle-product-page-widget {  
+    margin-top: -15px;
+    @media screen and (max-width: 959px) and (min-width: 768px) {
+      zoom: 0.9;
+    }
+    @media screen and (max-width: 479px) {
+      zoom: 0.9;
+    }
+  }
+}
