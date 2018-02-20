@@ -3639,3 +3639,14 @@
     }
   }
 }
+
+.sezzle-24d6353e-c88d-4745-9519-cf24787b0b99 {
+  &.sezzle-cart-page-widget { 
+    @media screen and (min-width: 481px) and (max-width: 620px) {
+      margin-top: 110px;
+    }
+    @media screen and (min-width: 481px) and (max-width: 687px) {
+      margin-left: -80px;
+    }
+  }
+}
