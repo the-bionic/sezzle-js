@@ -3445,7 +3445,7 @@
     .sezzle-checkout-button {
       @media screen and (max-width: 750px) {
         float: none !important;
-        text-align: center !important;    
+        text-align: center !important;
         justify-content: center !important;
       }
     }
@@ -3566,7 +3566,7 @@
 }
 
 .sezzle-ef900b8f-de4f-4d0e-a0d5-fccbd071767c {
-	&.sezzle-product-page-widget {    
+	&.sezzle-product-page-widget {
     margin-top: -20px;
     @media screen and (max-width: 479px) {
       zoom: 0.9;
@@ -3580,7 +3580,7 @@
 }
 
 .sezzle-615c5381-1541-4988-9b5c-8de419e6d2f0 {
-  &.sezzle-cart-page-widget {    
+  &.sezzle-cart-page-widget {
     margin-top: -45px;
     margin-bottom: 10px;
     zoom: 0.9;
@@ -3588,7 +3588,7 @@
 }
 
 .sezzle-4b22c5fb-ce82-41e7-a2cf-10681912c433 {
-	&.sezzle-product-page-widget {  
+	&.sezzle-product-page-widget {
     .sezzle-button-text {
       @media screen and (max-width: 800px) {
         float: none !important;
@@ -3601,15 +3601,15 @@
         float: none !important;
         justify-content: center !important;
       }
-    }  
+    }
   }
-  &.sezzle-cart-page-widget {    
+  &.sezzle-cart-page-widget {
     margin-top: -10px;
   }
 }
 
 .sezzle-3ed3617b-fded-412c-a0c0-9a8be672a687 {
-  &.sezzle-cart-page-widget { 
+  &.sezzle-cart-page-widget {
     margin-bottom: 10px;
     margin-top: -10px;
     .sezzle-button-text {
@@ -3624,12 +3624,12 @@
         float: none !important;
         justify-content: center !important;
       }
-    }  
+    }
   }
 }
 
 .sezzle-bd832e84-a0a4-450b-b7b1-19a9b1a37af5 {
-	&.sezzle-product-page-widget {  
+	&.sezzle-product-page-widget {
     margin-top: -15px;
     @media screen and (max-width: 959px) and (min-width: 768px) {
       zoom: 0.9;
@@ -3641,12 +3641,32 @@
 }
 
 .sezzle-24d6353e-c88d-4745-9519-cf24787b0b99 {
-  &.sezzle-cart-page-widget { 
+  &.sezzle-cart-page-widget {
     @media screen and (min-width: 481px) and (max-width: 620px) {
       margin-top: 110px;
     }
     @media screen and (min-width: 481px) and (max-width: 687px) {
       margin-left: -80px;
+    }
+  }
+}
+
+// Fresh Apparel
+.sezzle-14f768d6-9e76-48e1-a2de-5479957072e1 {
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+			}
+			margin-bottom: 10px;
     }
   }
 }
