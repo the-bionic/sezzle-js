@@ -3752,3 +3752,22 @@
     }
   }
 }
+
+.sezzle-3195a66a-6527-4edd-82dd-c0ac7e9d856f{
+	&.sezzle-cart-page-widget {
+		margin-top: 15px;
+		.sezzle-button-text {
+			@media screen and (max-width: 750px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+			}
+		}
+    .sezzle-checkout-button {
+      @media screen and (max-width: 750px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+	}
+}
