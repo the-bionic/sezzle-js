@@ -3689,5 +3689,13 @@
 .sezzle-715c8dcc-8958-418a-8e15-8005e43e41ee {
 	&.sezzle-product-page-widget {
     margin-top: 10px;
+    .sezzle-custom-widget-wrapper {
+      line-height: 5px;
+      margin-top: 10px;
+      max-width: 500px;
+      .sezzle-button-text {
+        line-height: 5px;
+      }
+    }
   }
 }
