@@ -3700,3 +3700,34 @@
     }
   }
 }
+
+// Trilogy Design Co
+.sezzle-29cc43cc-1356-4b8b-afc3-652e7841dacc {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (min-width: 591px) and (max-width: 872px) {
+        max-width: 200px;
+      }
+    }
+  }
+	&.sezzle-cart-page-widget {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    @media screen and (min-width: 769px) {
+      margin-left: -50px;
+    }
+    .sezzle-button-text {
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
