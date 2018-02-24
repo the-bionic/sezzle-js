@@ -3853,6 +3853,18 @@
     .sezzle-checkout-button {
 			color: black;
 			margin-bottom: 10px;
-    }
+		}
+	}
+}
+
+// fivewildhearts.com
+.sezzle-5dfeb3d4-3aea-417b-8918-c260ec78c8ab {
+	&.sezzle-cart-page-widget{
+			.sezzle-button-text {
+				font-size: 11px;
+			}
+			.sezzle-checkout-button {
+				font-size: 11px;
+		}
 	}
 }
