@@ -3868,3 +3868,24 @@
 		}
 	}
 }
+
+// GLITTERandGLAMshop
+.sezzle-3bf08bdb-a66c-4161-b04f-35cef166f542 {
+	&.sezzle-cart-page-widget{
+    .sezzle-button-text {
+			margin-top: -8px;
+			@media screen and (max-width: 750px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			margin-bottom: 10px;
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+	}
+}
