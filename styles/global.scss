@@ -3833,6 +3833,30 @@
 	}
 }
 
+// Nimbus Glass
+.sezzle-e8e7a8cb-c4ec-4fc2-a739-6c104ce0d093 {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+			color: black;
+			margin-top: -8px;
+    }
+    .sezzle-checkout-button {
+			color: black;
+			margin-bottom: 10px;
+    }
+	}
+	&.sezzle-cart-page-widget{
+    .sezzle-button-text {
+			color: black;
+			margin-top: -8px;
+    }
+    .sezzle-checkout-button {
+			color: black;
+			margin-bottom: 10px;
+		}
+	}
+}
+
 // fivewildhearts.com
 .sezzle-5dfeb3d4-3aea-417b-8918-c260ec78c8ab {
 	&.sezzle-cart-page-widget{
