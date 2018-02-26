@@ -3674,11 +3674,21 @@
 // Little Hooligans
 .sezzle-c3141d6b-5b0c-4916-a1af-647d4440c945 {
 	&.sezzle-product-page-widget {
+    margin-top: -15px;
+    .sezzle-button-text {
+      @media screen and (max-width: 1020px) and (min-width: 769px) {
+        max-width: 200px;
+      }
+      @media screen and (max-width: 421px) {
+        max-width: 200px;
+      }
+    }
     .sezzle-checkout-button {
 			margin-bottom: 10px;
 		}
   }
-	&.sezzle-cart-page-widget {
+	&.sezzle-cart-page-widget {   
+    margin-top: -10px;
     .sezzle-checkout-button {
 			margin-bottom: 10px;
 		}
