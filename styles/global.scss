@@ -4009,3 +4009,37 @@
 		}
   }
 }
+
+// Zookkie
+.sezzle-3caa76bd-321d-4e02-9ce1-64cbddb66b2c {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
