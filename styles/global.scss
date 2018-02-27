@@ -4171,3 +4171,28 @@
 		}
   }
 }
+
+// Rustic Pickle
+.sezzle-a83d20de-8c82-4663-998a-9ee529a6f689 {
+	&.sezzle-cart-page-widget {    
+    zoom: 0.9;
+    margin-top: -15px;
+    margin-bottom: 10px;
+    .sezzle-button-text {
+      @media screen and (max-width: 979px) {
+        max-width: 400px;
+      }
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
