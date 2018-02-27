@@ -4125,3 +4125,49 @@
 		}
   }
 }
+
+// Swift Fly Fishing
+.sezzle-aa34057d-5810-4bd4-b328-cb2217ca819c {
+	&.sezzle-product-page-widget {    
+    background: #fafafa;
+    @media screen and (max-width: 460px) {
+      zoom: 0.8;
+    }
+    .sezzle-button-text {    
+      max-width: 400px;
+      .currency-converter-wrapper-amount-box {    
+        margin-left: 5px !important;
+      }
+    }
+  }
+	&.sezzle-cart-page-widget {    
+    background: #fafafa;
+    padding-bottom: 20px;
+    @media screen and (min-width: 481px) {
+      margin-top: -80px;
+      padding-right: 20px;
+    }
+    @media screen and (max-width: 480px) {
+      margin-top: -65px;
+    }
+    .sezzle-button-text {
+      @media screen and (min-width: 481px) {
+        max-width: 400px;
+      }
+			@media screen and (max-width: 480px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+      .currency-converter-wrapper-amount-box {    
+        margin-left: 5px !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 480px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
