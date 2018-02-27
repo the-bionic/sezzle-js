@@ -4196,3 +4196,35 @@
     }
   }
 }
+
+// Addison Clark
+.sezzle-6e6c6bb7-c547-4017-bdcd-5f486002424a {
+	&.sezzle-product-page-widget {    
+    .sezzle-button-text {
+      @media screen and (min-width: 591px) and (max-width: 879px) {
+        max-width: 200px;
+      }
+    }
+  }
+	&.sezzle-cart-page-widget {   
+    margin-top: -10px;
+    margin-bottom: 10px;
+    .sezzle-button-text {
+      max-width: 400px;
+      @media screen and (min-width: 769px) and (max-width: 882px) {
+        max-width: 200px;
+      }
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
