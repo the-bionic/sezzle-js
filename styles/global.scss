@@ -3994,11 +3994,17 @@
 	&.sezzle-cart-page-widget {
     margin-top: -10px;
     margin-bottom: 15px;
+    @media screen and (max-width: 390px) {
+      zoom: 0.9;
+    }
     .sezzle-button-text {
 			@media screen and (max-width: 740px) {
         float: none !important;
         text-align: center !important;
         margin: auto !important;
+      }
+      @media screen and (min-width: 981px) {
+        max-width: 200px;
       }
     }
     .sezzle-checkout-button {
