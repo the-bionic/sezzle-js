@@ -4250,3 +4250,43 @@
 		}
   }
 }
+
+// Gigi and Max
+.sezzle-f1c8f6c9-3f69-4674-8517-1c81f5147c31 {
+	&.sezzle-product-page-widget { 
+    margin-top: 15px;
+    .sezzle-button-text {
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+      @media screen and (min-width: 750px) and (max-width: 845px) {
+        max-width: 200px;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}   
+  }
+	&.sezzle-cart-page-widget {  
+    margin-top: -10px;
+    margin-bottom: 10px;
+    .sezzle-button-text {
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		} 
+  }
+}
