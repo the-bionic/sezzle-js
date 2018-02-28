@@ -4290,3 +4290,24 @@
 		} 
   }
 }
+
+// Bray and Co
+.sezzle-e6593a73-b5c1-46b1-ae69-944101e27677 {
+	&.sezzle-cart-page-widget {  
+    margin-bottom: 10px;
+    margin-top: -10px;
+    .sezzle-button-text {
+			@media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		} 
+  }
+}
