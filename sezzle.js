@@ -802,7 +802,7 @@ SezzleJS.prototype.getCountryCodeFromIP = function(callback) {
     }
   }.bind(this);
 
-  httpRequest.open('GET', this.countryFromIPRequestURL);
+  httpRequest.open('GET', this.countryFromIPRequestURL, true);
   httpRequest.responseType = 'json';
   httpRequest.send();
 }
