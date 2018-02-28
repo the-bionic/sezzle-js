@@ -4128,19 +4128,19 @@
 
 // Swift Fly Fishing
 .sezzle-aa34057d-5810-4bd4-b328-cb2217ca819c {
-	&.sezzle-product-page-widget {    
+	&.sezzle-product-page-widget {
     background: #fafafa;
     @media screen and (max-width: 460px) {
       zoom: 0.8;
     }
-    .sezzle-button-text {    
+    .sezzle-button-text {
       max-width: 400px;
-      .currency-converter-wrapper-amount-box {    
+      .currency-converter-wrapper-amount-box {
         margin-left: 5px !important;
       }
     }
   }
-	&.sezzle-cart-page-widget {    
+	&.sezzle-cart-page-widget {
     background: #fafafa;
     padding-bottom: 20px;
     @media screen and (min-width: 481px) {
@@ -4159,7 +4159,7 @@
         text-align: center !important;
         margin: auto !important;
       }
-      .currency-converter-wrapper-amount-box {    
+      .currency-converter-wrapper-amount-box {
         margin-left: 5px !important;
       }
     }
@@ -4174,7 +4174,7 @@
 
 // Rustic Pickle
 .sezzle-a83d20de-8c82-4663-998a-9ee529a6f689 {
-	&.sezzle-cart-page-widget {    
+	&.sezzle-cart-page-widget {
     zoom: 0.9;
     margin-top: -15px;
     margin-bottom: 10px;
@@ -4199,14 +4199,14 @@
 
 // Addison Clark
 .sezzle-6e6c6bb7-c547-4017-bdcd-5f486002424a {
-	&.sezzle-product-page-widget {    
+	&.sezzle-product-page-widget {
     .sezzle-button-text {
       @media screen and (min-width: 591px) and (max-width: 879px) {
         max-width: 200px;
       }
     }
   }
-	&.sezzle-cart-page-widget {   
+	&.sezzle-cart-page-widget {
     margin-top: -10px;
     margin-bottom: 10px;
     .sezzle-button-text {
@@ -4231,7 +4231,7 @@
 
 // Charlotte and Ezra
 .sezzle-61e2bbb4-4a11-4c69-a581-e30c96088684 {
-	&.sezzle-product-page-widget {    
+	&.sezzle-product-page-widget {
     @media screen and (max-width: 500px) {
       zoom: 0.9;
     }
@@ -4253,7 +4253,7 @@
 
 // Gigi and Max
 .sezzle-f1c8f6c9-3f69-4674-8517-1c81f5147c31 {
-	&.sezzle-product-page-widget { 
+	&.sezzle-product-page-widget {
     margin-top: 15px;
     .sezzle-button-text {
 			@media screen and (max-width: 749px) {
@@ -4270,9 +4270,9 @@
         float: none !important;
         justify-content: center !important;
       }
-		}   
+		}
   }
-	&.sezzle-cart-page-widget {  
+	&.sezzle-cart-page-widget {
     margin-top: -10px;
     margin-bottom: 10px;
     .sezzle-button-text {
@@ -4287,13 +4287,13 @@
         float: none !important;
         justify-content: center !important;
       }
-		} 
+		}
   }
 }
 
 // Bray and Co
 .sezzle-e6593a73-b5c1-46b1-ae69-944101e27677 {
-	&.sezzle-cart-page-widget {  
+	&.sezzle-cart-page-widget {
     margin-bottom: 10px;
     margin-top: -10px;
     .sezzle-button-text {
@@ -4308,13 +4308,13 @@
         float: none !important;
         justify-content: center !important;
       }
-		} 
+		}
   }
 }
 
 // Mason Blake Apparel
 .sezzle-0abacb3f-de3d-425f-a35d-0e89b9acb84d {
-	&.sezzle-cart-page-widget {  
+	&.sezzle-cart-page-widget {
     margin-top: -10px;
     margin-bottom: 10px;
     .sezzle-button-text {
@@ -4329,6 +4329,25 @@
         float: none !important;
         justify-content: center !important;
       }
-		} 
+		}
   }
+}
+
+// Modish Trends
+.sezzle-67b68a0d-db00-4e89-b3a2-4182e273bfec {
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 750px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 750px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+	}
 }
