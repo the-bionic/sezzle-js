@@ -4228,3 +4228,25 @@
     }
   }
 }
+
+// Charlotte and Ezra
+.sezzle-61e2bbb4-4a11-4c69-a581-e30c96088684 {
+	&.sezzle-product-page-widget {    
+    @media screen and (max-width: 500px) {
+      zoom: 0.9;
+    }
+    .sezzle-button-text {
+			@media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
