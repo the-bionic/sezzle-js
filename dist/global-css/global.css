@@ -3731,3 +3731,16 @@
         justify-content: center !important;
   }
 }
+
+.sezzle-3ea7ece0-3224-4fef-b9f5-1f86e3b490d7.sezzle-product-page-widget {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+@media screen and (max-width: 719px) {
+  .sezzle-3ea7ece0-3224-4fef-b9f5-1f86e3b490d7.sezzle-product-page-widget {
+    display: none;
+  }
+}
+.sezzle-3ea7ece0-3224-4fef-b9f5-1f86e3b490d7.sezzle-product-preview-widget {
+  margin-top: 10px;
+}
