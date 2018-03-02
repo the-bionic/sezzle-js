@@ -4439,3 +4439,30 @@
 		}
   }
 }
+
+// Black Sheep Boutique and Salon
+.sezzle-0b36d61f-1e08-446f-a980-5d0a7747ea23 {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        max-width: 200px;
+      }
+    }
+  }
+	&.sezzle-cart-page-widget {
+		margin-bottom: 10px;
+    .sezzle-button-text {
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
