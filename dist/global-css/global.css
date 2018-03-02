@@ -3952,3 +3952,20 @@
         justify-content: center !important;
   }
 }
+
+@media screen and (min-width: 767px) and (max-width: 1077px) {
+  .sezzle-c5b9244a-dcf3-400c-9870-87e11b09727d.sezzle-product-page-widget .sezzle-button-text {
+    max-width: 200px;
+  }
+}
+@media screen and (min-width: 767px) and (max-width: 1077px) {
+  .sezzle-c5b9244a-dcf3-400c-9870-87e11b09727d.sezzle-product-page-widget .sezzle-checkout-button {
+    max-width: 200px;
+  }
+}
+.sezzle-c5b9244a-dcf3-400c-9870-87e11b09727d.sezzle-cart-page-widget .sezzle-button-text {
+  font-weight: 400;
+}
+.sezzle-c5b9244a-dcf3-400c-9870-87e11b09727d.sezzle-cart-page-widget .sezzle-checkout-button {
+  font-weight: 400;
+}

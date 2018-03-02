@@ -4591,3 +4591,28 @@
 		}
   }
 }
+
+
+// WANTMYLOOK
+.sezzle-c5b9244a-dcf3-400c-9870-87e11b09727d {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+			@media screen and (min-width: 767px) and (max-width: 1077px) {
+        max-width: 200px;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (min-width: 767px) and (max-width: 1077px) {
+        max-width: 200px;
+      }
+		}
+  }
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			font-weight: 400;
+    }
+    .sezzle-checkout-button {
+			font-weight: 400;
+		}
+  }
+}
