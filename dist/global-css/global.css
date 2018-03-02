@@ -3828,3 +3828,26 @@
         justify-content: center !important;
   }
 }
+
+@media screen and (max-width: 749px) {
+  .sezzle-0b36d61f-1e08-446f-a980-5d0a7747ea23.sezzle-product-page-widget .sezzle-button-text {
+    max-width: 200px;
+  }
+}
+.sezzle-0b36d61f-1e08-446f-a980-5d0a7747ea23.sezzle-cart-page-widget {
+  margin-bottom: 10px;
+}
+@media screen and (max-width: 749px) {
+  .sezzle-0b36d61f-1e08-446f-a980-5d0a7747ea23.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 749px) {
+  .sezzle-0b36d61f-1e08-446f-a980-5d0a7747ea23.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
