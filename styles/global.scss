@@ -4549,3 +4549,26 @@
 		}
   }
 }
+
+// A Quiver Full
+.sezzle-a116af67-d0a2-45b6-a726-dc17a7d5efb4 {
+	&.sezzle-cart-page-widget {
+		margin-bottom: 10px;
+    .sezzle-button-text {
+			@media screen and (min-width: 769px) and (max-width: 896px) {
+				max-width: 200px;
+      }
+			@media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
