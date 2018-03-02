@@ -4396,3 +4396,27 @@
 		}
   }
 }
+
+
+// The Yellow Daffodil Boutique
+.sezzle-838e7ae4-c63c-475a-b166-303f8fce127e {
+	&.sezzle-cart-page-widget {
+    margin-bottom: 15px;
+    .sezzle-button-text {
+      @media screen and (min-width: 769px) and (max-width: 878px) {
+        max-width: 200px;
+      }
+			@media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
