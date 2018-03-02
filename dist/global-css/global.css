@@ -3813,3 +3813,18 @@
         justify-content: center !important;
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .sezzle-f7f1ea4b-9402-48e5-92a2-15437a8aa299.sezzle-cart-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .sezzle-f7f1ea4b-9402-48e5-92a2-15437a8aa299.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
