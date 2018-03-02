@@ -4663,3 +4663,30 @@
 		}
   }
 }
+
+// carryURheart
+.sezzle-6565a955-af22-499e-83dc-0eb11b036f16 {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+			font-weight: 400;
+    }
+    .sezzle-checkout-button {
+			font-weight: 400;
+		}
+  }
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
