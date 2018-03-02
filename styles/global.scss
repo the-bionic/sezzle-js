@@ -4420,3 +4420,22 @@
 		}
   }
 }
+
+// Dream Big Little Co
+.sezzle-f7f1ea4b-9402-48e5-92a2-15437a8aa299 {
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 1024px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 1024px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
