@@ -4486,3 +4486,36 @@
 		}
   }
 }
+
+// Little Faces Apparel, LLC
+.sezzle-39693f98-93eb-4844-ba2d-82d0fdd269a5 {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 770px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 770px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 770px) {
+        float: left !important;
+        text-align: left !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 770px) {
+        float: left !important;
+        justify-content: left !important;
+      }
+		}
+  }
+}
