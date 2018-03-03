@@ -76,7 +76,7 @@ var SezzleJS = function(options) {
   this.hidePrice =  options.hidePrice || false;
 
   if (this.hidePrice) {
-    this.altVersionTemplate = 'or 4 automatic, interest free payments with %%logo%% %%link%%'
+    this.altVersionTemplate = 'or 4 automatic, interest free payments with %%logo%% %%link%%'.split('%%');
   }
   
   // Search for price elements. If found, assume there is only one in this page
