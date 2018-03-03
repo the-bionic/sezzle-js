@@ -4690,3 +4690,23 @@
 		}
   }
 }
+
+// Brooke Ashley design
+.sezzle-127c1dc2-99b4-4e66-8968-6d3b1ec2a998 {
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 749px) {
+				max-width: 200px;
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
