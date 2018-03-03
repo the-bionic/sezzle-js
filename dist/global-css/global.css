@@ -4029,3 +4029,19 @@
         justify-content: center !important;
   }
 }
+
+@media screen and (max-width: 749px) {
+  .sezzle-127c1dc2-99b4-4e66-8968-6d3b1ec2a998.sezzle-cart-page-widget .sezzle-button-text {
+    max-width: 200px;
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 749px) {
+  .sezzle-127c1dc2-99b4-4e66-8968-6d3b1ec2a998.sezzle-cart-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
