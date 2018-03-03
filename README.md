@@ -26,11 +26,21 @@ document.sezzleConfig = {
 }
 ```
 
+### Explanation of each option
+1. targetXPath
+  * Simple
+    * Detail - Path to the element in your webpage from where price would be picked up from.
+    * Type - `string`
+  * Advanced
+    * Detail - You may have multiple price elements in one page. So, this option also accepts a list of paths to multiple price elements.
+    * Type - `array of strings`
+
 ### Description
 This javascript can be used for putting sezzle's widget in websites.
 
 #### Simple
-#### Advanced **
+The most simple way to put sezzle's widget 
+#### Advanced
 
 Note that if you want to use a grayscale Sezzle logo put
 ```
