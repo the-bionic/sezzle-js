@@ -18,9 +18,19 @@ document.sezzleConfig = {
     minPrice: 0,
     maxPrice: 100000,
     imageUrl: '',
-    hideClasses: ['class-to-hide']
-  }
+    hideClasses: ['class-to-hide'],
+    priceElementClass: 'class-to-element-which-contains-price',
+    sezzleWidgetContainerClass: 'class-to-element-where-sezzle-element-will-be-rendered',
+    hidePrice: true,
+    altVersionTemplate: 'sezzle is the best %%logo%% %%link%%'
+}
 ```
+
+** Description
+This javascript can be used for putting sezzle's widget in websites.
+
+*** Simple
+*** Advanced
 
 Note that if you want to use a grayscale Sezzle logo put
 ```
