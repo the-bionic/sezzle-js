@@ -68,6 +68,22 @@ var SezzleJS = function(options) {
   this.bannerURL = options.bannerUrl || '';
   this.bannerClass = options.bannerClass || '';
   this.bannerLink = options.bannerLink || '';
+  // This is used to get price of element
+  this.priceElementClass = options.priceElementClass || 'sezzle-price-element';
+  // This is used to tell where to render sezzle element to
+  this.sezzleWidgetContainerClass = options.sezzleWidgetContainerClass || 'sezzle-widget-container';
+  // Don't show price in widget
+  this.hidePrice =  options.hidePrice || false;
+
+  if (this.hidePrice) {
+    this.altVersionTemplate = 'or 4 automatic, interest free payments with %%logo%% %%link%%'
+  }
+  
+  // Search for price elements. If found, assume there is only one in this page
+  this.hasPriceClassElement = false;
+  this.priceElements = Array.from(document.getElementsByClassName(this.priceElementClass));
+  this.renderElements = Array.from(document.getElementsByClassName(this.sezzleWidgetContainerClass));
+  if (this.priceElements.length == 1) this.hasPriceClassElement = true;
 
   this.theme = options.theme || '';
   if(this.theme == 'dark') {
@@ -1004,15 +1020,20 @@ SezzleJS.prototype.initWidget = function() {
   this.loadCSS(function() {
       var els = [];
       var toRenderEls = [];
-      this.xpath.forEach(function(path, index) {
-        this.getAllPriceElements(path)
-          .forEach(function(e) {
-            els.push(e);
-            toRenderEls.push(this.getElementToRender(
-              e, index
-            ))
-          }.bind(this));
-      }.bind(this));
+      if (this.hasPriceClassElement) {
+        els.push(this.priceElements[0])
+        toRenderEls.push(this.renderElements[0])
+      } else {
+        this.xpath.forEach(function(path, index) {
+          this.getAllPriceElements(path)
+            .forEach(function(e) {
+              els.push(e);
+              toRenderEls.push(this.getElementToRender(
+                e, index
+              ))
+            }.bind(this));
+        }.bind(this));
+      }
       els.forEach(function (el, index) {
         this.renderAwesomeSezzle(el, toRenderEls[index], index);
         this.startObserve(el);
