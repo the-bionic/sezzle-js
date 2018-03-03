@@ -26,11 +26,11 @@ document.sezzleConfig = {
 }
 ```
 
-** Description
+### Description
 This javascript can be used for putting sezzle's widget in websites.
 
-*** Simple
-*** Advanced
+#### Simple
+#### Advanced **
 
 Note that if you want to use a grayscale Sezzle logo put
 ```
