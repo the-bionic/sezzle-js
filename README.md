@@ -27,7 +27,7 @@ document.sezzleConfig = {
 ```
 
 ### Explanation of each option
-1. targetXPath
+  `targetXPath`
   * Simple
     * Detail - Path to the element in your webpage from where price would be picked up from.
     * Type - `string`
