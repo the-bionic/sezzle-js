@@ -4045,3 +4045,18 @@
         justify-content: center !important;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .sezzle-2ab116e3-51e0-4446-a7eb-0175b0b36d60.sezzle-product-page-widget .sezzle-button-text {
+    float: none !important;
+    text-align: center !important;
+    margin: auto !important;
+  }
+}
+@media screen and (max-width: 767px) {
+  .sezzle-2ab116e3-51e0-4446-a7eb-0175b0b36d60.sezzle-product-page-widget .sezzle-checkout-button {
+    float: none !important;
+    -ms-flex-pack: center !important;
+        justify-content: center !important;
+  }
+}
