@@ -4750,7 +4750,7 @@
   }
 }
 
-//
+// Downtown Diva
 .sezzle-8a37c350-72f2-4fe0-9838-c0e64109780b {
 	&.sezzle-product-page-widget {
     @media screen and (max-width: 404px) {
@@ -4773,5 +4773,28 @@
         justify-content: center !important;
       }
 		}
+  }
+}
+
+// Verclare Boutique
+.sezzle-292aa7fa-f152-425b-b396-a218c13cd798 {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 991px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 991px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+	&.sezzle-cart-page-widget {
+    margin-bottom: 10px;
+    zoom: 0.9;
   }
 }
