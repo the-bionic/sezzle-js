@@ -27,13 +27,25 @@ document.sezzleConfig = {
 ```
 
 ### Explanation of each option
-[link to README!](/widget-options.md)
+[click here](/widget-options.md)
 
 ### Description
 This javascript can be used for putting sezzle's widget in websites.
 
 #### Simple
-The most simple way to put sezzle's widget 
+The most simple way to put sezzle's widget is to following steps:
+1. Add the class `sezzle-price-element` to the price element.
+2. Add a new div with class `sezzle-widget-container`. This is where the sezzle widget will be rendered. So, you might want to put this div just below the price element.
+3. Add the following code at the end of your page.
+```
+<script>
+  document.sezzleConfig = {
+    alignment: 'left',
+    merchantID: 'your-merchant-id',
+  };
+</script>
+<script src="https://widget.sezzle.com/v1/javascript/price-widget/initial"></script>
+```
 #### Advanced
 
 Note that if you want to use a grayscale Sezzle logo put

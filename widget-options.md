@@ -25,7 +25,7 @@
   `alignment` (optional)
   Aligns the widget in the parent div.
   * Options - `left`, `center`, `right`.
-  * Default - `left`
+  * Default - `center`
   * Type - `string`
 
   `merchantID`
