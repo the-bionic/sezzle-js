@@ -1532,20 +1532,40 @@
 		color: #5f5f5f;
 	}
 
-	&.sezzle-product-page-widget {
+	&.sezzle-product-page-widget {    
+    overflow: unset;
 		.sezzle-checkout-button-wrapper {
-			font-size: 13px;
-			padding-top: 8px;
+      margin-top: -15px;
 
 			.payment-amount {
 				font-weight: 500;
-			}
+      }
+      
+      .sezzle-button-text {
+        @media screen and (max-width: 740px) {
+          float: none !important;
+          text-align: center !important;
+          margin: auto !important;
+        }
+      }
+      .sezzle-checkout-button {
+        @media screen and (max-width: 740px) {
+          float: none !important;
+          justify-content: center !important;
+        }
+      }
 		}
 	}
 
 	&.sezzle-cart-page-widget {
 		.sezzle-checkout-button-wrapper {
-			font-size: 13px;
+      font-size: 13px;
+      
+      .sezzle-button-text {
+        @media screen and (min-width: 981px) {
+          max-width: 200px;
+        }
+      }
 
 			.payment-amount {
 				font-weight: 500;
