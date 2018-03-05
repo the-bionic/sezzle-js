@@ -10,7 +10,7 @@
   
   `renderToPath` (optional)
   * Simple
-    * Detail - Path to the element in your webpage where the sezzle widget will be rendered to.
+    * Detail - Path to the element in your webpage where the sezzle widget will be rendered to. This is relative to the `targetXPath`.
     * Type - `string`
   * Advanced
     * Detail - You may want to place widgets in multiple places. So you can pass multiple paths in an array. The price path in `ith` index of `targetXPath` array will rendered at the path given in `ith` index of this array(`renderToPath`). If you do not pass any thing to `ith` index of this array but there is a path in `ith` index of `targetXPath`, then the widget will be rendered just below the price element.
