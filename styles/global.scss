@@ -4802,3 +4802,22 @@
     zoom: 0.9;
   }
 }
+
+// noellah
+.sezzle-003f7ac4-413e-459d-9d5d-31ff75dc2318 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 991px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 991px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
