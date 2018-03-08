@@ -4834,6 +4834,26 @@
   }
 }
 
+// David and Lee designs
+.sezzle-5316e31b-d055-453c-9981-da3305a3bf5d {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 166px;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
+
 // Poppy and Pen
 .sezzle-23a511f8-5dfc-4015-a209-d8449ba28ae9 {
   &.sezzle-cart-page-widget {
@@ -4869,5 +4889,50 @@
         justify-content: center !important;
       }
 		}
+  }
+}
+
+// mnmcreations
+.sezzle-11366625-ebd3-4961-9f95-214071385a5e {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        text-align: center !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+//Foxy Mountain
+.sezzle-48cf2339-5c7f-4c6c-ab1d-a52b1038446b {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      font-weight: 200;
+    }
+    .sezzle-inline-text {
+      font-weight: 200;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      @media screen and (max-width: 749px){
+        float: none !important;
+        text-align: center !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
   }
 }
