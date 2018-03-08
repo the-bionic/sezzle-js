@@ -4834,6 +4834,26 @@
   }
 }
 
+// David and Lee designs
+.sezzle-5316e31b-d055-453c-9981-da3305a3bf5d {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 166px;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
+
 // Poppy and Pen
 .sezzle-23a511f8-5dfc-4015-a209-d8449ba28ae9 {
   &.sezzle-cart-page-widget {
