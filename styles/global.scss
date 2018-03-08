@@ -4938,3 +4938,21 @@
   }
 }
 
+// sass-and-sparkle-boutique
+.sezzle-67c42e4f-8f5d-4a84-b446-30928722b242 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 1024px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 1024px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+		}
+  }
+}
