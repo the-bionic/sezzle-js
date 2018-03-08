@@ -4851,3 +4851,21 @@
     }
   }
 }
+
+// mnmcreations
+.sezzle-11366625-ebd3-4961-9f95-214071385a5e {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        text-align: center !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
