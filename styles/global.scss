@@ -4889,3 +4889,30 @@
     }
   }
 }
+
+//Foxy Mountain
+.sezzle-48cf2339-5c7f-4c6c-ab1d-a52b1038446b {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      font-weight: 200;
+    }
+    .sezzle-inline-text {
+      font-weight: 200;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      @media screen and (max-width: 749px){
+        float: none !important;
+        text-align: center !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
