@@ -3,3 +3,5 @@ node_modules
 .sass-cache*
 modal.html
 modal.min.html
+
+dist
