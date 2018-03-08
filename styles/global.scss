@@ -4872,26 +4872,6 @@
   }
 }
 
-// Tinker tyke threads
-.sezzle-25ec8a42-5e13-4e55-963d-7ee50c54f19a {
-	&.sezzle-cart-page-widget {
-    margin-bottom: 40px;
-    .sezzle-button-text {
-			@media screen and (max-width: 768px) {
-        float: none !important;
-        text-align: center !important;
-        margin: auto !important;
-      }
-    }
-    .sezzle-checkout-button {
-			@media screen and (max-width: 768px) {
-        float: none !important;
-        justify-content: center !important;
-      }
-		}
-  }
-}
-
 // mnmcreations
 .sezzle-11366625-ebd3-4961-9f95-214071385a5e {
   &.sezzle-cart-page-widget {
@@ -4936,3 +4916,25 @@
     }
   }
 }
+
+// AMK Creates
+.sezzle-008060a9-69a0-4aef-a283-54cd267231e7 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 177px;
+      font-weight: 200;
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        text-align: center !important;
+      }
+    }
+    .sezzle-checkout-button {
+      font-weight: 200;
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
