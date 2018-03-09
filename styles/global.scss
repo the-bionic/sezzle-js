@@ -5018,6 +5018,33 @@
   }
 }
 
+// Honey Hush
+.sezzle-323da956-e858-432c-bae6-4642b11c5572 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+			@media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			@media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    margin-top: -10px;
+    .sezzle-button-text {
+      @media screen and (min-width: 1221px) {
+        max-width: 200px;
+      }
+    }
+  }
+}
+
 // livelovewholesale
 .sezzle-d794ce9f-d789-4f3b-9505-60c274ea8623 {
   &.sezzle-cart-page-widget {
