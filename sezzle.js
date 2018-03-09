@@ -72,6 +72,9 @@ var SezzleJS = function(options) {
   this.alignmentSwitchMinWidth = options.alignmentSwitchMinWidth || 760; //pixels
   this.alignmentSwitchType = options.alignmentSwitchType || 'right';
   this.maxWidth = options.maxWidth || 0; //pixels
+  this.marginTop = options.marginTop || 0; //pixels
+  this.marginBottom = options.marginBottom || 0; //pixels
+  this.fontSize = options.fontSize || 0; //pixels
   // This is used to get price of element
   this.priceElementClass = options.priceElementClass || 'sezzle-price-element';
   // This is used to tell where to render sezzle element to
@@ -230,12 +233,11 @@ SezzleJS.prototype.loadCSS = function(callback) {
 }
 
 /**
- * Add CSS alignment class as required
+ * Add CSS alignment class as required based on the viewport width
  * @param element Element to add to
  */
 SezzleJS.prototype.addCSSAlignment = function(element) {
 
-  var matchedMediaQuery = false;
   var newAlignment = ""
     if (matchMedia) {
         var queryString = "(min-width: " + this.alignmentSwitchMinWidth + "px)"
@@ -243,12 +245,10 @@ SezzleJS.prototype.addCSSAlignment = function(element) {
         if (mq.matches) {
             // window width is at least alignmentSwitchMinWidth
             newAlignment = ""
-            console.log("switched")
         } else {
-            newAlignment = this.alignmentSwitchType
             // window width is less than alignmentSwitchMinWidth
+            newAlignment = this.alignmentSwitchType
         }
-        console.log("switched match media", queryString)
     }
     switch(newAlignment || this.alignment) {
         case 'left':
@@ -277,18 +277,20 @@ SezzleJS.prototype.addCSSWidth = function(element) {
       break;
   }
   if (this.maxWidth){
-    console.log("this.maxWidth", this.maxWidth)
       element.style.maxWidth = this.maxWidth + "px"
   }
 }
 
 /**
- * Add CSS font-weight styling as required
+ * Add CSS fonts styling as required
  * @param element Element to add to
  */
-SezzleJS.prototype.addCSSFontWeight = function(element) {
+SezzleJS.prototype.addCSSFontStyle = function(element) {
     if (this.fontWeight){
       element.style.fontWeight = this.fontWeight
+    }
+    if (this.fontSize){
+        element.style.fontSize = this.fontSize + "px"
     }
 }
 
@@ -314,7 +316,7 @@ SezzleJS.prototype.addCSSTheme = function(element) {
 SezzleJS.prototype.addCSSCustomisation = function(element) {
   this.addCSSAlignment(element);
   this.addCSSWidth(element);
-  this.addCSSFontWeight(element);
+  this.addCSSFontStyle(element);
   this.addCSSTheme(element);
 }
 
@@ -347,6 +349,15 @@ SezzleJS.prototype.insertWidgetTypeCSSClassInElement = function(element) {
   }
 }
 
+SezzleJS.prototype.setElementMargins = function(element) {
+    if (this.marginTop !== 0){
+        element.style.marginTop = this.marginTop + "px"
+    }
+    if (this.marginBottom !== 0){
+        element.style.marginBottom = this.marginBottom + "px"
+    }
+}
+
 /**
  * This function will set Sezzle's elements with
  * the price element in parallel
@@ -369,6 +380,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   //sezzle.className += this.ABTestClass;
   this.insertWidgetTypeCSSClassInElement(sezzle);
   this.insertStoreCSSClassInElement(sezzle);
+  this.setElementMargins(sezzle);
 
   // node level - 1
   var node = document.createElement("div");
