@@ -5126,3 +5126,14 @@
     }
   }
 }
+
+// love bug boutique
+.sezzle-5bef2f96-7959-453f-aa7c-3e8aa5c80737 {
+  &.sezzle-cart-page-widget {
+    padding-left: 45px;
+    margin-bottom: 20px;
+    @media screen and (max-width:768px) {
+      padding-left: 0;
+    }
+  }
+}
