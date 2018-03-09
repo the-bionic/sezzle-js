@@ -5164,31 +5164,90 @@
   &.sezzle-product-page-widget {
     .sezzle-button-text {
 			@media screen and (max-width: 959px) {
+
+// FitPro
+.sezzle-645cdb0e-d606-438d-9091-9e7ba6a99b1a {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      font-weight: 200;
+      @media screen and (max-width: 800px) {
         float: none !important;
         text-align: center !important;
         margin: auto !important;
       }
     }
     .sezzle-checkout-button {
-			@media screen and (max-width: 959px) {
+      font-weight: 200;
+      @media screen and (max-width: 800px) {
         float: none !important;
         justify-content: center !important;
       }
     }
   }
+}
+
+// Curlz Dots Monogramming
+.sezzle-e98a19c2-3986-497e-b3c2-20fdbeead4e4 {
   &.sezzle-cart-page-widget {
     .sezzle-button-text {
-			@media screen and (max-width: 767px) {
+      max-width: 190px;
+      padding-top: 5px;
+      @media screen and (max-width: 749px) {
         float: none !important;
         text-align: center !important;
         margin: auto !important;
       }
     }
     .sezzle-checkout-button {
-			@media screen and (max-width: 767px) {
+      @media screen and (max-width: 749px) {
         float: none !important;
         justify-content: center !important;
       }
+    }
+  }
+
+}
+
+// Curlz Dots Monogramming
+.sezzle-f84401aa-bbfa-4474-af71-dbc7ce4dce62 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			font-weight: 400;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			font-weight: 400;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+// Chic Shak Boutique
+.sezzle-fc600088-6d66-48b9-9203-58834e2c9bdd {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 170px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 20px;
     }
   }
 }
