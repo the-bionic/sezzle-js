@@ -5008,3 +5008,20 @@
     }
   }
 }
+
+// coralcactusboutique
+.sezzle-21b1e2ab-1134-45f8-ba46-31b84c0a63c3 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 250px;
+      @media screen and (min-width: 768px) and (max-width: 959px) {
+        font-size: small;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (min-width: 768px) and (max-width: 959px) {
+        font-size: small;
+      }
+    }
+  }
+}
