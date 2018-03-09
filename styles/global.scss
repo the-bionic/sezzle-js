@@ -5112,3 +5112,17 @@
     }
   }
 }
+
+// boutique: 406
+.sezzle-c3aafa23-bd3a-4bf4-9ea6-d0cca815dc2f {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+    }
+  }
+}
