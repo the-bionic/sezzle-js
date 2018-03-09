@@ -4988,3 +4988,23 @@
     }
   }
 }
+
+// livelovewholesale
+.sezzle-d794ce9f-d789-4f3b-9505-60c274ea8623 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 180px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
