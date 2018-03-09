@@ -5206,3 +5206,20 @@
     }
   }
 }
+
+// Chic Shak Boutique
+.sezzle-fc600088-6d66-48b9-9203-58834e2c9bdd {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 170px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 20px;
+    }
+  }
+}
