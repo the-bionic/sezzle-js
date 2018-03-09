@@ -5065,6 +5065,28 @@
   }
 }
 
+// ice by issa
+.sezzle-be38e8db-595a-4756-adba-a4905a8672e0 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      padding-right: 45px;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+        padding-right: 0px;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    margin-bottom: 20px;
+  }
 // coralcactusboutique
 .sezzle-21b1e2ab-1134-45f8-ba46-31b84c0a63c3 {
   &.sezzle-cart-page-widget {
