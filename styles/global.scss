@@ -5207,6 +5207,27 @@
   }
 }
 
+// Curlz Dots Monogramming
+.sezzle-f84401aa-bbfa-4474-af71-dbc7ce4dce62 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			font-weight: 400;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			font-weight: 400;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
 // Chic Shak Boutique
 .sezzle-fc600088-6d66-48b9-9203-58834e2c9bdd {
   &.sezzle-product-page-widget {
