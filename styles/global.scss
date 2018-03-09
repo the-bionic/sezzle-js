@@ -5158,3 +5158,30 @@
     }
   }
 }
+
+// FitPro
+.sezzle-645cdb0e-d606-438d-9091-9e7ba6a99b1a {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      font-weight: 200;
+      @media screen and (max-width: 800px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      font-weight: 200;
+      @media screen and (max-width: 800px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
