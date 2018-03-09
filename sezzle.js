@@ -68,6 +68,7 @@ var SezzleJS = function(options) {
   this.bannerURL = options.bannerUrl || '';
   this.bannerClass = options.bannerClass || '';
   this.bannerLink = options.bannerLink || '';
+  this.fontWeight = options.fontWeight || '';
   // This is used to get price of element
   this.priceElementClass = options.priceElementClass || 'sezzle-price-element';
   // This is used to tell where to render sezzle element to
@@ -259,6 +260,16 @@ SezzleJS.prototype.addCSSWidth = function(element) {
 }
 
 /**
+ * Add CSS font-weight styling as required
+ * @param element Element to add to
+ */
+SezzleJS.prototype.addCSSFontWeight = function(element) {
+    if (this.fontWeight){
+      element.style.fontWeight = this.fontWeight
+    }
+}
+
+/**
  * Add CSS theme class as required
  * @param element Element to add to
  */
@@ -280,6 +291,7 @@ SezzleJS.prototype.addCSSTheme = function(element) {
 SezzleJS.prototype.addCSSCustomisation = function(element) {
   this.addCSSAlignment(element);
   this.addCSSWidth(element);
+  this.addCSSFontWeight(element);
   this.addCSSTheme(element);
 }
 
