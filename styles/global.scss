@@ -5164,7 +5164,10 @@
   &.sezzle-product-page-widget {
     .sezzle-button-text {
 			@media screen and (max-width: 959px) {
-
+			}
+		}
+	}
+}
 // FitPro
 .sezzle-645cdb0e-d606-438d-9091-9e7ba6a99b1a {
   &.sezzle-product-page-widget {
@@ -5214,7 +5217,7 @@
 
 }
 
-// Curlz Dots Monogramming
+// stellaivyboutique.myshopify.com
 .sezzle-f84401aa-bbfa-4474-af71-dbc7ce4dce62 {
   &.sezzle-cart-page-widget {
     .sezzle-button-text {
@@ -5248,6 +5251,25 @@
     }
     .sezzle-checkout-button {
       padding-bottom: 20px;
+    }
+  }
+}
+
+// the-body-club.myshopify.com
+.sezzle-563fab21-9540-4b4c-b129-d382052e8f96 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
     }
   }
 }
