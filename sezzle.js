@@ -68,7 +68,10 @@ var SezzleJS = function(options) {
   this.bannerURL = options.bannerUrl || '';
   this.bannerClass = options.bannerClass || '';
   this.bannerLink = options.bannerLink || '';
-  this.fontWeight = options.fontWeight || '';
+  this.fontWeight = options.fontWeight || 300;
+  this.alignmentSwitchMinWidth = options.alignmentSwitchMinWidth || 760; //pixels
+  this.alignmentSwitchType = options.alignmentSwitchType || 'right';
+  this.maxWidth = options.maxWidth || 0; //pixels
   // This is used to get price of element
   this.priceElementClass = options.priceElementClass || 'sezzle-price-element';
   // This is used to tell where to render sezzle element to
@@ -231,18 +234,34 @@ SezzleJS.prototype.loadCSS = function(callback) {
  * @param element Element to add to
  */
 SezzleJS.prototype.addCSSAlignment = function(element) {
-  switch(this.alignment) {
-    case 'left':
-      element.className += " sezzle-left";
-      break;
-    case 'right':
-      element.className += " sezzle-right";
-			break;
-		case 'center':
-		  element.className += " sezzle-center";
-    default:
-      break;
-  }
+
+  var matchedMediaQuery = false;
+  var newAlignment = ""
+    if (matchMedia) {
+        var queryString = "(min-width: " + this.alignmentSwitchMinWidth + "px)"
+        const mq = window.matchMedia(queryString);
+        if (mq.matches) {
+            // window width is at least alignmentSwitchMinWidth
+            newAlignment = ""
+            console.log("switched")
+        } else {
+            newAlignment = this.alignmentSwitchType
+            // window width is less than alignmentSwitchMinWidth
+        }
+        console.log("switched match media", queryString)
+    }
+    switch(newAlignment || this.alignment) {
+        case 'left':
+            element.className += " sezzle-left";
+            break;
+        case 'right':
+            element.className += " sezzle-right";
+            break;
+        case 'center':
+            element.className += " sezzle-center";
+        default:
+            break;
+    }
 }
 
 /**
@@ -256,6 +275,10 @@ SezzleJS.prototype.addCSSWidth = function(element) {
       break;
     default:
       break;
+  }
+  if (this.maxWidth){
+    console.log("this.maxWidth", this.maxWidth)
+      element.style.maxWidth = this.maxWidth + "px"
   }
 }
 
