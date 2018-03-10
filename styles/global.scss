@@ -5295,3 +5295,24 @@
     }
   }
 }
+
+// itty bits designs
+.sezzle-e73186aa-514a-41ee-9932-f3d7eb228137 {
+  &.sezzle-cart-page-widget {
+    margin-top: -80px;
+    .sezzle-button-text {
+      max-width: 200px;
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
