@@ -5273,3 +5273,25 @@
     }
   }
 }
+
+// Felecia Bella
+.sezzle-d602a321-e2e3-407e-bbf2-29207f21a7e9 {
+  &.sezzle-cart-page-widget {
+    margin-bottom: -32px;
+    .sezzle-button-text {
+      text-transform: lowercase;
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      text-transform: lowercase;
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
