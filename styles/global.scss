@@ -5367,3 +5367,39 @@
     }
   }
 }
+
+// Diamonds and Divas
+.sezzle-a674a2ab-61da-487a-9cb0-6a397d0288f7 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      font-family: initial;
+      font-size: initial;
+    }
+    .sezzle-checkout-button {
+      font-family: initial;
+      font-size: initial;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      font-family: initial;
+      padding-top: 5px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+        margin-top: -7px !important;
+        padding-top: 0px !important;
+      }
+    }
+    .sezzle-checkout-button {
+      font-family: initial;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
