@@ -5433,3 +5433,43 @@
     }
   }
 }
+
+// Turner and Pooch Co
+.sezzle-5f009a55-d32f-4d1b-8774-321c4f11b684 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      @media screen and (min-width: 750px) {
+        margin-left: -0.5px;
+        text-align: left;
+      }
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 20px;
+      @media screen and (min-width: 750px) {
+        float: left !important;
+        justify-content: left !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 15px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+        padding-bottom: 10px;
+      }
+    }
+  }
+}
