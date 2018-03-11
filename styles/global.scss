@@ -5473,3 +5473,28 @@
     }
   }
 }
+
+// Bent Arrow
+.sezzle-0dd3124d-5ce5-4c0b-b0d4-a398100a3659 {
+  &.sezzle-cart-page-widget {
+    margin-bottom: -10px;
+    margin-top: 5px;
+    @media screen and (max-width: 394px) {
+      zoom: 0.9;
+    }
+    .sezzle-button-text {
+      max-width: 400px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
