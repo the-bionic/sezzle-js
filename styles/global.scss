@@ -5433,3 +5433,18 @@
     }
   }
 }
+
+// Penny Harper Apparel
+.sezzle-fcffb921-88e3-4b5f-9599-0344c410471f {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      padding-top: 10px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      padding-top: 10px;
+    }
+  }
+}
