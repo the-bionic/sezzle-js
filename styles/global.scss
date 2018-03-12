@@ -5586,3 +5586,24 @@
     }
   }
 }
+
+// Kind 5 Apparel
+.sezzle-a114dae1-c2c9-45e7-a62f-4705875f1680 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      padding-top: 7px;
+      max-width: 190px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
