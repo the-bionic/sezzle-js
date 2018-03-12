@@ -6099,7 +6099,7 @@
 	}
 }
 
-// Southern Roots
+// Southern Roots Boutique
 .sezzle-37dabca8-03e0-4a07-8a45-937859056d49 {
   &.sezzle-product-page-widget {
     .sezzle-button-text {
@@ -6117,3 +6117,25 @@
     }
   }
 }
+
+// Rusty Roots
+.sezzle-c578b08a-dedb-4b03-9269-0da08727dc26 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -9px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 20px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -9px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 10px;
+    }
+  }
+} 
