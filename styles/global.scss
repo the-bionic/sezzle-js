@@ -5565,3 +5565,24 @@
     }
   }
 }
+
+// Shop Sassy Couture
+.sezzle-43b2545f-0bcf-4eaa-8c4e-903ec2b59d8d {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      padding-top: 10px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
