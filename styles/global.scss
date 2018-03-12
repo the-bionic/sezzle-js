@@ -5920,3 +5920,30 @@
     }
   }
 }
+
+// For the Littles Apparel
+.sezzle-6aabe328-6948-42e3-8ad1-662a63166bb5 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      padding-top: 5px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+      }
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 15px;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
