@@ -5947,3 +5947,22 @@
     }
   }
 }
+
+// lingerie-shop-yahooo.myshopify.com
+.sezzle-f5ccc54a-6077-4dbf-ad2e-7cc99596cefd {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 496px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 496px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
