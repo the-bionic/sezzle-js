@@ -6242,3 +6242,26 @@
 		}
 	}
 }
+
+// bluelayneboutique.myshopify.com
+.sezzle-6abef53a-d7ac-4771-8446-bbd6c5f53458 {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+			margin-top: -8px;
+      @media screen and (max-width: 479px) {
+        max-width: 200px;
+      }
+    }
+	}
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			font-weight: 400;
+			.payment-amount {
+				font-weight: 400;
+			}
+    }
+    .sezzle-checkout-button {
+			font-weight: 400;
+		}
+	}
+}
