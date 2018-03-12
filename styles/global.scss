@@ -5823,3 +5823,35 @@
     }
   }
 }
+
+// essteemarieboutique.com
+.sezzle-77c0d7de-be12-4952-9ce5-50788725c613 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      font-size: small;
+    }
+    .sezzle-checkout-button {
+      font-size: small;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      font-size: small;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+      }
+    }
+    .sezzle-checkout-button {
+      font-size: small;
+      padding-bottom: 15px;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
