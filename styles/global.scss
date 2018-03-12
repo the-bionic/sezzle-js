@@ -5763,6 +5763,25 @@
   }
 }
 
+// Jb flowers
+.sezzle-f4689b07-b88e-4e41-8545-62634bd4195f {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 769px) {
+        float: none !important;
+        text-align: center !important;
+      }
+    }
+    .sezzle-checkout-button {
+      margin-bottom: 20px;
+      @media screen and (max-width: 769px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
 // Rolling Ranch Boutique
 .sezzle-f7a7e3b2-a6f5-444a-aa20-1e96da1a4991 {
   &.sezzle-product-page-widget {
@@ -5820,6 +5839,84 @@
         float: none !important;
         justify-content: center !important;
       }
+    }
+  }
+}
+
+// essteemarieboutique.com
+.sezzle-77c0d7de-be12-4952-9ce5-50788725c613 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      font-size: small;
+    }
+    .sezzle-checkout-button {
+      font-size: small;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      font-size: small;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+      }
+    }
+    .sezzle-checkout-button {
+      font-size: small;
+      padding-bottom: 15px;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+// Back At The Ranch
+.sezzle-ff85ddfd-8644-4e33-a673-b578f398c4a6 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      font-family: initial;
+    }
+    .sezzle-checkout-button {
+      font-family: initial;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      font-family: initial;
+      @media screen and (max-width: 500px) {
+        margin-top: -8px !important;
+      }
+    }
+    .sezzle-checkout-button {
+      font-family: initial;
+    }
+  }
+}
+
+// Laura Belle Boutique
+.sezzle-ca059a80-af07-41c8-b139-19dfdfcfa2f3 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      padding-top: 5px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      padding-top: 10px;
+      font-size: small;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 15px;
+      font-size: small;
     }
   }
 }
