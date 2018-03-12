@@ -5762,3 +5762,21 @@
     }
   }
 }
+
+// Rolling Ranch Boutique
+.sezzle-f7a7e3b2-a6f5-444a-aa20-1e96da1a4991 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      margin-top: -8px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 15px;
+    }
+  }
+}
