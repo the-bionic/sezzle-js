@@ -5607,3 +5607,30 @@
     }
   }
 }
+
+// TJ Swim
+.sezzle-cd0d8aa8-d1f2-4c0b-bfb3-4d18f1f2cf9c {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 10px;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
