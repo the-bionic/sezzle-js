@@ -6118,7 +6118,7 @@
 	}
 }
 
-// Southern Roots
+// Southern Roots Boutique
 .sezzle-37dabca8-03e0-4a07-8a45-937859056d49 {
   &.sezzle-product-page-widget {
     .sezzle-button-text {
@@ -6135,4 +6135,82 @@
       padding-top: 7px
     }
   }
+}
+
+// Rusty Roots
+.sezzle-c578b08a-dedb-4b03-9269-0da08727dc26 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -9px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 20px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -9px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 10px;
+    }
+  }
+}
+
+// she-the-seeker.myshopify.com
+.sezzle-7e1081e8-6309-4087-8cb4-435de4e05c8e {
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 800px) {
+				max-width: 200px;
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 800px) {
+        float: none !important;
+        justify-content: center !important;
+			}
+		}
+	}
+}
+
+// big-chop-accessories-boutique.myshopify.com
+.sezzle-b5ed3509-3437-47f2-8493-cd9e69010e8b {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+			}
+		}
+	}
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			font-weight: 400;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			font-weight: 400;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+			}
+		}
+	}
 }
