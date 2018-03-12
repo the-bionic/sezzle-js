@@ -6275,3 +6275,22 @@
 		}
 	}
 }
+
+// chloe-vs-tank.myshopify.com
+.sezzle-7d4eede0-a1a6-4905-9ec8-b11492f50cb4 {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+			}
+		}
+	}
+}
