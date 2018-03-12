@@ -5722,6 +5722,25 @@
   }
 }
 
+// mattie and mase
+.sezzle-b857db40-a176-402d-b738-1291c24da212 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
 // Summers Lane Boutique
 .sezzle-65d2252d-fd3c-4cf5-9093-01640e72e79e {
   &.sezzle-cart-page-widget {
