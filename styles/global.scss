@@ -5900,3 +5900,23 @@
     }
   }
 }
+
+// Laura Belle Boutique
+.sezzle-ca059a80-af07-41c8-b139-19dfdfcfa2f3 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      padding-top: 5px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      padding-top: 10px;
+      font-size: small;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 15px;
+      font-size: small;
+    }
+  }
+}
