@@ -5900,3 +5900,30 @@
     }
   }
 }
+
+// shop frey style
+.sezzle-704b7429-3146-4c7e-b9bd-a111380fe320 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 767px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 767px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      font-size: 12px;
+    }
+    .sezzle-checkout-button {
+      font-size: 12px;
+    }
+  }
+}
