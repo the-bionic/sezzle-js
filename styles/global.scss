@@ -5634,3 +5634,31 @@
     }
   }
 }
+
+// Penny Harper Apparel
+.sezzle-fcffb921-88e3-4b5f-9599-0344c410471f {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      padding-top: 10px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 12px;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
