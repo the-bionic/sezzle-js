@@ -6179,6 +6179,34 @@
 	}
 }
 
+// Little Lulus Bling Boutique
+.sezzle-083058d6-32f8-4df4-b8c4-e3d0065e0fd6 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      @media screen and (min-width: 768px) {
+        margin-left: 0px !important;
+        text-align: left !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (min-width: 768px) {
+        float: left !important;
+        justify-content: left !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -9px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 50px;
+    }
+  }
+}
+
 // big-chop-accessories-boutique.myshopify.com
 .sezzle-b5ed3509-3437-47f2-8493-cd9e69010e8b {
 	&.sezzle-product-page-widget {
