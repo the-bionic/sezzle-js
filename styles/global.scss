@@ -5721,3 +5721,25 @@
     }
   }
 }
+
+// Summers Lane Boutique
+.sezzle-65d2252d-fd3c-4cf5-9093-01640e72e79e {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      padding-top: 10px;
+      @media screen and (max-width: 749px) {
+        max-width: 190px !important;
+        margin-top: -19px !important;
+        float: none !important;
+        text-align: center !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
