@@ -6157,7 +6157,7 @@
       padding-bottom: 10px;
     }
   }
-} 
+}
 
 // she-the-seeker.myshopify.com
 .sezzle-7e1081e8-6309-4087-8cb4-435de4e05c8e {
@@ -6172,6 +6172,42 @@
     }
     .sezzle-checkout-button {
       @media screen and (max-width: 800px) {
+        float: none !important;
+        justify-content: center !important;
+			}
+		}
+	}
+}
+
+// big-chop-accessories-boutique.myshopify.com
+.sezzle-b5ed3509-3437-47f2-8493-cd9e69010e8b {
+	&.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+			}
+		}
+	}
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			font-weight: 400;
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			font-weight: 400;
+      @media screen and (max-width: 740px) {
         float: none !important;
         justify-content: center !important;
 			}
