@@ -5781,6 +5781,26 @@
   }
 }
 
+// Rose Gold Vintage {
+.sezzle-ce8d9acf-1519-4274-b21f-fbee50a76876 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      padding-top: 5px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      padding-top: 7px;
+      font-size: small;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 7px;
+      font-size: small;
+    }
+  }
+}
+
 // kaansdesigns.myshopify.com
 .sezzle-29c874c5-1dd1-4a89-b9a6-fe1a3ff6a6a0 {
   &.sezzle-cart-page-widget {
