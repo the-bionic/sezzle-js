@@ -6016,7 +6016,7 @@
   }
 }
 
-// The Gray Area Boutique 
+// The Gray Area Boutique
 .sezzle-d7d19339-4cd7-4672-a00e-1642efd29527 {
   &.sezzle-product-page-widget {
     .sezzle-button-text {
@@ -6071,6 +6071,27 @@
     .sezzle-checkout-button {
 			font-weight: 400;
       @media screen and (max-width: 980px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+// taylordtoyouboutique.myshopify.com
+.sezzle-6406e8b1-23a4-44e2-b37b-a84a6b4e2f86 {
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+				max-width: 200px;
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			margin-bottom: 10px;
+      @media screen and (max-width: 740px) {
         float: none !important;
         justify-content: center !important;
       }
