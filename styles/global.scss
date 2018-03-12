@@ -5947,3 +5947,25 @@
     }
   }
 }
+
+// Lily Diamond Boutique
+.sezzle-2092e3c1-92d5-4443-adfe-6cfe3d1bf07c {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 10px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 15px;
+    }
+  }
+}
