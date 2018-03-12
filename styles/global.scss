@@ -5693,3 +5693,31 @@
     }
   }
 }
+
+// The Pine Torch
+.sezzle-675fde20-96ba-404f-b41d-b4fc9095d264 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      padding-top: 10px;
+      @media screen and (min-width: 768px) {
+        margin-left: 0px !important;
+        text-align: left !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (min-width: 768px) {
+        margin-left: 0px !important;
+        justify-content: left !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 40px;
+    }
+  }
+}
