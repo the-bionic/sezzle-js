@@ -5958,7 +5958,6 @@
   }
   &.sezzle-cart-page-widget {
     .sezzle-button-text {
-
       max-width: 200px;
       margin-top: -8px;
       @media screen and (max-width: 768px) {
@@ -6013,6 +6012,30 @@
         float: none !important;
         justify-content: center !important;
       }
+    }
+  }
+}
+
+// The Gray Area Boutique 
+.sezzle-d7d19339-4cd7-4672-a00e-1642efd29527 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      padding-top: 5px;
+      font-size: small;
+    }
+    .sezzle-checkout-button {
+      font-size: small;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      padding-top: 10px;
+      font-size: small;
+    }
+    .sezzle-checkout-button {
+      font-size: small;
     }
   }
 }
