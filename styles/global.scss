@@ -5501,7 +5501,7 @@
 
 // Sprout Kids
 .sezzle-c67c0052-fa95-4085-a2d7-965e4d71e923 {
-  &.sezzle-product-page-widget {    
+  &.sezzle-product-page-widget {
     margin-top: -10px;
     margin-bottom: 5px;
     .sezzle-button-text {
@@ -5545,7 +5545,7 @@
 
 // J Beauty
 .sezzle-ccd1d9a9-ebd8-431c-82a1-73503affc82c {
-  &.sezzle-product-page-widget {    
+  &.sezzle-product-page-widget {
     margin-bottom: 30px;
     margin-top: -30px;
   }
@@ -5777,6 +5777,29 @@
     }
     .sezzle-checkout-button {
       padding-bottom: 15px;
+    }
+  }
+}
+
+// kaansdesigns.myshopify.com
+.sezzle-29c874c5-1dd1-4a89-b9a6-fe1a3ff6a6a0 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			font-weight: 400;
+			color: black;
+      @media screen and (max-width: 800px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			font-weight: 400;
+			color: black;
+      @media screen and (max-width: 800px) {
+        float: none !important;
+        justify-content: center !important;
+      }
     }
   }
 }
