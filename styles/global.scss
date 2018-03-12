@@ -6077,3 +6077,22 @@
     }
   }
 }
+
+// Southern Roots 
+.sezzle-37dabca8-03e0-4a07-8a45-937859056d49 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 10px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      padding-top: 7px
+    }
+  }
+}
