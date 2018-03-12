@@ -5901,7 +5901,6 @@
   }
 }
 
-<<<<<<< HEAD
 // shop frey style
 .sezzle-704b7429-3146-4c7e-b9bd-a111380fe320 {
   &.sezzle-product-page-widget {
@@ -5970,6 +5969,47 @@
     .sezzle-checkout-button {
       padding-bottom: 15px;
       @media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+// Lily Diamond Boutique
+.sezzle-2092e3c1-92d5-4443-adfe-6cfe3d1bf07c {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 10px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 15px;
+    }
+  }
+}
+
+// lingerie-shop-yahooo.myshopify.com
+.sezzle-f5ccc54a-6077-4dbf-ad2e-7cc99596cefd {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 496px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 496px) {
         float: none !important;
         justify-content: center !important;
       }
