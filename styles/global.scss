@@ -6243,6 +6243,16 @@
 	}
 }
 
+// The cutting edge
+.sezzle-0736043d-27c4-4e76-9dd3-d7aaefeaa83b {
+  &.sezzle-cart-page-widget {
+    padding-left: 65px;
+    @media screen and (max-width: 769px) {
+      padding-left: 0;
+    }
+  }
+}
+
 // bluelayneboutique.myshopify.com
 .sezzle-6abef53a-d7ac-4771-8446-bbd6c5f53458 {
 	&.sezzle-product-page-widget {
