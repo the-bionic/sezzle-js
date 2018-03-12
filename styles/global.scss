@@ -6242,3 +6242,13 @@
 		}
 	}
 }
+
+// The cutting edge
+.sezzle-0736043d-27c4-4e76-9dd3-d7aaefeaa83b {
+  &.sezzle-cart-page-widget {
+    padding-left: 65px;
+    @media screen and (max-width: 769px) {
+      padding-left: 0;
+    }
+  }
+}
