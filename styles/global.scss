@@ -5874,3 +5874,29 @@
     }
   }
 }
+
+// Back At The Ranch
+.sezzle-ff85ddfd-8644-4e33-a673-b578f398c4a6 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      font-family: initial;
+    }
+    .sezzle-checkout-button {
+      font-family: initial;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      font-family: initial;
+      @media screen and (max-width: 500px) {
+        margin-top: -8px !important;
+      }
+    }
+    .sezzle-checkout-button {
+      font-family: initial;
+    }
+  }
+}
