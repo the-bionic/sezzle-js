@@ -6039,3 +6039,41 @@
     }
   }
 }
+
+// frostedcowgirls.myshopify.com
+.sezzle-58562e41-5166-4c74-9f95-22ca26b97b7c {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 740px) {
+				max-width: 200px;
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 740px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+	}
+	&.sezzle-cart-page-widget {
+    .sezzle-button-text {
+			font-weight: 400;
+      @media screen and (max-width: 980px) {
+				max-width: 200px;
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+			font-weight: 400;
+      @media screen and (max-width: 980px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
