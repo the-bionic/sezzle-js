@@ -5434,17 +5434,203 @@
   }
 }
 
-// Penny Harper Apparel
-.sezzle-fcffb921-88e3-4b5f-9599-0344c410471f {
+// Turner and Pooch Co
+.sezzle-5f009a55-d32f-4d1b-8774-321c4f11b684 {
   &.sezzle-product-page-widget {
     .sezzle-button-text {
       max-width: 200px;
-      padding-top: 10px;
+      margin-top: -8px;
+      @media screen and (min-width: 750px) {
+        margin-left: -0.5px;
+        text-align: left;
+      }
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 20px;
+      @media screen and (min-width: 750px) {
+        float: left !important;
+        justify-content: left !important;
+      }
     }
   }
   &.sezzle-cart-page-widget {
     .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 15px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+        padding-bottom: 10px;
+      }
+    }
+  }
+}
+
+// Bent Arrow
+.sezzle-0dd3124d-5ce5-4c0b-b0d4-a398100a3659 {
+  &.sezzle-cart-page-widget {
+    margin-bottom: -10px;
+    margin-top: 5px;
+    @media screen and (max-width: 394px) {
+      zoom: 0.9;
+    }
+    .sezzle-button-text {
+      max-width: 400px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+// Sprout Kids
+.sezzle-c67c0052-fa95-4085-a2d7-965e4d71e923 {
+  &.sezzle-product-page-widget {    
+    margin-top: -10px;
+    margin-bottom: 5px;
+    .sezzle-button-text {
+      @media screen and (min-width: 750px) and (max-width: 916px) {
+        max-width: 200px;
+      }
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    .sezzle-button-text {
+      @media screen and (min-width: 750px) and (max-width: 916px) {
+        max-width: 200px;
+      }
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+// J Beauty
+.sezzle-ccd1d9a9-ebd8-431c-82a1-73503affc82c {
+  &.sezzle-product-page-widget {    
+    margin-bottom: 30px;
+    margin-top: -30px;
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+// Shop Sassy Couture
+.sezzle-43b2545f-0bcf-4eaa-8c4e-903ec2b59d8d {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
       padding-top: 10px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+// Kind 5 Apparel
+.sezzle-a114dae1-c2c9-45e7-a62f-4705875f1680 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      padding-top: 7px;
+      max-width: 190px;
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 749px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
+
+// TJ Swim
+.sezzle-cd0d8aa8-d1f2-4c0b-bfb3-4d18f1f2cf9c {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 10px;
+      @media screen and (max-width: 768px) {
+        float: none !important;
+        justify-content: center !important;
+      }
     }
   }
 }
