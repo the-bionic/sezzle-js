@@ -6418,3 +6418,25 @@
     }
   }
 }
+
+// Me & Reekie
+.sezzle-ee3fbeca-6966-49fd-9437-b07ba25b4b83 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      font-family: sans-serif;
+    }
+    .sezzle-checkout-button {
+      font-family: sans-serif;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      text-transform: initial;
+      color: black;
+    }
+    .sezzle-checkout-button {
+      text-transform: initial;
+      color: black;
+    }
+  }
+}
