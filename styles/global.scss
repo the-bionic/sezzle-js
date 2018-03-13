@@ -6318,6 +6318,26 @@
   }
 }
 
+// Sister Shirts
+.sezzle-babc4c2c-306e-4397-8b45-f4a5576594aa {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+
+  }
+}
+
 // west avenue
 .sezzle-5008b115-b447-46b9-a7d0-f88f21260521 {
   &.sezzle-product-page-widget {
