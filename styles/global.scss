@@ -6320,6 +6320,9 @@
 
 // west avenue
 .sezzle-5008b115-b447-46b9-a7d0-f88f21260521 {
+  &.sezzle-product-page-widget {
+    color: rgb(0, 135, 97);
+  }
   &.sezzle-cart-page-widget {
     .sezzle-button-text {
       @media screen and (max-width: 1024px) {
