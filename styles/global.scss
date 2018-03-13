@@ -6317,3 +6317,22 @@
     }
   }
 }
+
+// west avenue
+.sezzle-5008b115-b447-46b9-a7d0-f88f21260521 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      @media screen and (max-width: 1024px) {
+        float: none !important;
+        justify-content: center !important;
+      }
+    }
+  }
+}
