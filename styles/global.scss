@@ -6338,6 +6338,17 @@
   }
 }
 
+// Bella Dawn Boutique
+.sezzle-91fe54cb-bbde-4ac0-b9b5-79dec414cf21 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      @media screen and (min-width: 981px) {
+        max-width: 200px;
+      }
+    }
+  }
+}
+
 // west avenue
 .sezzle-5008b115-b447-46b9-a7d0-f88f21260521 {
   &.sezzle-product-page-widget {
