@@ -6294,3 +6294,26 @@
 		}
 	}
 }
+
+// Street Sole
+.sezzle-1a906a3c-018b-4541-926d-b47a223e5bf4 {
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+      @media screen and (max-width: 800px) {
+        float: none !important;
+        text-align: center !important;
+        margin: auto !important;
+      }
+    }
+    .sezzle-checkout-button {
+      padding-bottom: 15px;
+      @media screen and (max-width: 800px) {
+        float: none !important;
+        justify-content: center !important;
+        padding-bottom: 10px !important;
+      }
+    }
+  }
+}
