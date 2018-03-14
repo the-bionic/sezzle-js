@@ -6469,3 +6469,13 @@
     }
   }
 }
+
+// Blue Mountain Boutique
+.sezzle-3d30903b-894c-4cb5-a790-ca287af528ac {
+  color: #788188;
+  &.sezzle-cart-page-widget {
+    @media screen and (max-width: 749px) {
+      margin-top: -15px !important;
+    }
+  }
+}
