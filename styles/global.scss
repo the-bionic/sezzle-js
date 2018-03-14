@@ -6484,3 +6484,23 @@
 .sezzle-d912c613-e31a-4bc3-89ab-6cdef9d501f6 {
   color: #454545;
 }
+
+// Casey And Me Creationz
+.sezzle-6ce40528-ff92-43e7-9ae3-37ca8580f446 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      font-family: initial;
+    }
+    .sezzle-checkout-button {
+      font-family: initial;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      font-family: initial;
+    }
+    .sezzle-checkout-button {
+      font-family: initial;
+    }
+  }
+}
