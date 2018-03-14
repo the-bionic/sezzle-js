@@ -36,6 +36,10 @@ This javascript can be used for putting sezzle's widget in websites.
 The most simple way to put sezzle's widget is to following steps:
 1. Add the class `sezzle-price-element` to the price element.
 2. Add a new div with class `sezzle-widget-container`. This is where the sezzle widget will be rendered. So, you might want to put this div just below the price element.
+```
+<div class="sezzle-widget-container">
+</div>
+```
 3. Add the following code at the end of your page.
 ```
 <script>
