@@ -6449,3 +6449,23 @@
 		}
   }
 }
+
+// Style Bar Boutique
+.sezzle-5a7c2905-54c5-4e10-9f09-c1bcccd31646 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      font-family: initial;
+    }
+    .sezzle-checkout-button {
+      font-family: initial;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      font-family: initial;
+    }
+    .sezzle-checkout-button {
+      font-family: initial;
+    }
+  }
+}
