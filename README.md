@@ -40,8 +40,12 @@ The most simple way to put sezzle's widget is to following steps:
 ```
 <script>
   document.sezzleConfig = {
-    alignment: 'left',
-    merchantID: 'your-merchant-id',
+    forcedShow: false,
+    alignment: "right",
+    merchantID: "",
+    theme: "light",
+    merchantID: "your-merchant-id",
+    widgetType: "product-page",
   };
 </script>
 <script src="https://widget.sezzle.com/v1/javascript/price-widget/initial"></script>
