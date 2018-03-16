@@ -6504,3 +6504,33 @@
     }
   }
 }
+
+// The Body Club
+.sezzle-563fab21-9540-4b4c-b129-d382052e8f96 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: 7px;
+      @media screen and (min-width: 750px) {
+        margin-left: 0px !important;
+        text-align: left !important;
+      }
+    }
+    .sezzle-checkout-button {
+      margin-bottom: -12px;
+      @media screen and (min-width: 750px) {
+        margin-left: 0px !important;
+        justify-content: left !important;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px;
+      margin-top: -8px;
+    }
+    .sezzle-checkout-button {
+      margin-bottom: 10px;
+    }
+  }
+}
