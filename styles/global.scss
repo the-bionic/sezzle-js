@@ -6541,3 +6541,28 @@
     }
   }
 }
+
+// she seeks nomad
+.sezzle-68d59164-7ac9-4237-a027-b7861f9d2853 {
+  &.sezzle-product-page-widget {
+    margin-top: -45px;
+    margin-bottom: 20px;
+    @media screen and (max-width: 767px) {
+        margin-top: -15px !important;
+    }
+    .sezzle-button-text {
+      max-width: 200px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    margin-top: -7px;
+    margin-bottom: 15px;
+    .sezzle-button-text {
+      max-width: 195px;
+      font-size: 13.5px
+    }
+    .sezzle-checkout-button {
+      font-size: 13.5px;
+    }
+  }
+}
