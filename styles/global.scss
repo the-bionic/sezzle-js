@@ -1569,13 +1569,15 @@
 	}
 
 	&.sezzle-cart-page-widget {
+    @media screen and (max-width: 500px) {
+      margin-top: -15px !important;
+      margin-bottom: 9px !important;
+    }
 		.sezzle-checkout-button-wrapper {
       font-size: 13px;
 
       .sezzle-button-text {
-        @media screen and (min-width: 981px) {
           max-width: 200px;
-        }
       }
 
 			.payment-amount {
@@ -6573,5 +6575,21 @@
     @media screen and (max-width: 767px) {
       margin-bottom: 0px !important;
     }
+  }
+}
+
+// The Glass Wiz
+.sezzle-0b51129d-c2ad-4d11-886f-e8fcfa7d1e55 {
+  &.sezzle-product-page-widget {
+    font-family: initial;
+    .sezzle-button-text {
+      font-size: 16px;
+    }
+    .sezzle-checkout-button {
+      font-size: 16px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    font-family: initial;
   }
 }
