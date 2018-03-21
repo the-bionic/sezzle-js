@@ -53,7 +53,7 @@ var SezzleJS = function(options) {
   this.altVersionTemplate = [];
   if (options.altVersionTemplate) {
   //var altVersionTemplate = '';
-    this.altVersionTemplate = altVersionTemplate.split('%%');
+    this.altVersionTemplate = options.altVersionTemplate.split('%%');
   }
   //this.ABTestClass = '';
 
@@ -493,6 +493,13 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
           var customLinkText = document.createTextNode(' Learn more');
           customLink.appendChild(customLinkText);
           customNode.appendChild(customLink);
+          break;
+        case 'info':
+          var customInfoIcon = document.createElement("code");
+          customInfoIcon.className = "sezzle-info-icon";
+          customInfoIcon.innerHTML = "&#9432;"
+
+          customNode.appendChild(customInfoIcon);
           break;
         default:
           var customText = document.createTextNode(customLine);
