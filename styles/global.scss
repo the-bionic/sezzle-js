@@ -6612,3 +6612,24 @@
     color: #6d9baa;
   }
 }
+
+// Luxy Hair
+.sezzle-ccfa1af4-2876-43a7-ba40-b8f86fcfa2f7 {
+  &.sezzle-product-page-widget {
+    @media screen and (min-width: 1024px) {
+      .sezzle-checkout-button-wrapper {
+        padding-bottom: 0;
+      }
+      .sezzle-button-text {
+        max-width: 340px !important;
+        font-size: 13px !important;
+        font-weight: 250 !important;
+        line-height: 20px !important;
+      }
+      .sezzle-checkout-button {
+        font-size: 13px !important;
+        font-weight: 250 !important;
+      }
+    }
+  }
+}
