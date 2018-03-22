@@ -4613,6 +4613,15 @@
 
 // Billykirk
 .sezzle-758e55c9-2d43-420c-a3a4-b52f05e8f49f {
+	&.sezzle-product-page-widget {
+    zoom: 0.8;
+    .sezzle-custom-widget-wrapper {
+        max-width: 530px;
+        @media screen and (max-width: 459px) {
+          max-width: 400px;
+        }
+    }
+  }
 	&.sezzle-cart-page-widget {
     .sezzle-button-text {
 			@media screen and (max-width: 800px) {
