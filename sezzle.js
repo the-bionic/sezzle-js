@@ -52,10 +52,14 @@ var SezzleJS = function(options) {
 
   this.altVersionTemplate = [];
   if (options.altVersionTemplate) {
-  //var altVersionTemplate = '';
     this.altVersionTemplate = options.altVersionTemplate.split('%%');
   }
-  //this.ABTestClass = '';
+
+  // START AB-TESTING:
+  //var altVersionTemplate = '';
+  //this.altVersionTemplate = altVersionTemplate.split('%%');
+  //this.ABTestClass = ' ';
+  // END AB-TESTING
 
   this.forcedShow = options.forcedShow || false;
   this.alignment = options.alignment || '';
@@ -377,7 +381,11 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   // root node for sezzle
   var sezzle = document.createElement('div');
   sezzle.className = "sezzle-shopify-info-button"
-  //sezzle.className += this.ABTestClass;
+
+  if(this.ABTestClass) {
+    sezzle.className += this.ABTestClass;
+  }
+
   this.insertWidgetTypeCSSClassInElement(sezzle);
   this.insertStoreCSSClassInElement(sezzle);
   this.setElementMargins(sezzle);

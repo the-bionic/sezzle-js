@@ -1303,11 +1303,18 @@
 
 //GlamSeamless
 .sezzle-aac8ea9c-3495-4725-b748-3e72356c8181 {
-	&.sezzle-checkout-button-wrapper {
-		.sezzle-button-text.sezzle-thin {
-			width: 300px;
-		}
-	}
+  &.sezzle-short-widget {
+    @media screen and (max-width: 479px) {
+      zoom: 0.9;
+    }
+  }/*
+  &.sezzle-short-widget-no-price {
+  }*/
+  &.sezzle-normal-widget {
+    .sezzle-custom-widget-wrapper {
+        max-width: 320px;
+    }
+  }
 }
 
 //OM Goth
