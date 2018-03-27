@@ -6658,3 +6658,12 @@
     }
   }
 }
+
+// So Young CA
+.sezzle-4b40b477-c608-4ce0-bc0c-742f4fb37a9d {
+  &.sezzle-product-page-widget {
+    @media screen and (max-width: 767px) {
+      margin-top: -25px !important;
+    }
+  }
+}
