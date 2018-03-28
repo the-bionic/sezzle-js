@@ -24,12 +24,12 @@ document.sezzleConfig = {
     hidePrice: true,
     altVersionTemplate: 'sezzle is the best %%logo%% %%link%%',
     fontWeight: 200,
-	alignmentSwitchMinWidth: 800,
-	alignmentSwitchType: ‘right’,
-	maxWidth: 200,
-	marginTop: -20,
-	marginBottom: -20,
-	fontSize: 13
+    alignmentSwitchMinWidth: 800,
+    alignmentSwitchType: ‘right’,
+    maxWidth: 200,
+    marginTop: -20,
+    marginBottom: -20,
+    fontSize: 13
 }
 ```
 
