@@ -17,12 +17,19 @@ document.sezzleConfig = {
     widgetType: 'product-page',
     minPrice: 0,
     maxPrice: 100000,
-    imageUrl: '',
+    imageUrl: 'example.com/example.png',
     hideClasses: ['class-to-hide'],
     priceElementClass: 'class-to-element-which-contains-price',
     sezzleWidgetContainerClass: 'class-to-element-where-sezzle-element-will-be-rendered',
     hidePrice: true,
-    altVersionTemplate: 'sezzle is the best %%logo%% %%link%%'
+    altVersionTemplate: 'sezzle is the best %%logo%% %%link%%',
+    fontWeight: 200,
+	alignmentSwitchMinWidth: 800,
+	alignmentSwitchType: ‘right’,
+	maxWidth: 200,
+	marginTop: -20,
+	marginBottom: -20,
+	fontSize: 13
 }
 ```
 
