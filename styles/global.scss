@@ -6698,3 +6698,13 @@
     }
   }
 }
+
+// Shop Willow Co
+.sezzle-70db4418-abba-4d9e-b683-8995824c751b {
+  &.sezzle-cart-page-widget {
+    @media screen and (max-width: 749px) {
+      margin-top: -18px !important;
+      margin-bottom: -12px !important;
+    }
+  }
+}
