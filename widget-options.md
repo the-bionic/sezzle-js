@@ -90,3 +90,38 @@
   This is used to change the text of the widget and also change the arrangement of text, logo and the know more url within the widget. Example, `or 4 automatic, interest free payments with %%price%% %%logo%% %%link%%` will render the default widget. `price`, `logo` and `link` within `%% %%` can be put in different places in the string to change arrangement of each of them.
   * Type - `string`
   * Default - `empty`
+
+`fontWeight`(optional) 
+This is used to set the boldness of the text. 100 is the lightest, 900 is the boldest.
+  * Type - `number`
+  * Default - 400 (this is standard text weight)
+
+`alignmentSwitchMinWidth` (optional)
+minimum screen width in pixels below which the alignment changes to `alignmentSwitchType`.
+  * Type - `number`
+  * Default - `empty`
+
+ `alignmentSwitchType` (optional)
+When `alignmentSwitchMinWidth` is hit, the widget alignment changes to this. Options are `left`,`right`,`center`.
+  * Type - `string`
+  * Default - `right`
+ 
+`maxWidth` (optional)
+Maximum width of the widget element in pixels.
+  * Type - `number`
+  * Default - `empty`
+  
+  `marginTop` (optional)
+Amount of space above the widget in pixels.
+  * Type - `number`
+  * Default - 0
+  
+  `marginBottom` (optional)
+Amount of space below the widget in pixels.
+  * Type - `number`
+  * Default - 0
+
+`fontSize` (optional)
+This sets the font size in pixels.
+  * Type - `number`
+  * Default - inherited from the website's stylesheet

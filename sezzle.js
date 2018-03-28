@@ -52,10 +52,14 @@ var SezzleJS = function(options) {
 
   this.altVersionTemplate = [];
   if (options.altVersionTemplate) {
-  //var altVersionTemplate = '';
-    this.altVersionTemplate = altVersionTemplate.split('%%');
+    this.altVersionTemplate = options.altVersionTemplate.split('%%');
   }
-  //this.ABTestClass = '';
+
+  // START AB-TESTING:
+  //var altVersionTemplate = '';
+  //this.altVersionTemplate = altVersionTemplate.split('%%');
+  //this.ABTestClass = ' ';
+  // END AB-TESTING
 
   this.forcedShow = options.forcedShow || false;
   this.alignment = options.alignment || '';
@@ -75,6 +79,8 @@ var SezzleJS = function(options) {
   this.marginTop = options.marginTop || 0; //pixels
   this.marginBottom = options.marginBottom || 0; //pixels
   this.fontSize = options.fontSize || 0; //pixels
+  this.fontFamily = options.fontFamily || "inherit";
+  this.color = options.color || "inherit";
   // This is used to get price of element
   this.priceElementClass = options.priceElementClass || 'sezzle-price-element';
   // This is used to tell where to render sezzle element to
@@ -292,6 +298,19 @@ SezzleJS.prototype.addCSSFontStyle = function(element) {
     if (this.fontSize){
         element.style.fontSize = this.fontSize + "px"
     }
+    if (this.fontFamily){
+      element.style.fontFamily = this.fontFamily
+    }
+}
+
+/**
+ * Add CSS text color as required
+ * @param element Element to add to
+ */
+SezzleJS.prototype.addCSSTextColor = function(element) {
+  if (this.color){
+    element.style.color = this.color
+  }
 }
 
 /**
@@ -317,6 +336,7 @@ SezzleJS.prototype.addCSSCustomisation = function(element) {
   this.addCSSAlignment(element);
   this.addCSSWidth(element);
   this.addCSSFontStyle(element);
+  this.addCSSTextColor(element);
   this.addCSSTheme(element);
 }
 
@@ -377,7 +397,11 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   // root node for sezzle
   var sezzle = document.createElement('div');
   sezzle.className = "sezzle-shopify-info-button"
-  //sezzle.className += this.ABTestClass;
+
+  if(this.ABTestClass) {
+    sezzle.className += this.ABTestClass;
+  }
+
   this.insertWidgetTypeCSSClassInElement(sezzle);
   this.insertStoreCSSClassInElement(sezzle);
   this.setElementMargins(sezzle);
@@ -493,6 +517,13 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
           var customLinkText = document.createTextNode(' Learn more');
           customLink.appendChild(customLinkText);
           customNode.appendChild(customLink);
+          break;
+        case 'info':
+          var customInfoIcon = document.createElement("code");
+          customInfoIcon.className = "sezzle-info-icon";
+          customInfoIcon.innerHTML = "&#9432;"
+
+          customNode.appendChild(customInfoIcon);
           break;
         default:
           var customText = document.createTextNode(customLine);

@@ -17,12 +17,19 @@ document.sezzleConfig = {
     widgetType: 'product-page',
     minPrice: 0,
     maxPrice: 100000,
-    imageUrl: '',
+    imageUrl: 'example.com/example.png',
     hideClasses: ['class-to-hide'],
     priceElementClass: 'class-to-element-which-contains-price',
     sezzleWidgetContainerClass: 'class-to-element-where-sezzle-element-will-be-rendered',
     hidePrice: true,
-    altVersionTemplate: 'sezzle is the best %%logo%% %%link%%'
+    altVersionTemplate: 'sezzle is the best %%logo%% %%link%%',
+    fontWeight: 200,
+    alignmentSwitchMinWidth: 800,
+    alignmentSwitchType: ‘right’,
+    maxWidth: 200,
+    marginTop: -20,
+    marginBottom: -20,
+    fontSize: 13
 }
 ```
 
@@ -36,12 +43,20 @@ This javascript can be used for putting sezzle's widget in websites.
 The most simple way to put sezzle's widget is to following steps:
 1. Add the class `sezzle-price-element` to the price element.
 2. Add a new div with class `sezzle-widget-container`. This is where the sezzle widget will be rendered. So, you might want to put this div just below the price element.
+```
+<div class="sezzle-widget-container">
+</div>
+```
 3. Add the following code at the end of your page.
 ```
 <script>
   document.sezzleConfig = {
-    alignment: 'left',
-    merchantID: 'your-merchant-id',
+    forcedShow: false,
+    alignment: "right",
+    merchantID: "",
+    theme: "light",
+    merchantID: "your-merchant-id",
+    widgetType: "product-page",
   };
 </script>
 <script src="https://widget.sezzle.com/v1/javascript/price-widget/initial"></script>
