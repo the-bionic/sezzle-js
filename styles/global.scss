@@ -6688,3 +6688,35 @@
     }
   }
 }
+
+// Babzzi
+.sezzle-ca31348e-805a-4cc8-9390-6596f9252cb0 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      max-width: 210px !important;
+      font-size: 14px !important;
+    }
+    .custom-sezzle-know-more {
+      margin-left: -3px !important;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      max-width: 200px !important;
+      font-size: 13px !important;
+    }
+    .custom-sezzle-know-more {
+      margin-left: 1px !important;
+    }
+  }
+}
+
+// Shop Willow Co
+.sezzle-70db4418-abba-4d9e-b683-8995824c751b {
+  &.sezzle-cart-page-widget {
+    @media screen and (max-width: 749px) {
+      margin-top: -18px !important;
+      margin-bottom: -12px !important;
+    }
+  }
+}
