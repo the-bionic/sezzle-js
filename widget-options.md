@@ -54,12 +54,12 @@
   `minPrice` (optional)
   Only shows products with price more than this amount in cents.
   * Type - `number`
-  * Default - 0
+  * Default - `0`
 
   `maxPrice` (optional)
   Only shows products with price less than this amount in cents.
   * Type - `number`
-  * Default - 100000
+  * Default - `100000`
 
   `imageUrl` (optional)
   The sezzle logo can be replaced in the widget with an external image of choice.
@@ -91,21 +91,36 @@
   * Type - `string`
   * Default - `empty`
 
+`fontSize` (optional)
+This sets the font size in pixels.
+  * Type - `number`
+  * Default - inherited from the website's stylesheet
+
 `fontWeight`(optional) 
 This is used to set the boldness of the text. 100 is the lightest, 900 is the boldest.
   * Type - `number`
-  * Default - 400 (this is standard text weight)
+  * Default - `300`
+
+`fontFamily` (optional)
+This is used to set the font family of the widget's text.
+  * Type - `string`
+  * Default - `inherit`
+
+`color` (optional)
+This is used to set the widget's text color. Accepts all kinds of values (hexadecimal, rgb(), hsl(), etc...)
+  * Type - `string`
+  * Default - `inherit`
 
 `alignmentSwitchMinWidth` (optional)
-minimum screen width in pixels below which the alignment changes to `alignmentSwitchType`.
+Minimum screen width in pixels below which the alignment changes to `alignmentSwitchType`.
   * Type - `number`
-  * Default - `empty`
+  * Default - `760`
 
- `alignmentSwitchType` (optional)
+`alignmentSwitchType` (optional)
 When `alignmentSwitchMinWidth` is hit, the widget alignment changes to this. Options are `left`,`right`,`center`.
   * Type - `string`
-  * Default - `right`
- 
+  * Default - `empty`
+
 `maxWidth` (optional)
 Maximum width of the widget element in pixels.
   * Type - `number`
@@ -114,14 +129,9 @@ Maximum width of the widget element in pixels.
   `marginTop` (optional)
 Amount of space above the widget in pixels.
   * Type - `number`
-  * Default - 0
+  * Default - `0`
   
   `marginBottom` (optional)
 Amount of space below the widget in pixels.
   * Type - `number`
-  * Default - 0
-
-`fontSize` (optional)
-This sets the font size in pixels.
-  * Type - `number`
-  * Default - inherited from the website's stylesheet
+  * Default - `0`
