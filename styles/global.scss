@@ -6750,3 +6750,12 @@
     }
   }
 }
+
+// Arvo Wear
+.sezzle-18f9c426-61ce-413d-b57a-da285e52f9ec {
+  &.sezzle-product-page-widget {
+    @media screen and (max-width: 767px) {
+      margin-top: -25px !important;
+    }
+  }
+}
