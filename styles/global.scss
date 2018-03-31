@@ -6729,3 +6729,24 @@
     }
   }
 }
+
+// Bright Eyes Contacts
+.sezzle-c6ff159f-d141-4830-9ee3-bf9fa4079319 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      .payment-amount {
+        font-weight: 650;
+      }
+    }
+  }
+  &.sezzle-cart-page-widget {
+    @media screen and (max-width: 740px) {
+      margin-top: -21px !important;
+    }
+    .sezzle-button-text {
+      .payment-amount {
+        font-weight: 650;
+      }
+    }
+  }
+}
