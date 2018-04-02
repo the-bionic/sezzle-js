@@ -513,17 +513,26 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
         case 'link':
           var customLink = document.createElement("div");
           customLink.className = "sezzle-know-more custom-sezzle-know-more";
-
           var customLinkText = document.createTextNode(' Learn more');
           customLink.appendChild(customLinkText);
           customNode.appendChild(customLink);
           break;
+
         case 'info':
           var customInfoIcon = document.createElement("code");
           customInfoIcon.className = "sezzle-info-icon";
           customInfoIcon.innerHTML = "&#9432;"
 
           customNode.appendChild(customInfoIcon);
+          break;
+        case 'question-mark':
+          var customQuestionMarkIcon = document.createElement("img")
+          customQuestionMarkIcon.className = "sezzle-question-mark-icon";
+          customQuestionMarkIcon.src = "https://d2uyik3j5wol98.cloudfront.net/images/question_mark_black.png"
+          customQuestionMarkIcon.style.height = "13px";
+          customQuestionMarkIcon.style.width = "13px";
+
+          customNode.appendChild(customQuestionMarkIcon);
           break;
         default:
           var customText = document.createTextNode(customLine);

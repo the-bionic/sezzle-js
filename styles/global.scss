@@ -6757,5 +6757,13 @@
     @media screen and (max-width: 767px) {
       margin-top: -25px !important;
     }
+    .sezzle-button-text {
+      font-size: 13px;
+    }
+  }
+  &.sezzle-cart-page-widget {
+    .sezzle-button-text {
+      font-size: 13px;
+    }
   }
 }
