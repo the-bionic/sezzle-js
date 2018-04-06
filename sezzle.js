@@ -87,9 +87,13 @@ var SezzleJS = function(options) {
   this.sezzleWidgetContainerClass = options.sezzleWidgetContainerClass || 'sezzle-widget-container';
   // Don't show price in widget
   this.hidePrice =  options.hidePrice || false;
+  this.splitPriceElementsOn = options.splitPriceElementsOn || '';
 
   if (this.hidePrice) {
     this.altVersionTemplate = 'or 4 automatic, interest free payments with %%logo%% %%link%%'.split('%%');
+  }
+  if (this.splitPriceElementsOn) {
+    this.altVersionTemplate = 'or 4 automatic, interest free payments %%price-split%% with%%logo%%%%link%%'.split('%%')
   }
   
   // Search for price elements. If found, assume there is only one in this page
@@ -487,6 +491,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   } else {
     var customNode = document.createElement("div");
     customNode.className = "sezzle-custom-widget-wrapper sezzle-button-text";
+    this.addCSSCustomisation(customNode);
     this.addCSSAlignment(customNode);
 
     this.altVersionTemplate.forEach(function(customLine) {
@@ -534,6 +539,36 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
 
           customNode.appendChild(customQuestionMarkIcon);
           break;
+
+        case 'price-split':
+          var priceSplitNode = document.createElement("span");
+          priceSplitNode.className = "payment-amount price-split sezzle-button-text sezzleindex-" + index;
+        
+          var priceElemTexts = element.innerText.split(this.splitPriceElementsOn);
+
+          var priceElems = []
+          priceElemTexts.forEach(function(text) {
+              var priceElemSpan = document.createElement("span");
+              priceElemSpan.innerText = text;
+              priceElems.push(priceElemSpan);
+          })
+
+          var priceSplitText = ""
+          priceElems.forEach(function(elem, index) {
+            if (index == 0) {
+              priceSplitText = ' of ' + this.getFormattedPrice(elem);
+            }
+            else {
+              priceSplitText = priceSplitText + ' ' + this.splitPriceElementsOn + ' ' + this.getFormattedPrice(elem);
+            }
+          }.bind(this))
+
+          var priceSplitTextNode = document.createTextNode(priceSplitText);
+          priceSplitNode.appendChild(priceSplitTextNode);
+
+          customNode.appendChild(priceSplitNode);
+          break;
+
         default:
           var customText = document.createTextNode(customLine);
 
