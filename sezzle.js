@@ -491,6 +491,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   } else {
     var customNode = document.createElement("div");
     customNode.className = "sezzle-custom-widget-wrapper sezzle-button-text";
+    this.addCSSCustomisation(customNode);
     this.addCSSAlignment(customNode);
 
     this.altVersionTemplate.forEach(function(customLine) {
