@@ -552,11 +552,10 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
               priceElems.push(priceElemSpan);
           })
 
-          var priceSplitText = ' of '
-
+          var priceSplitText = ""
           priceElems.forEach(function(elem, index) {
             if (index == 0) {
-              priceSplitText = priceSplitText + this.getFormattedPrice(elem);
+              priceSplitText = ' of ' + this.getFormattedPrice(elem);
             }
             else {
               priceSplitText = priceSplitText + ' ' + this.splitPriceElementsOn + ' ' + this.getFormattedPrice(elem);
