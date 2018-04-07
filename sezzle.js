@@ -78,6 +78,9 @@ var SezzleJS = function(options) {
   this.maxWidth = options.maxWidth || 0; //pixels
   this.marginTop = options.marginTop || 0; //pixels
   this.marginBottom = options.marginBottom || 0; //pixels
+  this.marginSwitchMinWidth = options.marginSwitchMinWidth || 760; //pixels
+  this.marginTopSwitchType = options.marginTopSwitchType; //pixels
+  this.marginBottomSwitchType = options.marginBottomSwitchType; //pixels
   this.fontSize = options.fontSize || 0; //pixels
   this.fontFamily = options.fontFamily || "inherit";
   this.color = options.color || "inherit";
@@ -373,13 +376,44 @@ SezzleJS.prototype.insertWidgetTypeCSSClassInElement = function(element) {
   }
 }
 
+/**
+ * Set the top and bottom margins of element
+ * @param element to set margins to
+ */
 SezzleJS.prototype.setElementMargins = function(element) {
-    if (this.marginTop !== 0){
-        element.style.marginTop = this.marginTop + "px"
+
+  if (matchMedia) {
+    var queryString = "(min-width: " + this.marginSwitchMinWidth + "px)"
+    const mq = window.matchMedia(queryString);
+    if (mq.matches) {
+      // window width is at least alignmentSwitchMinWidth
+      element.style.marginTop = this.marginTop + "px";
+      element.style.marginBottom = this.marginBottom + "px";
+    } 
+    else {
+      // window width is less than alignmentSwitchMinWidth
+
+      // if marginTopSwitchType is not specified in the config (undefined) or if marginTopSwitchType is anything other than a number
+      if ((typeof this.marginTopSwitchType) !== "number") {
+        //use marginTop
+        element.style.marginTop = this.marginTop + "px";
+      } 
+      else {
+        //use marginTopSwitchType
+        element.style.marginTop = this.marginTopSwitchType + "px";
+      }
+
+      // if marginBottomSwitchType is not specified in the config (undefined) or if marginTopSwitchType is anything other than a number
+      if ((typeof this.marginBottomSwitchType) !== "number") {
+        //use marginBottom
+        element.style.marginBottom = this.marginBottom + "px";
+      } 
+      else {
+        //use marginBottomSwitchType
+        element.style.marginBottom = this.marginBottomSwitchType + "px";
+      }
     }
-    if (this.marginBottom !== 0){
-        element.style.marginBottom = this.marginBottom + "px"
-    }
+  }
 }
 
 /**
