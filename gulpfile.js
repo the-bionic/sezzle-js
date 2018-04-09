@@ -26,7 +26,7 @@ var gulp = require('gulp'),
 
 var buttonUploadName = 'sezzle-widget0.4.83.js';
 var bannerUploadName = 'sezzle-banner2.1.1.js';
-var globalCssUploadName = 'sezzle-styles-global1.1.836.css';
+var globalCssUploadName = 'sezzle-styles-global1.1.842.css';
 
 
 gulp.task("cssupload", function() {
