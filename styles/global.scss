@@ -6772,6 +6772,9 @@
 .sezzle-e1747230-3992-45b2-be99-6912356ace1c {
   &.sezzle-product-page-widget {
     clear: left;
-    margin-left: 10px;
+    .sezzle-custom-widget-wrapper {
+     display: inline;
+     margin-left: 10px;
+   }
   }
 }
