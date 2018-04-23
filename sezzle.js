@@ -678,35 +678,39 @@ SezzleJS.prototype.getPriceText = function(element) {
   if (this.ignoredPriceElements == []){
     return element.innerText;
   } else {
-    clone = element.cloneNode(true);
     this.ignoredPriceElements.forEach(function(ignoredEl) {
-        // If this is an ID
-        if (ignoredEl[0] === '#') {
-          clone.removeChild(clone.getElementById(ignoredEl.substr(1)));
-        } else
-        // If this is a class
-        if (ignoredEl[0] === '.') {
-          Array.from(
-            clone.getElementsByClassName(ignoredEl.substr(1))
-          )
-          .forEach(function(el) {
-              clone.removeChild(el);
-          })
-        }
-        // If this is a tag
-        {
-          var indexToTake = 0;
-          if (ignoredEl.split('-').length > 1) {
-            if (ignoredEl.split('-')[1] >= 0) {
-              indexToTake = parseInt(ignoredEl.split('-')[1]);
-            }
+        var subpaths = ignoredEl.split('/');
+        //filter out empty strings
+        subpaths = subpaths.filter(function(subpath) { return subpath !== "" });
+        var queryString = "";
+        //build the query string
+        for(var index in subpaths) {
+          //if subpath is a tag name
+          if(subpaths[index][0] !== '#' && subpaths[index][0] !== '.') {
+            var splitTagAndIndex = subpaths[index].split('-');
+            queryString = queryString + " " + splitTagAndIndex[0] + ":nth-of-type(" + String(Number(splitTagAndIndex[1]) + 1) + ")";
           }
-          Array.from(
-            clone.getElementsByTagName(ignoredEl.split('-')[0])
-          )
-          .forEach(function(el, index) {
-              if (index === indexToTake) clone.removeChild(el);
-          });
+          else {
+            queryString = queryString + " " + subpaths[index];
+          }
+        }
+        console.log("Ignored price elems are: ", document.querySelectorAll(queryString))
+        Array.from(
+          document.querySelectorAll(queryString)
+        ).forEach(function(element) {
+            //mark the element to be ignored
+            element.classList.add("sezzle-ignored-price-element")
+        })
+      })
+
+      var clone = element.cloneNode(true);
+
+      //remove all marked elements
+      Array.from(
+        clone.getElementsByTagName("*")
+      ).forEach(function(element) {
+        if(Array.from(element.classList).includes("sezzle-ignored-price-element")) {
+          clone.removeChild(element);
         }
       })
 
