@@ -694,7 +694,6 @@ SezzleJS.prototype.getPriceText = function(element) {
             queryString = queryString + " " + subpaths[index];
           }
         }
-        console.log("Ignored price elems are: ", document.querySelectorAll(queryString))
         Array.from(
           document.querySelectorAll(queryString)
         ).forEach(function(element) {
