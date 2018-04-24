@@ -394,7 +394,6 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   if (!this.isProductEligible(element.innerText)) return false;
   // Set data index to each price element for tracking
   element.dataset.sezzleindex = index;
-
   // Get element to be rendered with sezzle's widget
   var parent = renderelement;
 
@@ -431,7 +430,6 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
     // price value span node level - 1.1.1
     var priceSpanNode = document.createElement("span");
     priceSpanNode.className = "payment-amount sezzleindex-" + index;
-
 
     // price value text node level - 1.1.1.1
     var priceValueText = document.createTextNode(
@@ -545,23 +543,29 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
           priceSplitNode.className = "payment-amount price-split sezzle-button-text sezzleindex-" + index;
         
           var priceElemTexts = element.innerText.split(this.splitPriceElementsOn);
-
-          var priceElems = []
-          priceElemTexts.forEach(function(text) {
-              var priceElemSpan = document.createElement("span");
-              priceElemSpan.innerText = text;
-              priceElems.push(priceElemSpan);
-          })
-
           var priceSplitText = ""
-          priceElems.forEach(function(elem, index) {
-            if (index == 0) {
-              priceSplitText = ' of ' + this.getFormattedPrice(elem);
-            }
-            else {
-              priceSplitText = priceSplitText + ' ' + this.splitPriceElementsOn + ' ' + this.getFormattedPrice(elem);
-            }
-          }.bind(this))
+
+          if(priceElemTexts.length == 1) { //if the text is not being splitted (this check is needed in order to support sites with multiple types of product pricing)
+            //give the original element in the case there might be some ignored elements present
+            priceSplitText = ' of ' + this.getFormattedPrice(element)
+          }
+          else {
+            var priceElems = []
+            priceElemTexts.forEach(function(text) {
+                var priceElemSpan = document.createElement("span");
+                priceElemSpan.innerText = text;
+                priceElems.push(priceElemSpan);
+            })
+
+            priceElems.forEach(function(elem, index) {
+              if (index == 0) {
+                priceSplitText = ' of ' + this.getFormattedPrice(elem);
+              }
+              else {
+                priceSplitText = priceSplitText + ' ' + this.splitPriceElementsOn + ' ' + this.getFormattedPrice(elem);
+              }
+            }.bind(this))
+          }
 
           var priceSplitTextNode = document.createTextNode(priceSplitText);
           priceSplitNode.appendChild(priceSplitTextNode);
