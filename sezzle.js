@@ -713,6 +713,13 @@ SezzleJS.prototype.getPriceText = function(element) {
         }
       })
 
+      //remove all markers
+      Array.from(
+        document.getElementsByClassName("sezzle-ignored-price-element")
+      ).forEach(function(element) {
+        element.classList.remove("sezzle-ignored-price-element")
+      })
+
     return clone.innerText;
   }
 }
