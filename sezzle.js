@@ -1086,6 +1086,9 @@ SezzleJS.prototype.getFingerprint = function(callback) {
           callback(result);
         });
       }
+      else {
+        callback("");
+      }
     };
     document.getElementsByTagName("head")[0].appendChild(script);
   } else {
