@@ -122,6 +122,8 @@ var SezzleJS = function(options) {
   this.cssForMerchantURL = 'https://widget.sezzle.com/v1/css/price-widget?uuid=' + this.merchantID;
   // Countries supported by sezzle pay. To test your country, add here.
   this.supportedCountryCodes = ['US', 'IN'];
+  //private boolean variable set to true if widget is to be rendered as first child of the parent
+  this.widgetIsFirstChild = false
 
   // Variables set by the js
   this.countryCode = null;
@@ -622,7 +624,11 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
   sezzle.appendChild(node);
 
   // Adding sezzle to parent node
-  this.insertAfter(sezzle, parent);
+  if(this.widgetIsFirstChild) {
+    this.insertAsFirstChild(sezzle, parent);
+  } else {
+    this.insertAfter(sezzle, parent);
+  }
 
   this.logEvent('onload');
 }
@@ -662,6 +668,13 @@ SezzleJS.prototype.getElementToRender = function(element, index = 0) {
         // The ID in the element
         toRenderElement =
           document.getElementById(p.substr(1));
+      } else if (p === '::first-child') {
+        //rendered as first child
+        toRenderElement = 
+          toRenderElement.children.length > 0 ?
+            toRenderElement.firstElementChild :
+            null ;
+        this.widgetIsFirstChild = true
       } else {
         // If this is a tag
         // e.g. span-2 means second span
@@ -694,6 +707,19 @@ SezzleJS.prototype.getElementToRender = function(element, index = 0) {
  */
 SezzleJS.prototype.insertAfter = function(el, referenceNode) {
   referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+}
+
+/**
+ * Insert element as the first child of the parentElement of referenceElement
+ * @param element Element to insert
+ * @param referenceElement Element to grab parent element
+ */
+SezzleJS.prototype.insertAsFirstChild = function(element, referenceElement) {
+  referenceElement.parentElement.insertBefore(element, referenceElement);
+  //bump up element above nodes which are not element nodes (if any)
+  while(element.previousSibling) {
+    element.parentElement.insertBefore(element, element.previousSibling);
+  }
 }
 
 /**
