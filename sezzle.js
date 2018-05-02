@@ -1081,9 +1081,14 @@ SezzleJS.prototype.getFingerprint = function(callback) {
     script.type = "text/javascript";
     script.src = 'https://cdn.jsdelivr.net/fingerprintjs2/1.4.1/fingerprint2.min.js';
     script.onload = function() {
-      new Fingerprint2().get(function(result, components){
-        callback(result);
-      });
+      if (window.Fingerprint2 !== undefined) {
+        new Fingerprint2().get(function(result, components){
+          callback(result);
+        });
+      }
+      else {
+        callback("");
+      }
     };
     document.getElementsByTagName("head")[0].appendChild(script);
   } else {
