@@ -4,9 +4,6 @@ if (this.requirejs !== undefined) {
         baseUrl: "js",
         paths: {
             'fingerprint2': ['//cdn.jsdelivr.net/fingerprintjs2/1.4.1/fingerprint2.min'],
-        },
-        shim: {
-            'fingerprint2': ['requirejs']
         }
     });
 
