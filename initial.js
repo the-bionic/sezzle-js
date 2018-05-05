@@ -1,10 +1,10 @@
-if (requirejs) {
-    requirejs.config({
+if (this.requirejs !== undefined) {
+    this.requirejs.config({
         appDir: ".",
         baseUrl: "js",
         paths: {
             'fingerprint2': ['//cdn.jsdelivr.net/fingerprintjs2/1.4.1/fingerprint2.min'],
-        },
+        }
     });
 
     require(['fingerprint2'], function(Fingerprint2) {
