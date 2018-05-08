@@ -6805,3 +6805,14 @@
     }
   }
 }
+
+// Curvy Swimwear USA
+.sezzle-27f35e97-293a-4cb6-a9f8-aba685ab3260 {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      @media screen and (max-width: 369px) {
+        max-width: 200px !important;
+      }
+    }
+  }
+}
