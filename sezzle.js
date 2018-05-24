@@ -1,27 +1,4 @@
-  // var script2 = document.createElement("script");
-  // script2.src= 'https://cdn.polyfill.io/v2/polyfill.min.js'
-  // document.head.appendChild(script2);
-  function rzCC(s){
-  // thanks http://www.ruzee.com/blog/2006/07/\
-  // retrieving-css-styles-via-javascript/
-  for(var exp=/-([a-z])/;
-      exp.test(s);
-      s=s.replace(exp,RegExp.$1.toUpperCase()));
-  return s;
-}
 
-function _setStyle(element, declaration) {
-  if (declaration.charAt(declaration.length-1)==';')
-    declaration = declaration.slice(0, -1);
-  var k, v;
-  var splitted = declaration.split(';');
-  for (var i=0, len=splitted.length; i<len; i++) {
-     k = rzCC(splitted[i].split(':')[0]);
-     v = splitted[i].split(':')[1];
-     eval("element.style."+k+"='"+v+"'");
-
-  }
-}
 if(!Array.from){
 
 
@@ -251,7 +228,7 @@ SezzleJS.prototype.getAllPriceElements = function(xpath , xindex, elements ) {
 
   var ELEMENTSARRAY =[];
 
-  console.log(ELEMENTSARRAY)
+
   var elemnt_ID = 0;
   for(elemnt_ID in ELEMENTS) {
     var elemnt = ELEMENTS[elemnt_ID]
@@ -937,19 +914,19 @@ SezzleJS.prototype.startObserve = function(element) {
  */
 SezzleJS.prototype.renderModal = function() {
   if (!document.getElementsByClassName('sezzle-checkout-modal-lightbox').length) {
-    console.log('1');
+
     var modalNode = document.createElement('div');
-      console.log('2');
+
     modalNode.className = "sezzle-checkout-modal-lightbox close-sezzle-modal";
-      console.log('3');
+
   //  modalNode.style.display = 'none';
   //  _setStyle(modalNode,'display:none');
    modalNode.style.cssText  = 'display:none';
-      console.log('4');
+
     modalNode.innerHTML = '<div class="sezzle-checkout-modal sezzle-checkout-modal-hidden"><div class="top-content"><div class="sezzle-no-thanks close-sezzle-modal">×</div><div class="sezzle-modal-title"><div class="sezzle-title-text-center">How Sezzle Works</div></div><div class="sezzle-header-text">We have partnered with Sezzle to give you the ability to Buy Now and Pay Later.</div><div class="row point"><div class="col-xs-12 col-sm-12 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/0interest.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>No interest or fees</h2><p>You only pay the purchase price with Sezzle, as long as you have the installment amount in your bank account.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/shipped-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Your order is shipped right away</h2><p>We ship your order immediately, like we would for any other payment method.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 col-md-2 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/payments-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Easy, automatic payments</h2><p>Sezzle splits your purchase into 4 payments, automatically deducted from your bank account every two weeks.</p></div></div></div><div class="sezzle-simply-select"><div class="sezzle-inline-text-left">Just select</div><img src="https://sezzlemedia.s3.amazonaws.com/branding/sezzle-logos/sezzle-logo.svg"><div class="sezzle-inline-text-right">at checkout.</div></div><div class="sezzle-footer-text">Subject to approval. Estimated payment amount excludes taxes and shipping fees. Your actual installment payments will be presented for confirmation in your checkout with Sezzle.</div></div>';
-      console.log('5');
+
     document.getElementsByTagName('html')[0].appendChild(modalNode);
-      console.log('6');
+
 {/* <div class="sezzle-checkout-modal-lightbox"><div class="sezzle-checkout-modal"></div></div> */}
   } else {
     modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
@@ -959,9 +936,7 @@ SezzleJS.prototype.renderModal = function() {
   Array.from(document.getElementsByClassName('sezzle-know-more'))
     .forEach(function(el) {
       el.addEventListener('click', function() {
-        // Show modal node
-      //  modalNode.style.display = 'block';
-        //  _setStyle(modalNode,'display:block');
+
          modalNode.style.cssText  = 'display:block';
         // Remove hidden class to show the item
         modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
@@ -975,8 +950,7 @@ SezzleJS.prototype.renderModal = function() {
       if(el.getElementsByClassName('sezzle-know-more').length == 0) {
         el.parentElement.parentElement.addEventListener('click', function() {
           // Show modal node
-        //  modalNode.style.display = 'block';
-        //    _setStyle(modalNode,'display:block');
+
          modalNode.style.cssText  = 'display:block';
           // Remove hidden class to show the item
           modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal";
@@ -990,8 +964,7 @@ SezzleJS.prototype.renderModal = function() {
   document.getElementsByClassName('close-sezzle-modal')[0]
     .addEventListener('click', function() {
       // Display the modal node
-    //  modalNode.style.display = 'none';
-      //  _setStyle(modalNode,'display:none');
+    
        modalNode.style.cssText  = 'display:none';
       // Add hidden class hide the item
       modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = "sezzle-checkout-modal sezzle-checkout-modal-hidden";
