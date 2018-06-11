@@ -1172,6 +1172,9 @@ SezzleJS.prototype.getFingerprint = function(callback) {
         callback("");
       }
     };
+    script.onerror = function() {
+      callback("");
+    }
     document.getElementsByTagName("head")[0].appendChild(script);
   } else {
     new Fingerprint2().get(function(result, components){
