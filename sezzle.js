@@ -333,9 +333,7 @@ SezzleJS.prototype.parsePriceString = function(price, includeComma) {
  */
 SezzleJS.prototype.loadCSS = function(callback) {
   this.getCSSVersionForMerchant(function(version) {
-    // if(version == undefined){
-    //   version = 'sezzle-styles-global1.1.854.css';
-    // }
+
     var head = document.head;
     var link = document.createElement('link');
     link.type = 'text/css'
@@ -1142,11 +1140,17 @@ SezzleJS.prototype.getCSSVersionForMerchant = function(callback) {
     httpRequest.onreadystatechange = function() {
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
-          var ParsedObject = JSON.parse(httpRequest.response);
 
-          var body = httpRequest.response;
-          console.log(body.version, 'body version');
-          callback(ParsedObject.version);
+          if(httpRequest.response.version === undefined){
+              var ParsedObject = JSON.parse(httpRequest.response);
+              callback(ParsedObject.version);
+          }else{
+            var body = httpRequest.response;
+
+            callback(body.version);
+          }
+
+
         }
       }
     };
