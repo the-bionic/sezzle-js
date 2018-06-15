@@ -1,6 +1,6 @@
 // Places the Sezzle payment gateway option in Shopify checkout right below the Credit Card payment option
 
-window.addEventListener("load", function() {
+(function() {
     // if jQuery is defined
     if ($) {
         var sezzleGateway = $('div[data-select-gateway]:contains("Sezzle")').first()
@@ -54,4 +54,4 @@ window.addEventListener("load", function() {
             }
         }
     }
-})
+})()

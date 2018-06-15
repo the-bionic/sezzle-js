@@ -1,6 +1,6 @@
 // Work around to enable Sezzle widgets to be dynamic and react to DOM changes in Shopify checkout
 
-window.addEventListener("load", function() {
+(function() {
     // always the case for Shopify checkout pages
     var currentPriceElementText = document.querySelector(".payment-due__price") ? document.querySelector(".payment-due__price").innerText : null
     
@@ -40,4 +40,4 @@ window.addEventListener("load", function() {
     const observer = new MutationObserver(mutationHandler)
     // start observation
     observer.observe(mutationTarget, observerConfig)
-})
+})()
