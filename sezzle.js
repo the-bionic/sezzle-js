@@ -200,7 +200,7 @@ var SezzleJS = function(options) {
   // Non configurable options
   this._config = { attributes: true, childList: true, characterData: true };
   // URL to request to get ip of request
-  this.countryFromIPRequestURL = 'https://freegeoip.net/json/';
+  this.countryFromIPRequestURL = 'https://geoip.sezzle.com/v1/geoip/ipdetails';
   // URL to request to get css details
   this.cssForMerchantURL = 'https://widget.sezzle.com/v1/css/price-widget?uuid=' + this.merchantID;
   // Countries supported by sezzle pay. To test your country, add here.
@@ -1115,7 +1115,7 @@ SezzleJS.prototype.getCountryCodeFromIP = function(callback) {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
         var body = httpRequest.response;
-        this.countryCode = body.country_code;
+        this.countryCode = body.country_iso_code;
         this.ip = body.ip;
         callback(this.countryCode);
       }
