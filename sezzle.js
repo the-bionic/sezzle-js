@@ -1,8 +1,5 @@
 if(!Array.from){
-
-
-
-   Array.from = (function () {
+  Array.from = (function () {
     var toStr = Object.prototype.toString;
     var isCallable = function (fn) {
       return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
@@ -77,6 +74,7 @@ if(!Array.from){
     };
   }());
 }
+
 /**
  *
  * @param options All widget options
