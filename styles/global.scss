@@ -6790,3 +6790,15 @@
     }
   }
 }
+
+// Sezzle test (Grandmeister coffee)
+.sezzle-4e3e0bf4-4543-4171-924c-7e004f91e8de {
+  &.sezzle-product-page-widget {
+    .sezzle-button-text {
+      display: inline;
+      @media screen and (max-width: 376px) {
+        font-size: 13px !important;
+      }
+    }
+  }
+}
