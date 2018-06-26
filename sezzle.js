@@ -1270,7 +1270,7 @@ SezzleJS.prototype.getFingerprint = function(callback) {
   if(typeof window.Fingerprint2 === 'undefined' || window.Fingerprint2.VERSION != "1.4.1") {
     var script = document.createElement("script")
     script.type = "text/javascript";
-    script.src = 'https://cdn.jsdelivr.net/fingerprintjs2/1.4.1/fingerprint2.min.js';
+    script.src = 'https://d34uoa9py2cgca.cloudfront.net/checkout/fingerprintjs/fingerprint2.min.js';
     script.onload = function() {
       if (window.Fingerprint2 !== undefined) {
         new Fingerprint2().get(function(result, components){
