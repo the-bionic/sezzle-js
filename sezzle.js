@@ -859,13 +859,20 @@ SezzleJS.prototype.getPriceText = function(element) {
             queryString = queryString + " " + subpaths[index];
           }
         }
-        Array.from(
-          document.querySelectorAll(queryString)
-        ).forEach(function(element) {
-            //mark the element to be ignored
-            element.classList.add("sezzle-ignored-price-element")
-        })
+        if (queryString) {
+          Array.from(
+            document.querySelectorAll(queryString)
+          ).forEach(function(element) {
+              //mark the element to be ignored
+              element.classList.add("sezzle-ignored-price-element")
+          })
+        }
       })
+
+      // if no ignored elements are found, return the whole inner text of the element
+      if (!element.getElementsByClassName("sezzle-ignored-price-element").length) {
+        return element.innerText;
+      }
 
       var clone = element.cloneNode(true);
 
