@@ -93,8 +93,6 @@ var SezzleJS = function(options) {
       this.xpath.push(options.targetXPath.split('/'));
     } else {
       // options.targetXPath is an array of x-paths
-      //this.xpath = options.targetXPath.map(path => path.split('/'));
-
       this.xpath = options.targetXPath.map(function(path){
         return path.split('/');
       });
@@ -881,7 +879,7 @@ SezzleJS.prototype.getPriceText = function(element) {
       SezzleCustomArrayFrom(
         clone.getElementsByTagName("*")
       ).forEach(function(element) {
-        if(SezzleCustomArrayFrom(element.classList).includes("sezzle-ignored-price-element")) {
+        if(SezzleCustomArrayFrom(element.classList).indexOf("sezzle-ignored-price-element") !== -1) {
           clone.removeChild(element);
         }
       })
