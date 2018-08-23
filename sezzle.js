@@ -555,7 +555,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
     this.addCSSAlignment(priceNode);
 
     // price text node level - 1.1.1
-    var priceText = document.createTextNode("or 4 automatic, interest free payments");
+    var priceText = document.createTextNode("or 4 automatic, interest free payments of ");
 
     // Adding priceText node to priceNode level - 1.1
     priceNode.appendChild(priceText);
@@ -566,7 +566,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
 
     // price value text node level - 1.1.1.1
     var priceValueText = document.createTextNode(
-      ' of ' + this.getFormattedPrice(element)
+      this.getFormattedPrice(element)
     );
 
     // Adding price value to priceSpanNode - level - 1.1.2
@@ -632,7 +632,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
           customPriceSpanNode.className = "payment-amount sezzle-button-text sezzleindex-" + index;
 
           var customPriceValueText = document.createTextNode(
-            ' of ' + this.getFormattedPrice(element)
+            this.getFormattedPrice(element)
           );
 
           customPriceSpanNode.appendChild(customPriceValueText)
