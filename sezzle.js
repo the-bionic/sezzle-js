@@ -1366,13 +1366,21 @@ SezzleJS.prototype.init = function() {
   if (this.forcedShow) {
     // show the widget
     this.initWidget();
-    this.insertGoogleTagManagerScripts();
+    this.getCountryCodeFromIP(function(countryCode) {
+      // only inject Google tag manager for clients visiting from the United States
+      if (countryCode === 'US') {
+        this.insertGoogleTagManagerScripts();
+      }
+    }.bind(this));
   } else {
     // get the country and show the widget if supported
     this.getCountryCodeFromIP(function(countryCode) {
       if (this.supportedCountryCodes.indexOf(countryCode) !== -1) {
         this.initWidget();
-        this.insertGoogleTagManagerScripts();
+        // only inject Google tag manager for clients visiting from the United States
+        if (countryCode === 'US') {
+          this.insertGoogleTagManagerScripts();
+        }
         this.hideSezzleHideDivs();
         this.replaceBanner();
       }
