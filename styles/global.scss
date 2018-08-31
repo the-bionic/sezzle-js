@@ -6332,28 +6332,6 @@
   }
 }
 
-// west avenue
-.sezzle-5008b115-b447-46b9-a7d0-f88f21260521 {
-  &.sezzle-product-page-widget {
-    color: rgb(0, 135, 97);
-  }
-  &.sezzle-cart-page-widget {
-    .sezzle-button-text {
-      @media screen and (max-width: 1024px) {
-        float: none !important;
-        text-align: center !important;
-        margin: auto !important;
-      }
-    }
-    .sezzle-checkout-button {
-      @media screen and (max-width: 1024px) {
-        float: none !important;
-        justify-content: center !important;
-      }
-    }
-  }
-}
-
 // tranche boutique
 .sezzle-fa90cbdb-1791-40b9-8ccc-8c962e54f6bb {
   &.sezzle-cart-page-widget {
