@@ -1,6 +1,6 @@
 /*
  * Polyfill for Array.from. This polyfill was made to support Array.from
- * for <= ES5 versions. The code snippet was taken from this link: 
+ * for <= ES5 versions. The code snippet was taken from this link:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
  * Due to a possibility of websites writing their Array.from polyfills differently, this variable
  * is created to ensure that this script uses this particular version of Array.from
@@ -257,7 +257,7 @@ var SezzleJS = function(options) {
        .forEach(function(el) {
            children.push(el);
        })
- 		}
+         }
      // If this is a tag
      {
        var indexToTake = 0;
@@ -311,7 +311,7 @@ SezzleJS.prototype.parsePrice = function(price) {
  * @return string
  */
 SezzleJS.prototype.parsePriceString = function(price, includeComma) {
-	var formattedPrice = '';
+    var formattedPrice = '';
   for (var i = 0; i < price.length; i++) {
     if (this.isNumeric(price[i]) || price[i] == '.' || (includeComma && price[i] == ',')) {
       // If current is a . and previous is a character, it can be something like Rs.
@@ -320,7 +320,7 @@ SezzleJS.prototype.parsePriceString = function(price, includeComma) {
 
       formattedPrice += price[i];
     }
-	}
+    }
   return formattedPrice;
 }
 
@@ -555,7 +555,13 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
     this.addCSSAlignment(priceNode);
 
     // price text node level - 1.1.1
-    var priceText = document.createTextNode("or 4 automatic, interest free payments of ");
+    var numberOfPayments = 4
+    if (document.sezzleConfig && document.sezzleConfig.numberOfPayments) {
+        numberOfPayments = document.sezzleConfig.numberOfPayments
+    }
+
+    var priceTextValue = "or " + numberOfPayments + " automatic, interest free payments of ";
+    var priceText = document.createTextNode(priceTextValue);
 
     // Adding priceText node to priceNode level - 1.1
     priceNode.appendChild(priceText);
@@ -900,6 +906,7 @@ SezzleJS.prototype.getPriceText = function(element) {
  * @param element Element that contains price text
  */
 SezzleJS.prototype.getFormattedPrice = function(element) {
+
   priceText = this.getPriceText(element);
 
   // Get the price string - useful for formtting Eg: 120.00(string)
@@ -911,20 +918,25 @@ SezzleJS.prototype.getFormattedPrice = function(element) {
   // Will be used later to replace {price} with price / 4.0 Eg: ${price} USD
   var formatter = priceText.replace(priceString, '{price}');
 
-	// array of strings that come up inside of elements that we want to make sure to strip out
-	var ignoredPriceStrings = [
+    // array of strings that come up inside of elements that we want to make sure to strip out
+    var ignoredPriceStrings = [
     "Subtotal",
     "Total:",
     "Sold Out",
-	]
+    ]
 
-	// replace other strings not wanted in text
-	ignoredPriceStrings.forEach(function(ignoredString) {
-		formatter = formatter.replace(ignoredString, '');
+    // replace other strings not wanted in text
+    ignoredPriceStrings.forEach(function(ignoredString) {
+        formatter = formatter.replace(ignoredString, '');
   }, this);
 
+  var numberOfPayments = 4
+  if (document.sezzleConfig && document.sezzleConfig.numberOfPayments) {
+      numberOfPayments = document.sezzleConfig.numberOfPayments
+  }
+
   // get the sezzle instalment price
-  var sezzleInstalmentPrice = (price / 4.0).toFixed(2);
+  var sezzleInstalmentPrice = (price / numberOfPayments).toFixed(2);
 
   // format the string
   var sezzleInstalmentFormattedPrice = formatter.replace('{price}', sezzleInstalmentPrice);
@@ -1057,12 +1069,18 @@ SezzleJS.prototype.renderModal = function() {
   if (!document.getElementsByClassName('sezzle-checkout-modal-lightbox').length) {
     var modalNode = document.createElement('div');
     modalNode.className = "sezzle-checkout-modal-lightbox close-sezzle-modal";
-    modalNode.style.display = 'none';
+		modalNode.style.display = 'none';
+
+		var numberOfPayments = 4
+		if (document.sezzleConfig && document.sezzleConfig.numberOfPayments) {
+				numberOfPayments = document.sezzleConfig.numberOfPayments
+		}
+
     if (this.altLightboxHTML) {
       modalNode.innerHTML = this.altLightboxHTML;
     }
     else {
-      modalNode.innerHTML = '<div class="sezzle-checkout-modal sezzle-checkout-modal-hidden"><div class="top-content"><div class="sezzle-no-thanks close-sezzle-modal">×</div><div class="sezzle-modal-title"><div class="sezzle-title-text-center">How Sezzle Works</div></div><div class="sezzle-header-text">We have partnered with Sezzle to give you the ability to Buy Now and Pay Later.</div><div class="row point"><div class="col-xs-12 col-sm-12 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/0interest.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>No interest or fees</h2><p>You only pay the purchase price with Sezzle, as long as you have the installment amount in your bank account.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/shipped-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Your order is shipped right away</h2><p>We ship your order immediately, like we would for any other payment method.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 col-md-2 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/payments-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Easy, automatic payments</h2><p>Sezzle splits your purchase into 4 payments, automatically deducted from your bank account every two weeks.</p></div></div></div><div class="sezzle-simply-select"><div class="sezzle-inline-text-left">Just select</div><img src="https://sezzlemedia.s3.amazonaws.com/branding/sezzle-logos/sezzle-logo.svg"><div class="sezzle-inline-text-right">at checkout.</div></div><div class="sezzle-footer-text">Subject to approval. Estimated payment amount excludes taxes and shipping fees. Your actual installment payments will be presented for confirmation in your checkout with Sezzle.</div></div>';
+      modalNode.innerHTML = '<div class="sezzle-checkout-modal sezzle-checkout-modal-hidden"><div class="top-content"><div class="sezzle-no-thanks close-sezzle-modal">×</div><div class="sezzle-modal-title"><div class="sezzle-title-text-center">How Sezzle Works</div></div><div class="sezzle-header-text">We have partnered with Sezzle to give you the ability to Buy Now and Pay Later.</div><div class="row point"><div class="col-xs-12 col-sm-12 col-md-2 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/0interest.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>No interest or fees</h2><p>You only pay the purchase price with Sezzle, as long as you have the installment amount in your bank account.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 col-md-2 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/shipped-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Your order is shipped right away</h2><p>We ship your order immediately, like we would for any other payment method.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 col-md-2 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/payments-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Easy, automatic payments</h2><p>Sezzle splits your purchase into ' + numberOfPayments + ' payments, automatically deducted from your bank account every two weeks.</p></div></div></div><div class="sezzle-simply-select"><div class="sezzle-inline-text-left">Just select</div><img src="https://sezzlemedia.s3.amazonaws.com/branding/sezzle-logos/sezzle-logo.svg"><div class="sezzle-inline-text-right">at checkout.</div></div><div class="sezzle-footer-text">Subject to approval. Estimated payment amount excludes taxes and shipping fees. Your actual installment payments will be presented for confirmation in your checkout with Sezzle.</div></div>';
     }
     document.getElementsByTagName('html')[0].appendChild(modalNode);
 {/* <div class="sezzle-checkout-modal-lightbox"><div class="sezzle-checkout-modal"></div></div> */}
