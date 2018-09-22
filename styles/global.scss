@@ -602,10 +602,6 @@
       font-size: 8.5px;
     }
 
-    .sezzle-modal-link {
-      cursor: pointer;
-    }
-
     .sezzle-info-icon {
       color: inherit;
       background-color: inherit;
@@ -616,6 +612,10 @@
       width: auto;
       margin-bottom: -0.5px;
     }
+  }
+
+  .sezzle-modal-link {
+    cursor: pointer;
   }
 
   .sezzle-inline-text {
