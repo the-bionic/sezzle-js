@@ -4755,26 +4755,6 @@
   }
 }
 
-// David and Lee designs
-.sezzle-5316e31b-d055-453c-9981-da3305a3bf5d {
-  &.sezzle-cart-page-widget {
-    .sezzle-button-text {
-      max-width: 166px;
-      @media screen and (max-width: 768px) {
-        float: none !important;
-        text-align: center !important;
-        margin: auto !important;
-      }
-    }
-    .sezzle-checkout-button {
-			@media screen and (max-width: 768px) {
-        float: none !important;
-        justify-content: center !important;
-      }
-		}
-  }
-}
-
 // Poppy and Pen
 .sezzle-23a511f8-5dfc-4015-a209-d8449ba28ae9 {
   &.sezzle-cart-page-widget {
@@ -6270,28 +6250,6 @@
   }
 }
 
-// west avenue
-.sezzle-5008b115-b447-46b9-a7d0-f88f21260521 {
-  &.sezzle-product-page-widget {
-    color: rgb(0, 135, 97);
-  }
-  &.sezzle-cart-page-widget {
-    .sezzle-button-text {
-      @media screen and (max-width: 1024px) {
-        float: none !important;
-        text-align: center !important;
-        margin: auto !important;
-      }
-    }
-    .sezzle-checkout-button {
-      @media screen and (max-width: 1024px) {
-        float: none !important;
-        justify-content: center !important;
-      }
-    }
-  }
-}
-
 // tranche boutique
 .sezzle-fa90cbdb-1791-40b9-8ccc-8c962e54f6bb {
   &.sezzle-cart-page-widget {
@@ -6724,5 +6682,20 @@
 .sezzle-adb7ffd3-e154-46c6-8658-14f75b2f15df {
   &.sezzle-product-page-widget {
     clear: left;
+  }
+}
+
+// SWAK Designs
+.sezzle-96de3510-30d6-4e84-998e-430125728c9c {
+  &.sezzle-product-preview-widget {
+    .payment-amount {
+      font-size: 11px !important;
+    }
+    .szl-light-image {
+      height: 19px !important;
+    }
+    .sezzle-know-more {
+      font-size: 8px !important;
+    }
   }
 }
