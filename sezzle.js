@@ -1,6 +1,6 @@
 /*
  * Polyfill for Array.from. This polyfill was made to support Array.from
- * for <= ES5 versions. The code snippet was taken from this link: 
+ * for <= ES5 versions. The code snippet was taken from this link:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
  * Due to a possibility of websites writing their Array.from polyfills differently, this variable
  * is created to ensure that this script uses this particular version of Array.from
@@ -954,7 +954,7 @@ SezzleJS.prototype.observer = new MutationObserver(function(mutations) {
           .parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
       }
       document.getElementsByClassName('sezzleindex-' + priceIndex)[0]
-        .innerText = ' of ' + price;
+        .innerText = price;
     });
 });
 
@@ -1020,7 +1020,7 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
           .parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
       }
       document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
-      .innerText = ' of ' + price;
+      .innerText = price;
     }
   }
 });
