@@ -845,8 +845,8 @@ SezzleJS.prototype.isProductEligible = function(priceText) {
  * @param element Element that contains the price text
  */
 SezzleJS.prototype.getPriceText = function(element) {
-  if (this.ignoredPriceElements == []){
-    return element.innerText;
+  if (this.ignoredPriceElements.length === 0){
+    return element.innerText || element.textContent;
   } else {
     this.ignoredPriceElements.forEach(function(ignoredEl) {
         var subpaths = ignoredEl.split('/');
@@ -909,8 +909,12 @@ SezzleJS.prototype.getFormattedPrice = function(element) {
 
   priceText = this.getPriceText(element);
 
+  console.log('priceText', priceText);
+
   // Get the price string - useful for formtting Eg: 120.00(string)
   var priceString = this.parsePriceString(priceText, true);
+
+  console.log('priceString', priceString);
 
   // Get the price in float from the element - useful for calculation Eg : 120.00(float)
   var price = this.parsePrice(priceText);
@@ -976,7 +980,6 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
     .filter(function(mutation) {
       return mutation.removedNodes.length && mutation.addedNodes.length
     });
-
   // if there is at least on removed added mutation
   if (removedAddedMutations.length) {
     // Assuming this is the mutation we need
@@ -1000,8 +1003,12 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
       var removedNode = removedNodesMutated[i];
       if (removedNode.dataset && removedNode.dataset.hasOwnProperty('sezzleindex')) {
         removedSezzleNode = removedNode;
+      } else if (removedNode.textContent && removedNode.textContent.trim() !== '') {
+        removedSezzleNode = removedNode
       }
     }
+
+    // console.log("removedSezzleNode", removedSezzleNode);
 
     // If the node is found, find the node corresponding node which got added
     if (removedSezzleNode) {
@@ -1020,22 +1027,55 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
       }
 
       // change the innertext
-      var addedSezzleNode = s.findSameClassElement(removedSezzleNode, addedNodesMutated);
-      addedSezzleNode.dataset.sezzleindex = removedSezzleNode.dataset.sezzleindex;
-      var price = s.getFormattedPrice(addedSezzleNode);
-      delete s;
-      if (!/\d/.test(price)) {
-        document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
-          .parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
-      } else {
-        document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
-          .parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
+      var addedSezzleNode;
+      var index;
+
+      if (addedNodesMutated && addedNodesMutated.dataset) {
+        addedSezzleNode = s.findSameClassElement(removedSezzleNode, addedNodesMutated);
+        addedSezzleNode.dataset.sezzleindex = addedNodesMutated.dataset.sezzleindex;
+      } else if (addedNodesMutated && addedNodesMutated.length >= 0) {
+        addedSezzleNode = addedNodesMutated[0];
+        index = s.findSezzleIndex(addedSezzleNode, 0, 3);
       }
-      document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
-      .innerText = price;
+
+      var price = s.getFormattedPrice(addedSezzleNode);
+
+      if (index !== null) {
+        document.getElementsByClassName('sezzleindex-' + index.index)[0].innerText = price;
+      } else {
+        delete s;
+        if (!/\d/.test(price)) {
+          document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
+            .parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
+        } else {
+          document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
+            .parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
+        }
+        document.getElementsByClassName('sezzleindex-' + addedSezzleNode.dataset.sezzleindex)[0]
+        .innerText = price;
+      }
     }
   }
 });
+
+// Looks for the sezzle index in the numberOfLevels parents
+// Sometimes text nodes which are deleted do not have the sezzle index
+// So this function helps to get the parent which is has the sezzleindex
+SezzleJS.prototype.findSezzleIndex = function(element, currentLevel, numberOfLevels) {
+  if (currentLevel === numberOfLevels + 1) {
+    // couldn't find
+    return null;
+  }
+  if (element && element.dataset && element.dataset.sezzleindex) {
+    return {
+      index: element.dataset.sezzleindex,
+      level: currentLevel
+    }
+  } else {
+    console.log(element.parentNode, currentLevel + 1, numberOfLevels);
+    return this.findSezzleIndex(element.parentNode, currentLevel + 1, numberOfLevels);
+  }
+}
 
 SezzleJS.prototype.findSameClassElement = function(element, similarElements) {
   for (var i=0; i<similarElements.length; i++) {
