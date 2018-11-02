@@ -909,12 +909,12 @@ SezzleJS.prototype.getFormattedPrice = function(element) {
 
   priceText = this.getPriceText(element);
 
-  console.log('priceText', priceText);
+
 
   // Get the price string - useful for formtting Eg: 120.00(string)
   var priceString = this.parsePriceString(priceText, true);
 
-  console.log('priceString', priceString);
+
 
   // Get the price in float from the element - useful for calculation Eg : 120.00(float)
   var price = this.parsePrice(priceText);
@@ -1008,7 +1008,7 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
       }
     }
 
-    // console.log("removedSezzleNode", removedSezzleNode);
+
 
     // If the node is found, find the node corresponding node which got added
     if (removedSezzleNode) {
@@ -1072,7 +1072,7 @@ SezzleJS.prototype.findSezzleIndex = function(element, currentLevel, numberOfLev
       level: currentLevel
     }
   } else {
-    console.log(element.parentNode, currentLevel + 1, numberOfLevels);
+    
     return this.findSezzleIndex(element.parentNode, currentLevel + 1, numberOfLevels);
   }
 }
