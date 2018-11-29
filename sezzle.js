@@ -100,7 +100,8 @@ var SezzleJS = function(options) {
     this.marginBottom = options.marginBottom || 0; //pixels
     this.scaleFactor = options.scaleFactor || 1.1;
     this.fontFamily = options.fontFamily || "inherit";
-    this.textColor = options.color || "inherit";
+		this.textColor = options.color || "inherit";
+		this.fontSize = options.fontSize || "inherit";
     // This is used to get price of element
     this.priceElementClass = options.priceElementClass || 'sezzle-price-element';
     // This is used to tell where to render sezzle element to
@@ -343,7 +344,10 @@ SezzleJS.prototype.addCSSFontStyle = function(element) {
     }
     if(this.fontFamily) {
         element.style.fontFamily = this.fontFamily
-    }
+		}
+		if (this.fontSize) {
+			element.style.fontSize = this.fontSize + "px"
+		}
 }
 
 /**
