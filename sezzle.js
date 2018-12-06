@@ -14,9 +14,9 @@ var SezzleJS = function(options) {
         } else {
             // options.targetXPath is an array of x-paths
             this.xpath = options.targetXPath..filter(function(subpath) {
-							return subpath !== "" ;
+              return subpath !== "" ;
             }).map(function(path) {
-							return path.split('/');
+              return path.split('/');
             });
         }
     }
