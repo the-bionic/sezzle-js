@@ -100,7 +100,7 @@ var SezzleJS = function(options) {
     this.scaleFactor = options.scaleFactor || 1.0;
     this.fontFamily = options.fontFamily || "inherit";
     this.textColor = options.color || "inherit";
-    this.fontSize = options.fontSize || "inherit";
+    this.fontSize = options.fontSize || 12;
     this.maxWidth = options.maxWidth || 400; //pixels
     // This is used to get price of element
     this.priceElementClass = options.priceElementClass || 'sezzle-price-element';
@@ -110,7 +110,7 @@ var SezzleJS = function(options) {
     this.splitPriceElementsOn = options.splitPriceElementsOn || '';
     this.altModalHTML = options.altLightboxHTML || '';
     // if doing widget with both Sezzle or afterpay
-    this.afterpayModalClickURL = options.afterpayModalClickURL || 'https://www.afterpay.com/terms-of-service?soft_redirect=true'
+    this.afterpayModalClickURL = options.afterpayModalClickURL || 'https://www.afterpay.com/purchase-payment-agreement'
 
     this.widgetTemplate = [];
     if (options.altVersionTemplate) {
@@ -984,7 +984,6 @@ SezzleJS.prototype.renderAPModal = function() {
     modalNode.className = "sezzle-checkout-modal-lightbox close-sezzle-modal";
     modalNode.style = "position: center"
     modalNode.style.display = 'none';
-    if (window.matchMedia("(max-width: 700px)"))
     modalNode.innerHTML = '<div style="position: fixed; z-index: 2147483647; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: auto;"><div style="display: flex; place-content: center; align-items: center; width: 100%; min-height: 100%; background-color: rgba(0, 0, 0, 0.8);"><div style="position: relative; background-color: rgb(255, 255, 255);"><a href="' + this.afterpayModalClickURL + '" target="_blank" style="display: block;"><img src="//cdn.shopify.com/s/files/1/0105/4102/t/53/assets/PX_S18AfterPay-Horz.jpg" style="display: block; width: 100%;"></a><a href="#" style="position: absolute; right: 8px; top: 8px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" width="32px" height="32px"><g id="surface1"><path style=" " d="M 16 3 C 8.832031 3 3 8.832031 3 16 C 3 23.167969 8.832031 29 16 29 C 23.167969 29 29 23.167969 29 16 C 29 8.832031 23.167969 3 16 3 Z M 16 5 C 22.085938 5 27 9.914063 27 16 C 27 22.085938 22.085938 27 16 27 C 9.914063 27 5 22.085938 5 16 C 5 9.914063 9.914063 5 16 5 Z M 12.21875 10.78125 L 10.78125 12.21875 L 14.5625 16 L 10.78125 19.78125 L 12.21875 21.21875 L 16 17.4375 L 19.78125 21.21875 L 21.21875 19.78125 L 17.4375 16 L 21.21875 12.21875 L 19.78125 10.78125 L 16 14.5625 Z "></path></g></svg></a></div></div></div>'
     document.getElementsByTagName('html')[0].appendChild(modalNode);
 
@@ -1310,7 +1309,7 @@ SezzleJS.prototype.initWidget = function() {
     }.bind(this));
     this.renderModal();
     // only render APModal if ap-modal-link exists
-    if (document.getElementsByClassName('ap-modal-link').length > 0) {
+    if (document.getElementsByClassName('ap-modal-info-link').length > 0) {
         this.renderAPModal();
     }
 }

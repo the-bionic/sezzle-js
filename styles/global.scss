@@ -580,7 +580,6 @@
     width: unset;
     margin: 0 auto;
     word-wrap: normal;
-    font-size: 12px;
 
     .sezzle-payment-amount {
       font-weight: 900;
@@ -746,12 +745,14 @@
 
 .sezzle-afterpay-logo {
 	vertical-align: middle;
-	max-width: 30%;
+	max-height: 14px;
 }
 
 .ap-modal-info-link {
 	cursor: pointer;
-	margin-left: 5px;
+	margin-left: 3px;
+	color: inherit;
+	background-color: inherit;
 }
 
 // Magento styles
