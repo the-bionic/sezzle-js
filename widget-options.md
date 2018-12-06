@@ -139,3 +139,43 @@ Amount of space to the left of the widget in pixels.
 Scales the size of the entire widget down, keeping the same layout.
   * Type - `number`
   * Default - `1.0`
+
+  `alignment` (optional)
+Aligns the widget based on the rendertopath element. Options are `auto`, `left`, `right`, `center`.
+  * Type - `string`
+  * Default - `auto`
+
+  `bannerClass` (optional)
+The class name of the banner to replace.
+  * Type - `string`
+  * Default - `empty`
+
+  `bannerURL` (optional)
+The URL of the banner image.
+  * Type - `string`
+  * Default - `empty`
+
+  `bannerLink` (optional)
+The url that opens upon click of the banner.
+  * Type - `string`
+  * Default - `empty`
+
+  `splitPriceElementsOn` (optional)
+For use on variant prices, and/or when prices are separated by strings.
+  * Type - `string`
+  * Default - `empty`
+
+  `afterpayModalClickURL` (optional)
+The URL that opens in a new tab for dual installs with afterpay upon click of modal - when merchant wants just one widget showing both.
+  * Type - `string`
+  * Default - `https://www.afterpay.com/terms-of-service?soft_redirect=true`
+
+	`numberOfPayments` (optional)
+The number of payments displayed which the price is split by. Should NOT be changed unless an agreement is in place.
+  * Type - `number`
+  * Default - 4
+
+	`ignoredPriceElements` (optional)
+Price elements to ignore when displaying widgets.
+  * Type - `array of strings`
+  * Default - `[]`

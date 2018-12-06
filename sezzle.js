@@ -13,10 +13,10 @@ var SezzleJS = function(options) {
             }));
         } else {
             // options.targetXPath is an array of x-paths
-            this.xpath = options.targetXPath.map(function(path) {
-                return path.split('/');
-            }).filter(function(subpath) {
-                return subpath !== "" ;
+            this.xpath = options.targetXPath..filter(function(subpath) {
+							return subpath !== "" ;
+            }).map(function(path) {
+							return path.split('/');
             });
         }
     }
@@ -512,7 +512,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
                 logoNode.src = this.imageURL;
                 sezzleButtonText.appendChild(logoNode);
                 break;
-                        // changed from learn-more to link as that is what current altVersionTemplates use
+            // changed from learn-more to link as that is what current altVersionTemplates use
             case 'link':
                 var learnMoreNode = document.createElement("span");
                 learnMoreNode.className = "sezzle-modal-link sezzle-learn-more";
