@@ -11,8 +11,7 @@ var SezzleJS = function(options) {
             this.xpath.push(options.targetXPath.split('/').filter(function(subpath) {
                  return subpath !== "";
             }));
-        }
-        else {
+        } else {
             // options.targetXPath is an array of x-paths
             this.xpath = options.targetXPath.map(function(path) {
                 return path.split('/');
@@ -27,8 +26,7 @@ var SezzleJS = function(options) {
         if (typeof(options.renderToPath) === 'string') {
             // Only one respective render location is given
             this.rendertopath.push(options.renderToPath);
-        }
-        else {
+        } else {
             // options.renderToPath is an array of x-paths
             this.rendertopath = options.renderToPath;
         }
@@ -41,8 +39,7 @@ var SezzleJS = function(options) {
             this.rendertopath[index] =
             this.rendertopath[index].trim() != '' ?
             this.rendertopath[index].trim() : null;
-        }
-        else {
+        } else {
             this.rendertopath.push(null);
         }
     }.bind(this));
@@ -55,8 +52,7 @@ var SezzleJS = function(options) {
             .filter(function(subpath) {
                  return subpath !== "";
             }));
-        }
-        else {
+        } else {
             // options.ignoredPriceElements is an array of x-paths
             this.ignoredPriceElements = options.ignoredPriceElements.map(function(path){
                 return path.trim().split('/');
@@ -74,8 +70,7 @@ var SezzleJS = function(options) {
             filter(function(subpath) {
                  return subpath !== "";
             }));
-        }
-        else {
+        } else {
             // options.hideClasses is an array of x-paths
             this.hideElements = options.hideClasses.map(function(path){
                 return path.trim().split('/');
@@ -120,9 +115,8 @@ var SezzleJS = function(options) {
     this.widgetTemplate = [];
     if (options.altVersionTemplate) {
         this.widgetTemplate = options.altVersionTemplate.split('%%');
-    }
-    else {
-        const defaultWidgetTemplate = 'or ' + this.numberOfPayments + ' interest-free payments of %%price%% with %%logo%% %%info%%';
+    } else {
+        var defaultWidgetTemplate = 'or ' + this.numberOfPayments + ' interest-free payments of %%price%% with %%logo%% %%info%%';
         this.widgetTemplate = defaultWidgetTemplate.split('%%');
     }
 
@@ -151,8 +145,7 @@ var SezzleJS = function(options) {
     if (this.theme == 'dark') {
         this.imageURL = options.imageUrl || 'https://d34uoa9py2cgca.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-white-sm-100w.png';
         this.imageClassName = 'szl-dark-image';
-    }
-    else {
+    } else {
         this.imageURL = options.imageUrl || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
         this.imageClassName = 'szl-light-image';
     }
@@ -199,21 +192,19 @@ var SezzleJS = function(options) {
    var children = [];
    var elementArray = Array.prototype.slice.call(elements);
 
-    for(var index = 0; index < elementArray.length; index++) {
+    for (var index = 0; index < elementArray.length; index++) {
         var element = elementArray[index]
 
         // If this is an ID
         if (xpath[xindex][0] === '#') {
             children.push(document.getElementById(xpath[xindex].substr(1)));
-        }
-        // If this is a class
-        else if (xpath[xindex][0] === '.') {
+            // If this is a class
+        } else if (xpath[xindex][0] === '.') {
             Array.prototype.forEach.call(element.getElementsByClassName(xpath[xindex].substr(1)), function(el) {
                 children.push(el);
-            });
-        }
-        // If this is a tag
-        else {
+        });
+          // If this is a tag
+        } else {
             var indexToTake = 0;
             if (xpath[xindex].split('-').length > 1) {
                 if (xpath[xindex].split('-')[1] >= 0) {
@@ -265,7 +256,7 @@ SezzleJS.prototype.parsePrice = function(price) {
  */
 SezzleJS.prototype.parsePriceString = function(price, includeComma) {
     var formattedPrice = '';
-    for(var i = 0; i < price.length; i++) {
+    for (var i = 0; i < price.length; i++) {
         if (this.isNumeric(price[i]) || price[i] == '.' || (includeComma && price[i] == ',')) {
             // If current is a . and previous is a character, it can be something like Rs.
             // so ignore it
@@ -301,7 +292,7 @@ SezzleJS.prototype.addCSSAlignment = function(element) {
     var newAlignment = ""
     if (matchMedia && this.alignmentSwitchMinWidth && this.alignmentSwitchType) {
         var queryString = "(min-width: " + this.alignmentSwitchMinWidth + "px)"
-        const mq = window.matchMedia(queryString);
+        var mq = window.matchMedia(queryString);
         if (!mq.matches) {
             newAlignment = this.alignmentSwitchType
         }
@@ -316,7 +307,7 @@ SezzleJS.prototype.addCSSAlignment = function(element) {
         case 'center':
             element.className += " sezzle-center";
         default:
-            // if there is no alignment specified, it will be center
+            // if there is no alignment specified, it will be auto
             break;
     }
 }
@@ -336,8 +327,7 @@ SezzleJS.prototype.guessWidgetAlignment = function(priceElement) {
         // Since the sites we are adding to are mostly, if not all in English, it will be LTR (left to right), hence 'left' at the start
         // 'justify' will be the same as 'left'
         return 'left'
-    }
-    else if (textAlignment === 'end') {
+    } else if (textAlignment === 'end') {
         // end is a CSS3  value for textAlign to accommodate for other languages which may be RTL (right to left), for instance Arabic
         // Since the sites we are adding to are mostly, if not all in English, it will be LTR (left to right), hence 'right' at the end
         return 'right'
@@ -574,8 +564,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
                 if (priceElemTexts.length == 1) { //if the text is not being splitted (this check is needed in order to support sites with multiple types of product pricing)
                     //give the original element in the case there might be some ignored elements present
                     priceSplitText = this.getFormattedPrice(element)
-                }
-                else {
+                } else {
                     var priceElems = []
                     priceElemTexts.forEach(function(text) {
                         var priceElemSpan = document.createElement("span");
@@ -585,8 +574,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function(element, renderelement, index 
                     priceElems.forEach(function(elem, index) {
                         if (index == 0) {
                             priceSplitText = this.getFormattedPrice(elem);
-                        }
-                        else {
+                        } else {
                             priceSplitText = priceSplitText + ' ' + this.splitPriceElementsOn + ' ' + this.getFormattedPrice(elem);
                         }
                     }.bind(this))
@@ -643,40 +631,34 @@ SezzleJS.prototype.getElementToRender = function(element, index) {
         path = path.filter(function(subpath) { return subpath !== "" });
         var toRenderElement = element;
 
-        for(var i = 0; i < path.length; i++) {
+        for (var i = 0; i < path.length; i++) {
             var p = path[i];
 
             if (toRenderElement == null) {
                 break;
-            }
-            else if (p === '.') {
+            } else if (p === '.') {
                 continue;
-            }
-            else if (p === '..') {
+            } else if (p === '..') {
                 // One level back
                 toRenderElement = toRenderElement.parentElement;
-            }
-            else if (p[0] === '.') {
+            } else if (p[0] === '.') {
                 // The class in the element
                 toRenderElement =
                     toRenderElement.getElementsByClassName(p.substr(1)).length ?
                     toRenderElement.getElementsByClassName(p.substr(1))[0] :
                     null ;
-            }
-            else if (p[0] === '#') {
+            } else if (p[0] === '#') {
                 // The ID in the element
                 toRenderElement =
                     document.getElementById(p.substr(1));
-            }
-            else if (p === '::first-child') {
+            } else if (p === '::first-child') {
                 //rendered as first child
                 toRenderElement =
                     toRenderElement.children.length > 0 ?
                     toRenderElement.firstElementChild :
                     null ;
                 this.widgetIsFirstChild = true
-            }
-            else {
+            } else {
                 // If this is a tag
                 // indexes are 0-indexed (e.g. span-2 means third span)
                 var indexToTake = 0;
@@ -717,7 +699,7 @@ SezzleJS.prototype.insertAfter = function(el, referenceNode) {
 SezzleJS.prototype.insertAsFirstChild = function(element, referenceElement) {
     referenceElement.parentElement.insertBefore(element, referenceElement);
     //bump up element above nodes which are not element nodes (if any)
-    while(element.previousSibling) {
+    while (element.previousSibling) {
         element.parentElement.insertBefore(element, element.previousSibling);
     }
 }
@@ -742,8 +724,7 @@ SezzleJS.prototype.isProductEligible = function(priceText) {
 SezzleJS.prototype.getPriceText = function(element) {
     if (this.ignoredPriceElements == []){
         return element.innerText;
-    }
-    else {
+    } else {
         this.ignoredPriceElements.forEach(function(subpaths) {
             // get all elements pointed to by the xPath. Search is rooted at element
             this.getElementsByXPath(subpaths, 0, [element]).forEach(function(ignoredPriceElement){
@@ -829,8 +810,7 @@ SezzleJS.prototype.observer = new MutationObserver(function(mutations) {
         var sezzlePriceElement = document.getElementsByClassName('sezzleindex-' + priceIndex)[0];
         if (!/\d/.test(price)) {
             sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
-        }
-        else {
+        } else {
             sezzlePriceElement.parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
         }
         sezzlePriceElement.innerText = price;
@@ -852,7 +832,7 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
         removedNodesMutated = removedNodesMutated.concat(removedNodes);
 
         // Get all the removed children of deleted nodes
-        for(var i=0; i<removedNodes.length; i++) {
+        for (var i=0; i<removedNodes.length; i++) {
             var removedNode = removedNodes[i];
             if ('getElementsByTagName' in removedNode) {
                 var removedChildren = Array.prototype.slice.call(removedNode.getElementsByTagName('*'));
@@ -862,7 +842,7 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
 
         // Get the node which we need
         var removedSezzleNode;
-        for(var i=0; i<removedNodesMutated.length; i++) {
+        for (var i=0; i<removedNodesMutated.length; i++) {
             var removedNode = removedNodesMutated[i];
             if (removedNode.dataset && removedNode.dataset.hasOwnProperty('sezzleindex')) {
                 removedSezzleNode = removedNode;
@@ -877,7 +857,7 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
             // Store all the children of the added nodes
             var addedNodesMutated = [];
             addedNodesMutated = addedNodesMutated.concat(addedNodes);
-            for(var i=0; i<addedNodes.length; i++) {
+            for (var i=0; i<addedNodes.length; i++) {
                 var addedNode = addedNodes[i];
                 if ('getElementsByTagName' in addedNode) {
                     var addedChildren = Array.prototype.slice.call(addedNode.getElementsByTagName('*'));
@@ -893,8 +873,7 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
             var sezzlePriceElement = document.getElementsByClassName('sezzleindex-' + priceIndex)[0];
             if (!/\d/.test(price)) {
                 sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
-            }
-            else {
+            } else {
                 sezzlePriceElement.parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
             }
             sezzlePriceElement.innerText = price;
@@ -903,7 +882,7 @@ SezzleJS.prototype.deleteObserver = new MutationObserver(function(mutations) {
 });
 
 SezzleJS.prototype.findSameClassElement = function(element, similarElements) {
-    for(var i=0; i<similarElements.length; i++) {
+    for (var i=0; i<similarElements.length; i++) {
         var similarElement = similarElements[i];
         if (similarElement.className === element.className) return similarElement;
     }
@@ -937,13 +916,11 @@ SezzleJS.prototype.renderModal = function() {
         modalNode.style.display = 'none';
         if (this.altModalHTML) {
             modalNode.innerHTML = this.altModalHTML;
-        }
-        else {
+        } else {
             modalNode.innerHTML = '<div class="sezzle-checkout-modal sezzle-checkout-modal-hidden"><div class="top-content"><div class="sezzle-no-thanks close-sezzle-modal">×</div><div class="sezzle-modal-title"><div class="sezzle-title-text-center">How Sezzle Works</div></div><div class="sezzle-header-text">We have partnered with Sezzle to give you the ability to Buy Now and Pay Later.</div><div class="row point"><div class="col-xs-12 col-sm-12 col-md-2 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/0interest.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>No interest or fees</h2><p>You only pay the purchase price with Sezzle, as long as you have the installment amount in your bank account.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 col-md-2 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/shipped-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Your order is shipped right away</h2><p>We ship your order immediately, like we would for any other payment method.</p></div></div><div class="row point"><div class="col-xs-12 col-sm-12 col-md-2 modal-icon"><img src="https://d34uoa9py2cgca.cloudfront.net/Checkout/payments-green.svg"></div><div class="col-xs-12 col-sm-12 modal-description"><h2>Easy, automatic payments</h2><p>Sezzle splits your purchase into ' + this.numberOfPayments + ' payments, automatically deducted from your bank account every two weeks.</p></div></div></div><div class="sezzle-simply-select"><div class="sezzle-inline-text-left">Just select</div><img src="https://sezzlemedia.s3.amazonaws.com/branding/sezzle-logos/sezzle-logo.svg"><div class="sezzle-inline-text-right">at checkout.</div></div><div class="sezzle-footer-text">Subject to approval. Estimated payment amount excludes taxes and shipping fees. Your actual installment payments will be presented for confirmation in your checkout with Sezzle.</div></div>';
         }
         document.getElementsByTagName('html')[0].appendChild(modalNode);
-    }
-    else {
+      } else {
         modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
     }
 
@@ -965,8 +942,7 @@ SezzleJS.prototype.renderModal = function() {
                 // log on click event
                 this.logEvent('onclick');
             }.bind(this));
-        }
-        else { // attach event listener to the sezzle-modal-link(s)
+        } else { // attach event listener to the sezzle-modal-link(s)
             Array.prototype.forEach.call(modalLinks, function(modalLink) {
                 modalLink.addEventListener('click', function() {
                     // Show modal node
@@ -1077,8 +1053,7 @@ SezzleJS.prototype.getCSSVersionForMerchant = function(callback) {
     // make request
     if (document.sezzleCssVersionOverride !== undefined) {
         callback(document.sezzleCssVersionOverride);
-    }
-    else {
+    } else {
         var httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function() {
             if (httpRequest.readyState === XMLHttpRequest.DONE) {
@@ -1086,8 +1061,7 @@ SezzleJS.prototype.getCSSVersionForMerchant = function(callback) {
                     if (httpRequest.response.version === undefined) {
                         var ParsedObject = JSON.parse(httpRequest.response);
                         callback(ParsedObject.version);
-                    }
-                    else {
+                    } else {
                         var body = httpRequest.response;
                         callback(body.version);
                     }
@@ -1159,8 +1133,7 @@ SezzleJS.prototype.logEvent = function(eventName) {
                 "merchant_uuid": this.merchantID,
             }));
         }.bind(this));
-    }
-    else {
+    } else {
         this.postEvent(JSON.stringify({
             "event_name": eventName,
             "button_version": document.sezzleButtonVersion,
@@ -1186,8 +1159,7 @@ SezzleJS.prototype.postEvent = function(payload) {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             if (httpRequest.status === 200) {
                 console.log("Succesfully logged event");
-            }
-            else {
+            } else {
                 console.log("Error: Status " + httpRequest.status);
             }
         }
@@ -1211,8 +1183,7 @@ SezzleJS.prototype.getFingerprint = function(callback) {
                 new Fingerprint2().get(function(result, components){
                     callback(result);
                 });
-            }
-            else {
+            } else {
                 callback("");
             }
         };
@@ -1220,8 +1191,7 @@ SezzleJS.prototype.getFingerprint = function(callback) {
             callback("");
         }
         document.getElementsByTagName("head")[0].appendChild(script);
-    }
-    else {
+    } else {
         new Fingerprint2().get(function(result, components){
             callback(result);
         });
@@ -1259,8 +1229,7 @@ SezzleJS.prototype.insertGoogleTagManagerScripts = function() {
     var head = document.getElementsByTagName("HEAD")[0];
     if (head.firstChild) {
         head.insertBefore(script, head.firstChild);
-    }
-    else {
+    } else {
         head.appendChild(script);
     }
 
@@ -1279,8 +1248,7 @@ SezzleJS.prototype.insertGoogleTagManagerScripts = function() {
     var body = document.getElementsByTagName("BODY")[0];
     if (body.firstChild) {
         body.insertBefore(noscript, body.firstChild);
-    }
-    else {
+    } else {
         body.appendChild(noscript);
     }
 }
@@ -1302,8 +1270,7 @@ SezzleJS.prototype.init = function() {
                 this.insertGoogleTagManagerScripts();
             }
         }.bind(this));
-    }
-    else {
+    } else {
         // get the country and show the widget if supported
         this.getCountryCodeFromIP(function(countryCode) {
             if (this.supportedCountryCodes.indexOf(countryCode) !== -1) {
@@ -1329,8 +1296,7 @@ SezzleJS.prototype.initWidget = function() {
     if (this.hasPriceClassElement) {
         els.push(this.priceElements[0]);
         toRenderEls.push(this.renderElements[0]);
-    }
-    else {
+    } else {
         this.xpath.forEach(function(path, index) {
             this.getElementsByXPath(path).forEach(function(e) {
                 els.push(e);
