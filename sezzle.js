@@ -54,10 +54,10 @@ var SezzleJS = function(options) {
             }));
         } else {
             // options.ignoredPriceElements is an array of x-paths
-            this.ignoredPriceElements = options.ignoredPriceElements.map(function(path){
-                return path.trim().split('/');
-            }).filter(function(subpath) {
-                return subpath !== "";
+            this.ignoredPriceElements = options.ignoredPriceElements.filter(function(subpath) {
+              return subpath !== "";
+            }).map(function(path){
+              return path.trim().split('/');
             });
         }
     }
@@ -72,10 +72,10 @@ var SezzleJS = function(options) {
             }));
         } else {
             // options.hideClasses is an array of x-paths
-            this.hideElements = options.hideClasses.map(function(path){
-                return path.trim().split('/');
-            }).filter(function(subpath) {
-                return subpath !== "" ;
+            this.hideElements = options.hideClasses.filter(function(subpath) {
+              return subpath !== "" ;
+            }).map(function(path){
+              return path.trim().split('/');
             });
         }
     }
