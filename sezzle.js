@@ -110,7 +110,7 @@ var SezzleJS = function (options) {
   this.splitPriceElementsOn = options.splitPriceElementsOn || '';
   this.altModalHTML = options.altLightboxHTML || '';
   // if doing widget with both Sezzle or afterpay
-  this.afterpayModalClickURL = options.afterpayModalClickURL || 'https://www.afterpay.com/purchase-payment-agreement'
+  this.afterpayModalClickURL = options.afterpayModalClickURL || 'https://www.afterpay.com/purchase-payment-agreement';
 
   this.widgetTemplate = [];
   if (options.altVersionTemplate) {
@@ -193,7 +193,7 @@ SezzleJS.prototype.getElementsByXPath = function (xpath, xindex, elements) {
   var elementArray = Array.prototype.slice.call(elements);
 
   for (var index = 0; index < elementArray.length; index++) {
-    var element = elementArray[index]
+    var element = elementArray[index];
 
     // If this is an ID
     if (xpath[xindex][0] === '#') {
@@ -276,8 +276,8 @@ SezzleJS.prototype.loadCSS = function (callback) {
   this.getCSSVersionForMerchant(function (version) {
     var head = document.head;
     var link = document.createElement('link');
-    link.type = 'text/css'
-    link.rel = 'stylesheet'
+    link.type = 'text/css';
+    link.rel = 'stylesheet';
     link.href = 'https://d3svog4tlx445w.cloudfront.net/shopify-app/assets/' + version;
     head.appendChild(link);
     link.onload = callback;
@@ -289,9 +289,9 @@ SezzleJS.prototype.loadCSS = function (callback) {
  * @param element Element to add to
  */
 SezzleJS.prototype.addCSSAlignment = function (element) {
-  var newAlignment = ''
+  var newAlignment = '';
   if (matchMedia && this.alignmentSwitchMinWidth && this.alignmentSwitchType) {
-    var queryString = '(min-width: ' + this.alignmentSwitchMinWidth + 'px)'
+    var queryString = '(min-width: ' + this.alignmentSwitchMinWidth + 'px)';
     var mq = window.matchMedia(queryString);
     if (!mq.matches) {
       newAlignment = this.alignmentSwitchType
@@ -319,20 +319,20 @@ SezzleJS.prototype.addCSSAlignment = function (element) {
  */
 SezzleJS.prototype.guessWidgetAlignment = function (priceElement) {
   if (!priceElement) {
-    return 'left' //default
+    return 'left'; //default
   }
   var textAlignment = window.getComputedStyle(priceElement).textAlign
   if (textAlignment === 'start' || textAlignment === 'justify') {
     // start is a CSS3  value for textAlign to accommodate for other languages which may be RTL (right to left), for instance Arabic
     // Since the sites we are adding to are mostly, if not all in English, it will be LTR (left to right), hence 'left' at the start
     // 'justify' will be the same as 'left'
-    return 'left'
+    return 'left';
   } else if (textAlignment === 'end') {
     // end is a CSS3  value for textAlign to accommodate for other languages which may be RTL (right to left), for instance Arabic
     // Since the sites we are adding to are mostly, if not all in English, it will be LTR (left to right), hence 'right' at the end
-    return 'right'
+    return 'right';
   }
-  return textAlignment
+  return textAlignment;
 }
 
 /**
@@ -341,13 +341,13 @@ SezzleJS.prototype.guessWidgetAlignment = function (priceElement) {
  */
 SezzleJS.prototype.addCSSFontStyle = function (element) {
   if (this.fontWeight) {
-    element.style.fontWeight = this.fontWeight
+    element.style.fontWeight = this.fontWeight;
   }
   if (this.fontFamily) {
-    element.style.fontFamily = this.fontFamily
+    element.style.fontFamily = this.fontFamily;
   }
   if (this.fontSize != 'inherit') {
-    element.style.fontSize = this.fontSize + 'px'
+    element.style.fontSize = this.fontSize + 'px';
   }
 }
 
@@ -358,7 +358,7 @@ SezzleJS.prototype.addCSSFontStyle = function (element) {
 
 SezzleJS.prototype.addCSSWidth = function (element) {
   if (this.maxWidth) {
-    element.style.maxWidth = this.maxWidth + 'px'
+    element.style.maxWidth = this.maxWidth + 'px';
   }
 }
 
@@ -368,7 +368,7 @@ SezzleJS.prototype.addCSSWidth = function (element) {
  */
 SezzleJS.prototype.addCSSTextColor = function (element) {
   if (this.textColor) {
-    element.style.color = this.textColor
+    element.style.color = this.textColor;
   }
 }
 
@@ -396,7 +396,7 @@ SezzleJS.prototype.addCSSCustomisation = function (element) {
   this.addCSSFontStyle(element);
   this.addCSSTextColor(element);
   this.addCSSTheme(element);
-  this.addCSSWidth(element)
+  this.addCSSWidth(element);
 }
 
 /**
@@ -417,13 +417,13 @@ SezzleJS.prototype.insertWidgetTypeCSSClassInElement = function (element) {
       element.className += ' sezzle-cart-page-widget';
       break;
     case 'product-page':
-      element.className += ' sezzle-product-page-widget'
+      element.className += ' sezzle-product-page-widget';
       break;
     case 'product-preview':
-      element.className += ' sezzle-product-preview-widget'
+      element.className += ' sezzle-product-preview-widget';
       break;
     default:
-      element.className += ' sezzle-product-page-widget'
+      element.className += ' sezzle-product-page-widget';
       break;
   }
 }
@@ -447,8 +447,8 @@ SezzleJS.prototype.setElementMargins = function (element) {
  * @return void
 */
 SezzleJS.prototype.setWidgetSize = function (element) {
-  element.style.transformOrigin = 'top ' + this.alignment
-  element.style.transform = 'scale(' + this.scaleFactor + ')'
+  element.style.transformOrigin = 'top ' + this.alignment;
+  element.style.transform = 'scale(' + this.scaleFactor + ')';
 }
 
 /**
@@ -471,12 +471,12 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   //get the alignment of the widget (if widgetAlignment is auto)
   // the alignment, when set to auto follows the text-align property of the price element
   if (this.alignment === 'auto') {
-    this.alignment = this.guessWidgetAlignment(element)
+    this.alignment = this.guessWidgetAlignment(element);
   }
 
   // root node for sezzle
   var sezzle = document.createElement('div');
-  sezzle.className = 'sezzle-shopify-info-button'
+  sezzle.className = 'sezzle-shopify-info-button';
 
   if (this.ABTestClass) {
     sezzle.className += this.ABTestClass;
@@ -502,7 +502,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
         var priceSpanNode = document.createElement('span');
         priceSpanNode.className = 'sezzle-payment-amount sezzle-button-text sezzleindex-' + index;
         var priceValueText = document.createTextNode(this.getFormattedPrice(element));
-        priceSpanNode.appendChild(priceValueText)
+        priceSpanNode.appendChild(priceValueText);
         sezzleButtonText.appendChild(priceSpanNode);
         break;
 
@@ -524,27 +524,27 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
       case 'info':
         var infoIconNode = document.createElement('code');
         infoIconNode.className = 'sezzle-modal-link sezzle-info-icon';
-        infoIconNode.innerHTML = '&#9432;'
+        infoIconNode.innerHTML = '&#9432;';
         sezzleButtonText.appendChild(infoIconNode);
         break;
 
       case 'question-mark':
-        var questionMarkIconNode = document.createElement('img')
+        var questionMarkIconNode = document.createElement('img');
         questionMarkIconNode.className = 'sezzle-modal-link sezzle-question-mark-icon';
-        questionMarkIconNode.src = 'https://d2uyik3j5wol98.cloudfront.net/images/question_mark_black.png'
+        questionMarkIconNode.src = 'https://d2uyik3j5wol98.cloudfront.net/images/question_mark_black.png';
         sezzleButtonText.appendChild(questionMarkIconNode);
         break;
 
       case 'afterpay-logo':
         var apNode = document.createElement('img');
-        apNode.className = 'sezzle-afterpay-logo'
+        apNode.className = 'sezzle-afterpay-logo';
         apNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/ap-logo-widget.png';
         sezzleButtonText.appendChild(apNode);
         break;
 
       case 'afterpay-logo-grey':
         var apNode = document.createElement('img');
-        apNode.className = 'sezzle-afterpay-logo'
+        apNode.className = 'sezzle-afterpay-logo';
         apNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/ap-logo-widget-grayscale.png';
         sezzleButtonText.appendChild(apNode);
         break;
@@ -552,7 +552,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
       case 'afterpay-info-icon':
         var apInfoIconNode = document.createElement('code');
         apInfoIconNode.className = 'ap-modal-info-link';
-        apInfoIconNode.innerHTML = '&#9432;'
+        apInfoIconNode.innerHTML = '&#9432;';
         sezzleButtonText.appendChild(apInfoIconNode);
         break;
 
@@ -560,12 +560,12 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
         var priceSplitNode = document.createElement('span');
         priceSplitNode.className = 'sezzle-payment-amount sezzle-price-split sezzleindex-' + index;
         var priceElemTexts = element.innerText.split(this.splitPriceElementsOn);
-        var priceSplitText = ''
+        var priceSplitText = '';
         if (priceElemTexts.length == 1) { //if the text is not being splitted (this check is needed in order to support sites with multiple types of product pricing)
           //give the original element in the case there might be some ignored elements present
-          priceSplitText = this.getFormattedPrice(element)
+          priceSplitText = this.getFormattedPrice(element);
         } else {
-          var priceElems = []
+          var priceElems = [];
           priceElemTexts.forEach(function (text) {
             var priceElemSpan = document.createElement('span');
             priceElemSpan.innerText = text;
@@ -577,7 +577,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
             } else {
               priceSplitText = priceSplitText + ' ' + this.splitPriceElementsOn + ' ' + this.getFormattedPrice(elem);
             }
-          }.bind(this))
+          }.bind(this));
         }
 
         var priceSplitTextNode = document.createTextNode(priceSplitText);
@@ -657,7 +657,7 @@ SezzleJS.prototype.getElementToRender = function (element, index) {
           toRenderElement.children.length > 0 ?
             toRenderElement.firstElementChild :
             null;
-        this.widgetIsFirstChild = true
+        this.widgetIsFirstChild = true;
       } else {
         // If this is a tag
         // indexes are 0-indexed (e.g. span-2 means third span)
@@ -777,7 +777,7 @@ SezzleJS.prototype.getFormattedPrice = function (element) {
     'Subtotal',
     'Total:',
     'Sold Out',
-  ]
+  ];
 
   // replace other strings not wanted in text
   ignoredPriceStrings.forEach(function (ignoredString) {
@@ -820,7 +820,7 @@ SezzleJS.prototype.observer = new MutationObserver(function (mutations) {
 SezzleJS.prototype.deleteObserver = new MutationObserver(function (mutations) {
   // Get the mutations which have both added and removed nodes
   var removedAddedMutations = mutations.filter(function (mutation) {
-    return mutation.removedNodes.length && mutation.addedNodes.length
+    return mutation.removedNodes.length && mutation.addedNodes.length;
   });
 
   // if there is at least one removed added mutation
@@ -970,7 +970,7 @@ SezzleJS.prototype.renderModal = function () {
   document.getElementsByClassName('sezzle-checkout-modal')[0].addEventListener('click', function (event) {
     // stop propagating the event to the parent sezzle-checkout-modal-lightbox to prevent the closure of the modal
     event.stopPropagation();
-  })
+  });
 }
 
 /**
@@ -982,9 +982,9 @@ SezzleJS.prototype.renderAPModal = function () {
   var modalNode = document.createElement('div');
   var modalNode = document.createElement('div');
   modalNode.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal';
-  modalNode.style = 'position: center'
+  modalNode.style = 'position: center';
   modalNode.style.display = 'none';
-  modalNode.innerHTML = '<div style="position: fixed; z-index: 2147483647; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: auto;"><div style="display: flex; place-content: center; align-items: center; width: 100%; min-height: 100%; background-color: rgba(0, 0, 0, 0.8);"><div style="position: relative; background-color: rgb(255, 255, 255);"><a href="' + this.afterpayModalClickURL + '" target="_blank" style="display: block;"><img src="//cdn.shopify.com/s/files/1/0105/4102/t/53/assets/PX_S18AfterPay-Horz.jpg" style="display: block; width: 100%;"></a><a href="#" style="position: absolute; right: 8px; top: 8px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" width="32px" height="32px"><g id="surface1"><path style=" " d="M 16 3 C 8.832031 3 3 8.832031 3 16 C 3 23.167969 8.832031 29 16 29 C 23.167969 29 29 23.167969 29 16 C 29 8.832031 23.167969 3 16 3 Z M 16 5 C 22.085938 5 27 9.914063 27 16 C 27 22.085938 22.085938 27 16 27 C 9.914063 27 5 22.085938 5 16 C 5 9.914063 9.914063 5 16 5 Z M 12.21875 10.78125 L 10.78125 12.21875 L 14.5625 16 L 10.78125 19.78125 L 12.21875 21.21875 L 16 17.4375 L 19.78125 21.21875 L 21.21875 19.78125 L 17.4375 16 L 21.21875 12.21875 L 19.78125 10.78125 L 16 14.5625 Z "></path></g></svg></a></div></div></div>'
+  modalNode.innerHTML = '<div style="position: fixed; z-index: 2147483647; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: auto;"><div style="display: flex; place-content: center; align-items: center; width: 100%; min-height: 100%; background-color: rgba(0, 0, 0, 0.8);"><div style="position: relative; background-color: rgb(255, 255, 255);"><a href="' + this.afterpayModalClickURL + '" target="_blank" style="display: block;"><img src="//cdn.shopify.com/s/files/1/0105/4102/t/53/assets/PX_S18AfterPay-Horz.jpg" style="display: block; width: 100%;"></a><a href="#" style="position: absolute; right: 8px; top: 8px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" width="32px" height="32px"><g id="surface1"><path style=" " d="M 16 3 C 8.832031 3 3 8.832031 3 16 C 3 23.167969 8.832031 29 16 29 C 23.167969 29 29 23.167969 29 16 C 29 8.832031 23.167969 3 16 3 Z M 16 5 C 22.085938 5 27 9.914063 27 16 C 27 22.085938 22.085938 27 16 27 C 9.914063 27 5 22.085938 5 16 C 5 9.914063 9.914063 5 16 5 Z M 12.21875 10.78125 L 10.78125 12.21875 L 14.5625 16 L 10.78125 19.78125 L 12.21875 21.21875 L 16 17.4375 L 19.78125 21.21875 L 21.21875 19.78125 L 17.4375 16 L 21.21875 12.21875 L 19.78125 10.78125 L 16 14.5625 Z "></path></g></svg></a></div></div></div>';
   document.getElementsByTagName('html')[0].appendChild(modalNode);
 
 
@@ -1030,7 +1030,7 @@ SezzleJS.prototype.getCountryCodeFromIP = function (callback) {
       if (httpRequest.status === 200) {
         var body = httpRequest.response;
         if (typeof body === 'string') {
-          body = JSON.parse(body)
+          body = JSON.parse(body);
         }
         this.countryCode = body.country_iso_code;
         this.ip = body.ip;
@@ -1119,7 +1119,7 @@ SezzleJS.prototype.replaceBanner = function () {
 SezzleJS.prototype.logEvent = function (eventName) {
   if (this.fingerprint == null) {
     this.getFingerprint(function (fingerprint) {
-      this.fingerprint = fingerprint
+      this.fingerprint = fingerprint;
       this.postEvent(JSON.stringify({
         'event_name': eventName,
         'button_version': document.sezzleButtonVersion,
@@ -1174,7 +1174,7 @@ SezzleJS.prototype.postEvent = function (payload) {
 */
 SezzleJS.prototype.getFingerprint = function (callback) {
   if (typeof window.Fingerprint2 === 'undefined' || window.Fingerprint2.VERSION != '1.4.1') {
-    var script = document.createElement('script')
+    var script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = 'https://d34uoa9py2cgca.cloudfront.net/checkout/fingerprintjs/fingerprint2.min.js';
     script.onload = function () {
@@ -1213,7 +1213,7 @@ SezzleJS.prototype.getCookie = function (name) {
 */
 SezzleJS.prototype.isMobileBrowser = function () {
   return /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)
-    || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0, 4))
+    || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0, 4));
 }
 
 /*
