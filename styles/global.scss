@@ -755,13 +755,14 @@
 }
 
 .sezzle-afterpay-logo {
-  vertical-align: middle;
+  vertical-align: middle !important;
   max-height: 14px;
+  margin-bottom: -1px !important;
 }
 
 .ap-modal-info-link {
   cursor: pointer;
-  margin-left: 3px;
+  margin-left: 3px !important;
   color: inherit;
   background-color: inherit;
 }
