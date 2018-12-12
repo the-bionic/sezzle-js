@@ -101,7 +101,7 @@ var SezzleJS = function (options) {
   this.fontFamily = options.fontFamily || 'inherit';
   this.textColor = options.color || 'inherit';
   this.fontSize = options.fontSize || 12;
-		this.maxWidth = options.maxWidth || 400; //pixels
+  this.maxWidth = options.maxWidth || 400; //pixels
   // This is used to get price of element
   this.priceElementClass = options.priceElementClass || 'sezzle-price-element';
   // This is used to tell where to render sezzle element to
@@ -109,8 +109,8 @@ var SezzleJS = function (options) {
   // splitPriceElementsOn is used to deal with price ranges which are separated by arbitrary strings
   this.splitPriceElementsOn = options.splitPriceElementsOn || '';
   this.altModalHTML = options.altLightboxHTML || '';
-		// if doing widget with both Sezzle or afterpay - the modal to display:
-		this.apModalHTML = options.apModalHTML || '';
+  // if doing widget with both Sezzle or afterpay - the modal to display:
+  this.apModalHTML = options.apModalHTML || '';
 
   this.widgetTemplate = [];
   if (options.altVersionTemplate) {
@@ -982,8 +982,8 @@ SezzleJS.prototype.renderAPModal = function () {
   var modalNode = document.createElement('div');
   modalNode.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal';
   modalNode.style = 'position: center';
-		modalNode.style.display = 'none';
-		modalNode.innerHTML = this.apModalHTML;
+  modalNode.style.display = 'none';
+  modalNode.innerHTML = this.apModalHTML;
   document.getElementsByTagName('html')[0].appendChild(modalNode);
 
   // attach click event listeners to open/close modal
