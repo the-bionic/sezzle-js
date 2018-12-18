@@ -1194,7 +1194,9 @@ SezzleJS.prototype.getTrackId = function () {
   track_id = this.getCookie("szl_uuid");
   if (!track_id) {
     track_id = generateUUID();
-    document.cookie = "szl_uuid=" + track_id + ";domain=.sezzle.com;path=/";
+      var CookieDate = new Date;
+      CookieDate.setFullYear(CookieDate.getFullYear() + 10);
+      document.cookie = 'szl_uuid=' + track_id + ';path=/;expires=' + CookieDate.toUTCString() + ';';
   }
   return track_id;
 }
