@@ -610,8 +610,9 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   } else {
     this.insertAfter(sezzle, parent);
   }
-
-  this.logEvent('onload');
+  setTimeout(function () {
+    this.logEvent('onload');
+  }, 1000);
 }
 
 /**
