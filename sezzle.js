@@ -1120,7 +1120,7 @@ SezzleJS.prototype.replaceBanner = function () {
 */
 SezzleJS.prototype.logEvent = function (eventName) {
   this.track_id = this.getTrackId();
-  let viewport = {
+  var viewport = {
     width: null,
     height: null
   };
@@ -1135,7 +1135,7 @@ SezzleJS.prototype.logEvent = function (eventName) {
   } catch {
     // unable to fetch viewport dimensions
   }
-  let sezzleConfigStr = null
+  var sezzleConfigStr = null
   if (document.sezzleConfig) {
     sezzleConfigStr = JSON.stringify(document.sezzleConfig);
   }
@@ -1192,7 +1192,7 @@ SezzleJS.prototype.getTrackId = function () {
     });
   }
 
-  track_id = this.getCookie("szl_uuid");
+  track_id = this.getCookie('szl_uuid');
   if (!track_id) {
     track_id = generateUUID();
       var CookieDate = new Date;

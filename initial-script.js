@@ -33,7 +33,6 @@
   callback(track_id);
 
 })(function (track_id) {
-  console.log('track id', track_id);
   var el = document.createElement('script');
   el.src = 'http://localhost:12121/v1/javascript/price-widget?uuid=' + document.sezzleConfig['merchantID'] + '&track_id=' + track_id
   document.getElementsByTagName('head')[0].appendChild(el);
