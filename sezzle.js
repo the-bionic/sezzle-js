@@ -165,7 +165,6 @@ var SezzleJS = function (options) {
   this.countryCode = null;
   this.ip = null;
   this.fingerprint = null;
-  this.trackId = null;
   this.productPrice = null;
 }
 
@@ -1117,106 +1116,44 @@ SezzleJS.prototype.replaceBanner = function () {
 * Log Event
 */
 SezzleJS.prototype.logEvent = function (eventName) {
-  var win = window.frames.szl;
-    this.track_id = this.getTrackId();
-    var viewport = {
-        width: null,
-        height: null
-    };
-    try {
-        if (screen && screen.width) {
-            viewport.width = screen.width;
-        }
-        if (screen && screen.height) {
-            viewport.height = screen.height;
-        }
-
-    } catch {
-        // unable to fetch viewport dimensions
-    }
-    var sezzleConfigStr = null
-    if (document.sezzleConfig) {
-        sezzleConfigStr = JSON.stringify(document.sezzleConfig);
-    }
-  win.postMessage({
-      'event_name': eventName,
-      'button_version': document.sezzleButtonVersion,
-      'cart_id': this.getCookie('cart'),
-      'fingerprint': this.fingerprint,
-      'ip_address': this.ip,
-      'merchant_site': window.location.hostname,
-      'is_mobile_browser': this.isMobileBrowser(),
-      'user_agent': navigator.userAgent,
-      'merchant_uuid': this.merchantID,
-      'track_id': this.track_id,
-      'page_url': window.location.href,
-      'viewport': viewport,
-      'product_price': this.productPrice,
-      'sezzle_config': sezzleConfigStr,
-  }, 'http://localhost:8082');
-
-
-  // this.postEvent(JSON.stringify({
-  //   'event_name': eventName,
-  //   'button_version': document.sezzleButtonVersion,
-  //   'cart_id': this.getCookie('cart'),
-  //   'fingerprint': this.fingerprint,
-  //   'ip_address': this.ip,
-  //   'merchant_site': window.location.hostname,
-  //   'is_mobile_browser': this.isMobileBrowser(),
-  //   'user_agent': navigator.userAgent,
-  //   'merchant_uuid': this.merchantID,
-  //   'track_id': this.track_id,
-  //   'page_url': window.location.href,
-  //   'viewport': viewport,
-  //   'product_price': this.productPrice,
-  //   'sezzle_config': sezzleConfigStr,
-  // }));
-}
-
-/*
-* Post Event
-*/
-SezzleJS.prototype.postEvent = function (payload) {
-  var url = 'https://widget.sezzle.com/v1/event/log';
-
-  var httpRequest = new XMLHttpRequest();
-  httpRequest.onreadystatechange = function () {
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-      if (httpRequest.status === 200) {
-        console.log('Succesfully logged event');
-      } else {
-        console.log('Error: Status ' + httpRequest.status);
-      }
-    }
+  var viewport = {
+      width: null,
+      height: null
   };
+  try {
+      if (screen && screen.width) {
+          viewport.width = screen.width;
+      }
+      if (screen && screen.height) {
+          viewport.height = screen.height;
+      }
 
-  httpRequest.open('POST', url, true);
-  httpRequest.setRequestHeader('Content-Type', 'application/json');
-  httpRequest.send(payload);
-}
-
-/*
-* Get Track ID
-*/
-SezzleJS.prototype.getTrackId = function () {
-  var track_id = null;
-  function generateUUID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
+  } catch {
+      // unable to fetch viewport dimensions
   }
-
-  track_id = this.getCookie('szl_uuid');
-  if (!track_id) {
-    track_id = generateUUID();
-      var CookieDate = new Date;
-      CookieDate.setFullYear(CookieDate.getFullYear() + 10);
-      document.cookie = 'szl_uuid=' + track_id + ';path=/;expires=' + CookieDate.toUTCString() + ';';
+  var sezzleConfigStr = null
+  if (document.sezzleConfig) {
+      sezzleConfigStr = JSON.stringify(document.sezzleConfig);
   }
-  return track_id;
-}
+  var win = window.frames.szl;
+  if (win) {
+    console.log("log event")
+      win.postMessage({
+          'event_name': eventName,
+          'button_version': document.sezzleButtonVersion,
+          'cart_id': this.getCookie('cart'),
+          'ip_address': this.ip,
+          'merchant_site': window.location.hostname,
+          'is_mobile_browser': this.isMobileBrowser(),
+          'user_agent': navigator.userAgent,
+          'merchant_uuid': this.merchantID,
+          'page_url': window.location.href,
+          'viewport': viewport,
+          'product_price': this.productPrice,
+          'sezzle_config': sezzleConfigStr,
+      }, 'https://staging.tracking.sezzle.com');
+  }
+};
 
 /*
 * Get Cookie
@@ -1253,7 +1190,9 @@ SezzleJS.prototype.init = function () {
       // only inject Google tag manager for clients visiting from the United States
       if (countryCode === 'US') {
           var win = window.frames.szl;
-          win.postMessage('initGTMScript', 'http://localhost:8082');
+          if (win) {
+              win.postMessage('initGTMScript', 'https://staging.tracking.sezzle.com');
+          }
       }
     }.bind(this));
   } else {
@@ -1265,7 +1204,9 @@ SezzleJS.prototype.init = function () {
         // only inject Google tag manager for clients visiting from the United States
         // if (countryCode === 'US') {
             var win = window.frames.szl;
-            win.postMessage('initGTMScript', 'http://localhost:8082');
+            if (win) {
+                win.postMessage('initGTMScript', 'https://staging.tracking.sezzle.com');
+            }
         // }
         this.hideSezzleHideElements();
         this.replaceBanner();
