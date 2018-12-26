@@ -1,6 +1,4 @@
 (function (callback) {
-  // set track id
-  let track_id = null;
   function generateUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -14,7 +12,8 @@
       return parts.pop().split(';').shift();
     }
   }
-
+  // set track id
+  var track_id = null;
   track_id = getCookie('szl_uuid');
   if (!track_id) {
     track_id = generateUUID();
@@ -22,14 +21,15 @@
     CookieDate.setFullYear(CookieDate.getFullYear() + 10);
     document.cookie = 'szl_uuid=' + track_id + ';path=/;expires=' + CookieDate.toUTCString() + ';';
   }
-  let iframe = document.createElement('iframe');
+  var iframe = document.createElement('iframe');
   iframe.width = 0;
   iframe.height = 0;
   iframe.style.display = 'none';
   iframe.style.visibility = 'hidden';
-  let html = '<body>Foor</body>';
+  iframe.name='szl'
   iframe.src = 'https://staging.tracking.sezzle.com?trk_id=' + track_id;
   document.body.appendChild(iframe);
+
   callback(track_id);
 
 })(function (track_id) {
