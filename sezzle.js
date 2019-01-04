@@ -1209,14 +1209,14 @@ SezzleJS.prototype.init = function () {
         this.logEvent('request');
         this.loadCSS(this.initWidget.bind(this));
         // only inject Google tag manager for clients visiting from the United States
-        // if (countryCode === 'US') {
+        if (countryCode === 'US') {
             var win = window.frames.szl;
             if (win) {
               setTimeout(function () {
                 win.postMessage('initGTMScript', 'https://staging.tracking.sezzle.com');
               },100)
             }
-        // }
+        }
         this.hideSezzleHideElements();
         this.replaceBanner();
       }
