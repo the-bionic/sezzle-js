@@ -1137,21 +1137,27 @@ SezzleJS.prototype.logEvent = function (eventName) {
   }
   var win = window.frames.szl;
   if (win) {
-    console.log("log event")
+    var cartId = this.getCookie('cart');
+    var merchantID = this.merchantID;
+    var productPrice = this.productPrice;
+    var isMobileBrowser = this.isMobileBrowser();
+    var ip = this.ip;
+    setTimeout(function () {
       win.postMessage({
-          'event_name': eventName,
-          'button_version': document.sezzleButtonVersion,
-          'cart_id': this.getCookie('cart'),
-          'ip_address': this.ip,
-          'merchant_site': window.location.hostname,
-          'is_mobile_browser': this.isMobileBrowser(),
-          'user_agent': navigator.userAgent,
-          'merchant_uuid': this.merchantID,
-          'page_url': window.location.href,
-          'viewport': viewport,
-          'product_price': this.productPrice,
-          'sezzle_config': sezzleConfigStr,
+        'event_name': eventName,
+        'button_version': document.sezzleButtonVersion,
+        'cart_id': cartId,
+        'ip_address': ip,
+        'merchant_site': window.location.hostname,
+        'is_mobile_browser': isMobileBrowser,
+        'user_agent': navigator.userAgent,
+        'merchant_uuid': merchantID,
+        'page_url': window.location.href,
+        'viewport': viewport,
+        'product_price': productPrice,
+        'sezzle_config': sezzleConfigStr,
       }, 'https://staging.tracking.sezzle.com');
+    },100);
   }
 };
 
@@ -1191,6 +1197,7 @@ SezzleJS.prototype.init = function () {
       if (countryCode === 'US') {
           var win = window.frames.szl;
           if (win) {
+              // win.postMessage('initGTMScript', 'http://localhost:9001/');
               win.postMessage('initGTMScript', 'https://staging.tracking.sezzle.com');
           }
       }
@@ -1205,7 +1212,9 @@ SezzleJS.prototype.init = function () {
         // if (countryCode === 'US') {
             var win = window.frames.szl;
             if (win) {
+              setTimeout(function () {
                 win.postMessage('initGTMScript', 'https://staging.tracking.sezzle.com');
+              },100)
             }
         // }
         this.hideSezzleHideElements();
