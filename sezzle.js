@@ -476,7 +476,8 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
 
   // root node for sezzle
   var sezzle = document.createElement('div');
-  sezzle.className = 'sezzle-shopify-info-button';
+  // TODO: why there is a shopify specific naming
+  sezzle.className = `sezzle-shopify-info-button sezzlewidgetindex-${index}`;
 
   if (this.ABTestClass) {
     sezzle.className += this.ABTestClass;
@@ -610,6 +611,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   }
 
   this.logEvent('onload');
+  return sezzle;
 }
 
 /**
@@ -794,12 +796,12 @@ SezzleJS.prototype.getFormattedPrice = function (element) {
 }
 
 /**
- * Mutation observer
+ * Mutation observer callback function
  * This observer observes for any change in a
  * given DOM element (Price element in our case)
  * and act on that
  */
-SezzleJS.prototype.observer = new MutationObserver(function (mutations) {
+SezzleJS.prototype.mutationCallBack = function (mutations) {
   mutations
     .filter(function (mutation) { return mutation.type === 'childList' })
     .forEach(function (mutation) {
@@ -815,79 +817,7 @@ SezzleJS.prototype.observer = new MutationObserver(function (mutations) {
       }
       sezzlePriceElement.innerText = price;
     });
-});
-
-SezzleJS.prototype.deleteObserver = new MutationObserver(function (mutations) {
-  // Get the mutations which have both added and removed nodes
-  var removedAddedMutations = mutations.filter(function (mutation) {
-    return mutation.removedNodes.length && mutation.addedNodes.length;
-  });
-
-  // if there is at least one removed added mutation
-  if (removedAddedMutations.length) {
-    // Assuming this is the mutation we need
-    var removedAddedMutation = removedAddedMutations[0];
-    var removedNodes = Array.prototype.slice.call(removedAddedMutation.removedNodes);
-    var removedNodesMutated = [];
-    removedNodesMutated = removedNodesMutated.concat(removedNodes);
-
-    // Get all the removed children of deleted nodes
-    for (var i = 0; i < removedNodes.length; i++) {
-      var removedNode = removedNodes[i];
-      if ('getElementsByTagName' in removedNode) {
-        var removedChildren = Array.prototype.slice.call(removedNode.getElementsByTagName('*'));
-        removedNodesMutated = removedNodesMutated.concat(removedChildren);
-      }
-    }
-
-    // Get the node which we need
-    var removedSezzleNode;
-    for (var i = 0; i < removedNodesMutated.length; i++) {
-      var removedNode = removedNodesMutated[i];
-      if (removedNode.dataset && removedNode.dataset.hasOwnProperty('sezzleindex')) {
-        removedSezzleNode = removedNode;
-      }
-    }
-
-    // If the node is found, find the node corresponding node which got added
-    if (removedSezzleNode) {
-      var s = new SezzleJS(document.sezzleConfig);
-      var addedNodes = Array.prototype.slice.call(removedAddedMutation.addedNodes);
-
-      // Store all the children of the added nodes
-      var addedNodesMutated = [];
-      addedNodesMutated = addedNodesMutated.concat(addedNodes);
-      for (var i = 0; i < addedNodes.length; i++) {
-        var addedNode = addedNodes[i];
-        if ('getElementsByTagName' in addedNode) {
-          var addedChildren = Array.prototype.slice.call(addedNode.getElementsByTagName('*'));
-          addedNodesMutated = addedNodesMutated.concat(addedChildren);
-        }
-      }
-
-      // change the innertext
-      var addedSezzleNode = s.findSameClassElement(removedSezzleNode, addedNodesMutated);
-      addedSezzleNode.dataset.sezzleindex = removedSezzleNode.dataset.sezzleindex;
-      var price = s.getFormattedPrice(addedSezzleNode);
-      delete s;
-      var sezzlePriceElement = document.getElementsByClassName('sezzleindex-' + priceIndex)[0];
-      if (!/\d/.test(price)) {
-        sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
-      } else {
-        sezzlePriceElement.parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
-      }
-      sezzlePriceElement.innerText = price;
-    }
-  }
-});
-
-SezzleJS.prototype.findSameClassElement = function (element, similarElements) {
-  for (var i = 0; i < similarElements.length; i++) {
-    var similarElement = similarElements[i];
-    if (similarElement.className === element.className) return similarElement;
-  }
-  return null;
-}
+};
 
 /**
  * This function starts observing for change
@@ -897,11 +827,11 @@ SezzleJS.prototype.findSameClassElement = function (element, similarElements) {
  */
 SezzleJS.prototype.startObserve = function (element) {
   // TODO : Need a way to unsubscribe to prevent memory leak
-  this.observer.observe(element, this._config);
-  this.deleteObserver.observe(element.parentNode.parentNode, {
-    childList: true,
-    subtree: true
-  });
+  // Deleted elements should not be observed
+  // That is handled
+  var observer = new MutationObserver(this.mutationCallBack);
+  observer.observe(element, this._config);
+  return observer;
 }
 
 /**
@@ -923,38 +853,6 @@ SezzleJS.prototype.renderModal = function () {
   } else {
     modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
   }
-
-  // attach click event listeners to open/close modal
-  // all assets with the sezzle-modal-link class have click event listeners hooked to them
-  // if the widget does not contain an element with a sezzle-modal-link, the event listener is attached to the whole widget
-  Array.prototype.forEach.call(document.getElementsByClassName('sezzle-button-text'), function (el) {
-    var modalLinks = el.getElementsByClassName('sezzle-modal-link');
-    if (modalLinks.length == 0) {
-      // attach event listener to sezzle-button-text
-      // add the sezzle-modal-link class to sezzle-button-text to make it appear clickable
-      // (elements with the sezzle-modal-link class appear clickable when hovered on)
-      el.classList.add('sezzle-modal-link');
-      el.addEventListener('click', function () {
-        // Show modal node
-        modalNode.style.display = 'block';
-        // Remove hidden class to show the item
-        modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = 'sezzle-checkout-modal';
-        // log on click event
-        this.logEvent('onclick');
-      }.bind(this));
-    } else { // attach event listener to the sezzle-modal-link(s)
-      Array.prototype.forEach.call(modalLinks, function (modalLink) {
-        modalLink.addEventListener('click', function () {
-          // Show modal node
-          modalNode.style.display = 'block';
-          // Remove hidden class to show the item
-          modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = 'sezzle-checkout-modal';
-          // log on click event
-          this.logEvent('onclick');
-        }.bind(this));
-      }.bind(this));
-    }
-  }.bind(this));
 
   // Event listener for close in modal
   Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), function (el) {
@@ -980,26 +878,11 @@ SezzleJS.prototype.renderModal = function () {
  */
 SezzleJS.prototype.renderAPModal = function () {
   var modalNode = document.createElement('div');
-  modalNode.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal';
+  modalNode.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal sezzle-ap-modal';
   modalNode.style = 'position: center';
   modalNode.style.display = 'none';
   modalNode.innerHTML = this.apModalHTML;
   document.getElementsByTagName('html')[0].appendChild(modalNode);
-
-  // attach click event listeners to open/close modal
-  // all assets with the sezzle-modal-link class have click event listeners hooked to them
-  // if the widget does not contain an element with a sezzle-modal-link, the event listener is attached to the whole widget
-  Array.prototype.forEach.call(document.getElementsByClassName('sezzle-button-text'), function (el) {
-    var modalLinks = el.getElementsByClassName('ap-modal-info-link');
-    Array.prototype.forEach.call(modalLinks, function (modalLink) {
-      modalLink.addEventListener('click', function () {
-        // Show modal node
-        modalNode.style.display = 'block';
-        // log on click event
-        this.logEvent('onclick');
-      }.bind(this));
-    }.bind(this));
-  }.bind(this));
 
   // Event listener for close in modal
   Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), function (el) {
@@ -1015,6 +898,58 @@ SezzleJS.prototype.renderAPModal = function () {
     event.stopPropagation();
   })
 }
+
+/**
+ * This function add events to the button in sezzle widget
+ * to open the modal
+ */
+SezzleJS.prototype.addClickEventForModal = function(sezzleElement) {
+  // attach click event listeners to open/close modal
+  // all assets with the sezzle-modal-link class have click event listeners hooked to them
+  // if the widget does not contain an element with a sezzle-modal-link, the event listener is attached to the whole widget
+  Array.prototype.forEach.call(sezzleElement.getElementsByClassName('sezzle-button-text'), function (el) {
+    var modalLinks = el.getElementsByClassName('sezzle-modal-link');
+    var modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
+    if (modalLinks.length == 0) {
+      // attach event listener to sezzle-button-text
+      // add the sezzle-modal-link class to sezzle-button-text to make it appear clickable
+      // (elements with the sezzle-modal-link class appear clickable when hovered on)
+      el.classList.add('sezzle-modal-link');
+      el.addEventListener('click', function () {
+        // Show modal node
+        modalNode.style.display = 'block';
+        // Remove hidden class to show the item
+        modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = 'sezzle-checkout-modal';
+        // log on click event
+        this.logEvent('onclick');
+      }.bind(this));
+    } else { // attach event listener to the sezzle-modal-link(s)
+      Array.prototype.forEach.call(modalLinks, function (modalLink) {
+        modalLink.addEventListener('click', function () {
+          // Show modal node
+          modalNode.style.display = 'block';
+          // Remove hidden class to show the item
+          modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = 'sezzle-checkout-modal';
+          // log on click event
+          this.logEvent('onclick');
+        }.bind(this));
+      }.bind(this));
+    }
+
+    // for AfterPay
+    var modalLinks = el.getElementsByClassName('ap-modal-info-link');
+    Array.prototype.forEach.call(modalLinks, function (modalLink) {
+      modalLink.addEventListener('click', function () {
+        // Show modal node
+        document.getElementsByClassName('sezzle-ap-modal')[0].style.display = 'block';
+        // log on click event
+        this.logEvent('onclick');
+      }.bind(this));
+    }.bind(this));
+
+  }.bind(this));
+}
+
 
 /**
  * This function will return the ISO 3166-1 alpha-2 country code
@@ -1289,26 +1224,63 @@ SezzleJS.prototype.init = function () {
  */
 SezzleJS.prototype.initWidget = function () {
   var els = [];
-  var toRenderEls = [];
-  if (this.hasPriceClassElement) {
-    els.push(this.priceElements[0]);
-    toRenderEls.push(this.renderElements[0]);
-  } else {
-    this.xpath.forEach(function (path, index) {
-      this.getElementsByXPath(path).forEach(function (e) {
-        els.push(e);
-        toRenderEls.push(this.getElementToRender(e, index));
-      }.bind(this));
-    }.bind(this));
-  }
-  els.forEach(function (el, index) {
-    this.renderAwesomeSezzle(el, toRenderEls[index], index);
-    this.startObserve(el);
-  }.bind(this));
+  var intervalInMs = 2000;
+
+  // This should always happen before rendering the widget
   this.renderModal();
   // only render APModal if ap-modal-link exists
   if (document.getElementsByClassName('ap-modal-info-link').length > 0) {
     this.renderAPModal();
+  }
+
+  function sezzleWidgetCheckInterval() {
+    // Look for newly added price elements
+    this.xpath.forEach(function (path, index) {
+      this.getElementsByXPath(path).forEach(function (e) {
+        if (!e.hasAttribute('data-sezzleindex')) {
+          els.push({
+            element: e,
+            toRenderElement: this.getElementToRender(e, index),
+            deleted: false,
+            observer: null
+          });
+        }
+      }.bind(this))
+    }.bind(this));
+    // add the sezzle widget to the price elements
+    els.forEach(function (el, index) {
+      if (!el.element.hasAttribute('data-sezzleindex')) {
+        var sz = this.renderAwesomeSezzle(el.element, el.toRenderElement, index);
+        this.addClickEventForModal(sz);
+        el.observer = this.startObserve(el.element);
+      }
+    }.bind(this));
+
+
+    // Find the deleted price elements
+    // remove corresponding Sezzle widgets if exists
+    els.forEach(function(el, index) {
+      if (el.element.parentElement == null && !el.deleted) { // element is deleted
+        // Stop observing for changes in the element
+        if (el.observer !== null) el.observer.disconnect();
+        // Mark that element as deleted
+        el.deleted = true;
+        // Delete the corresponding sezzle widget if exist
+        var tmp = document.getElementsByClassName(`sezzlewidgetindex-${index}`);
+        if (tmp.length) {
+          var sw = tmp[0];
+          sw.parentElement.removeChild(sw);
+        }
+      }
+    })
+    setTimeout(sezzleWidgetCheckInterval.bind(this), intervalInMs)
+  };
+
+  if (this.hasPriceClassElement) {
+    var sz = this.renderAwesomeSezzle(this.priceElements[0], this.renderElements[0], 0);
+    this.startObserve(this.priceElements[0]);
+  } else {
+    sezzleWidgetCheckInterval.call(this);
   }
 }
 
