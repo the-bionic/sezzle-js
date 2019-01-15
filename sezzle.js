@@ -611,6 +611,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   }
 
   this.logEvent('onload');
+  return sezzle;
 }
 
 /**
@@ -853,11 +854,62 @@ SezzleJS.prototype.renderModal = function () {
     modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
   }
 
+  // Event listener for close in modal
+  Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), function (el) {
+    el.addEventListener('click', function () {
+      // Display the modal node
+      modalNode.style.display = 'none';
+      // Add hidden class hide the item
+      modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = 'sezzle-checkout-modal sezzle-checkout-modal-hidden';
+    });
+  });
+
+  // Event listener to prevent close in modal if click happens within sezzle-checkout-modal
+  document.getElementsByClassName('sezzle-checkout-modal')[0].addEventListener('click', function (event) {
+    // stop propagating the event to the parent sezzle-checkout-modal-lightbox to prevent the closure of the modal
+    event.stopPropagation();
+  });
+}
+
+/**
+ * This function renders the Afterpay modal based on if you include ap-modal-info-link
+ * Also adds the event for open and close modals
+ * to respective buttons
+ */
+SezzleJS.prototype.renderAPModal = function () {
+  var modalNode = document.createElement('div');
+  modalNode.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal sezzle-ap-modal';
+  modalNode.style = 'position: center';
+  modalNode.style.display = 'none';
+  modalNode.innerHTML = this.apModalHTML;
+  document.getElementsByTagName('html')[0].appendChild(modalNode);
+
+  // Event listener for close in modal
+  Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), function (el) {
+    el.addEventListener('click', function () {
+      // Display the modal node
+      modalNode.style.display = 'none';
+    });
+  });
+
+  // Event listener to prevent close in modal if click happens within sezzle-checkout-modal
+  document.getElementsByClassName('sezzle-checkout-modal')[0].addEventListener('click', function (event) {
+    // stop propagating the event to the parent sezzle-checkout-modal-lightbox to prevent the closure of the modal
+    event.stopPropagation();
+  })
+}
+
+/**
+ * This function add events to the button in sezzle widget
+ * to open the modal
+ */
+SezzleJS.prototype.addClickEventForModal = function(sezzleElement) {
   // attach click event listeners to open/close modal
   // all assets with the sezzle-modal-link class have click event listeners hooked to them
   // if the widget does not contain an element with a sezzle-modal-link, the event listener is attached to the whole widget
-  Array.prototype.forEach.call(document.getElementsByClassName('sezzle-button-text'), function (el) {
+  Array.prototype.forEach.call(sezzleElement.getElementsByClassName('sezzle-button-text'), function (el) {
     var modalLinks = el.getElementsByClassName('sezzle-modal-link');
+    var modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
     if (modalLinks.length == 0) {
       // attach event listener to sezzle-button-text
       // add the sezzle-modal-link class to sezzle-button-text to make it appear clickable
@@ -883,67 +935,21 @@ SezzleJS.prototype.renderModal = function () {
         }.bind(this));
       }.bind(this));
     }
-  }.bind(this));
 
-  // Event listener for close in modal
-  Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), function (el) {
-    el.addEventListener('click', function () {
-      // Display the modal node
-      modalNode.style.display = 'none';
-      // Add hidden class hide the item
-      modalNode.getElementsByClassName('sezzle-checkout-modal')[0].className = 'sezzle-checkout-modal sezzle-checkout-modal-hidden';
-    });
-  });
-
-  // Event listener to prevent close in modal if click happens within sezzle-checkout-modal
-  document.getElementsByClassName('sezzle-checkout-modal')[0].addEventListener('click', function (event) {
-    // stop propagating the event to the parent sezzle-checkout-modal-lightbox to prevent the closure of the modal
-    event.stopPropagation();
-  });
-}
-
-/**
- * This function renders the Afterpay modal based on if you include ap-modal-info-link
- * Also adds the event for open and close modals
- * to respective buttons
- */
-SezzleJS.prototype.renderAPModal = function () {
-  var modalNode = document.createElement('div');
-  modalNode.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal';
-  modalNode.style = 'position: center';
-  modalNode.style.display = 'none';
-  modalNode.innerHTML = this.apModalHTML;
-  document.getElementsByTagName('html')[0].appendChild(modalNode);
-
-  // attach click event listeners to open/close modal
-  // all assets with the sezzle-modal-link class have click event listeners hooked to them
-  // if the widget does not contain an element with a sezzle-modal-link, the event listener is attached to the whole widget
-  Array.prototype.forEach.call(document.getElementsByClassName('sezzle-button-text'), function (el) {
+    // for AfterPay
     var modalLinks = el.getElementsByClassName('ap-modal-info-link');
     Array.prototype.forEach.call(modalLinks, function (modalLink) {
       modalLink.addEventListener('click', function () {
         // Show modal node
-        modalNode.style.display = 'block';
+        document.getElementsByClassName('sezzle-ap-modal')[0].style.display = 'block';
         // log on click event
         this.logEvent('onclick');
       }.bind(this));
     }.bind(this));
+
   }.bind(this));
-
-  // Event listener for close in modal
-  Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), function (el) {
-    el.addEventListener('click', function () {
-      // Display the modal node
-      modalNode.style.display = 'none';
-    });
-  });
-
-  // Event listener to prevent close in modal if click happens within sezzle-checkout-modal
-  document.getElementsByClassName('sezzle-checkout-modal')[0].addEventListener('click', function (event) {
-    // stop propagating the event to the parent sezzle-checkout-modal-lightbox to prevent the closure of the modal
-    event.stopPropagation();
-  })
 }
+
 
 /**
  * This function will return the ISO 3166-1 alpha-2 country code
@@ -1220,6 +1226,13 @@ SezzleJS.prototype.initWidget = function () {
   var els = [];
   var intervalInMs = 2000;
 
+  // This should always happen before rendering the widget
+  this.renderModal();
+  // only render APModal if ap-modal-link exists
+  if (document.getElementsByClassName('ap-modal-info-link').length > 0) {
+    this.renderAPModal();
+  }
+
   function sezzleWidgetCheckInterval() {
     // Look for newly added price elements
     this.xpath.forEach(function (path, index) {
@@ -1237,7 +1250,8 @@ SezzleJS.prototype.initWidget = function () {
     // add the sezzle widget to the price elements
     els.forEach(function (el, index) {
       if (!el.element.hasAttribute('data-sezzleindex')) {
-        this.renderAwesomeSezzle(el.element, el.toRenderElement, index);
+        var sz = this.renderAwesomeSezzle(el.element, el.toRenderElement, index);
+        this.addClickEventForModal(sz);
         el.observer = this.startObserve(el.element);
       }
     }.bind(this));
@@ -1248,7 +1262,7 @@ SezzleJS.prototype.initWidget = function () {
     els.forEach(function(el, index) {
       if (el.element.parentElement == null && !el.deleted) { // element is deleted
         // Stop observing for changes in the element
-        el.observer.disconnect();
+        if (el.observer !== null) el.observer.disconnect();
         // Mark that element as deleted
         el.deleted = true;
         // Delete the corresponding sezzle widget if exist
@@ -1263,16 +1277,10 @@ SezzleJS.prototype.initWidget = function () {
   };
 
   if (this.hasPriceClassElement) {
-    this.renderAwesomeSezzle(this.priceElements[0], this.renderElements[0], 0);
+    var sz = this.renderAwesomeSezzle(this.priceElements[0], this.renderElements[0], 0);
     this.startObserve(this.priceElements[0]);
   } else {
     sezzleWidgetCheckInterval.call(this);
-  }
-
-  this.renderModal();
-  // only render APModal if ap-modal-link exists
-  if (document.getElementsByClassName('ap-modal-info-link').length > 0) {
-    this.renderAPModal();
   }
 }
 
