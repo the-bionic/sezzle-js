@@ -1218,51 +1218,55 @@ SezzleJS.prototype.init = function () {
  */
 SezzleJS.prototype.initWidget = function () {
   var els = [];
+  var intervalInMs = 2000;
+
+  function sezzleWidgetCheckInterval() {
+    // Look for newly added price elements
+    this.xpath.forEach(function (path, index) {
+      this.getElementsByXPath(path).forEach(function (e) {
+        if (!e.hasAttribute('data-sezzleindex')) {
+          els.push({
+            element: e,
+            toRenderElement: this.getElementToRender(e, index),
+            deleted: false,
+            observer: null
+          });
+        }
+      }.bind(this))
+    }.bind(this));
+    // add the sezzle widget to the price elements
+    els.forEach(function (el, index) {
+      if (!el.element.hasAttribute('data-sezzleindex')) {
+        this.renderAwesomeSezzle(el.element, el.toRenderElement, index);
+        el.observer = this.startObserve(el.element);
+      }
+    }.bind(this));
+
+
+    // Find the deleted price elements
+    // remove corresponding Sezzle widgets if exists
+    els.forEach(function(el, index) {
+      if (el.element.parentElement == null && !el.deleted) { // element is deleted
+        // Stop observing for changes in the element
+        el.observer.disconnect();
+        // Mark that element as deleted
+        el.deleted = true;
+        // Delete the corresponding sezzle widget if exist
+        var tmp = document.getElementsByClassName(`sezzlewidgetindex-${index}`);
+        if (tmp.length) {
+          var sw = tmp[0];
+          sw.parentElement.removeChild(sw);
+        }
+      }
+    })
+    setTimeout(sezzleWidgetCheckInterval.bind(this), intervalInMs)
+  };
 
   if (this.hasPriceClassElement) {
     this.renderAwesomeSezzle(this.priceElements[0], this.renderElements[0], 0);
     this.startObserve(this.priceElements[0]);
   } else {
-    setInterval(function() {
-      // Look for newly added price elements
-      this.xpath.forEach(function (path, index) {
-        this.getElementsByXPath(path).forEach(function (e) {
-          if (!e.hasAttribute('data-sezzleindex')) {
-            els.push({
-              element: e,
-              toRenderElement: this.getElementToRender(e, index),
-              deleted: false,
-              observer: null
-            });
-          }
-        }.bind(this))
-      }.bind(this));
-      // add the sezzle widget to the price elements
-      els.forEach(function (el, index) {
-        if (!el.element.hasAttribute('data-sezzleindex')) {
-          this.renderAwesomeSezzle(el.element, el.toRenderElement, index);
-          el.observer = this.startObserve(el.element);
-        }
-      }.bind(this));
-
-
-      // Find the deleted price elements
-      // remove corresponding Sezzle widgets if exists
-      els.forEach(function(el, index) {
-        if (el.element.parentElement == null && !el.deleted) { // element is deleted
-          // Stop observing for changes in the element
-          el.observer.disconnect();
-          // Mark that element as deleted
-          el.deleted = true;
-          // Delete the corresponding sezzle widget if exist
-          var tmp = document.getElementsByClassName(`sezzlewidgetindex-${index}`);
-          if (tmp.length) {
-            var sw = tmp[0];
-            sw.parentElement.removeChild(sw);
-          }
-        }
-      })
-    }.bind(this), 2000)
+    sezzleWidgetCheckInterval.call(this);
   }
 
   this.renderModal();
