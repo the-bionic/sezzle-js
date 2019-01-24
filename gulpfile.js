@@ -24,7 +24,7 @@ var gulp = require('gulp'),
     rp = require("request-promise"),
     config = { useIAM: true };
 
-var buttonUploadName = 'sezzle-widget2.2.0.js';
+var buttonUploadName = 'sezzle-widget2.3.0.js';
 var bannerUploadName = 'sezzle-banner2.1.1.js';
 var globalCssUploadName = 'sezzle-styles-global2.0.2.css';
 
