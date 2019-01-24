@@ -1156,7 +1156,7 @@ SezzleJS.prototype.logEvent = function (eventName) {
         'viewport': viewport,
         'product_price': productPrice,
         'sezzle_config': sezzleConfigStr,
-      }, 'https://staging.tracking.sezzle.com');
+      }, 'https://tracking.sezzle.com');
     },100);
   }
 };
@@ -1198,7 +1198,7 @@ SezzleJS.prototype.init = function () {
           var win = window.frames.szl;
           if (win) {
               // win.postMessage('initGTMScript', 'http://localhost:9001/');
-              win.postMessage('initGTMScript', 'https://staging.tracking.sezzle.com');
+              win.postMessage('initGTMScript', 'https://tracking.sezzle.com');
           }
       }
     }.bind(this));
@@ -1213,7 +1213,7 @@ SezzleJS.prototype.init = function () {
             var win = window.frames.szl;
             if (win) {
               setTimeout(function () {
-                win.postMessage('initGTMScript', 'https://staging.tracking.sezzle.com');
+                win.postMessage('initGTMScript', 'https://tracking.sezzle.com');
               },100)
             }
         }
