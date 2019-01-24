@@ -14,9 +14,9 @@ var SezzleJS = function (options) {
     } else {
       // options.targetXPath is an array of x-paths
       this.xpath = options.targetXPath.map(function (path) {
-       return path.split('/').filter(function (subpath) {
-        return subpath !== '';
-       });
+        return path.split('/').filter(function (subpath) {
+          return subpath !== '';
+        });
       });
     }
   }
@@ -56,8 +56,8 @@ var SezzleJS = function (options) {
       // options.ignoredPriceElements is an array of x-paths
       this.ignoredPriceElements = options.ignoredPriceElements.map(function (path) {
         return path.trim().split('/').filter(function (subpath) {
-         return subpath !== '';
-       });
+          return subpath !== '';
+        });
       });
     }
   }
@@ -74,8 +74,8 @@ var SezzleJS = function (options) {
       // options.hideClasses is an array of x-paths
       this.hideElements = options.hideClasses.map(function (path) {
         return path.trim().split('/').filter(function (subpath) {
-         return subpath !== '';
-       });
+          return subpath !== '';
+        });
       });
     }
   }
@@ -165,6 +165,7 @@ var SezzleJS = function (options) {
   this.countryCode = null;
   this.ip = null;
   this.fingerprint = null;
+  this.productPrice = null;
 }
 
 /**
@@ -609,7 +610,6 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   } else {
     this.insertAfter(sezzle, parent);
   }
-
   this.logEvent('onload');
   return sezzle;
 }
@@ -712,6 +712,7 @@ SezzleJS.prototype.insertAsFirstChild = function (element, referenceElement) {
  */
 SezzleJS.prototype.isProductEligible = function (priceText) {
   var price = this.parsePrice(priceText);
+  this.productPrice = price;
   var priceInCents = price * 100;
   if (priceInCents >= this.minPrice && priceInCents <= this.maxPrice) {
     return true;
@@ -1050,85 +1051,50 @@ SezzleJS.prototype.replaceBanner = function () {
 * Log Event
 */
 SezzleJS.prototype.logEvent = function (eventName) {
-  if (this.fingerprint == null) {
-    this.getFingerprint(function (fingerprint) {
-      this.fingerprint = fingerprint;
-      this.postEvent(JSON.stringify({
+  var viewport = {
+      width: null,
+      height: null
+  };
+  try {
+      if (screen && screen.width) {
+          viewport.width = screen.width;
+      }
+      if (screen && screen.height) {
+          viewport.height = screen.height;
+      }
+
+  } catch {
+      // unable to fetch viewport dimensions
+  }
+  var sezzleConfigStr = null
+  if (document.sezzleConfig) {
+      sezzleConfigStr = JSON.stringify(document.sezzleConfig);
+  }
+  var win = window.frames.szl;
+  if (win) {
+    var cartId = this.getCookie('cart');
+    var merchantID = this.merchantID;
+    var productPrice = this.productPrice;
+    var isMobileBrowser = this.isMobileBrowser();
+    var ip = this.ip;
+    setTimeout(function () {
+      win.postMessage({
         'event_name': eventName,
         'button_version': document.sezzleButtonVersion,
-        'cart_id': this.getCookie('cart'),
-        'fingerprint': fingerprint,
-        'ip_address': this.ip,
+        'cart_id': cartId,
+        'ip_address': ip,
         'merchant_site': window.location.hostname,
-        'is_mobile_browser': this.isMobileBrowser(),
+        'is_mobile_browser': isMobileBrowser,
         'user_agent': navigator.userAgent,
-        'merchant_uuid': this.merchantID,
-      }));
-    }.bind(this));
-  } else {
-    this.postEvent(JSON.stringify({
-      'event_name': eventName,
-      'button_version': document.sezzleButtonVersion,
-      'cart_id': this.getCookie('cart'),
-      'fingerprint': this.fingerprint,
-      'ip_address': this.ip,
-      'merchant_site': window.location.hostname,
-      'is_mobile_browser': this.isMobileBrowser(),
-      'user_agent': navigator.userAgent,
-      'merchant_uuid': this.merchantID,
-    }));
+        'merchant_uuid': merchantID,
+        'page_url': window.location.href,
+        'viewport': viewport,
+        'product_price': productPrice,
+        'sezzle_config': sezzleConfigStr,
+      }, 'https://tracking.sezzle.com');
+    },100);
   }
-}
-
-/*
-* Post Event
-*/
-SezzleJS.prototype.postEvent = function (payload) {
-  var url = 'https://widget.sezzle.com/v1/event/log';
-
-  var httpRequest = new XMLHttpRequest();
-  httpRequest.onreadystatechange = function () {
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-      if (httpRequest.status === 200) {
-        console.log('Succesfully logged event');
-      } else {
-        console.log('Error: Status ' + httpRequest.status);
-      }
-    }
-  };
-
-  httpRequest.open('POST', url, true);
-  httpRequest.setRequestHeader('Content-Type', 'application/json');
-  httpRequest.send(payload);
-}
-
-/*
-* Get Fingerprint
-*/
-SezzleJS.prototype.getFingerprint = function (callback) {
-  if (typeof window.Fingerprint2 === 'undefined' || window.Fingerprint2.VERSION != '1.4.1') {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://d34uoa9py2cgca.cloudfront.net/checkout/fingerprintjs/fingerprint2.min.js';
-    script.onload = function () {
-      if (window.Fingerprint2 !== undefined) {
-        new Fingerprint2().get(function (result, components) {
-          callback(result);
-        });
-      } else {
-        callback('');
-      }
-    };
-    script.onerror = function () {
-      callback('');
-    }
-    document.getElementsByTagName('head')[0].appendChild(script);
-  } else {
-    new Fingerprint2().get(function (result, components) {
-      callback(result);
-    });
-  }
-}
+};
 
 /*
 * Get Cookie
@@ -1149,41 +1115,6 @@ SezzleJS.prototype.isMobileBrowser = function () {
     || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0, 4));
 }
 
-/*
- * insert Google Tag Manager scripts for tracking and analytics
- */
-SezzleJS.prototype.insertGoogleTagManagerScripts = function () {
-  var script = document.createElement('script');
-
-  script.innerText = "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TN62CQG');";
-
-  // insert script as first child of HEAD
-  var head = document.getElementsByTagName('HEAD')[0];
-  if (head.firstChild) {
-    head.insertBefore(script, head.firstChild);
-  } else {
-    head.appendChild(script);
-  }
-
-  var noscript = document.createElement('noscript');
-  var iframe = document.createElement('iframe');
-  iframe.src = 'https://www.googletagmanager.com/ns.html?id=GTM-TN62CQG';
-  iframe.height = '0';
-  iframe.width = '0';
-  iframe.style.display = 'none';
-  iframe.style.visibility = 'hidden';
-
-  // append iframe to noscript
-  noscript.appendChild(iframe);
-
-  // insert noscript as first child of BODY
-  var body = document.getElementsByTagName('BODY')[0];
-  if (body.firstChild) {
-    body.insertBefore(noscript, body.firstChild);
-  } else {
-    body.appendChild(noscript);
-  }
-}
 
 /**
  * Initialise the widget if the
@@ -1199,7 +1130,11 @@ SezzleJS.prototype.init = function () {
     this.getCountryCodeFromIP(function (countryCode) {
       // only inject Google tag manager for clients visiting from the United States
       if (countryCode === 'US') {
-        this.insertGoogleTagManagerScripts();
+          var win = window.frames.szl;
+          if (win) {
+              // win.postMessage('initGTMScript', 'http://localhost:9001/');
+              win.postMessage('initGTMScript', 'https://tracking.sezzle.com');
+          }
       }
     }.bind(this));
   } else {
@@ -1210,7 +1145,12 @@ SezzleJS.prototype.init = function () {
         this.loadCSS(this.initWidget.bind(this));
         // only inject Google tag manager for clients visiting from the United States
         if (countryCode === 'US') {
-          this.insertGoogleTagManagerScripts();
+            var win = window.frames.szl;
+            if (win) {
+              setTimeout(function () {
+                win.postMessage('initGTMScript', 'https://tracking.sezzle.com');
+              },100)
+            }
         }
         this.hideSezzleHideElements();
         this.replaceBanner();
