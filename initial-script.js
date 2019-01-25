@@ -1,3 +1,13 @@
+
+function getUUID() {
+  var uuid = document.sezzleMerchantUUID || '';
+  if (uuid === '') {
+      // fallback if uuid does not exist
+      uuid = document.sezzleConfig["merchantID"];
+  }
+  return uuid;
+}
+
 (function (callback) {
   var iframe = document.createElement('iframe');
   iframe.width = 0;
@@ -10,7 +20,8 @@
   callback();
 
 })(function () {
+  var uuid = getUUID();
   var el = document.createElement('script');
-  el.src = 'https://widget.sezzle.com/v1/javascript/price-widget?uuid=' + document.sezzleConfig['merchantID'];
+  el.src = 'https://widget.sezzle.com/v1/javascript/price-widget?uuid=' + uuid;
   document.getElementsByTagName('head')[0].appendChild(el);
 });
