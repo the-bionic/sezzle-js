@@ -39,7 +39,7 @@
     "gulp-replace": "^0.5.4",
     "gulp-rimraf": "^0.2.1",
     "gulp-ruby-sass": "^2.1.1",
-    "gulp-s3-upload": "^1.6.4",
+    "gulp-s3-upload": "1.7.1",
     "gulp-stylelint": "^4.0.0",
     "gulp-uglify": "^2.1.2",
     "gulp-webserver": "^0.9.1",
