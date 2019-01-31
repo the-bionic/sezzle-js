@@ -8,16 +8,12 @@ var SezzleJS = function (options) {
   if (options.targetXPath) {
     if (typeof (options.targetXPath) === 'string') {
       // Only one x-path is given
-      this.xpath.push(options.targetXPath.split('/').filter(function (subpath) {
-        return subpath !== '';
-      }));
+      this.xpath.push(this.breakXPath(options.targetXPath));
     } else {
       // options.targetXPath is an array of x-paths
       this.xpath = options.targetXPath.map(function (path) {
-        return path.split('/').filter(function (subpath) {
-          return subpath !== '';
-        });
-      });
+        return this.breakXPath(path);
+      }.bind(this));
     }
   }
 
@@ -55,10 +51,8 @@ var SezzleJS = function (options) {
     } else {
       // options.ignoredPriceElements is an array of x-paths
       this.ignoredPriceElements = options.ignoredPriceElements.map(function (path) {
-        return path.trim().split('/').filter(function (subpath) {
-          return subpath !== '';
-        });
-      });
+        return this.breakXPath(path.trim());
+      }.bind(this));
     }
   }
 
@@ -66,17 +60,12 @@ var SezzleJS = function (options) {
   if (options.hideClasses) {
     if (typeof (options.hideClasses) === 'string') {
       // Only one x-path is given
-      this.hideElements.push(options.hideClasses.trim().split('/').
-        filter(function (subpath) {
-          return subpath !== '';
-        }));
+      this.hideElements.push(this.breakXPath(options.hideClasses.trim()));
     } else {
       // options.hideClasses is an array of x-paths
       this.hideElements = options.hideClasses.map(function (path) {
-        return path.trim().split('/').filter(function (subpath) {
-          return subpath !== '';
-        });
-      });
+        return this.breakXPath(path.trim());
+      }.bind(this));
     }
   }
 
@@ -111,6 +100,19 @@ var SezzleJS = function (options) {
   this.altModalHTML = options.altLightboxHTML || '';
   // if doing widget with both Sezzle or afterpay - the modal to display:
   this.apModalHTML = options.apModalHTML || '';
+
+  // This option is to render custom class in sezzle widget
+  // This option contains an array of objects
+  // each of the objects should have two properties
+  // xpath -> the path from the root of sezzle element
+  // className -> a string of classname that is to be added
+  // index -> this is optional, if provided then only the widget with
+  // the same sezzle index value will be effected with the class name
+  // Example : [
+  // {xpath:'.', className: 'test-1', index: 0},
+  // {xpath: './.hello', className: 'test-2', index: 0}
+  //]
+  this.customClasses = Array.isArray(options.customClasses) ? options.customClasses : [];
 
   this.widgetTemplate = [];
   if (options.altVersionTemplate) {
@@ -176,7 +178,7 @@ var SezzleJS = function (options) {
  * @return All the elements which are pointed to by the xpath
  */
 SezzleJS.prototype.getElementsByXPath = function (xpath, xindex, elements) {
-  var xpath = xpath || '';
+  var xpath = xpath || [];
   var xindex = xindex || 0;
   var elements = elements || null;
 
@@ -201,6 +203,10 @@ SezzleJS.prototype.getElementsByXPath = function (xpath, xindex, elements) {
       children.push(document.getElementById(xpath[xindex].substr(1)));
       // If this is a class
     } else if (xpath[xindex][0] === '.') {
+      // If there is only one '.' return the element
+      if (xpath[xindex].trim().length === 1) {
+        children.push(element);
+      }
       Array.prototype.forEach.call(element.getElementsByClassName(xpath[xindex].substr(1)), function (el) {
         children.push(el);
       });
@@ -604,6 +610,21 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   // Adding main node to sezzel node
   sezzle.appendChild(node);
 
+  this.customClasses.forEach(function(customClass) {
+    if (customClass.xpath && customClass.className) {
+      if (typeof(customClass.index) !== 'number') {
+        customClass.index = 0; // set the default value
+      }
+      if (customClass.index === index) {
+        var path = this.breakXPath(customClass.xpath);
+        this.getElementsByXPath(path, 0, [sezzle])
+          .forEach(function(el) {
+            el.className += ' ' + customClass.className;
+          })
+      }
+    }
+  }.bind(this))
+
   // Adding sezzle to parent node
   if (this.widgetIsFirstChild) {
     this.insertAsFirstChild(sezzle, parent);
@@ -612,6 +633,11 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   }
   this.logEvent('onload');
   return sezzle;
+}
+
+// breaks xpath into array
+SezzleJS.prototype.breakXPath = function(xpath) {
+  return xpath.split('/').filter(function(subpath) {return subpath !== ''});
 }
 
 /**
@@ -628,9 +654,7 @@ SezzleJS.prototype.getElementToRender = function (element, index) {
   var toRenderElement = null;
 
   if (this.rendertopath[index] !== null) {
-    var path = this.rendertopath[index].split('/');
-    //filter out empty strings
-    path = path.filter(function (subpath) { return subpath !== '' });
+    var path = this.breakXPath(this.rendertopath[index]);
     var toRenderElement = element;
 
     for (var i = 0; i < path.length; i++) {
