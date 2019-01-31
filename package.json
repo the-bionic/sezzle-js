@@ -48,5 +48,8 @@
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.0",
     "stylelint-config-standard": "^17.0.0"
+  },
+  "dependencies": {
+    "gulp-cloudfront-invalidate": "^0.1.5"
   }
 }

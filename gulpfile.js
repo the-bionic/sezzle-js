@@ -14,6 +14,7 @@ var gulp = require('gulp'),
     fs = require('fs'),
     rimraf = require('gulp-rimraf'),
     s3 = require('gulp-s3-upload')(config),
+    cloudfront = require('gulp-cloudfront-invalidate'),
     pump = require('pump'),
     htmlToJS = require('gulp-html-to-js'),
     webserver = require('gulp-webserver'),
@@ -50,7 +51,11 @@ gulp.task("upload-initial", function() {
         }, {
             // S3 Constructor Options, ie:
             maxRetries: 5
-        }));
+        }))
+    .pipe(cloudfront({
+        distribution: 'E113O1YE02L91O',
+        paths: ['/scripts/*']
+    }));
 });
 
 
