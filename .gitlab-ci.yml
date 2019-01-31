@@ -17,6 +17,8 @@ test:
 
 deploy:
   stage: deploy
+  environment:
+    name: production
   only:
    - master
   script:
