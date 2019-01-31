@@ -106,7 +106,12 @@ var SezzleJS = function (options) {
   // each of the objects should have two properties
   // xpath -> the path from the root of sezzle element
   // className -> a string of classname that is to be added
-  // Example : [{xpath:'.', className: 'test-1'}, {xpath: './.hello', className: 'test-2'}]
+  // index -> this is optional, if provided then only the widget with
+  // the same sezzle index value will be effected with the class name
+  // Example : [
+  // {xpath:'.', className: 'test-1', index: 0},
+  // {xpath: './.hello', className: 'test-2', index: 0}
+  //]
   this.customClasses = Array.isArray(options.customClasses) ? options.customClasses : [];
 
   this.widgetTemplate = [];
@@ -607,11 +612,16 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
 
   this.customClasses.forEach(function(customClass) {
     if (customClass.xpath && customClass.className) {
-      var path = this.breakXPath(customClass.xpath);
-      this.getElementsByXPath(path, 0, [sezzle])
-        .forEach(function(el) {
-          el.className += ' ' + customClass.className;
-        })
+      if (typeof(customClass.index) !== 'number') {
+        customClass.index = 0; // set the default value
+      }
+      if (customClass.index === index) {
+        var path = this.breakXPath(customClass.xpath);
+        this.getElementsByXPath(path, 0, [sezzle])
+          .forEach(function(el) {
+            el.className += ' ' + customClass.className;
+          })
+      }
     }
   }.bind(this))
 
