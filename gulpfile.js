@@ -10,17 +10,15 @@ var gulp = require('gulp'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
     del = require('del'),
-    concat = require('gulp-concat'),
-    replace = require('gulp-replace'),
     replace = require('gulp-replace'),
     fs = require('fs'),
     rimraf = require('gulp-rimraf'),
     s3 = require('gulp-s3-upload')(config),
+    cloudfront = require('gulp-cloudfront-invalidate'),
     pump = require('pump'),
     htmlToJS = require('gulp-html-to-js'),
     webserver = require('gulp-webserver'),
     htmlmin = require('gulp-htmlmin'),
-    rename = require("gulp-rename"),
     rp = require("request-promise"),
     config = { useIAM: true };
 
@@ -40,6 +38,26 @@ gulp.task("cssupload", function() {
             maxRetries: 5
         }))
 });
+
+gulp.task("upload-initial", function() {
+    var indexPath = './initial-script.js';
+    gulp.src(indexPath)
+        .pipe(s3({
+            Bucket: 'sezzle-shopify-application',
+            ACL: 'public-read',
+            keyTransform: function(relative_filename) {
+              return 'scripts/' + relative_filename;
+            }
+        }, {
+            // S3 Constructor Options, ie:
+            maxRetries: 5
+        }))
+    .pipe(cloudfront({
+        distribution: 'E113O1YE02L91O',
+        paths: ['/scripts/*']
+    }));
+});
+
 
 gulp.task("upload-widget", function() {
     var indexPath = './sezzle.js'

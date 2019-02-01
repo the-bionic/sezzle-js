@@ -4,9 +4,10 @@
   "description": "Sezzle Sales Widget Price Watcher",
   "main": "sezzle.js",
   "scripts": {
+    "deploy-initial": "./node_modules/.bin/gulp upload-initial",
     "deploy-widget": "./node_modules/.bin/gulp deploywidget",
     "deploy-css": "./node_modules/.bin/gulp styles && ./node_modules/.bin/gulp deploycss",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\""
   },
   "repository": {
     "type": "git",
@@ -38,7 +39,7 @@
     "gulp-replace": "^0.5.4",
     "gulp-rimraf": "^0.2.1",
     "gulp-ruby-sass": "^2.1.1",
-    "gulp-s3-upload": "^1.6.4",
+    "gulp-s3-upload": "1.7.1",
     "gulp-stylelint": "^4.0.0",
     "gulp-uglify": "^2.1.2",
     "gulp-webserver": "^0.9.1",
@@ -47,5 +48,8 @@
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.0",
     "stylelint-config-standard": "^17.0.0"
+  },
+  "dependencies": {
+    "gulp-cloudfront-invalidate": "^0.1.5"
   }
 }
