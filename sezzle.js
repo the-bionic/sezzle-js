@@ -938,13 +938,13 @@ SezzleJS.prototype.addClickEventForModal = function(sezzleElement) {
   // if the widget does not contain an element with a sezzle-modal-link, the event listener is attached to the whole widget
   Array.prototype.forEach.call(sezzleElement.getElementsByClassName('sezzle-button-text'), function (el) {
     var modalLinks = el.getElementsByClassName('sezzle-modal-link');
-    var modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
     if (modalLinks.length == 0) {
       // attach event listener to sezzle-button-text
       // add the sezzle-modal-link class to sezzle-button-text to make it appear clickable
       // (elements with the sezzle-modal-link class appear clickable when hovered on)
       el.classList.add('sezzle-modal-link');
       el.addEventListener('click', function () {
+        var modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
         // Show modal node
         modalNode.style.display = 'block';
         // Remove hidden class to show the item
@@ -955,6 +955,7 @@ SezzleJS.prototype.addClickEventForModal = function(sezzleElement) {
     } else { // attach event listener to the sezzle-modal-link(s)
       Array.prototype.forEach.call(modalLinks, function (modalLink) {
         modalLink.addEventListener('click', function () {
+          var modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
           // Show modal node
           modalNode.style.display = 'block';
           // Remove hidden class to show the item
@@ -1193,13 +1194,17 @@ SezzleJS.prototype.init = function () {
 SezzleJS.prototype.initWidget = function () {
   var els = [];
   var intervalInMs = 2000;
+  var modalsRendered = false;
 
-  // This should always happen before rendering the widget
-  this.renderModal();
-  // only render APModal if ap-modal-link exists
-  if (document.getElementsByClassName('ap-modal-info-link').length > 0) {
-    this.renderAPModal();
-  }
+  function renderModals() {
+    // This should always happen before rendering the widget
+    this.renderModal();
+    // only render APModal if ap-modal-link exists
+    if (document.getElementsByClassName('ap-modal-info-link').length > 0) {
+      this.renderAPModal();
+    }
+    modalsRendered = true;
+  };
 
   function sezzleWidgetCheckInterval() {
     // Look for newly added price elements
@@ -1254,6 +1259,9 @@ SezzleJS.prototype.initWidget = function () {
   } else {
     sezzleWidgetCheckInterval.call(this);
   }
+
+  // render them mdoals if not done already
+  if (!modalsRendered) renderModals.call(this);
 }
 
 // Assumes document.sezzleConfig is present
