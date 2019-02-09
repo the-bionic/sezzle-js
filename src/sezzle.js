@@ -100,6 +100,8 @@ var SezzleJS = function(options) {
   this.altModalHTML = options.altLightboxHTML || '';
   // if doing widget with both Sezzle or afterpay - the modal to display:
   this.apModalHTML = options.apModalHTML || '';
+  // if doing widget with both Sezzle or quadpay - the modal to display:
+  this.qpModalHTML = options.qpModalHTML || '';
 
   // This option is to render custom class in sezzle widget
   // This option contains an array of objects
@@ -518,6 +520,34 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
         sezzleButtonText.appendChild(apInfoIconNode);
         break;
 
+      case 'quadpay-logo':
+        var qpNode = document.createElement('img');
+        qpNode.className = 'sezzle-quadpay-logo';
+        qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget.png';
+        sezzleButtonText.appendChild(qpNode);
+        break;
+
+      case 'quadpay-logo-grey':
+        var qpNode = document.createElement('img');
+        qpNode.className = 'sezzle-quadpay-logo';
+        qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-grayscale.png';
+        sezzleButtonText.appendChild(qpNode);
+        break;
+
+      case 'quadpay-logo-white':
+        var qpNode = document.createElement('img');
+        qpNode.className = 'sezzle-quadpay-logo';
+        qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-white.png';
+        sezzleButtonText.appendChild(qpNode);
+        break;
+
+      case 'quadpay-info-icon':
+        var quadpayInfoIconNode = document.createElement('code');
+        quadpayInfoIconNode.className = 'quadpay-modal-info-link';
+        quadpayInfoIconNode.innerHTML = '&#9432;';
+        sezzleButtonText.appendChild(quadpayInfoIconNode);
+        break;
+
       case 'price-split':
         var priceSplitNode = document.createElement('span');
         priceSplitNode.className = 'sezzle-payment-amount sezzle-price-split sezzleindex-' + index;
@@ -875,6 +905,34 @@ SezzleJS.prototype.renderAPModal = function () {
 }
 
 /**
+ * This function renders the Quadpay modal based on if you include quadpay-modal-info-link
+ * Also adds the event for open and close modals
+ * to respective buttons
+ */
+SezzleJS.prototype.renderQPModal = function () {
+  var modalNode = document.createElement('div');
+  modalNode.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal sezzle-qp-modal';
+  modalNode.style = 'position: center';
+  modalNode.style.display = 'none';
+  modalNode.innerHTML = this.qpModalHTML;
+  document.getElementsByTagName('html')[0].appendChild(modalNode);
+
+  // Event listener for close in modal
+  Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), function (el) {
+    el.addEventListener('click', function () {
+      // Display the modal node
+      modalNode.style.display = 'none';
+    });
+  });
+
+  // Event listener to prevent close in modal if click happens within sezzle-checkout-modal
+  document.getElementsByClassName('sezzle-checkout-modal')[0].addEventListener('click', function (event) {
+    // stop propagating the event to the parent sezzle-checkout-modal-lightbox to prevent the closure of the modal
+    event.stopPropagation();
+  })
+}
+
+/**
  * This function add events to the button in sezzle widget
  * to open the modal
  */
@@ -913,13 +971,24 @@ SezzleJS.prototype.addClickEventForModal = function(sezzleElement) {
     }
 
     // for AfterPay
-    var modalLinks = el.getElementsByClassName('ap-modal-info-link');
-    Array.prototype.forEach.call(modalLinks, function (modalLink) {
+    var apModalLinks = el.getElementsByClassName('ap-modal-info-link');
+    Array.prototype.forEach.call(apModalLinks, function (modalLink) {
       modalLink.addEventListener('click', function () {
         // Show modal node
         document.getElementsByClassName('sezzle-ap-modal')[0].style.display = 'block';
         // log on click event
-        this.logEvent('onclick');
+        this.logEvent('onclick-afterpay');
+      }.bind(this));
+    }.bind(this));
+
+    // for QuadPay
+    var qpModalLinks = el.getElementsByClassName('quadpay-modal-info-link');
+    Array.prototype.forEach.call(qpModalLinks, function (modalLink) {
+      modalLink.addEventListener('click', function () {
+        // Show modal node
+        document.getElementsByClassName('sezzle-qp-modal')[0].style.display = 'block';
+        // log on click event
+        this.logEvent('onclick-quadpay');
       }.bind(this));
     }.bind(this));
 
@@ -1148,6 +1217,10 @@ SezzleJS.prototype.initWidget = function () {
     // only render APModal if ap-modal-link exists
     if (document.getElementsByClassName('ap-modal-info-link').length > 0) {
       this.renderAPModal();
+    }
+    // only render QPModal if ap-modal-link exists
+    if (document.getElementsByClassName('quadpay-modal-info-link').length > 0) {
+      this.renderQPModal();
     }
     modalsRendered = true;
   };
