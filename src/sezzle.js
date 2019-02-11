@@ -1,18 +1,17 @@
-/**
- *
- * @param options All widget options
- */
-var SezzleJS = function (options) {
+require('./initial');
+var Helper = require('./helper');
+
+var SezzleJS = function(options) {
   // Configurable options
   this.xpath = [];
   if (options.targetXPath) {
     if (typeof (options.targetXPath) === 'string') {
       // Only one x-path is given
-      this.xpath.push(this.breakXPath(options.targetXPath));
+      this.xpath.push(Helper.breakXPath(options.targetXPath));
     } else {
       // options.targetXPath is an array of x-paths
       this.xpath = options.targetXPath.map(function (path) {
-        return this.breakXPath(path);
+        return Helper.breakXPath(path);
       }.bind(this));
     }
   }
@@ -27,6 +26,7 @@ var SezzleJS = function (options) {
       this.rendertopath = options.renderToPath;
     }
   }
+
   // Sync up the rendertopath array with
   // xpath array, place null for not defined indices
   // to follow the default behaviour
@@ -51,7 +51,7 @@ var SezzleJS = function (options) {
     } else {
       // options.ignoredPriceElements is an array of x-paths
       this.ignoredPriceElements = options.ignoredPriceElements.map(function (path) {
-        return this.breakXPath(path.trim());
+        return Helper.breakXPath(path.trim());
       }.bind(this));
     }
   }
@@ -60,11 +60,11 @@ var SezzleJS = function (options) {
   if (options.hideClasses) {
     if (typeof (options.hideClasses) === 'string') {
       // Only one x-path is given
-      this.hideElements.push(this.breakXPath(options.hideClasses.trim()));
+      this.hideElements.push(Helper.breakXPath(options.hideClasses.trim()));
     } else {
       // options.hideClasses is an array of x-paths
       this.hideElements = options.hideClasses.map(function (path) {
-        return this.breakXPath(path.trim());
+        return Helper.breakXPath(path.trim());
       }.bind(this));
     }
   }
@@ -227,53 +227,6 @@ SezzleJS.prototype.getElementsByXPath = function (xpath, xindex, elements) {
 
   children = children.filter(function (c) { return c !== null });
   return this.getElementsByXPath(xpath, xindex + 1, children);
-}
-
-/**
- * This is helper function for formatPrice
- * @param n char value
- * @return boolean [if it's numeric or not]
- */
-SezzleJS.prototype.isNumeric = function (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
-
-/**
- * This is helper function for formatPrice
- * @param n char value
- * @return boolean [if it's alphabet or not]
- */
-SezzleJS.prototype.isAlpha = function (n) {
-  return /^[a-zA-Z()]+$/.test(n);
-}
-
-/**
- * This function will format the price
- * @param price - string value
- * @return float
- */
-SezzleJS.prototype.parsePrice = function (price) {
-  return parseFloat(this.parsePriceString(price, false));
-}
-
-/**
- * This function will return the price string
- * @param price - string value
- * @param includeComma - comma should be added to the string or not
- * @return string
- */
-SezzleJS.prototype.parsePriceString = function (price, includeComma) {
-  var formattedPrice = '';
-  for (var i = 0; i < price.length; i++) {
-    if (this.isNumeric(price[i]) || price[i] == '.' || (includeComma && price[i] == ',')) {
-      // If current is a . and previous is a character, it can be something like Rs.
-      // so ignore it
-      if (i > 0 && price[i] == '.' && this.isAlpha(price[i - 1])) continue;
-
-      formattedPrice += price[i];
-    }
-  }
-  return formattedPrice;
 }
 
 /**
@@ -620,7 +573,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
         customClass.targetXPathIndex = -1; // set the default value
       }
       if (customClass.index === index || customClass.targetXPathIndex === targetXPathIndex) {
-        var path = this.breakXPath(customClass.xpath);
+        var path = Helper.breakXPath(customClass.xpath);
         this.getElementsByXPath(path, 0, [sezzle])
           .forEach(function(el) {
             el.className += ' ' + customClass.className;
@@ -639,11 +592,6 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   return sezzle;
 }
 
-// breaks xpath into array
-SezzleJS.prototype.breakXPath = function(xpath) {
-  return xpath.split('/').filter(function(subpath) {return subpath !== ''});
-}
-
 /**
  * This function finds out the element where Sezzle's widget
  * will be rendered. By default it would return the parent element
@@ -658,7 +606,7 @@ SezzleJS.prototype.getElementToRender = function (element, index) {
   var toRenderElement = null;
 
   if (this.rendertopath[index] !== null) {
-    var path = this.breakXPath(this.rendertopath[index]);
+    var path = Helper.breakXPath(this.rendertopath[index]);
     var toRenderElement = element;
 
     for (var i = 0; i < path.length; i++) {
@@ -739,7 +687,7 @@ SezzleJS.prototype.insertAsFirstChild = function (element, referenceElement) {
  * @param price Price of product
  */
 SezzleJS.prototype.isProductEligible = function (priceText) {
-  var price = this.parsePrice(priceText);
+  var price = Helper.parsePrice(priceText);
   this.productPrice = price;
   var priceInCents = price * 100;
   if (priceInCents >= this.minPrice && priceInCents <= this.maxPrice) {
@@ -795,10 +743,10 @@ SezzleJS.prototype.getFormattedPrice = function (element) {
   priceText = this.getPriceText(element);
 
   // Get the price string - useful for formtting Eg: 120.00(string)
-  var priceString = this.parsePriceString(priceText, true);
+  var priceString = Helper.parsePriceString(priceText, true);
 
   // Get the price in float from the element - useful for calculation Eg : 120.00(float)
-  var price = this.parsePrice(priceText);
+  var price = Helper.parsePrice(priceText);
 
   // Will be used later to replace {price} with price / this.numberOfPayments Eg: ${price} USD
   var formatter = priceText.replace(priceString, '{price}');
@@ -835,9 +783,7 @@ SezzleJS.prototype.mutationCallBack = function (mutations) {
     .filter(function (mutation) { return mutation.type === 'childList' })
     .forEach(function (mutation) {
       var priceIndex = mutation.target.dataset.sezzleindex;
-      var s = new SezzleJS(document.sezzleConfig);
-      var price = s.getFormattedPrice(mutation.target);
-      delete s;
+      var price = this.getFormattedPrice(mutation.target);
       var sezzlePriceElement = document.getElementsByClassName('sezzleindex-' + priceIndex)[0];
       if (!/\d/.test(price)) {
         sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
@@ -845,7 +791,7 @@ SezzleJS.prototype.mutationCallBack = function (mutations) {
         sezzlePriceElement.parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
       }
       sezzlePriceElement.innerText = price;
-    });
+    }.bind(this));
 };
 
 /**
@@ -858,7 +804,7 @@ SezzleJS.prototype.startObserve = function (element) {
   // TODO : Need a way to unsubscribe to prevent memory leak
   // Deleted elements should not be observed
   // That is handled
-  var observer = new MutationObserver(this.mutationCallBack);
+  var observer = new MutationObserver(this.mutationCallBack.bind(this));
   observer.observe(element, this._config);
   return observer;
 }
@@ -1264,5 +1210,4 @@ SezzleJS.prototype.initWidget = function () {
   if (!modalsRendered) renderModals.call(this);
 }
 
-// Assumes document.sezzleConfig is present
-window.onload = new SezzleJS(document.sezzleConfig).init();
+module.exports = SezzleJS;
