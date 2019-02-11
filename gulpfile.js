@@ -92,7 +92,8 @@ gulp.task('bundlejs', function () {
       },
       optimization: {
         minimize: true, // <---- disables uglify.
-      }
+      },
+      mode: 'production'
     }))
     .pipe(gulp.dest('dist/'));
 });
@@ -163,6 +164,6 @@ gulp.task('createtag', function(done) {
 })
 
 gulp.task('styles', gulp.series('cleancss', 'csscompile'));
-gulp.task('deploywidget', gulp.series('upload-widget', 'post-button-to-widget-server'));
+gulp.task('deploywidget', gulp.series('bundlejs', 'upload-widget', 'post-button-to-widget-server'));
 gulp.task('deploycss', gulp.series('cssupload', 'post-button-css-to-wrapper'));
 gulp.task('release', gulp.series('grabversion', 'updatepackage', 'commitupdate', 'createtag'));
