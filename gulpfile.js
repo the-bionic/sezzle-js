@@ -98,9 +98,9 @@ gulp.task('bundlejs', function () {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('upload-widget', function () {
+gulp.task('upload-widget', function (done) {
   var indexPath = `./dist/${buttonUploadName}`
-  gulp.src(indexPath)
+  return gulp.src(indexPath)
     .pipe(s3({
       Bucket: 'sezzle-shopify-application', //  Required
       ACL: 'public-read'       //  Needs to be user-defined
@@ -119,7 +119,7 @@ gulp.task('post-button-to-widget-server', function () {
     },
     json: true
   }
-  rp(options)
+  return rp(options)
     .then(function (body) {
       console.log('Posted new version to shopify wrapper')
     })
