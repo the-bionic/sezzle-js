@@ -171,7 +171,7 @@ gulp.task('commitupdate', function() {
 
 gulp.task('commitupdatecss', function() {
   return gulp.src('./package.json')
-    .pipe(git.commit(`bumped css version: ${newVersion}`));
+    .pipe(git.commit(`bumped css version to: ${newVersion}`));
 })
 
 gulp.task('createtag', function(done) {
