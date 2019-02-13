@@ -21,10 +21,12 @@ build:
   script: npm run build
 
 deploy:
+  image: starefossen/ruby-node:latest
   stage: deploy
   environment:
     name: production
   only:
    - master
   script:
+   - gem install sass
    - npm run deploy
