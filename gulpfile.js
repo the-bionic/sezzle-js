@@ -67,7 +67,7 @@ gulp.task('post-button-css-to-wrapper', function () {
     },
     json: true
   }
-  rp(options)
+  return rp(options)
     .then(function (body) {
       console.log('Posted new version to shopify wrapper')
     })
