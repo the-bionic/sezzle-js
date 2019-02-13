@@ -232,6 +232,7 @@ gulp.task('release-css', gulp.series('grabversioncss', 'newbranchcss', 'updatepa
 gulp.task('deploy', function (done) {
   // Check if there is any version commit
   exec('git log --pretty=format:%s -2 | tail', function (err, stdout, stderr) {
+    if (err) throw err;
     var commits = stdout.split('\n');
     if (commits.length === 2) {
       var versionCommit = '';
@@ -247,6 +248,7 @@ gulp.task('deploy', function (done) {
         console.log(versionCommit);
         console.log('Updating JS version');
         exec('npx gulp deploywidget', function(err, stdout, stderr) {
+          if (err) throw err;
           console.log(stdout);
           done();
         });
@@ -254,6 +256,7 @@ gulp.task('deploy', function (done) {
         console.log(versionCommit);
         console.log('Updating CSS version');
         exec('npx gulp deploycss', function(err, stdout, stderr) {
+          if (err) throw err;
           console.log(stdout);
           done();
         })
