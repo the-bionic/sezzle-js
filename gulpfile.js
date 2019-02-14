@@ -85,9 +85,7 @@ gulp.task('bundlejs', function () {
   return gulp.src('src/sezzle-init.js')
     .pipe(webpack({
       output: {
-        filename: buttonUploadName,
-        libraryTarget: 'umd',
-        library: 'SezzleJS'
+        filename: buttonUploadName
       },
       optimization: {
         minimize: true, // <---- disables uglify.
