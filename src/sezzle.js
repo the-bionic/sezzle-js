@@ -1255,11 +1255,18 @@ SezzleJS.prototype.initWidget = function () {
           el.element, el.toRenderElement,
           index, el.targetXPathIndex
         );
-        this.addClickEventForModal(sz);
-        el.observer = this.startObserve(el.element);
+        if (sz) {
+
+          el.observer = this.startObserve(el.element);
+        } else { // remove the element from the els array
+          delete els[index];
+        }
       }
     }.bind(this));
-
+    // refresh the array
+    els = els.filter(function(e) {
+      return e !== undefined;
+    })
 
     // Find the deleted price elements
     // remove corresponding Sezzle widgets if exists
