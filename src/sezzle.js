@@ -202,9 +202,11 @@ SezzleJS.prototype.getElementsByXPath = function (xpath, xindex, elements) {
   for (var index = 0; index < elementArray.length; index++) {
     var element = elementArray[index];
 
-    // If this is an ID
-    if (xpath[xindex][0] === '#') {
-      children.push(document.getElementById(xpath[xindex].substr(1)));
+    // If parent path
+    if (xpath[xindex] === '..') {
+      children.push(element.parentElement);
+    } else if (xpath[xindex][0] === '#') { // If this is an ID
+      children.push(element.getElementById(xpath[xindex].substr(1)));
       // If this is a class
     } else if (xpath[xindex][0] === '.') {
       // If there is only one '.' return the element
@@ -1253,11 +1255,18 @@ SezzleJS.prototype.initWidget = function () {
           el.element, el.toRenderElement,
           index, el.targetXPathIndex
         );
-        this.addClickEventForModal(sz);
-        el.observer = this.startObserve(el.element);
+        if (sz) {
+
+          el.observer = this.startObserve(el.element);
+        } else { // remove the element from the els array
+          delete els[index];
+        }
       }
     }.bind(this));
-
+    // refresh the array
+    els = els.filter(function(e) {
+      return e !== undefined;
+    })
 
     // Find the deleted price elements
     // remove corresponding Sezzle widgets if exists
