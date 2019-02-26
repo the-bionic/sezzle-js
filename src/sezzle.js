@@ -1286,6 +1286,7 @@ SezzleJS.prototype.initWidget = function () {
         );
         if (sz) {
           el.observer = this.startObserve(el.element, this.mutationCallBack.bind(this));
+          this.addClickEventForModal(sz);
           this.observeRelatedElements(el.element, sz, this.relatedElementActions[el.targetXPathIndex]);
         } else { // remove the element from the els array
           delete els[index];
