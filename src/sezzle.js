@@ -1188,7 +1188,7 @@ SezzleJS.prototype.init = function () {
       // only inject Google tag manager for clients visiting from the United States
       if (countryCode === 'US') {
           var win = window.frames.szl;
-          if (win) {
+          if (win && !document.sezzleConfig.noGtm) {
               // win.postMessage('initGTMScript', 'http://localhost:9001/');
               win.postMessage('initGTMScript', 'https://tracking.sezzle.com');
           }
@@ -1203,7 +1203,7 @@ SezzleJS.prototype.init = function () {
         // only inject Google tag manager for clients visiting from the United States
         if (countryCode === 'US') {
             var win = window.frames.szl;
-            if (win) {
+            if (win && !document.sezzleConfig.noGtm) {
               setTimeout(function () {
                 win.postMessage('initGTMScript', 'https://tracking.sezzle.com');
               },100)
