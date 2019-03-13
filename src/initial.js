@@ -1,5 +1,5 @@
 // adding tracking iframe
-if (!document.sezzleConfig.noTracking) {
+if (document.sezzleConfig && !document.sezzleConfig.noTracking) {
     var sz_iframe = document.createElement('iframe');
     sz_iframe.width = 0;
     sz_iframe.height = 0;
