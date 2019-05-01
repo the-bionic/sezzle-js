@@ -113,6 +113,9 @@ var SezzleJS = function(options) {
   this.qpModalHTML = options.qpModalHTML || '';
   // after pay link
   this.apLink = options.apLink || 'https://www.afterpay.com/terms-of-service';
+  // countries widget should show in
+  this.supportedCountryCodes = options.supportedCountryCodes || ['US', 'IN', 'CA'];
+
 
   // This option is to render custom class in sezzle widget
   // This option contains an array of objects
@@ -172,8 +175,6 @@ var SezzleJS = function(options) {
   this.countryFromIPRequestURL = 'https://geoip.sezzle.com/v1/geoip/ipdetails';
   // URL to request to get css details
   this.cssForMerchantURL = 'https://widget.sezzle.com/v1/css/price-widget?uuid=' + this.merchantID;
-  // Countries supported by sezzle pay. To test your country, add here.
-  this.supportedCountryCodes = ['US', 'IN'];
   //private boolean variable set to true if widget is to be rendered as first child of the parent
   this.widgetIsFirstChild = false;
 
@@ -458,6 +459,8 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
 
   // Do not render this product if it is not eligible
   if (!this.isProductEligible(element.textContent)) return false;
+  // Do not render if sezzle ignored price element
+  if (element.classList.contains('sezzle-ignored-price-element')) return false;
   // Set data index to each price element for tracking
   element.dataset.sezzleindex = index;
   // Get element to be rendered with sezzle's widget
@@ -1194,8 +1197,8 @@ SezzleJS.prototype.init = function () {
     this.logEvent('request');
     this.loadCSS(this.initWidget.bind(this));
     this.getCountryCodeFromIP(function (countryCode) {
-      // only inject Google tag manager for clients visiting from the United States
-      if (countryCode === 'US') {
+      // only inject Google tag manager for clients visiting from the United States or Canada
+      if (countryCode === 'US' || 'CA') {
           var win = window.frames.szl;
           if (win && !document.sezzleConfig.noGtm) {
               // win.postMessage('initGTMScript', 'http://localhost:9001/');
@@ -1209,8 +1212,8 @@ SezzleJS.prototype.init = function () {
       if (this.supportedCountryCodes.indexOf(countryCode) !== -1) {
         this.logEvent('request');
         this.loadCSS(this.initWidget.bind(this));
-        // only inject Google tag manager for clients visiting from the United States
-        if (countryCode === 'US') {
+        // only inject Google tag manager for clients visiting from the United States or Canada
+        if (countryCode === 'US' || 'CA') {
             var win = window.frames.szl;
             if (win && !document.sezzleConfig.noGtm) {
               setTimeout(function () {
