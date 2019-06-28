@@ -960,10 +960,10 @@ SezzleJS.prototype.getCSSVersionForMerchant = function (callback) {
 }
 
 /**
- * Hide elements pointed to by this.hideElements
+ * Hide elements pointed to by this.hideClasses
  */
 SezzleJS.prototype.hideSezzleHideElements = function (configGroupIndex) {
-  this.configGroups[configGroupIndex].hideElements.forEach(function (subpaths) {
+  this.configGroups[configGroupIndex].hideClasses.forEach(function (subpaths) {
     this.getElementsByXPath(subpaths).forEach(function (element) {
       if (!element.classList.contains('sezzle-hidden')) {
         element.classList.add('sezzle-hidden');
@@ -1127,7 +1127,7 @@ SezzleJS.prototype.initWidget = function () {
   var els = [];
 
   // only render the modal once for all widgets
-  (function renderModals() {
+  function renderModals() {
     // This should always happen before rendering the widget
     this.renderModal();
     // only render APModal if ap-modal-link exists
@@ -1138,7 +1138,7 @@ SezzleJS.prototype.initWidget = function () {
     if (document.getElementsByClassName('quadpay-modal-info-link').length > 0) {
       this.renderQPModal();
     }
-  }.bind(this))(); // Note: this function is called here
+  };
 
   function sezzleWidgetCheckInterval() {
     // Look for newly added price elements
@@ -1217,6 +1217,7 @@ SezzleJS.prototype.initWidget = function () {
   }.bind(this));
 
   if (!allConfigsUsePriceClassElement) sezzleWidgetCheckInterval.call(this);
+  renderModals.call(this);
 }
 
 module.exports = SezzleJS;
