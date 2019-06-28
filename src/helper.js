@@ -309,13 +309,13 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
     result.imageClassName = 'szl-light-image';
   }
 
-  result.hideElements = configGroup.hideElements || (defaultConfig && defaultConfig.hideElements) || [];
-  if (typeof (result.hideElements) === 'string') {
+  result.hideClasses = configGroup.hideClasses || (defaultConfig && defaultConfig.hideClasses) || [];
+  if (typeof (result.hideClasses) === 'string') {
     // Only one x-path is given
-    result.hideElements = [this.breakXPath(result.hideElements.trim())];
+    result.hideClasses = [this.breakXPath(result.hideClasses.trim())];
   } else {
-    // result.hideElements is an array of x-paths
-    result.hideElements = result.hideElements.map(function (path) {
+    // result.hideClasses is an array of x-paths
+    result.hideClasses = result.hideClasses.map(function (path) {
       return this.breakXPath(path.trim());
     }.bind(this));
   }
