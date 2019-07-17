@@ -1,7 +1,7 @@
 {
   "name": "sezzle-js",
   "version": "4.1.2",
-  "cssversion": "2.0.8",
+  "cssversion": "2.0.10",
   "description": "Sezzle Sales Widget Price Watcher",
   "main": "sezzle.js",
   "scripts": {
