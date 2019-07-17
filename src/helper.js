@@ -59,7 +59,7 @@ exports.validateConfig = function (options) {
   // check correct factorization
   options.configGroups.forEach(function (group) {
     Object.keys(group).forEach(function (key) {
-      if (propsNotInConfigGroup.includes(key)) {
+      if (propsNotInConfigGroup.indexOf(key) >= 0) {
         throw new Error(key + " is not a property of a configGroup. Specify this key at the outermost layer");
       }
     });
