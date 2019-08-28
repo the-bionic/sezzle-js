@@ -425,7 +425,7 @@ gulp.task('branchupdate-modal', function(done) {
   createBranch(getUpdateBranchName('modal'), done);
 })
 
-gulp.task('update-modal', gulp.series('branchupdate-modal', 'modal-version-check-for-update', 'logupdate-modal', 'commitupdate-modal'));
+gulp.task('update-modal', gulp.series('modal-version-check-for-update', 'branchupdate-modal', 'logupdate-modal', 'commitupdate-modal'));
 gulp.task('deployupdatemodal', gulp.series('cleanmodal', 'minify-modal-update', 'modalupload-update'));
 
 // CI processes
