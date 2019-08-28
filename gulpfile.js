@@ -104,7 +104,7 @@ gulp.task('minify-modal', function () {
 });
 
 gulp.task('minify-modal-update', function () {
-  const languages = language[uh.modalversion];
+  const languages = language[uh.modal];
   let steams = [];
   languages.forEach((lang) => {
     const steam = gulp.src(`./modals/modals-${uh.modal}/modal-${lang}.html`)
