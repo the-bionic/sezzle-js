@@ -407,6 +407,17 @@ function getUpdateBranchName(type) {
 
 gulp.task('modal-version-check-for-update', function(done) {
   versionCheckForUpdate(pjson.modalversion);
+  if (!language[argv.updateversion]) {
+    throw 'No language defined for this version';
+  } else {
+    language[argv.updateversion].forEach(lang => {
+      fs.access(`./modals/modals-${argv.updateversion}/modal-${lang}.html`, (err) => {
+        if (err) {
+          throw `No file found: ./modals/modals-${argv.updateversion}/modal-${lang}.html`;
+        }
+      });
+    });
+  }
   done();
 });
 
