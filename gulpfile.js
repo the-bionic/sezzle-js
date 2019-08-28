@@ -327,6 +327,7 @@ gulp.task('createtag', function (done) {
 function getbranchName(type) {
   return `version-${type}-${argv.newversion}`;
 }
+
 function createBranch(branchName, done) {
   git.checkout('master', function (err) {
     if (err) throw err;
@@ -339,6 +340,17 @@ function createBranch(branchName, done) {
     });
   })
 }
+
+function deleteBranch(branchName, done) {
+  git.branch(branchName, {args:'-D'}, function (err) {
+    if (err) console.log(err);
+    git.push('origin', branchName, {args:'--delete'}, function(err){
+      if (err) console.log(err);
+      done();
+    });
+  });
+}
+
 gulp.task('newbranch', function (done) {
   createBranch(getbranchName('js'), done);
 });
@@ -433,10 +445,15 @@ gulp.task('commitupdate-modal', function() {
 });
 
 gulp.task('branchupdate-modal', function(done) {
+  deleteBranch(getUpdateBranchName('modal'), done);
   createBranch(getUpdateBranchName('modal'), done);
 })
 
-gulp.task('update-modal', gulp.series('modal-version-check-for-update', 'branchupdate-modal', 'logupdate-modal', 'commitupdate-modal'));
+gulp.task('pushversionmodal-modal', function (done) {
+  pushBranch(getUpdateBranchName('modal'), done);
+});
+
+gulp.task('update-modal', gulp.series('modal-version-check-for-update', 'branchupdate-modal', 'logupdate-modal', 'commitupdate-modal', 'pushversionmodal-modal'));
 gulp.task('deployupdatemodal', gulp.series('cleanmodal', 'minify-modal-update', 'modalupload-update'));
 
 // CI processes
