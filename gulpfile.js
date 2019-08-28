@@ -331,24 +331,24 @@ function getbranchName(type) {
 function createBranch(branchName, done) {
   git.checkout('master', function (err) {
     if (err) throw err;
-    git.pull('origin', 'master', function (err) {
-      if (err) throw err;
-      git.checkout(branchName, { args: '-b' }, function (err) {
-        if (err) throw err;
-        done();
+    git.branch(branchName, {args:'-D'}, function (err) {
+      if (err) console.log(err.cmd, 'failed');
+      git.push('origin', branchName, {args:'--delete'}, function(err){
+        if (err) console.log(err.cmd, 'failed');
+        git.pull('origin', 'master', function (err) {
+          if (err) throw err;
+          git.checkout(branchName, { args: '-b' }, function (err) {
+            if (err) throw err;
+            done();
+          });
+        });
       });
     });
   })
 }
 
 function deleteBranch(branchName, done) {
-  git.branch(branchName, {args:'-D'}, function (err) {
-    if (err) console.log(err);
-    git.push('origin', branchName, {args:'--delete'}, function(err){
-      if (err) console.log(err);
-      done();
-    });
-  });
+
 }
 
 gulp.task('newbranch', function (done) {
@@ -445,7 +445,6 @@ gulp.task('commitupdate-modal', function() {
 });
 
 gulp.task('branchupdate-modal', function(done) {
-  deleteBranch(getUpdateBranchName('modal'), done);
   createBranch(getUpdateBranchName('modal'), done);
 })
 
