@@ -1,6 +1,4 @@
 {
-    "plugins": [],  // npm modules to load
-
     "maxerr": false,
     "raw-ignore-regex": false,
     "attr-bans": [
