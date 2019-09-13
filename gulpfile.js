@@ -148,6 +148,19 @@ gulp.task('minify-modal-update', function () {
 	return merge(steams);
 });
 
+gulp.task('csscompile-modal-update', function () {
+  return sass(`./modals/modals-${uh.modal}/modal.scss`, {
+    style: 'expanded'
+  })
+  .pipe(autoprefixer('last 2 version'))
+  .pipe(gulp.dest('dist/modal-css'))
+  .pipe(rename({
+    suffix: '.min'
+  }))
+  .pipe(postcss([cssnano()]))
+  .pipe(gulp.dest('dist/modal-css'))
+});
+
 gulp.task('modalupload', function () {
   // bucket base url https://d3svog4tlx445w.cloudfront.net/
   const languages = language[pjson.modalversion];
@@ -515,7 +528,7 @@ gulp.task('pushversionmodal-modal', function (done) {
 });
 
 gulp.task('update-modal', gulp.series('modal-version-check-for-update', 'branchupdate-modal', 'logupdate-modal', 'commitupdate-modal', 'pushversionmodal-modal'));
-gulp.task('deployupdatemodal', gulp.series('cleanmodal', 'csscompile-modal', 'minify-modal-update', 'modalupload-update'));
+gulp.task('deployupdatemodal', gulp.series('cleanmodal', 'csscompile-modal-update', 'minify-modal-update', 'modalupload-update'));
 
 // CI processes
 gulp.task('deploy', function (done) {
