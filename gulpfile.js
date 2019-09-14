@@ -306,7 +306,7 @@ gulp.task('grabversioncss', function (done) {
 
 gulp.task('grabversionmodal', function (done) {
   // versionCheck('0.0.0'); // any of the modal versions can be released irrespective of numbers
-  if (rh[argv.newversion]) {
+  if (rh[`modal-${argv.newversion}`]) {
     throw 'Can not be released again. Try updating';
   }
   if (!language[argv.newversion]) {
