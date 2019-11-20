@@ -69,12 +69,12 @@ If `renderToPath` is `../../.my-render-element` - This will render the widget tw
       document.sezzleConfig = {
         targetXPath: '<path-to-price-element>',
         renderToPath: '<relative-path-to-element-to-which-to-render-this-widget>',
-        language:function(){
+        language:()=>{
           if (<your-logic>){
             return 'en'
           }
           return 'fr'
-          
+
         }
       }
     </script>
