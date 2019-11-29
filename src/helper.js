@@ -1,5 +1,4 @@
-var cloneDeep = require('lodash.clonedeep')
-
+var cloneDeep = require('lodash.clonedeep');
 // properties that do not belong to a config group (must have been factorized before)
 const propsNotInConfigGroup = [
   "merchantID",
@@ -26,9 +25,9 @@ const widgetLanguageTranslation = function (language, numberOfPayments) {
   const translations = {
     'en': 'or ' + numberOfPayments + ' interest-free payments of %%price%% with %%logo%% %%info%%',
     'fr': 'ou ' + numberOfPayments + ' paiements de %%price%% sans intérêts avec %%logo%% %%info%%'
-  }
-  return translations[language] || translations['en'];
-}
+  };
+  return translations[language] || translations.en;
+};
 
 /**
  * This is a function to validate configs
@@ -43,7 +42,6 @@ exports.validateConfig = function (options) {
       throw new Error("options.configGroups must have at least one config object");
     }
   }
-
   // checking fields which MUST be specified in configGroups. (Only one as of now :D)
   const mustInclude = ["targetXPath"];
   options.configGroups.forEach(function (group) {
@@ -53,16 +51,14 @@ exports.validateConfig = function (options) {
       }
     });
   });
-
   // type checks for crucial fields
-
   // expected types for crucial fields in the config
   // may do type checking for all fields in the future but it's just not necessary as of now
   const expectedTypes = {
     "targetXPath": "string",
     "renderToPath": "string",
     "urlMatch": "string"
-  }
+  };
   options.configGroups.forEach(function (group) {
     Object.keys(expectedTypes).forEach(function (key) {
       if (group.hasOwnProperty(key) && typeof (group[key]) !== expectedTypes[key]) {
@@ -70,7 +66,6 @@ exports.validateConfig = function (options) {
       }
     });
   });
-
   // check correct factorization
   options.configGroups.forEach(function (group) {
     Object.keys(group).forEach(function (key) {
@@ -79,12 +74,10 @@ exports.validateConfig = function (options) {
       }
     });
   });
-
   // if control reaches this point, the config is acceptable. It may not be perfect since the checks
   // are pretty loose, but at least the crucial parts of it are OK. May add more checks in the future.
   return;
-}
-
+};
 
 /**
  * This is a helper function to convert an old
@@ -103,7 +96,7 @@ exports.makeCompatible = function (options) {
   compatible.configGroups = this.splitConfig(options);
   // should we factorize common field values and place in defaultConfig? I don't think so
   return compatible;
-}
+};
 
 /**
  * Function to split configs up according to the targetXPath
@@ -118,7 +111,6 @@ exports.splitConfig = function (options) {
     if (Array.isArray(options.targetXPath)) {
       // group up custom classes according to index
       var groupedCustomClasses = this.groupCustomClasses(options.customClasses);
-
       // need to ensure it's array and not string so that code doesnt mistakenly separate chars
       var renderToPathIsArray = Array.isArray(options.renderToPath);
       // a group should revolve around targetXPath
@@ -126,10 +118,8 @@ exports.splitConfig = function (options) {
       options.targetXPath.forEach(function (xpath, inner) {
         // deep clone as config may have nested objects
         var config = cloneDeep(options);
-
         // overwrite targetXPath
         config.targetXPath = xpath;
-
         // sync up renderToPath array
         if (renderToPathIsArray && typeof (options.renderToPath[inner]) !== 'undefined') {
           config.renderToPath = options.renderToPath[inner] ? options.renderToPath[inner] : null;
@@ -137,24 +127,20 @@ exports.splitConfig = function (options) {
           // by default, below parent of target
           config.renderToPath = "..";
         }
-
         // sync up relatedElementActions array
         if (options.relatedElementActions &&
           typeof (options.relatedElementActions[inner]) !== 'undefined' &&
           Array.isArray(options.relatedElementActions[inner])) {
           config.relatedElementActions = options.relatedElementActions[inner];
         }
-
         // sync up customClasses
         if (typeof (groupedCustomClasses[inner]) !== 'undefined') {
           config.customClasses = groupedCustomClasses[inner];
         }
-
         // duplicate ignoredPriceElements string / array if exists
         if (options.ignoredPriceElements) {
           config.ignoredPriceElements = options.ignoredPriceElements;
         }
-
         // that's all, append
         res.push(config);
       });
@@ -164,7 +150,7 @@ exports.splitConfig = function (options) {
     }
   }
   return res;
-}
+};
 
 /**
  * Group customClasses by targetXPathIndex
@@ -186,7 +172,7 @@ exports.groupCustomClasses = function (customClasses) {
     });
   }
   return result;
-}
+};
 
 /**
  * This is a helper function to move fields which do not belong to a
@@ -197,23 +183,20 @@ exports.groupCustomClasses = function (customClasses) {
  */
 exports.factorize = function (options) {
   var factorized = {};
-
   // assumption is being made that all these fields are the same across all config groups
   // it is a reasonable assumption to make as :
   // - one config as a whole should only be assigned to one merchantID
   // - forcedShow is only useful if the country in which the widget is served is not in the supported list
   //   so it's reasonable to assume that forcedShow should be the same value for all configs
   // - as the widget only supports one modal currently, there is no capability of loading multiple modals
-
   propsNotInConfigGroup.forEach(function (field) {
     if (options[field] !== undefined) {
       factorized[field] = options[field];
       delete options[field];
     }
   });
-
   return factorized;
-}
+};
 
 /**
  * Maps the props of configGroups passed by input into a default configGroup object
@@ -225,19 +208,15 @@ exports.factorize = function (options) {
  */
 exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayments, language) {
   var result = {};
-
   // targetXPath SHOULD NOT be specified in defaultConfig since
   // it is like an ID for a configGroup (except if adding the price element class is used)
   result.xpath = this.breakXPath(configGroup.targetXPath);
-
   result.rendertopath = configGroup.renderToPath || (defaultConfig && defaultConfig.renderToPath) || '..';
-
   // This array in which its elements are objects with two keys
   // relatedPath - this is a xpath of an element related to the price element
   // action - this is a function triggered when the element has a mutation
   // initialAction - this is a function to act upon a pre existing element's condition
   result.relatedElementActions = configGroup.relatedElementActions || (defaultConfig && defaultConfig.relatedElementActions) || [];
-
   result.ignoredPriceElements = configGroup.ignoredPriceElements || (defaultConfig && defaultConfig.ignoredPriceElements) || [];
   if (typeof (result.ignoredPriceElements) === 'string') {
     // Only one x-path is given
@@ -248,13 +227,12 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
       return this.breakXPath(path.trim());
     }.bind(this));
   }
-
   result.alignment = configGroup.alignment || (defaultConfig && defaultConfig.alignment) || 'auto';
   result.widgetType = configGroup.widgetType || (defaultConfig && defaultConfig.widgetType) || 'product-page';
   result.bannerURL = configGroup.bannerURL || (defaultConfig && defaultConfig.bannerURL) || '';
   result.bannerClass = configGroup.bannerClass || (defaultConfig && defaultConfig.bannerClass) || '';
   result.bannerLink = configGroup.bannerLink || (defaultConfig && defaultConfig.bannerLink) || '';
-  result.fontWeight = configGroup.fontWeight || (defaultConfig && defaultConfig.fontWeight) | 300;
+  result.fontWeight = configGroup.fontWeight || (defaultConfig && defaultConfig.fontWeight) || 300;
   result.alignmentSwitchMinWidth = configGroup.alignmentSwitchMinWidth || (defaultConfig && defaultConfig.alignmentSwitchMinWidth); //pixels
   result.alignmentSwitchType = configGroup.alignmentSwitchType || (defaultConfig && defaultConfig.alignmentSwitchType);
   result.marginTop = configGroup.marginTop || (defaultConfig && defaultConfig.marginTop) || 0; //pixels
@@ -290,7 +268,6 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
   // {xpath: './.hello', className: 'test-2', index: 0, configGroupIndex: 0}
   //]
   result.customClasses = Array.isArray(configGroup.customClasses) ? configGroup.customClasses : [];
-
   result.widgetTemplate = configGroup.altVersionTemplate || (defaultConfig && defaultConfig.altVersionTemplate);
   if (result.widgetTemplate) {
     result.widgetTemplate = (constructWidgetTemplate(result.widgetTemplate, language, numberOfPayments)).split('%%');
@@ -298,25 +275,20 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
     var defaultWidgetTemplate = widgetLanguageTranslation(language, numberOfPayments);
     result.widgetTemplate = defaultWidgetTemplate.split('%%');
   }
-
   if (result.splitPriceElementsOn) {
     result.widgetTemplate = result.widgetTemplate.map(function (subtemplate) {
       return subtemplate === 'price' ? 'price-split' : subtemplate;
     });
   }
-
   // Search for price elements. If found, assume there is only one in this page
   result.hasPriceClassElement = false;
   result.priceElements = Array.prototype.slice.
     call(document.getElementsByClassName(result.priceElementClass));
-
   result.renderElements = Array.prototype.slice.
     call(document.getElementsByClassName(result.sezzleWidgetContainerClass));
-
   if (result.priceElements.length == 1) {
     result.hasPriceClassElement = true;
   }
-
   result.theme = configGroup.theme || (defaultConfig && defaultConfig.theme) || 'light';
   if (result.theme == 'dark') {
     result.imageURL = configGroup.imageUrl || (defaultConfig && defaultConfig.imageUrl) || 'https://d34uoa9py2cgca.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-white-sm-100w.png';
@@ -325,7 +297,6 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
     result.imageURL = configGroup.imageUrl || (defaultConfig && defaultConfig.imageUrl) || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
     result.imageClassName = 'szl-light-image';
   }
-
   result.hideClasses = configGroup.hideClasses || (defaultConfig && defaultConfig.hideClasses) || [];
   if (typeof (result.hideClasses) === 'string') {
     // Only one x-path is given
@@ -336,18 +307,15 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
       return this.breakXPath(path.trim());
     }.bind(this));
   }
-
   result.ignoredFormattedPriceText = configGroup.ignoredFormattedPriceText || (defaultConfig && defaultConfig.ignoredFormattedPriceText) || ['Subtotal', 'Total:', 'Sold Out'];
   if(!Array.isArray(result.ignoredFormattedPriceText)) {
-    result.ignoredFormattedPriceText = [result.ignoredFormattedPriceText]
+    result.ignoredFormattedPriceText = [result.ignoredFormattedPriceText];
   }
-
   // variables set by the JS
   result.productPrice = null;
   result.widgetIsFirstChild = false; //private boolean variable set to true if widget is to be rendered as first child of the parent
-
   return result;
-}
+};
 
 /**
  * This is helper function for formatPrice
@@ -356,7 +324,7 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
  */
 exports.isNumeric = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
-}
+};
 
 /**
  * This is a helper function to break xpath into array
@@ -366,9 +334,9 @@ exports.isNumeric = function (n) {
 exports.breakXPath = function (xpath) {
   return xpath.split('/')
     .filter(function (subpath) {
-      return subpath !== ''
+      return subpath !== '';
     });
-}
+};
 
 /**
  * This is helper function for formatPrice
@@ -377,7 +345,7 @@ exports.breakXPath = function (xpath) {
  */
 exports.isAlphabet = function (n) {
   return /^[a-zA-Z()]+$/.test(n);
-}
+};
 
 /**
  * This function will return the price string
@@ -392,12 +360,11 @@ exports.parsePriceString = function (price, includeComma) {
       // If current is a . and previous is a character, it can be something like Rs.
       // so ignore it
       if (i > 0 && price[i] == '.' && this.isAlphabet(price[i - 1])) continue;
-
       formattedPrice += price[i];
     }
   }
   return formattedPrice;
-}
+};
 
 /**
  * This function will format the price
@@ -406,7 +373,7 @@ exports.parsePriceString = function (price, includeComma) {
  */
 exports.parsePrice = function (price) {
   return parseFloat(this.parsePriceString(price, false));
-}
+};
 
 /**
  * Insert child after a given element
@@ -415,7 +382,7 @@ exports.parsePrice = function (price) {
  */
 exports.insertAfter = function (el, referenceNode) {
   referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
-}
+};
 
 /**
  * Insert element as the first child of the parentElement of referenceElement
@@ -428,7 +395,7 @@ exports.insertAsFirstChild = function (element, referenceElement) {
   while (element.previousSibling) {
     element.parentElement.insertBefore(element, element.previousSibling);
   }
-}
+};
 
 /**
  * Returns altVersionTemplate, based on config provided
@@ -442,11 +409,11 @@ exports.insertAsFirstChild = function (element, referenceElement) {
  */
 function constructWidgetTemplate (widgetTemplate, language, numberOfPayments) {
   if (typeof(widgetTemplate) === 'object' && widgetTemplate != null) {
-    if (!widgetTemplate['en'] && !widgetTemplate[language]) {
-      console.warn("Please specify atleast 'en' key in altVersionTemplate, rendering default widget template.")
+    if (!widgetTemplate.en && !widgetTemplate[language]) {
+      console.warn("Please specify atleast 'en' key in altVersionTemplate, rendering default widget template.");
       return widgetLanguageTranslation(language, numberOfPayments); // return default widget template
     }
-    return widgetTemplate[language] || widgetTemplate['en']; // returns specific language if present else return en key
+    return widgetTemplate[language] || widgetTemplate.en; // returns specific language if present else return en key
   }
-  return widgetTemplate //if widgetTemplate is string
+  return widgetTemplate; //if widgetTemplate is string
 }
