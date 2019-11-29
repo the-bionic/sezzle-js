@@ -366,7 +366,7 @@ SezzleJS.prototype.setLogoSize = function (element, configGroupIndex) {
  */
 SezzleJS.prototype.setLogoStyle = function (element, configGroupIndex) {
   Object.keys(this.configGroups[configGroupIndex].logoStyle).forEach(key=>{
-    element.style[key] = this.configGroups[configGroupIndex].logoStyle[key]
+    element.style[key] = this.configGroups[configGroupIndex].logoStyle[key];
    
  });
 }
