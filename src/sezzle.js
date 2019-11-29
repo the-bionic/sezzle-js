@@ -2,14 +2,11 @@ const Helper = require('./helper');
 
 const SezzleJS = function (options) {
   if (!options) options = {};
-
   // convert to new config if options passed in is old config
   var isOldConfig = typeof (options.configGroups) === 'undefined';
   if (isOldConfig) options = Helper.makeCompatible(options);
-
   // validate config structure
   Helper.validateConfig(options);
-
   // filter off config groups which do not match the current URL
   options.configGroups = options.configGroups.filter(function (configGroup) {
     // if no URL match is provided, consider the group for backwards compatability reasons
@@ -40,17 +37,13 @@ const SezzleJS = function (options) {
   this.noTracking = !!options.noTracking;
   // no gtm
   this.noGtm = !!options.noGtm;
-
   // Variables set by the js
   this.countryCode = null;
   this.ip = null;
   this.fingerprint = null;
-
   // Widget Language
   this.browserLanguage = navigator.language || navigator.browserLanguage || 'en';
   this.browserLanguage = this.browserLanguage.substring(0, 2).toLowerCase();
-
-
   switch(typeof(options.language)){
     case 'string':
       this.language = options.language;
@@ -61,7 +54,6 @@ const SezzleJS = function (options) {
     default:
       this.language = this.browserLanguage;
   }
-
   if(this.language  !== 'en' && this.language !== 'fr'){
     this.language = this.browserLanguage;
   }
@@ -70,7 +62,7 @@ const SezzleJS = function (options) {
   options.configGroups.forEach(function (configGroup) {
     this.configGroups.push(Helper.mapGroupToDefault(configGroup, options.defaultConfig, this.numberOfPayments, this.language));
   }.bind(this));
-}
+};
 
 /**
  * This function fetches all the elements that is pointed to by the given xpath
@@ -79,27 +71,19 @@ const SezzleJS = function (options) {
  *
  * @return All the elements which are pointed to by the xpath
  */
-SezzleJS.prototype.getElementsByXPath = function (xpath, xindex, elements) {
-  var xpath = xpath || [];
-  var xindex = xindex || 0;
-  var elements = elements || null;
-
+SezzleJS.prototype.getElementsByXPath = function (xpath = [], xindex = 0, elements = null) {
   // Break condition
   if (xindex === xpath.length) {
     return elements;
   }
-
   // If elements are not provided, root the search at the document object
   if (elements === null) {
     elements = [document];
   }
-
   var children = [];
   var elementArray = Array.prototype.slice.call(elements);
-
   for (var index = 0; index < elementArray.length; index++) {
     var element = elementArray[index];
-
     // If parent path
     if (xpath[xindex] === '..') {
       children.push(element.parentElement);
@@ -114,7 +98,6 @@ SezzleJS.prototype.getElementsByXPath = function (xpath, xindex, elements) {
       Array.prototype.forEach.call(element.getElementsByClassName(xpath[xindex].substr(1)), function (el) {
         children.push(el);
       });
-
     } else if (xpath[xindex].indexOf('child') === 0) { // If this is a child indicator
       var childNumber = xpath[xindex].split('-')[1];
       var childElement = element.childNodes[childNumber];
@@ -122,7 +105,7 @@ SezzleJS.prototype.getElementsByXPath = function (xpath, xindex, elements) {
         if (childElement.nodeName === '#text') { // if it's a text node we wrap it
           newSpan = document.createElement('span');
           newSpan.appendChild(document.createTextNode(childElement.nodeValue));
-          element.replaceChild(newSpan, childElement)
+          element.replaceChild(newSpan, childElement);
           children.push(newSpan);
         } else {
           children.push(childElement);
@@ -143,9 +126,9 @@ SezzleJS.prototype.getElementsByXPath = function (xpath, xindex, elements) {
     }
   }
 
-  children = children.filter(function (c) { return c !== null });
+  children = children.filter(function (c) { return c !== null; });
   return this.getElementsByXPath(xpath, xindex + 1, children);
-}
+};
 
 /**
  * This function loads up CSS dynamically to clients page
@@ -161,7 +144,7 @@ SezzleJS.prototype.loadCSS = function (callback) {
     head.appendChild(link);
     link.onload = callback;
   }.bind(this));
-}
+};
 
 /**
  * Add CSS alignment class as required based on the viewport width
@@ -174,7 +157,7 @@ SezzleJS.prototype.addCSSAlignment = function (element, configGroupIndex) {
     var queryString = '(min-width: ' + this.configGroups[configGroupIndex].alignmentSwitchMinWidth + 'px)';
     var mq = window.matchMedia(queryString);
     if (!mq.matches) {
-      newAlignment = this.configGroups[configGroupIndex].alignmentSwitchType
+      newAlignment = this.configGroups[configGroupIndex].alignmentSwitchType;
     }
   }
   switch (newAlignment || this.configGroups[configGroupIndex].alignment) {
@@ -186,11 +169,12 @@ SezzleJS.prototype.addCSSAlignment = function (element, configGroupIndex) {
       break;
     case 'center':
       element.className += ' sezzle-center';
+      break;
     default:
       // if there is no alignment specified, it will be auto
       break;
   }
-}
+};
 
 /**
  * Guesses the widget alignment based on the
@@ -199,8 +183,7 @@ SezzleJS.prototype.addCSSAlignment = function (element, configGroupIndex) {
  */
 SezzleJS.prototype.guessWidgetAlignment = function (priceElement) {
   if (!priceElement) return 'left'; //default
-
-  var textAlignment = window.getComputedStyle(priceElement).textAlign
+  var textAlignment = window.getComputedStyle(priceElement).textAlign;
   if (textAlignment === 'start' || textAlignment === 'justify') {
     // start is a CSS3  value for textAlign to accommodate for other languages which may be RTL (right to left), for instance Arabic
     // Since the sites we are adding the widgets to are mostly, if not all in English, it will be LTR (left to right), which implies
@@ -212,7 +195,7 @@ SezzleJS.prototype.guessWidgetAlignment = function (priceElement) {
     return 'right';
   }
   return textAlignment;
-}
+};
 
 /**
  * Add CSS fonts styling as required
@@ -229,7 +212,7 @@ SezzleJS.prototype.addCSSFontStyle = function (element, configGroupIndex) {
   if (this.configGroups[configGroupIndex].fontSize != 'inherit') {
     element.style.fontSize = this.configGroups[configGroupIndex].fontSize + 'px';
   }
-}
+};
 
 /**
  * Add CSS width class as required
@@ -241,7 +224,7 @@ SezzleJS.prototype.addCSSWidth = function (element, configGroupIndex) {
   if (this.configGroups[configGroupIndex].maxWidth) {
     element.style.maxWidth = this.configGroups[configGroupIndex].maxWidth + 'px';
   }
-}
+};
 
 /**
  * Add CSS text color as required
@@ -252,7 +235,7 @@ SezzleJS.prototype.addCSSTextColor = function (element, configGroupIndex) {
   if (this.configGroups[configGroupIndex].textColor) {
     element.style.color = this.configGroups[configGroupIndex].textColor;
   }
-}
+};
 
 /**
  * Add CSS theme class as required
@@ -268,7 +251,7 @@ SezzleJS.prototype.addCSSTheme = function (element, configGroupIndex) {
       element.className += ' szl-light';
       break;
   }
-}
+};
 
 /**
  * Add CSS customisation class as required
@@ -281,7 +264,7 @@ SezzleJS.prototype.addCSSCustomisation = function (element, configGroupIndex) {
   this.addCSSTextColor(element, configGroupIndex);
   this.addCSSTheme(element, configGroupIndex);
   this.addCSSWidth(element, configGroupIndex);
-}
+};
 
 /**
  * Insert css class name in element
@@ -289,7 +272,7 @@ SezzleJS.prototype.addCSSCustomisation = function (element, configGroupIndex) {
  */
 SezzleJS.prototype.insertStoreCSSClassInElement = function (element) {
   element.className += ' sezzle-' + this.merchantID;
-}
+};
 
 /**
  * Insert css class name in element
@@ -311,7 +294,7 @@ SezzleJS.prototype.insertWidgetTypeCSSClassInElement = function (element, config
       element.className += ' sezzle-product-page-widget';
       break;
   }
-}
+};
 
 /**
  * Set the top and bottom margins of element
@@ -323,7 +306,7 @@ SezzleJS.prototype.setElementMargins = function (element, configGroupIndex) {
   element.style.marginBottom = this.configGroups[configGroupIndex].marginBottom + 'px';
   element.style.marginLeft = this.configGroups[configGroupIndex].marginLeft + 'px';
   element.style.marginRight = this.configGroups[configGroupIndex].marginRight + 'px';
-}
+};
 
 /**
  * Scale the element size using CSS transforms
@@ -340,7 +323,7 @@ SezzleJS.prototype.setWidgetSize = function (element, configGroupIndex) {
     element.style.height = this.configGroups[configGroupIndex].fixedHeight + 'px';
     element.style.overflow = 'hidden';
   }
-}
+};
 
 /**
  * Scale the widget size using CSS transforms
@@ -352,10 +335,8 @@ SezzleJS.prototype.setWidgetSize = function (element, configGroupIndex) {
  */
 SezzleJS.prototype.setLogoSize = function (element, configGroupIndex) {
   element.style.transformOrigin = 'top ' + this.configGroups[configGroupIndex].alignment;
-  element.style.transform = 'scale(' + this.configGroups[configGroupIndex].logoSize + ')'
-}
-
-
+  element.style.transform = 'scale(' + this.configGroups[configGroupIndex].logoSize + ')';
+};
 
 /**
  * Add styling to logo Element incase its provided by the config
@@ -369,8 +350,7 @@ SezzleJS.prototype.setLogoStyle = function (element, configGroupIndex) {
     element.style[key] = this.configGroups[configGroupIndex].logoStyle[key];
    
  });
-}
-
+};
 
 /**
  * This function will set Sezzle's elements with
@@ -381,9 +361,7 @@ SezzleJS.prototype.setLogoStyle = function (element, configGroupIndex) {
  * @param configGroupIndex Index of the config group
  * @return void
  */
-SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index, configGroupIndex) {
-  var index = index || 0;
-
+SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, configGroupIndex, index = 0) {
   // Do not render this product if it is not eligible
   var priceText = this.getPriceText(element, configGroupIndex);
   if (!this.isProductEligible(priceText, configGroupIndex)) return false;
@@ -393,38 +371,27 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   element.dataset.sezzleindex = index;
   // Get element to be rendered with sezzle's widget
   var parent = renderelement;
-
   // get the alignment of the widget (if widgetAlignment is auto)
   // the alignment, when set to auto follows the text-align property of the price element
   if (this.configGroups[configGroupIndex].alignment === 'auto') {
     this.configGroups[configGroupIndex].alignment = this.guessWidgetAlignment(element);
   }
-
   // root node for sezzle
   var sezzle = document.createElement('div');
   // TODO: why there is a shopify specific naming
   sezzle.className = "sezzle-shopify-info-button sezzlewidgetindex-" + index;
-
-  // not set in the config currently
-  //if (this.ABTestClass) {
-  //	sezzle.className += this.ABTestClass;
-  //}
-
   this.insertWidgetTypeCSSClassInElement(sezzle, configGroupIndex);
   this.insertStoreCSSClassInElement(sezzle);
   this.setElementMargins(sezzle, configGroupIndex);
   if (this.configGroups[configGroupIndex].scaleFactor) this.setWidgetSize(sezzle, configGroupIndex);
-
   var node = document.createElement('div');
   node.className = 'sezzle-checkout-button-wrapper sezzle-modal-link';
   node.style.cursor = 'pointer';
   this.insertStoreCSSClassInElement(node);
   this.addCSSAlignment(node, configGroupIndex);
-
   var sezzleButtonText = document.createElement('div');
   sezzleButtonText.className = 'sezzle-button-text';
   this.addCSSCustomisation(sezzleButtonText, configGroupIndex);
-
   this.configGroups[configGroupIndex].widgetTemplate.forEach(function (subtemplate) {
     switch (subtemplate) {
       case 'price':
@@ -434,14 +401,13 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
         priceSpanNode.appendChild(priceValueText);
         sezzleButtonText.appendChild(priceSpanNode);
         break;
-
       case 'logo':
         var logoNode = document.createElement('img');
         logoNode.className = 'sezzle-logo ' + this.configGroups[configGroupIndex].imageClassName;
         logoNode.src = this.configGroups[configGroupIndex].imageURL;
         sezzleButtonText.appendChild(logoNode);
         this.setLogoSize(logoNode, configGroupIndex);
-        if(this.configGroups[configGroupIndex].logoStyle != {}) this.setLogoStyle(logoNode, configGroupIndex)
+        if(this.configGroups[configGroupIndex].logoStyle != {}) this.setLogoStyle(logoNode, configGroupIndex);
         break;
       // changed from learn-more to link as that is what current altVersionTemplates use
       case 'link':
@@ -451,42 +417,36 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
         learnMoreNode.appendChild(learnMoreText);
         sezzleButtonText.appendChild(learnMoreNode);
         break;
-
       case 'info':
         var infoIconNode = document.createElement('code');
         infoIconNode.className = 'sezzle-info-icon';
         infoIconNode.innerHTML = '&#9432;';
         sezzleButtonText.appendChild(infoIconNode);
         break;
-
       case 'question-mark':
         var questionMarkIconNode = document.createElement('img');
         questionMarkIconNode.className = 'sezzle-question-mark-icon';
         questionMarkIconNode.src = 'https://d2uyik3j5wol98.cloudfront.net/images/question_mark_black.png';
         sezzleButtonText.appendChild(questionMarkIconNode);
         break;
-
       case 'afterpay-logo':
         var apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/ap-logo-widget.png';
         sezzleButtonText.appendChild(apNode);
         break;
-
       case 'afterpay-logo-grey':
-        var apNode = document.createElement('img');
+        apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/ap-logo-widget-grayscale.png';
         sezzleButtonText.appendChild(apNode);
         break;
-
       case 'afterpay-info-icon':
         var apInfoIconNode = document.createElement('code');
         apInfoIconNode.className = 'ap-modal-info-link no-sezzle-info';
         apInfoIconNode.innerHTML = '&#9432;';
         sezzleButtonText.appendChild(apInfoIconNode);
         break;
-
       case 'afterpay-link-icon':
         var apAnchor = document.createElement('a');
         apAnchor.href = this.configGroups[configGroupIndex].apLink;
@@ -494,38 +454,33 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
         var apLinkIconNode = document.createElement('code');
         apLinkIconNode.className = 'ap-info-link';
         apLinkIconNode.innerHTML = '&#9432;';
-        apAnchor.appendChild(apLinkIconNode)
+        apAnchor.appendChild(apLinkIconNode);
         sezzleButtonText.appendChild(apAnchor);
         break;
-
       case 'quadpay-logo':
         var qpNode = document.createElement('img');
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget.png';
         sezzleButtonText.appendChild(qpNode);
         break;
-
       case 'quadpay-logo-grey':
-        var qpNode = document.createElement('img');
+        qpNode = document.createElement('img');
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-grayscale.png';
         sezzleButtonText.appendChild(qpNode);
         break;
-
       case 'quadpay-logo-white':
-        var qpNode = document.createElement('img');
+        qpNode = document.createElement('img');
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-white.png';
         sezzleButtonText.appendChild(qpNode);
         break;
-
       case 'quadpay-info-icon':
         var quadpayInfoIconNode = document.createElement('code');
         quadpayInfoIconNode.className = 'quadpay-modal-info-link no-sezzle-info';
         quadpayInfoIconNode.innerHTML = '&#9432;';
         sezzleButtonText.appendChild(quadpayInfoIconNode);
         break;
-
       case 'price-split':
         var priceSplitNode = document.createElement('span');
         priceSplitNode.className = 'sezzle-payment-amount sezzle-price-split sezzleindex-' + index;
@@ -549,29 +504,23 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
             }
           }.bind(this));
         }
-
         var priceSplitTextNode = document.createTextNode(priceSplitText);
         priceSplitNode.appendChild(priceSplitTextNode);
         sezzleButtonText.appendChild(priceSplitNode);
         break;
-
       case 'line-break':
         var lineBreakNode = document.createElement('br');
         sezzleButtonText.appendChild(lineBreakNode);
         break;
-
       default:
         var widgetTextNode = document.createTextNode(subtemplate);
         sezzleButtonText.appendChild(widgetTextNode);
         break;
     }
   }.bind(this));
-
   node.appendChild(sezzleButtonText);
-
   // Adding main node to sezzel node
   sezzle.appendChild(node);
-
   this.configGroups[configGroupIndex].customClasses.forEach(function (customClass) {
     if (customClass.xpath && customClass.className) {
       if (typeof (customClass.index) !== 'number') {
@@ -585,11 +534,10 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
         this.getElementsByXPath(path, 0, [sezzle])
           .forEach(function (el) {
             el.className += ' ' + customClass.className;
-          })
+          });
       }
     }
   }.bind(this));
-
   // Adding sezzle to parent node
   if (this.configGroups[configGroupIndex].widgetIsFirstChild) {
     Helper.insertAsFirstChild(sezzle, parent);
@@ -598,7 +546,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   }
   this.logEvent('onload', configGroupIndex);
   return sezzle;
-}
+};
 
 /**
  * This function finds out the element where Sezzle's widget
@@ -609,17 +557,13 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
  * @param index - Index of the config group that element belongs to
  * @return the element where Sezzle's widget will be rendered
  */
-SezzleJS.prototype.getElementToRender = function (element, index) {
-  var index = index || 0;
+SezzleJS.prototype.getElementToRender = function (element, index = 0) {
   var toRenderElement = null;
-
   if (this.configGroups[index].rendertopath !== null) {
     var path = Helper.breakXPath(this.configGroups[index].rendertopath);
-    var toRenderElement = element;
-
+    toRenderElement = element;
     for (var i = 0; i < path.length; i++) {
       var p = path[i];
-
       if (toRenderElement === null) {
         break;
       } else if (p === '.') {
@@ -661,7 +605,7 @@ SezzleJS.prototype.getElementToRender = function (element, index) {
     }
   }
   return toRenderElement ? toRenderElement : element.parentElement; // return the element's parent if toRenderElement is null
-}
+};
 
 /**
  * Is the product eligible for sezzle pay
@@ -672,7 +616,7 @@ SezzleJS.prototype.isProductEligible = function (priceText, configGroupIndex) {
   this.configGroups[configGroupIndex].productPrice = price;
   var priceInCents = price * 100;
   return priceInCents >= this.minPrice && priceInCents <= this.maxPrice;
-}
+};
 
 /**
  * Gets price text
@@ -690,29 +634,24 @@ SezzleJS.prototype.getPriceText = function (element, configGroupIndex) {
       });
     }.bind(this));
   }
-
   // if no ignored elements are found, return the whole inner text of the element
   if (!element.getElementsByClassName('sezzle-ignored-price-element').length) {
     return element.textContent;
   }
-
   // deep clone
   var clone = element.cloneNode(true);
-
   //remove all marked elements
   Array.prototype.forEach.call(clone.getElementsByTagName('*'), function (element) {
     if (Array.prototype.slice.call(element.classList).indexOf('sezzle-ignored-price-element') !== -1) {
       clone.removeChild(element);
     }
   });
-
   //remove all markers
   Array.prototype.forEach.call(element.getElementsByClassName('sezzle-ignored-price-element'), function (element) {
     element.classList.remove('sezzle-ignored-price-element');
   });
-
   return clone.textContent;
-}
+};
 
 /**
  * Formats a price as Sezzle needs it
@@ -722,29 +661,22 @@ SezzleJS.prototype.getPriceText = function (element, configGroupIndex) {
  */
 SezzleJS.prototype.getFormattedPrice = function (element, configGroupIndex, priceText) {
   if(!priceText) priceText = this.getPriceText(element, configGroupIndex);
-
   // Get the price string - useful for formtting Eg: 120.00(string)
   var priceString = Helper.parsePriceString(priceText, true);
-
   // Get the price in float from the element - useful for calculation Eg : 120.00(float)
   var price = Helper.parsePrice(priceText);
-
   // Will be used later to replace {price} with price / this.numberOfPayments Eg: ${price} USD
   var formatter = priceText.replace(priceString, '{price}');
-
   // replace other strings not wanted in text
   this.configGroups[configGroupIndex].ignoredFormattedPriceText.forEach(function (ignoredString) {
     formatter = formatter.replace(ignoredString, '');
   }.bind(this));
-
   // get the sezzle installment price
   var sezzleInstallmentPrice = (price / this.numberOfPayments).toFixed(2);
-
   // format the string
   var sezzleInstallmentFormattedPrice = formatter.replace('{price}', sezzleInstallmentPrice);
-
   return sezzleInstallmentFormattedPrice;
-}
+};
 
 /**
  * Mutation observer callback function
@@ -754,7 +686,7 @@ SezzleJS.prototype.getFormattedPrice = function (element, configGroupIndex, pric
  */
 SezzleJS.prototype.mutationCallBack = function (mutations, configGroupIndex) {
   mutations
-    .filter(function (mutation) { return mutation.type === 'childList' })
+    .filter(function (mutation) { return mutation.type === 'childList'; })
     .forEach(function (mutation) {
       try {
         var priceIndex = mutation.target.dataset.sezzleindex;
@@ -787,7 +719,7 @@ SezzleJS.prototype.startObserve = function (element, callback) {
   var observer = new MutationObserver(callback);
   observer.observe(element, this._config);
   return observer;
-}
+};
 
 /**
  * This function renders the Sezzle modal
@@ -795,15 +727,14 @@ SezzleJS.prototype.startObserve = function (element, callback) {
  * to respective buttons
  */
 SezzleJS.prototype.renderModal = function () {
+  var modalNode = document.createElement('div');
   if (!document.getElementsByClassName('sezzle-checkout-modal-lightbox').length) {
-    var modalNode = document.createElement('div');
     modalNode.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal';
     modalNode.style.display = 'none';
     this.getModal(modalNode, closeModalHandler);
   } else {
     modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
   }
-
   function closeModalHandler () {
       // Event listener for close in modal
     Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), function (el) {
@@ -814,17 +745,16 @@ SezzleJS.prototype.renderModal = function () {
         modalNode.getElementsByClassName('sezzle-modal')[0].className = 'sezzle-modal sezzle-checkout-modal-hidden';
       });
     });
-
     // Event listener to prevent close in modal if click happens within sezzle-checkout-modal
-    var sezzleModal = document.getElementsByClassName('sezzle-modal')[0]
+    var sezzleModal = document.getElementsByClassName('sezzle-modal')[0];
     // backwards compatability check
-    if (!sezzleModal) sezzleModal = document.getElementsByClassName('sezzle-checkout-modal')[0]
+    if (!sezzleModal) sezzleModal = document.getElementsByClassName('sezzle-checkout-modal')[0];
     sezzleModal.addEventListener('click', function (event) {
       // stop propagating the event to the parent sezzle-checkout-modal-lightbox to prevent the closure of the modal
       event.stopPropagation();
     });
   }
-}
+};
 
 /**
  * This function renders the Afterpay modal based on if you include ap-modal-info-link
@@ -838,7 +768,6 @@ SezzleJS.prototype.renderAPModal = function () {
   modalNode.style.display = 'none';
   modalNode.innerHTML = this.apModalHTML;
   document.getElementsByTagName('html')[0].appendChild(modalNode);
-
   // Event listener for close in modal
   Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), function (el) {
     el.addEventListener('click', function () {
@@ -846,7 +775,6 @@ SezzleJS.prototype.renderAPModal = function () {
       modalNode.style.display = 'none';
     });
   });
-
   // Event listener to prevent close in modal if click happens within sezzle-checkout-modal
   let sezzleModal = document.getElementsByClassName('sezzle-modal')[0];
   // backwards compatability check
@@ -855,7 +783,7 @@ SezzleJS.prototype.renderAPModal = function () {
     // stop propagating the event to the parent sezzle-checkout-modal-lightbox to prevent the closure of the modal
     event.stopPropagation();
   });
-}
+};
 
 /**
  * This function renders the Quadpay modal based on if you include quadpay-modal-info-link
@@ -869,7 +797,6 @@ SezzleJS.prototype.renderQPModal = function () {
   modalNode.style.display = 'none';
   modalNode.innerHTML = this.qpModalHTML;
   document.getElementsByTagName('html')[0].appendChild(modalNode);
-
   // Event listener for close in modal
   Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), function (el) {
     el.addEventListener('click', function () {
@@ -877,7 +804,6 @@ SezzleJS.prototype.renderQPModal = function () {
       modalNode.style.display = 'none';
     });
   });
-
   // Event listener to prevent close in modal if click happens within sezzle-checkout-modal
   let sezzleModal = document.getElementsByClassName('sezzle-modal')[0];
   // backwards compatability check
@@ -886,7 +812,7 @@ SezzleJS.prototype.renderQPModal = function () {
     // stop propagating the event to the parent sezzle-checkout-modal-lightbox to prevent the closure of the modal
     event.stopPropagation();
   });
-}
+};
 
 /**
  * This function add events to the button in sezzle widget
@@ -906,20 +832,16 @@ SezzleJS.prototype.addClickEventForModal = function (sezzleElement, configGroupI
         });
         if (modalNode) {
           modalNode.style.display = 'block'; // Remove hidden class to show the item
-
           var modals = modalNode.getElementsByClassName('sezzle-modal');
-
           if (modals.length) {
             modals[0].className = 'sezzle-modal';
           }
-
           // log on click event
           this.logEvent('onclick', configGroupIndex);
         }
       }
     }.bind(this));
   }.bind(this));
-
   // for AfterPay
   var apModalLinks = sezzleElement.getElementsByClassName('ap-modal-info-link');
   Array.prototype.forEach.call(apModalLinks, function (modalLink) {
@@ -930,7 +852,6 @@ SezzleJS.prototype.addClickEventForModal = function (sezzleElement, configGroupI
       this.logEvent('onclick-afterpay', configGroupIndex);
     }.bind(this));
   }.bind(this));
-
   // for QuadPay
   var qpModalLinks = sezzleElement.getElementsByClassName('quadpay-modal-info-link');
   Array.prototype.forEach.call(qpModalLinks, function (modalLink) {
@@ -941,8 +862,7 @@ SezzleJS.prototype.addClickEventForModal = function (sezzleElement, configGroupI
       this.logEvent('onclick-quadpay', configGroupIndex);
     }.bind(this));
   }.bind(this));
-}
-
+};
 
 /**
  * This function will return the ISO 3166-1 alpha-2 country code
@@ -966,7 +886,7 @@ SezzleJS.prototype.getCountryCodeFromIP = function (callback) {
   httpRequest.open('GET', this.countryFromIPRequestURL, true);
   httpRequest.responseType = 'json';
   httpRequest.send();
-}
+};
 
 /**
  * This function will fetch the css file version to use for given merchant
@@ -990,13 +910,12 @@ SezzleJS.prototype.getCSSVersionForMerchant = function (callback) {
           }
         }
       }
-    }
-
+    };
     httpRequest.open('GET', this.cssForMerchantURL);
     httpRequest.responseType = 'json';
     httpRequest.send();
   }
-}
+};
 
 SezzleJS.prototype.getModal = function (modalNode, callback) {
   if (document.sezzleDefaultModalVersion && document.sezzleModalAvailableLanguages) {
@@ -1014,7 +933,6 @@ SezzleJS.prototype.getModal = function (modalNode, callback) {
         }
       }
     }.bind(this);
-
     // Convert document.sezzleModalAvailableLanguages into Array
     var availableLanguages = document.sezzleModalAvailableLanguages.split(',').map(function(singleLanguage) {
       return singleLanguage.trim();
@@ -1025,12 +943,11 @@ SezzleJS.prototype.getModal = function (modalNode, callback) {
     } else {
       modalLanguage = 'en';
     }
-
     var url = 'https://media.sezzle.com/shopify-app/assets/' + document.sezzleDefaultModalVersion.replace("{%%s%%}", modalLanguage);
     httpRequest.open('GET', url, true);
     httpRequest.send();
   }
-}
+};
 
 /**
  * Hide elements pointed to by this.hideClasses
@@ -1041,10 +958,9 @@ SezzleJS.prototype.hideSezzleHideElements = function (configGroupIndex) {
       if (!element.classList.contains('sezzle-hidden')) {
         element.classList.add('sezzle-hidden');
       }
-    })
+    });
   }.bind(this));
-}
-
+};
 
 /*
 * Log Event
@@ -1068,7 +984,7 @@ SezzleJS.prototype.logEvent = function (eventName, configGroupIndex) {
       // unable to fetch viewport dimensions
       console.log(error);
     }
-    var sezzleConfigStr = null
+    var sezzleConfigStr = null;
     sezzleConfigStr = JSON.stringify(this.config);
     var win = window.frames.szl;
     if (win) {
@@ -1106,15 +1022,14 @@ SezzleJS.prototype.getCookie = function (name) {
   if (parts.length === 2) {
     return parts.pop().split(';').shift();
   }
-}
+};
 
 /*
 * Is Mobile Browser
 */
 SezzleJS.prototype.isMobileBrowser = function () {
-  return /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)
-    || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0, 4));
-}
+  return /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0, 4));
+};
 
 
 /**
@@ -1125,7 +1040,6 @@ SezzleJS.prototype.isMobileBrowser = function () {
 SezzleJS.prototype.init = function () {
   // no widget to render
   if (!this.configGroups.length) return;
-
   // Check if the widget should be shown
   if (this.forcedShow) {
     // show the widget
@@ -1159,7 +1073,7 @@ SezzleJS.prototype.init = function () {
       }
     }.bind(this));
   }
-}
+};
 
 /**
  * This function start an observation on related elements to the price element
@@ -1188,7 +1102,7 @@ SezzleJS.prototype.observeRelatedElements = function (priceElement, sezzleElemen
       }
     }.bind(this));
   }
-}
+};
 
 /**
  * All steps required to show the widget
@@ -1196,7 +1110,6 @@ SezzleJS.prototype.observeRelatedElements = function (priceElement, sezzleElemen
 SezzleJS.prototype.initWidget = function () {
   const intervalInMs = 2000;
   var els = [];
-
   // only render the modal once for all widgets
   function renderModals() {
     // This should always happen before rendering the widget
@@ -1209,8 +1122,7 @@ SezzleJS.prototype.initWidget = function () {
     if (document.getElementsByClassName('quadpay-modal-info-link').length > 0) {
       this.renderQPModal();
     }
-  };
-
+  }
   function sezzleWidgetCheckInterval() {
     // Look for newly added price elements
     this.configGroups.forEach(function (configGroup, index) {
@@ -1248,8 +1160,7 @@ SezzleJS.prototype.initWidget = function () {
     // refresh the array
     els = els.filter(function (e) {
       return e !== undefined;
-    })
-
+    });
     // Find the deleted price elements
     // remove corresponding Sezzle widgets if exists
     els.forEach(function (el, index) {
@@ -1266,15 +1177,12 @@ SezzleJS.prototype.initWidget = function () {
         }
       }
     });
-
     // Hide elements ex: afterpay
     for (var index = 0, len = this.configGroups.length; index < len; index++) {
       this.hideSezzleHideElements(index);
     }
-
-    setTimeout(sezzleWidgetCheckInterval.bind(this), intervalInMs)
-  };
-
+    setTimeout(sezzleWidgetCheckInterval.bind(this), intervalInMs);
+  }
   var allConfigsUsePriceClassElement = true;
   this.configGroups.forEach(function (configGroup, index) {
     if (configGroup.hasPriceClassElement) {
@@ -1286,9 +1194,8 @@ SezzleJS.prototype.initWidget = function () {
       allConfigsUsePriceClassElement = false;
     }
   }.bind(this));
-
   if (!allConfigsUsePriceClassElement) sezzleWidgetCheckInterval.call(this);
   renderModals.call(this);
-}
+};
 
 module.exports = SezzleJS;
