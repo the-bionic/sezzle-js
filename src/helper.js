@@ -12,7 +12,8 @@ const propsNotInConfigGroup = [
   "qpModalHTML",
   "noGtm",
   "noTracking",
-  "testID"
+  "testID",
+  "language"
 ];
 
 /**
@@ -35,7 +36,6 @@ const widgetLanguageTranslation = function (language, numberOfPayments) {
  * @return nothing. If config is invalid, error is thrown and program execution is stopped.
  */
 exports.validateConfig = function (options) {
-  console.log(options)
   if (!Array.isArray(options.configGroups)) {
     throw new Error("options.configGroups is not an array");
   } else {
