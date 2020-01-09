@@ -4,6 +4,11 @@
         transition: 0.15s;
         cursor: pointer;
     }
+
+    .bg_footer {
+        font-size: 16px;
+    }
+
     @media (max-width: 650px) {
         .sezzle-modal {
             position: relative;
@@ -23,8 +28,7 @@
         }
 
         .bg_footer {
-            height: 100px !important;
-            padding: 20px 30px !important;
+            font-size: 14px;
         }
     }
 
@@ -42,7 +46,7 @@
 
     @media (max-width: 320px) {
         .bg_footer {
-            height: 140px !important;
+            font-size: 13px;
         }
     }
 
