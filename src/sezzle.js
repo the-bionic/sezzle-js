@@ -690,7 +690,7 @@ SezzleJS.prototype.mutationCallBack = function (mutations, configGroupIndex) {
         var price = this.getFormattedPrice(mutation.target, configGroupIndex);
         var sezzlePriceElement = document.getElementsByClassName('sezzleindex-' + priceIndex)[0];
         if (sezzlePriceElement) {
-          if (!/\d/.test(price)) {
+          if (!/\d/.test(price) && !this.isProductEligible(price, configGroupIndex)) {
             sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
           } else {
             sezzlePriceElement.parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
