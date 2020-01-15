@@ -690,12 +690,16 @@ SezzleJS.prototype.mutationCallBack = function (mutations, configGroupIndex) {
         var price = this.getFormattedPrice(mutation.target, configGroupIndex);
         var sezzlePriceElement = document.getElementsByClassName('sezzleindex-' + priceIndex)[0];
         if (sezzlePriceElement) {
-          if (!/\d/.test(price) && !this.isProductEligible(price, configGroupIndex)) {
+          if (!/\d/.test(price)) {
             sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
           } else {
             sezzlePriceElement.parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
           }
           sezzlePriceElement.textContent = price;
+          var priceText = this.getPriceText(mutation.target, configGroupIndex);
+          if (!this.isProductEligible(priceText, configGroupIndex)){
+            sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
+          }
         }
       } catch(e) {
         console.warn(e);
