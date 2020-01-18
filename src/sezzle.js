@@ -696,6 +696,9 @@ SezzleJS.prototype.mutationCallBack = function (mutations, configGroupIndex) {
             sezzlePriceElement.parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
           }
           sezzlePriceElement.textContent = price;
+          // Check if the price is still valid for widget
+          // Price may change dynamically due to any reason,
+          // like, updating product category
           var priceText = this.getPriceText(mutation.target, configGroupIndex);
           if (!this.isProductEligible(priceText, configGroupIndex)){
             sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
