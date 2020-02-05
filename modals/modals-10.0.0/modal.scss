@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:500,700");
+
+.sezzle-checkout-modal-hidden {
+    .sezzle-no-thanks:hover {
+        transition: 0.15s;
+        cursor: pointer;
+    }
+
+    @media (max-width: 650px) {
+        .sezzle-modal {
+            top: 15% !important;
+            max-width: 100%;
+            min-width: 320px;
+        }
+        .column {
+            float: none !important;
+            width: 100% !important;
+        }
+        .desktop {
+            display: none;
+        }
+        .mobile {
+            display: block !important;
+        }
+        .separator-bar {
+            width: 100% !important;
+            float: none !important;
+        }
+    }
+
+    .mobile {
+        display: none
+    }
+
+    .separator-bar {
+        width: 10%;
+        float: left;
+        color: #9da0a5;
+        margin-top: 14px;
+    }
+
+    .vertical-bar {
+        width: 2%;
+        background: #9da0a5;
+        height: 62px;
+        margin-left: 40px;
+    }
+
+    .separator-bar-text-block {
+        text-align: center;
+        font-size: 28px;
+        font-weight: 800;
+        margin: 14px;
+    }
+
+    #header {
+        position: absolute;
+        z-index: 1;
+        text-align: center;
+        font-size: 28px;
+        padding-top: 13px;
+        padding-bottom: 41px;
+        font-weight: bold;
+        width: 100%;
+        border-radius: 10px;
+    }
+    #content {
+        position: absolute;
+        z-index: 2;
+        top: 50px;
+        background-color: #ededf4;
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(5, 31, 52, 0.19), 0 6px 6px rgba(5, 31, 52, 0.2);
+        margin-top: 12px;
+    }
+
+    .column {
+        width: 45%;
+        float: left;
+    }
+
+    .footer-links {
+        text-transform: none; 
+        font-family: Raleway; 
+        font-size: 18px; 
+        line-height: 1.29; 
+        text-align: center; 
+        color: #a728a6;
+    }
+
+    .footer-left {
+        padding-top: 29px;
+    }
+
+    .footer-right {
+        margin-top: 37px;
+    }
+}
