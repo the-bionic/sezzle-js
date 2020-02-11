@@ -725,24 +725,40 @@ SezzleJS.prototype.startObserve = function (element, callback) {
   return observer;
 };
 
+/** 
+ * @description Adds/removes styles to stop body scroll when modal is open. Also
+ *              records/restores the scroll position to avoid side effects of position: fixed
+ * @param boolean -> disable/enable scroll
+*/
+SezzleJS.prototype.disableBodyScroll = function (disable) {
+  const bodyElement = document.body;
+  // Add styles if modal is open
+  if (disable) {
+    // Cross-browser
+    this.scrollDistance = pageYOffset || (document.documentElement.clientHeight ? document.documentElement.scrollTop : document.body.scrollTop) || 0;
+    bodyElement.classList.add('sezzle-modal-open');
+    // reset scroll in background because of previous step
+    bodyElement.style.top = (this.scrollDistance * -1) + 'px';
+  }
+  // Remove styles if modal closes and resets scroll position
+  else {
+    bodyElement.classList.remove('sezzle-modal-open');
+    window.scrollTo(0, this.scrollDistance);
+  }
+};
+
 /**
  * This function renders the Sezzle modal
  * Also adds the event for open and close modals
  * to respective buttons
  */
 SezzleJS.prototype.renderModal = function () {
-  var modalNode = document.createElement('div');
-  if (!document.getElementsByClassName('sezzle-checkout-modal-lightbox').length) {
-    modalNode.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal';
-    modalNode.style.display = 'none';
-    this.getModal(modalNode, closeModalHandler);
-  } else {
-    modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
-  }
-  function closeModalHandler () {
-      // Event listener for close in modal
-    Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), function (el) {
-      el.addEventListener('click', function () {
+  // Handler function when modal is closed. 
+  closeModalHandler = () => {
+    // Event listener for close in modal
+    Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), (el) => {
+      el.addEventListener('click', () => {
+        this.disableBodyScroll(false);
         // Display the modal node
         modalNode.style.display = 'none';
         // Add hidden class hide the item
@@ -757,6 +773,17 @@ SezzleJS.prototype.renderModal = function () {
       // stop propagating the event to the parent sezzle-checkout-modal-lightbox to prevent the closure of the modal
       event.stopPropagation();
     });
+  };
+  
+  // Renders modal via a http call to sezzle cdn
+  var modalNode = document.createElement('div');
+  if (!document.getElementsByClassName('sezzle-checkout-modal-lightbox').length) {
+    modalNode.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal';
+    modalNode.style.display = 'none';
+    modalNode.style.maxHeight = '100%';
+    this.getModal(modalNode, closeModalHandler);
+  } else {
+    modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
   }
 };
 
@@ -835,6 +862,7 @@ SezzleJS.prototype.addClickEventForModal = function (sezzleElement, configGroupI
           }
         });
         if (modalNode) {
+         this.disableBodyScroll(true);
           modalNode.style.display = 'block'; // Remove hidden class to show the item
           var modals = modalNode.getElementsByClassName('sezzle-modal');
           if (modals.length) {
