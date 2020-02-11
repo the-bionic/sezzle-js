@@ -732,7 +732,6 @@ SezzleJS.prototype.startObserve = function (element, callback) {
 */
 SezzleJS.prototype.disableBodyScroll = function (disable) {
   const bodyElement = document.body;
-  const customSezzleClass = {top: 0, bottom: 0, right:0, left: 0, position: 'fixed'}; 
   // Add styles if modal is open
   if (disable) {
     // Cross-browser
