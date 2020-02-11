@@ -1,0 +1,37 @@
+@mixin absolute-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+body {
+    background-color: grey;
+}
+
+.sezzle-checkout-modal-hidden {
+    .sezzle-modal {
+        @include absolute-center();
+        z-index: 99999999;
+        max-height: 100%;
+        background: url('./modal-background-large.svg');
+        width: 60%;
+        height: 80%;
+        max-width: 100%;
+        box-shadow: 0 10px 20px rgba(5, 31, 52, 0.19), 0 6px 6px rgba(5, 31, 52, 0.2);
+    }
+    .svg-container {
+        position: relative; 
+        height:0;
+        width: 100%;
+        padding: 0;
+        padding-bottom: 100%;
+    }
+    svg {
+        position: absolute; 
+        height: 100%; 
+        width: 100%; 
+        left: 0; 
+        top:0;
+    }
+}

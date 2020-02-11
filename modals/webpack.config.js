@@ -32,6 +32,17 @@ module.exports = {
       }
     ]),
   ],
+  module: {
+    rules: [
+        {
+            test: /\.svg/,
+            use: {
+                loader: 'svg-url-loader',
+                options: {noquotes: true,}
+            }
+        }
+    ]
+  },
   mode: 'production',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
