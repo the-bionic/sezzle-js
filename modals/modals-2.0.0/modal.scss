@@ -2,8 +2,10 @@
 
 $breakpoint-large: 1150px;
 $breakpoint-small: 950px;
-
 $breakpoint-mobile: 600px;
+
+$font-color: #382757;
+$font-family: Comfortaa;
 
 @mixin absolute-center {
     top: 50%;
@@ -26,6 +28,8 @@ $breakpoint-mobile: 600px;
         height: auto;
         max-height: 90%;
         width: 60%;
+        color: $font-color;
+        font-family: $font-family;
         background-color: white;
         overflow: auto;
         padding: 20px 0;
@@ -74,8 +78,6 @@ $breakpoint-mobile: 600px;
     .sezzle-header {
         margin: 30px auto 0;
         width: 70%;
-        color: #382757;
-        font-family: Comfortaa;
         font-size: 28px;
         line-height: 32px;
         font-weight: 700;
@@ -107,9 +109,7 @@ $breakpoint-mobile: 600px;
 
     .sezzle-row {
         width: 70%;
-        margin: 10px auto 0;    
-        color: #382757;
-        font-family: Comfortaa;
+        margin: 10px auto 0;
         font-size: 18px;
         line-height: 28px;
 
@@ -146,8 +146,6 @@ $breakpoint-mobile: 600px;
         padding-right: 8px;
     }
     .percentage {
-        color: #382757;
-        font-family: Comfortaa;
         font-size: 28px;
         line-height: 32px;
         font-weight: 700;
@@ -157,8 +155,6 @@ $breakpoint-mobile: 600px;
         }
     }
     .week {
-        color: #382757;
-        font-family: Comfortaa;
         font-size: 18px;
         line-height: 20px;
 
@@ -181,9 +177,7 @@ $breakpoint-mobile: 600px;
         display: table-cell;
         vertical-align: baseline;
         width: 32%;
-        color: #382757;
         font-weight: 700;
-        font-family: Comfortaa;
         font-size: 18px;
         line-height: 21px;
         padding: 10px;
@@ -196,8 +190,6 @@ $breakpoint-mobile: 600px;
         }
     }
     .sub-feature {
-        color: #382757;
-        font-family: Comfortaa;
         font-size: 12px;
         line-height: 21px;
         font-weight: 300;
@@ -223,14 +215,11 @@ $breakpoint-mobile: 600px;
     .button-text {
         margin: 0 auto;
         color: #FFFFFF;
-        font-family: Comfortaa;
         font-size: 18px;
         line-height: 20px;
     }
     .no-thanks {
         margin: 30px auto 0;
-        color: #382757;
-        font-family: Comfortaa;
         font-size: 12px;
         line-height: 17px;
         font-weight: 700;
@@ -239,8 +228,6 @@ $breakpoint-mobile: 600px;
     }
     .terms {
         margin: 10px auto;
-        color: #382757;
-        font-family: Comfortaa;
         font-size: 12px;
         line-height: 17px;
     }
