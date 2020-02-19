@@ -20,3 +20,5 @@
   ```
 - Run `npm run release-modal -- --newversion=<version>` command locally on your `latest master`. In this case the command should look like `npm run release-modal -- --newversion=2.0.1`
 -- This will create and push a new branch and merging that branch with master will release a new version.
+
+- To update a modal run `npm run update-modal -- --updateversion=<version>` command locally on your `latest master`.  In this case the command should look like `npm run update-modal -- --updateversion=2.0.1`.  This will update an existing modal with the specified version.
