@@ -739,10 +739,12 @@ SezzleJS.prototype.disableBodyScroll = function (disable) {
     // reset scroll in background because of previous step
     bodyElement.style.top = (this.scrollDistance * -1) + 'px';
   }
-  // Remove styles if modal closes and resets scroll position
+  // Remove styles if modal closes and resets body scroll position as well modal scroll to 0,0
   else {
     bodyElement.classList.remove('sezzle-modal-open');
     window.scrollTo(0, this.scrollDistance);
+    // reset modal scroll
+    document.querySelector('.sezzle-modal').scrollTo(0,0);
   }
 };
 
