@@ -1,5 +1,4 @@
 const Helper = require('./helper');
-
 const SezzleJS = function (options) {
   if (!options) options = {};
   // convert to new config if options passed in is old config
@@ -740,10 +739,12 @@ SezzleJS.prototype.disableBodyScroll = function (disable) {
     // reset scroll in background because of previous step
     bodyElement.style.top = (this.scrollDistance * -1) + 'px';
   }
-  // Remove styles if modal closes and resets scroll position
+  // Remove styles if modal closes and resets body scroll position as well modal scroll to 0,0
   else {
     bodyElement.classList.remove('sezzle-modal-open');
     window.scrollTo(0, this.scrollDistance);
+    // reset modal scroll
+    document.querySelector('.sezzle-modal').scrollTo(0,0);
   }
 };
 
@@ -950,6 +951,7 @@ SezzleJS.prototype.getCSSVersionForMerchant = function (callback) {
 };
 
 SezzleJS.prototype.getModal = function (modalNode, callback) {
+  console.log('getModal function run');
   if (document.sezzleDefaultModalVersion && document.sezzleModalAvailableLanguages) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function () {
@@ -966,6 +968,8 @@ SezzleJS.prototype.getModal = function (modalNode, callback) {
       }
     }.bind(this);
     // Convert document.sezzleModalAvailableLanguages into Array
+    
+    console.log(document.sezzleDefaultModalVersion,document.sezzleModalAvailableLanguages, '##')
     var availableLanguages = document.sezzleModalAvailableLanguages.split(',').map(function(singleLanguage) {
       return singleLanguage.trim();
     });
@@ -975,7 +979,7 @@ SezzleJS.prototype.getModal = function (modalNode, callback) {
     } else {
       modalLanguage = 'en';
     }
-    var url = 'https://media.sezzle.com/shopify-app/assets/' + document.sezzleDefaultModalVersion.replace("{%%s%%}", modalLanguage);
+     var url = 'https://media.sezzle.com/shopify-app/assets/' + document.sezzleDefaultModalVersion.replace("{%%s%%}", modalLanguage);
     httpRequest.open('GET', url, true);
     httpRequest.send();
   }

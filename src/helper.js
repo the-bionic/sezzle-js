@@ -290,13 +290,38 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
     result.hasPriceClassElement = true;
   }
   result.theme = configGroup.theme || (defaultConfig && defaultConfig.theme) || 'light';
-  if (result.theme == 'dark') {
-    result.imageURL = configGroup.imageUrl || (defaultConfig && defaultConfig.imageUrl) || 'https://d34uoa9py2cgca.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-white-sm-100w.png';
-    result.imageClassName = 'szl-dark-image';
-  } else {
-    result.imageURL = configGroup.imageUrl || (defaultConfig && defaultConfig.imageUrl) || 'https://d3svog4tlx445w.cloudfront.net/branding/sezzle-logos/png/sezzle-logo-sm-100w.png';
+  /* Theme can now be 
+    a) dark (for dark backgrounds)
+    b) greyscale 
+    c) white
+    d) light (for light backgrounds)
+  */
+ switch(result.theme){
+   case "dark":
+   result.imageURL = configGroup.imageUrl || (defaultConfig && defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg';
+   result.imageClassName = 'szl-dark-image';
+   break;
+   case "grayscale":
+   result.imageURL = configGroup.imageUrl || (defaultConfig && defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_Black.svg';
+   result.imageClassName = 'szl-dark-image';
+   break;
+   case "white":
+   result.imageURL = configGroup.imageUrl || (defaultConfig && defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_White.svg';
+   result.imageClassName = 'szl-dark-image';
+   break;
+   case "white-flat":
+   result.imageURL = configGroup.imageUrl || (defaultConfig && defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_WhiteAlt.svg';
+   result.imageClassName = 'szl-dark-image';
+   break;
+   case "black-flat":
+   result.imageURL = configGroup.imageUrl || (defaultConfig && defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_BlackAlt.svg';
+   result.imageClassName = 'szl-dark-image';
+   break;
+   default:
+   result.imageURL = configGroup.imageUrl || (defaultConfig && defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg';
     result.imageClassName = 'szl-light-image';
-  }
+    break;
+ }
   result.hideClasses = configGroup.hideClasses || (defaultConfig && defaultConfig.hideClasses) || [];
   if (typeof (result.hideClasses) === 'string') {
     // Only one x-path is given
