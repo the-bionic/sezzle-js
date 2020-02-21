@@ -313,6 +313,7 @@ $font-family: Comfortaa;
             transform: rotate(-45deg);
         }
 
+        // always show x for mobile
         @media screen and (max-width: $breakpoint-small) {
             opacity: 1;
         }
