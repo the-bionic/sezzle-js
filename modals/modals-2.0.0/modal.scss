@@ -104,28 +104,6 @@ $font-family: Comfortaa;
         }
     }
 
-    .sezzle-close-modal {
-        position: fixed;
-        cursor: pointer;
-        top: 0;
-        right: 8px;
-        font-size: 27pt;
-        padding: 3px;
-
-        &:hover {
-            transform: scale(1.1);
-            color: #f08570;
-        }
-
-        @media screen and (max-width: $breakpoint-small) {
-            top: 1px;
-            right: 3px;
-            font-size: 20pt;
-            color: #f08570;
-            padding: 10px;
-        }
-    }
-
     .sezzle-header {
         margin: 30px auto 0;
         width: 70%;
@@ -305,5 +283,38 @@ $font-family: Comfortaa;
         color: #037269;
         margin-top: 20px;
         margin-bottom: 10px;
+    }
+    .sezzle-close-modal {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+        width: 24px;
+        height: 24px;
+        opacity: 0.2;
+        
+        &:hover {
+            opacity: 1;
+        }
+
+        &:before, &:after {
+            position: absolute;
+            left: 12px;
+            content: ' ';
+            height: 24px;
+            width: 3px;
+            background-color: #f08570;
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+
+        @media screen and (max-width: $breakpoint-small) {
+            opacity: 1;
+        }
     }
 }
