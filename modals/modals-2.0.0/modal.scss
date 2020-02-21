@@ -104,6 +104,28 @@ $font-family: Comfortaa;
         }
     }
 
+    .sezzle-close-modal {
+        position: fixed;
+        cursor: pointer;
+        top: 0;
+        right: 8px;
+        font-size: 27pt;
+        padding: 3px;
+
+        &:hover {
+            transform: scale(1.1);
+            color: #f08570;
+        }
+
+        @media screen and (max-width: $breakpoint-small) {
+            top: 1px;
+            right: 3px;
+            font-size: 20pt;
+            color: #f08570;
+            padding: 10px;
+        }
+    }
+
     .sezzle-header {
         margin: 30px auto 0;
         width: 70%;
@@ -114,6 +136,11 @@ $font-family: Comfortaa;
         @media screen and (min-width: $breakpoint-small) {
             font-size: 24px;
             margin: 25px auto 0;
+            line-height: 27px;
+        }
+
+        @media screen and (max-width: $breakpoint-small) {
+            line-height: 27px;
         }
 
         @media screen and (max-width: 727px) {
@@ -148,6 +175,8 @@ $font-family: Comfortaa;
         }
 
         .desktop {
+            line-height: 1.2;
+            
             @media screen and (max-width: $breakpoint-small) {
                 display: none;
             }
@@ -155,7 +184,8 @@ $font-family: Comfortaa;
 
         .mobile {
             display: none;
-    
+            line-height: 1.2;
+
             @media screen and (max-width: $breakpoint-small) {
                 display: block;
             }
@@ -253,24 +283,14 @@ $font-family: Comfortaa;
     .sezzle-button:hover {
         opacity: 0.8;
     }
-    .button-text {
-        margin: 0 auto;
-        color: #037269;
-        font-size: 18px;
-        line-height: 20px;
-    }
-    .no-thanks {
-        margin: 30px auto 0;
-        font-size: 12px;
-        line-height: 17px;
-        font-weight: 700;
-        text-decoration: underline;
-        cursor: pointer;
-    }
     .terms {
         margin: 10px auto;
         font-size: 12px;
         line-height: 17px;
+
+        @media screen and (max-width: $breakpoint-small ){
+            margin: 30px auto 10px; 
+        }
     }
     .just-select-sezzle {
         font-size: 23px;
@@ -278,14 +298,6 @@ $font-family: Comfortaa;
         color: #037269;
         margin-top: 40px;
         margin-bottom:50px;
-
-        span {
-            text-decoration: none;
-            color: #037269;
-            border-bottom: 3px solid #037269;
-            padding-bottom: 7px;
-            border-radius: 1.5px;
-        }
     }
     .just-select-sezzle-mobile {
         font-size: 23px;
@@ -293,13 +305,5 @@ $font-family: Comfortaa;
         color: #037269;
         margin-top: 20px;
         margin-bottom: 10px;
-    }    
-    .just-select-sezzle-mobile > hr {
-        background-color: #037269;
-        height: 3px;
-        width: 84px;
-        border-radius: 1.5 !important;
-        margin: 5px auto;
-        margin-bottom: 40px;
     }
 }
