@@ -233,6 +233,7 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
   result.bannerClass = configGroup.bannerClass || (defaultConfig && defaultConfig.bannerClass) || '';
   result.bannerLink = configGroup.bannerLink || (defaultConfig && defaultConfig.bannerLink) || '';
   result.fontWeight = configGroup.fontWeight || (defaultConfig && defaultConfig.fontWeight) || 300;
+  result.lineHeight = configGroup.lineHeight || (defaultConfig && defaultConfig.lineHeight) ||  '13px';
   result.alignmentSwitchMinWidth = configGroup.alignmentSwitchMinWidth || (defaultConfig && defaultConfig.alignmentSwitchMinWidth); //pixels
   result.alignmentSwitchType = configGroup.alignmentSwitchType || (defaultConfig && defaultConfig.alignmentSwitchType);
   result.marginTop = configGroup.marginTop || (defaultConfig && defaultConfig.marginTop) || 0; //pixels
