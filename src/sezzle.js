@@ -211,6 +211,8 @@ SezzleJS.prototype.addCSSFontStyle = function (element, configGroupIndex) {
   if (this.configGroups[configGroupIndex].fontSize != 'inherit') {
     element.style.fontSize = this.configGroups[configGroupIndex].fontSize + 'px';
   }
+  element.style.lineHeight = this.configGroups[configGroupIndex].lineHeight || '13px';
+  
 };
 
 /**
@@ -951,7 +953,6 @@ SezzleJS.prototype.getCSSVersionForMerchant = function (callback) {
 };
 
 SezzleJS.prototype.getModal = function (modalNode, callback) {
-  console.log('getModal function run');
   if (document.sezzleDefaultModalVersion && document.sezzleModalAvailableLanguages) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function () {
@@ -969,7 +970,6 @@ SezzleJS.prototype.getModal = function (modalNode, callback) {
     }.bind(this);
     // Convert document.sezzleModalAvailableLanguages into Array
     
-    console.log(document.sezzleDefaultModalVersion,document.sezzleModalAvailableLanguages, '##')
     var availableLanguages = document.sezzleModalAvailableLanguages.split(',').map(function(singleLanguage) {
       return singleLanguage.trim();
     });
