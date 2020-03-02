@@ -745,6 +745,7 @@ SezzleJS.prototype.disableBodyScroll = function (disable) {
   else {
     bodyElement.classList.remove('sezzle-modal-open');
     window.scrollTo(0, this.scrollDistance);
+    bodyElement.style.top = 0;
     // reset modal scroll
     document.querySelector('.sezzle-modal').scrollTo(0,0);
   }
