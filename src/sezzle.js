@@ -908,7 +908,7 @@ SezzleJS.prototype.addClickEventForModal = function (sezzleElement, configGroupI
 SezzleJS.prototype.getCountryCodeFromIP = function (callback) {
   var httpRequest = new XMLHttpRequest();
   httpRequest.onreadystatechange = function () {
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+    if (httpRequest.readyState === XMLHttpRequest.DONE || httpRequest.readyState === 4) {
       if (httpRequest.status === 200) {
         var body = httpRequest.response;
         if (typeof (body) === 'string') body = JSON.parse(body);
@@ -935,7 +935,7 @@ SezzleJS.prototype.getCSSVersionForMerchant = function (callback) {
   } else {
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function () {
-      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.readyState === XMLHttpRequest.DONE || httpRequest.readyState === 4) {
         if (httpRequest.status === 200) {
           if (httpRequest.response.version === undefined) {
             var ParsedObject = JSON.parse(httpRequest.response);
@@ -957,7 +957,7 @@ SezzleJS.prototype.getModal = function (modalNode, callback) {
   if (document.sezzleDefaultModalVersion && document.sezzleModalAvailableLanguages) {
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function () {
-      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.readyState === XMLHttpRequest.DONE || httpRequest.readyState === 4) {
         if (httpRequest.status === 200) {
           // append the html to the modal node
           modalNode.innerHTML = httpRequest.response;
