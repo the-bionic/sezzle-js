@@ -1,6 +1,6 @@
 {
   "modal-1.0.0": "Fri, 13 Sep 2019 14:35:02 GMT",
-  "modal": "2.0.0",
+  "modal": "10.0.0",
   "modal-1.0.1": "Wed, 30 Oct 2019 06:38:57 GMT",
   "modal-1.0.4": "Thu, 09 Jan 2020 20:35:55 GMT",
   "modal-1.0.2": "Wed, 30 Oct 2019 06:40:00 GMT",
@@ -11,5 +11,6 @@
   "modal-1.0.8": "Mon, 17 Feb 2020 03:43:48 GMT",
   "modal-1.0.9": "Sat, 25 Jan 2020 01:40:04 GMT",
   "modal-1.0.10": "Tue, 28 Jan 2020 19:00:05 GMT",
-  "modal-2.0.0": "Wed, 04 Mar 2020 19:30:21 GMT"
+  "modal-2.0.0": "Wed, 04 Mar 2020 19:30:21 GMT",
+  "modal-10.0.0": "Mon, 16 Mar 2020 22:49:29 GMT"
 }
