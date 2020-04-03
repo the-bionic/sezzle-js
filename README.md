@@ -80,3 +80,20 @@ Example: For the below code snippet, the following would all be valid as a targe
 For further customization, please check out the available options [here](/widget-options.md)
 
 If you run into any issues please contact merchantsupport@sezzle.com, or request Sezzle to add the widgets for you through your Merchant Dashboard > Setup Checklist > Add Widgets to Product Pages.
+
+
+##Sezzle Checkout Button 
+
+Place the following in the cart page whereever you want to place the checkout button 
+```
+<sezzle-button  
+  theme='light' 
+  template= 'Pay with %%logo%%' 
+  borderType ='square'
+/>
+```
+
+
+Theme can either be 'light' or 'dark'
+Template is what will be displayed on merchant website
+borderType can be -> rounded, square, semi-rounded
