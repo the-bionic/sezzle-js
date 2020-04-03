@@ -1,4 +1,8 @@
 const Helper = require('./helper');
+import SezzleCheckoutButton from './sezzleCheckoutButton'
+
+window.customElements.define('sezzle-button', SezzleCheckoutButton);
+
 const SezzleJS = function (options) {
   if (!options) options = {};
   // convert to new config if options passed in is old config
