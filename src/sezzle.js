@@ -1,7 +1,7 @@
 const Helper = require('./helper');
 import SezzleCheckoutButton from './sezzleCheckoutButton'
 
-window.customElements.define('sezzle-button', SezzleCheckoutButton);
+if(window.customElements) window.customElements.define('sezzle-button', SezzleCheckoutButton);
 
 const SezzleJS = function (options) {
   if (!options) options = {};
