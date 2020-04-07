@@ -1,3 +1,4 @@
+/* eslint-disable */
 var gulp = require('gulp'),
   sass = require('gulp-ruby-sass'),
   autoprefixer = require('gulp-autoprefixer'),
@@ -245,7 +246,7 @@ gulp.task('bundlejs', function () {
         filename: buttonUploadName
       },
       optimization: {
-        minimize: true // <---- disables uglify.
+        minimize: false // <---- disables uglify.
       },
       mode: 'production'
     }))
