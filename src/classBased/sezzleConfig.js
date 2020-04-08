@@ -1,3 +1,5 @@
+import Utils from './utils';
+
 const cloneDeep = require('lodash.clonedeep');
 
 class sezzleConfig {
@@ -23,7 +25,7 @@ class sezzleConfig {
     // Sezzle Config starts here
     this.sezzleConfig = {
       config: null,
-      configGroups: [],
+      configGroups: null,
       merchantID: null,
       forcedShow: null,
       numberOfPayments: null,
@@ -34,14 +36,15 @@ class sezzleConfig {
       qpModalHTML: null,
       affirmModalHTML: null,
       supportedCountryCodes: null,
-      mutationObserverConfig: { attributes: true, childList: true, characterData: true },
       noTracking: null,
       noGtm: null,
       countryCode: null,
       ip: null,
       fingerprint: null,
-      browserLanguage: (navigator.language || navigator.browserLanguage || 'en').substring(0, 2).toLowerCase(),
       language: null,
+      // pre-defined config properties
+      browserLanguage: (navigator.language || navigator.browserLanguage || 'en').substring(0, 2).toLowerCase(),
+      mutationObserverConfig: { attributes: true, childList: true, characterData: true },
       apiEndpoints: {
         sezzleAssetsCDN: 'https://media.sezzle.com/shopify-app/assets/',
         countryFromIPRequestURL: 'https://geoip.sezzle.com/v1/geoip/ipdetails',
@@ -229,51 +232,44 @@ class sezzleConfig {
     // are pretty loose, but at least the crucial parts of it are OK. May add more checks in the future.
   }
 
+  /**
+   * @description filter off config groups which do not match the current URL
+   */
   _urlConfigFilter() {
-    // filter off config groups which do not match the current URL
     this.options.configGroups = this.options.configGroups
       .filter((configGroup) => !configGroup.urlMatch || RegExp(configGroup.urlMatch).test(window.location.href));
   }
 
+  /**
+   * @description sets config once the options are modified
+   */
   _configSetters() {
-    this.sezzleConfig.config = this.options;
-    this.sezzleConfig.merchantID = this.options.merchantID || '';
-    this.sezzleConfig.forcedShow = this.options.forcedShow || false;
-    this.sezzleConfig.numberOfPayments = this.options.numberOfPayments || 4;
-    this.sezzleConfig.minPrice = this.options.minPrice || 4;
-    this.sezzleConfig.maxPrice = this.options.maxPrice || 4;
-    this.sezzleConfig.altModalHTML = this.options.altLightboxHTML || '';
-    this.sezzleConfig.apModalHTML = this.options.apModalHTML || '';
-    this.sezzleConfig.qpModalHTML = this.options.qpModalHTML || '';
-    this.sezzleConfig.affirmModalHTML = this.options.affirmModalHTML || '';
-    this.sezzleConfig.supportedCountryCodes = this.options.supportedCountryCodes || ['US', 'IN', 'CA'];
-    this.sezzleConfig.noTracking = !!this.options.noTracking;
-    this.sezzleConfig.noGtm = !!this.options.noGtm;
+    const modifiedSezzleConfig = {
+      config: this.options,
+      merchantID: this.options.merchantID || '',
+      forcedShow: this.options.forcedShow || false,
+      numberOfPayments: this.options.numberOfPayments || 4,
+      minPrice: this.options.minPrice || 0,
+      maxPrice: this.options.maxPrice || 25000,
+      altModalHTML: this.options.altLightboxHTML || '',
+      apModalHTML: this.options.apModalHTML || '',
+      qpModalHTML: this.options.qpModalHTML || '',
+      affirmModalHTML: this.options.affirmModalHTML || '',
+      supportedCountryCodes: this.options.supportedCountryCodes || ['US', 'IN', 'CA'],
+      noTracking: !!this.options.noTracking,
+      noGtm: !!this.options.noGtm,
+    };
+
+    this.sezzleConfig = { ...this.sezzleConfig, ...modifiedSezzleConfig };
   }
 
   _languageSetter() {
-    switch (typeof (this.options.language)) {
-    case 'string':
-      this.sezzleConfig.language = this.options.language;
-      break;
-    case 'function':
-      this.sezzleConfig.language = this.options.language();
-      break;
-    default:
-      this.sezzleConfig.language = this.browserLanguage;
-    }
+    const type = typeof (this.options.language);
+    if (type === 'string') this.sezzleConfig.language = this.options.language;
+    else if (type === 'function') this.sezzleConfig.language = this.options.language();
+    else this.sezzleConfig.language = this.browserLanguage;
 
     if (this.options.language !== 'en' && this.options.language !== 'fr') this.sezzleConfig.language = this.options.browserLanguage;
-  }
-
-  /**
-   * This is a helper function to break xpath into array
-   * @param xpath string Ex: './.class1/#id'
-   * @returns string[] Ex: ['.', '.class', '#id']
-   */
-  // eslint-disable-next-line class-methods-use-this
-  _breakXPath(xpath) {
-    return xpath.split('/').filter((subpath) => subpath !== '');
   }
 
   /**
@@ -316,7 +312,7 @@ class sezzleConfig {
     const result = {};
     // targetXPath SHOULD NOT be specified in defaultConfig since
     // it is like an ID for a configGroup (except if adding the price element class is used)
-    result.xpath = this._breakXPath(configGroup.targetXPath);
+    result.xpath = Utils.breakXPath(configGroup.targetXPath);
     result.rendertopath = configGroup.renderToPath || (this.options.defaultConfig && this.options.defaultConfig.renderToPath) || '..';
     // This array in which its elements are objects with two keys
     // relatedPath - this is a xpath of an element related to the price element
@@ -327,17 +323,14 @@ class sezzleConfig {
 
     if (typeof (result.ignoredPriceElements) === 'string') {
       // Only one x-path is given
-      result.ignoredPriceElements = [this._breakXPath(result.ignoredPriceElements.trim())];
+      result.ignoredPriceElements = [Utils.breakXPath(result.ignoredPriceElements.trim())];
     } else {
       // result.ignoredPriceElements is an array of x-paths
-      result.ignoredPriceElements = result.ignoredPriceElements.map((path) => this._breakXPath(path.trim()));
+      result.ignoredPriceElements = result.ignoredPriceElements.map((path) => Utils.breakXPath(path.trim()));
     }
 
     result.alignment = configGroup.alignment || (this.options.defaultConfig && this.options.defaultConfig.alignment) || 'auto';
     result.widgetType = configGroup.widgetType || (this.options.defaultConfig && this.options.defaultConfig.widgetType) || 'product-page';
-    result.bannerURL = configGroup.bannerURL || (this.options.defaultConfig && this.options.defaultConfig.bannerURL) || '';
-    result.bannerClass = configGroup.bannerClass || (this.options.defaultConfig && this.options.defaultConfig.bannerClass) || '';
-    result.bannerLink = configGroup.bannerLink || (this.options.defaultConfig && this.options.defaultConfig.bannerLink) || '';
     result.fontWeight = configGroup.fontWeight || (this.options.defaultConfig && this.options.defaultConfig.fontWeight) || 300;
     result.lineHeight = configGroup.lineHeight || (this.options.defaultConfig && this.options.defaultConfig.lineHeight) || '13px';
     result.alignmentSwitchMinWidth = configGroup.alignmentSwitchMinWidth || (this.options.defaultConfig && this.options.defaultConfig.alignmentSwitchMinWidth); // pixels
@@ -432,10 +425,10 @@ class sezzleConfig {
     result.hideClasses = configGroup.hideClasses || (this.options.defaultConfig && this.options.defaultConfig.hideClasses) || [];
     if (typeof (result.hideClasses) === 'string') {
       // Only one x-path is given
-      result.hideClasses = [this._breakXPath(result.hideClasses.trim())];
+      result.hideClasses = [Utils.breakXPath(result.hideClasses.trim())];
     } else {
       // result.hideClasses is an array of x-paths
-      result.hideClasses = result.hideClasses.map((path) => this._breakXPath(path.trim()));
+      result.hideClasses = result.hideClasses.map((path) => Utils.breakXPath(path.trim()));
     }
     result.ignoredFormattedPriceText = configGroup.ignoredFormattedPriceText
       || (this.options.defaultConfig && this.options.defaultConfig.ignoredFormattedPriceText)
@@ -450,7 +443,11 @@ class sezzleConfig {
     return result;
   }
 
+  /**
+   * @description map config group props
+   */
   _setConfigGroups() {
+    this.sezzleConfig.configGroups = [];
     this.options.configGroups.forEach((configGroup) => {
       this.sezzleConfig.configGroups
         .push(this._mapGroupToDefault(configGroup));

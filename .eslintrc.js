@@ -37,6 +37,7 @@ module.exports = {
     "no-param-reassign": "off",
     "func-names": ["error", "never"],
     "no-cycle": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-useless-escape": "off"
   },
 };
