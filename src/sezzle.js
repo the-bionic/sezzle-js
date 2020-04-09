@@ -1,7 +1,5 @@
 const Helper = require('./helper');
-import SezzleCheckoutButton from './sezzleCheckoutButton'
 
-if(window && window.customElements) window.customElements.define('sezzle-button', SezzleCheckoutButton);
 
 const SezzleJS = function (options) {
   if (!options) options = {};
@@ -67,6 +65,7 @@ const SezzleJS = function (options) {
   options.configGroups.forEach(function (configGroup) {
     this.configGroups.push(Helper.mapGroupToDefault(configGroup, options.defaultConfig, this.numberOfPayments, this.language));
   }.bind(this));
+  
 };
 
 /**
@@ -281,6 +280,160 @@ SezzleJS.prototype.insertStoreCSSClassInElement = function (element) {
   element.className += ' sezzle-' + this.merchantID;
 };
 
+
+SezzleJS.prototype.createSezzleButton = function (configGroupIndex) {
+  const buttonConfig  = this.configGroups[configGroupIndex].sezzleCheckoutButton
+  //general style
+  if(buttonConfig){
+    var sezzleCheckoutButton = document.createElement('button')
+    sezzleCheckoutButton.innerHTML = this.parseButtonTemplate(buttonConfig.template,buttonConfig.theme)
+    switch(buttonConfig.borderType) {
+      case 'square':
+        sezzleCheckoutButton.style.borderRadius = '0px'
+      break;
+      case 'semi-rounded':
+      sezzleCheckoutButton.style.borderRadius = '5px'
+      break;
+      default: 
+      sezzleCheckoutButton.style.borderRadius = '300px'
+      break;
+    }
+    //adding styles to the button
+    sezzleCheckoutButton.classList.add('sezzle-checkout-button','ripple')
+    sezzleCheckoutButton.style.paddingLeft = buttonConfig.paddingX  || '13px';
+    sezzleCheckoutButton.style.paddingRight = buttonConfig.paddingX || '13px';
+    const buttonCSS = this.getCheckoutButtonCSS(buttonConfig.theme)
+    this.embedButtonStyle(buttonCSS)
+    sezzleCheckoutButton.addEventListener('click', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      try { 
+        location.replace('/checkout');
+      } 
+      catch(e) { 
+        location.replace('/checkout');
+      }
+      location.replace('/checkout');
+    });
+    var checkoutButtonParent = document.getElementsByName('checkout')[0].parentElement
+    checkoutButtonParent.append(sezzleCheckoutButton)
+  }
+}
+
+SezzleJS.prototype.embedButtonStyle = function (inputStyle) {
+  var style = document.createElement('style');
+  if (style.styleSheet) {
+  style.styleSheet.cssText = inputStyle;
+  } else {
+      style.appendChild(document.createTextNode(inputStyle));
+  }
+  document.getElementsByTagName('head')[0].appendChild(style);
+  var link = document.createElement('link');
+  link.setAttribute('rel', 'stylesheet');
+  link.setAttribute('type', 'text/css');
+  link.setAttribute('href', 'https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet');
+  document.head.appendChild(link);
+} 
+
+SezzleJS.prototype.parseButtonTemplate = function (template,theme) {
+  const sezzleImage  = {
+    white: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg',
+    colored: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg'
+  }
+  var chosenImage = (theme === 'light')?sezzleImage.white:sezzleImage.colored
+  const templateArray =  template.split(' ')
+  var templateString = '';
+  templateArray.forEach(subtemplate=>{
+    switch(subtemplate) {
+      case '%%logo%%':
+      templateString +=  `<img id='sezzle-logo-img' src=${chosenImage} />`
+      break;
+      default: 
+      templateString += `${subtemplate} `
+    } 
+  })
+  return templateString
+}
+SezzleJS.prototype.getCheckoutButtonCSS = function (theme) {
+  var styles;
+  if(theme === 'light') {
+    styles = `
+    .sezzle-checkout-button {
+      width:auto;
+      height:40px;
+      cursor:pointer;
+      outline:none;
+      border:transparent;
+      font-family:'Comfortaa',cursive;
+      margin-bottom: 10px;
+      font-size: 0.8125em;
+      letter-spacing: 0.15em;
+      background:#392558;
+      color: white;
+    
+  }
+  .ripple {
+      background-position: center;
+      transition: background 0.8s;
+      
+    }
+    .ripple:hover {
+      background: #d784ff radial-gradient(circle, purple 70%, #d784ff 70%) center/15000%;
+      color:white;
+    }
+    .ripple:active {
+      background-color: #d784ff;
+      background-size: 100%;
+      color:white;
+      transition: background 0s;
+    }
+    
+  #sezzle-logo-img {
+      position: relative;
+      width: 50px;
+      top: 3px;
+      }
+    `
+  } else {
+    styles = `
+    .sezzle-checkout-button{ 
+      width:auto;
+      height:40px;
+      cursor:pointer;
+      outline:none;
+      border:transparent;
+      font-family:'Comfortaa',cursive;
+      margin-bottom: 10px;
+      font-size: 0.8125em;
+      letter-spacing: 0.15em;
+      background:#fff;
+      color: #392558;
+    }
+    .ripple {
+      background-position: center;
+      transition: background 0.8s;
+      
+    }
+    .ripple:hover {
+      background: #eee radial-gradient(circle, grey 70%, #eee 70%) center/15000%;
+      color:white;
+    }
+    .ripple:active {
+      background-color: #d784ff;
+      background-size: 100%;
+      color:white;
+      transition: background 0s;
+    }
+    
+  #sezzle-logo-img {
+      position: relative;
+      width: 50px;
+      top: 3px;
+      }
+    `
+  }
+  return styles;
+}
 /**
  * Insert css class name in element
  * @param element to add class to
@@ -369,6 +522,7 @@ SezzleJS.prototype.setLogoStyle = function (element, configGroupIndex) {
  * @return void
  */
 SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index = 0, configGroupIndex) {
+  this.createSezzleButton(configGroupIndex)
   // Do not render this product if it is not eligible
   var priceText = this.getPriceText(element, configGroupIndex);
   if (!this.isProductEligible(priceText, configGroupIndex)) return false;
@@ -388,6 +542,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   // TODO: why there is a shopify specific naming
   sezzle.className = "sezzle-shopify-info-button sezzlewidgetindex-" + index;
   this.insertWidgetTypeCSSClassInElement(sezzle, configGroupIndex);
+  
   this.insertStoreCSSClassInElement(sezzle);
   this.setElementMargins(sezzle, configGroupIndex);
   if (this.configGroups[configGroupIndex].scaleFactor) this.setWidgetSize(sezzle, configGroupIndex);
@@ -1265,6 +1420,7 @@ SezzleJS.prototype.initWidget = function () {
     }.bind(this));
     // add the sezzle widget to the price elements
     els.forEach(function (el, index) {
+     
       if (!el.element.hasAttribute('data-sezzleindex')) {
         var sz = this.renderAwesomeSezzle(
           el.element, el.toRenderElement,

@@ -218,6 +218,15 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
   // initialAction - this is a function to act upon a pre existing element's condition
   result.relatedElementActions = configGroup.relatedElementActions || (defaultConfig && defaultConfig.relatedElementActions) || [];
   result.ignoredPriceElements = configGroup.ignoredPriceElements || (defaultConfig && defaultConfig.ignoredPriceElements) || [];
+
+  //Below is for sezzle checkout button
+  if(configGroup.urlMatch === 'cart'){
+    result.sezzleCheckoutButton = configGroup.sezzleCheckoutButton
+  }else{
+    console.warn('sezzleCheckoutButton can be part of cart pages only');
+  } 
+  //
+  //
   if (typeof (result.ignoredPriceElements) === 'string') {
     // Only one x-path is given
     result.ignoredPriceElements = [this.breakXPath(result.ignoredPriceElements.trim())];
