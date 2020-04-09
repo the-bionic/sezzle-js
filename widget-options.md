@@ -413,6 +413,21 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 **Options**: false, true<br/>
 **Default**: false
 
+`sezzleCheckoutButton` (Can only be a part of cart config; optional)
+**Purpose**: Show Sezzle Checkout Button on the Cart Page<br/>
+**Type**: Object<br/>
+**Options**: {
+  "template" : "Pay with %%logo%%",
+  "theme" : "light",
+  "borderType" : "square",
+  "paddingX" : "13px"
+}<br/>
+**Default**: {
+  "template" : "Checkout with %%logo%%",
+  "theme" : "light",
+  "borderType" : "rounded",
+  "paddingX" : "13px"
+}
 <!-- 
 ## Status Definitions:
 

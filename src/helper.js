@@ -219,14 +219,9 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
   result.relatedElementActions = configGroup.relatedElementActions || (defaultConfig && defaultConfig.relatedElementActions) || [];
   result.ignoredPriceElements = configGroup.ignoredPriceElements || (defaultConfig && defaultConfig.ignoredPriceElements) || [];
 
-  //Below is for sezzle checkout button
-  if(configGroup.urlMatch === 'cart'){
-    result.sezzleCheckoutButton = configGroup.sezzleCheckoutButton
-  }else{
-    console.warn('sezzleCheckoutButton can be part of cart pages only');
-  } 
-  //
-  //
+  // Below is for sezzle checkout button
+  result.sezzleCheckoutButton = configGroup.sezzleCheckoutButton;
+  
   if (typeof (result.ignoredPriceElements) === 'string') {
     // Only one x-path is given
     result.ignoredPriceElements = [this.breakXPath(result.ignoredPriceElements.trim())];
