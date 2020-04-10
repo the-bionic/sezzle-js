@@ -218,14 +218,14 @@ exports.mapGroupToDefault = function(configGroup, defaultConfig, numberOfPayment
   // initialAction - this is a function to act upon a pre existing element's condition
   result.relatedElementActions = configGroup.relatedElementActions || (defaultConfig && defaultConfig.relatedElementActions) || [];
   result.ignoredPriceElements = configGroup.ignoredPriceElements || (defaultConfig && defaultConfig.ignoredPriceElements) || [];
-
   // Below is for sezzle checkout button
   result.sezzleCheckoutButton = configGroup.sezzleCheckoutButton;
-  result.sezzleCheckoutButton.theme  = result.sezzleCheckoutButton.theme || "light";
-  result.sezzleCheckoutButton.paddingX  = result.sezzleCheckoutButton.paddingX || "13px";
-  result.sezzleCheckoutButton.template  = result.sezzleCheckoutButton.template || "Checkout with %%logo%%";
-  result.sezzleCheckoutButton.borderType  = result.sezzleCheckoutButton.borderType || "rounded";
-  
+  if (result.sezzleCheckoutButton) {
+    result.sezzleCheckoutButton.theme  = result.sezzleCheckoutButton.theme || "light";
+    result.sezzleCheckoutButton.paddingX  = result.sezzleCheckoutButton.paddingX || "13px";
+    result.sezzleCheckoutButton.template  = result.sezzleCheckoutButton.template || "Checkout with %%logo%%";
+    result.sezzleCheckoutButton.borderType  = result.sezzleCheckoutButton.borderType || "rounded";
+  }
   if (typeof (result.ignoredPriceElements) === 'string') {
     // Only one x-path is given
     result.ignoredPriceElements = [this.breakXPath(result.ignoredPriceElements.trim())];

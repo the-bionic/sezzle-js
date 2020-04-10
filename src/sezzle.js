@@ -1,12 +1,10 @@
 const Helper = require('./helper');
-
-
 const SezzleJS = function (options) {
   if (!options) options = {};
-  // convert to new config if options passed in is old config
+  // Convert to new config if options passed in is old config
   var isOldConfig = typeof (options.configGroups) === 'undefined';
   if (isOldConfig) options = Helper.makeCompatible(options);
-  // validate config structure
+  // Validate config structure
   Helper.validateConfig(options);
   // filter off config groups which do not match the current URL
   options.configGroups = options.configGroups.filter(function (configGroup) {
