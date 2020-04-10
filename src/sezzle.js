@@ -56,7 +56,6 @@ const SezzleJS = function (options) {
       break;
     default:
       this.language = this.browserLanguage;
-      break;
   }
   if(this.language  !== 'en' && this.language !== 'fr'){
     this.language = this.browserLanguage;
@@ -174,9 +173,7 @@ SezzleJS.prototype.addCSSAlignment = function (element, configGroupIndex) {
     case 'center':
       element.className += ' sezzle-center';
       break;
-    default:
-      // if there is no alignment specified, it will be auto
-      break;
+    default: ; 
   }
 };
 
@@ -255,7 +252,6 @@ SezzleJS.prototype.addCSSTheme = function (element, configGroupIndex) {
       break;
     default:
       element.className += ' szl-light';
-      break;
   }
 };
 
@@ -288,43 +284,32 @@ SezzleJS.prototype.insertStoreCSSClassInElement = function (element) {
  */
 SezzleJS.prototype.createSezzleButton = function (configGroupIndex) {
   var checkoutButtonParent = document.getElementsByName('checkout')[0].parentElement;
-    if(checkoutButtonParent) {
-      const buttonConfig  = this.configGroups[configGroupIndex].sezzleCheckoutButton;
-      if (buttonConfig.theme === undefined) buttonConfig.theme  = "light";
-      if (buttonConfig.paddingX === undefined) buttonConfig.paddingX  = "13px";
-      if (buttonConfig.template === undefined) buttonConfig.template  = "Checkout with %%logo%%";
-      if (buttonConfig.borderType === undefined) buttonConfig.borderType  = "rounded";
-        var sezzleCheckoutButton = document.createElement('button');
-        sezzleCheckoutButton.innerHTML = this.parseButtonTemplate(buttonConfig.template,buttonConfig.theme);
-        switch(buttonConfig.borderType) {
-          case 'square':
-            sezzleCheckoutButton.style.borderRadius = '0px';
-            break;
-          case 'semi-rounded':
-            sezzleCheckoutButton.style.borderRadius = '5px';
-            break;
-          default: 
-            sezzleCheckoutButton.style.borderRadius = '300px';
-            break;
-        }
-        //adding styles to the button
-        sezzleCheckoutButton.classList.add('sezzle-checkout-button','ripple');
-        buttonConfig.theme === 'light'? sezzleCheckoutButton.classList.add('sezzle-button-light') : sezzleCheckoutButton.classList.add('sezzle-button-dark');
-        sezzleCheckoutButton.style.paddingLeft = buttonConfig.paddingX;
-        sezzleCheckoutButton.style.paddingRight = buttonConfig.paddingX;
-        this.embedButtonFont();
-        sezzleCheckoutButton.addEventListener('click', function (e) {
-          e.stopPropagation();
-          e.preventDefault();
-          try { 
-            location.replace('/checkout');
-          } 
-          catch(e) { 
-            location.replace('/checkout');
-          }
-          location.replace('/checkout');
-        });
-        checkoutButtonParent.append(sezzleCheckoutButton);
+  if(checkoutButtonParent) {
+    const buttonConfig  = this.configGroups[configGroupIndex].sezzleCheckoutButton;
+    var sezzleCheckoutButton = document.createElement('button');
+    sezzleCheckoutButton.innerHTML = this.parseButtonTemplate(buttonConfig.template, buttonConfig.theme);
+    switch(buttonConfig.borderType) {
+      case 'square':
+        sezzleCheckoutButton.style.borderRadius = '0px';
+        break;
+      case 'semi-rounded':
+        sezzleCheckoutButton.style.borderRadius = '5px';
+        break;
+      default: 
+        sezzleCheckoutButton.style.borderRadius = '300px';
+    }
+    // Adding styles to the button
+    sezzleCheckoutButton.classList.add('sezzle-checkout-button');
+    sezzleCheckoutButton.classList.add(`sezzle-button-${buttonConfig.theme}`);
+    sezzleCheckoutButton.style.paddingLeft = buttonConfig.paddingX;
+    sezzleCheckoutButton.style.paddingRight = buttonConfig.paddingX;
+    this.embedButtonFont();
+    sezzleCheckoutButton.addEventListener('click', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      location.replace('/checkout');
+      });
+    checkoutButtonParent.append(sezzleCheckoutButton);
   }
 }
 
@@ -345,22 +330,21 @@ SezzleJS.prototype.embedButtonFont = function () {
  * @param theme -  Theme of the button supplied in the config
  * @return templateString  -  Inner Html of the button
  */
-SezzleJS.prototype.parseButtonTemplate = function (template,theme) {
+SezzleJS.prototype.parseButtonTemplate = function (template, theme) {
   const sezzleImage  = {
-    white: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg',
-    colored: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg'
+    dark: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg',
+    light: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg'
   };
-  var chosenImage = (theme === 'light') ? sezzleImage.white : sezzleImage.colored;
+  var chosenImage = sezzleImage[theme]
   const templateArray = template.split(' ')
   var templateString = '';
   templateArray.forEach((subtemplate)=>{
     switch(subtemplate) {
       case '%%logo%%':
-        templateString +=  `<img id='sezzle-logo-img' src=${chosenImage} />`;
+        templateString +=  `<img class='sezzle-button-logo-img' src=${chosenImage} />`;
         break;
       default: 
         templateString += `${subtemplate} `;
-        break;
     } 
   })
   return templateString;
@@ -384,7 +368,6 @@ SezzleJS.prototype.insertWidgetTypeCSSClassInElement = function (element, config
       break;
     default:
       element.className += ' sezzle-product-page-widget';
-      break;
   }
 };
 
@@ -475,7 +458,6 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
   // TODO: why there is a shopify specific naming
   sezzle.className = "sezzle-shopify-info-button sezzlewidgetindex-" + index;
   this.insertWidgetTypeCSSClassInElement(sezzle, configGroupIndex);
-  
   this.insertStoreCSSClassInElement(sezzle);
   this.setElementMargins(sezzle, configGroupIndex);
   if (this.configGroups[configGroupIndex].scaleFactor) this.setWidgetSize(sezzle, configGroupIndex);
@@ -660,7 +642,6 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
       default:
         var widgetTextNode = document.createTextNode(subtemplate);
         sezzleButtonText.appendChild(widgetTextNode);
-        break;
     }
   }.bind(this));
   node.appendChild(sezzleButtonText);
@@ -1353,7 +1334,6 @@ SezzleJS.prototype.initWidget = function () {
     }.bind(this));
     // add the sezzle widget to the price elements
     els.forEach(function (el, index) {
-     
       if (!el.element.hasAttribute('data-sezzleindex')) {
         var sz = this.renderAwesomeSezzle(
           el.element, el.toRenderElement,
