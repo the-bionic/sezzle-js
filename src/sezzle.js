@@ -1,14 +1,10 @@
 const Helper = require('./helper');
-import SezzleCheckoutButton from './sezzleCheckoutButton'
-
-if(window && window.customElements) window.customElements.define('sezzle-button', SezzleCheckoutButton);
-
 const SezzleJS = function (options) {
   if (!options) options = {};
-  // convert to new config if options passed in is old config
+  // Convert to new config if options passed in is old config
   var isOldConfig = typeof (options.configGroups) === 'undefined';
   if (isOldConfig) options = Helper.makeCompatible(options);
-  // validate config structure
+  // Validate config structure
   Helper.validateConfig(options);
   // filter off config groups which do not match the current URL
   options.configGroups = options.configGroups.filter(function (configGroup) {
@@ -49,7 +45,7 @@ const SezzleJS = function (options) {
   // Widget Language
   this.browserLanguage = navigator.language || navigator.browserLanguage || 'en';
   this.browserLanguage = this.browserLanguage.substring(0, 2).toLowerCase();
-  switch(typeof(options.language)){
+  switch (typeof (options.language)) {
     case 'string':
       this.language = options.language;
       break;
@@ -59,7 +55,7 @@ const SezzleJS = function (options) {
     default:
       this.language = this.browserLanguage;
   }
-  if(this.language  !== 'en' && this.language !== 'fr'){
+  if (this.language !== 'en' && this.language !== 'fr') {
     this.language = this.browserLanguage;
   }
   // map config group props
@@ -175,9 +171,7 @@ SezzleJS.prototype.addCSSAlignment = function (element, configGroupIndex) {
     case 'center':
       element.className += ' sezzle-center';
       break;
-    default:
-      // if there is no alignment specified, it will be auto
-      break;
+    default: ;
   }
 };
 
@@ -218,7 +212,7 @@ SezzleJS.prototype.addCSSFontStyle = function (element, configGroupIndex) {
     element.style.fontSize = this.configGroups[configGroupIndex].fontSize + 'px';
   }
   element.style.lineHeight = this.configGroups[configGroupIndex].lineHeight || '13px';
-  
+
 };
 
 /**
@@ -256,7 +250,6 @@ SezzleJS.prototype.addCSSTheme = function (element, configGroupIndex) {
       break;
     default:
       element.className += ' szl-light';
-      break;
   }
 };
 
@@ -281,6 +274,80 @@ SezzleJS.prototype.insertStoreCSSClassInElement = function (element) {
   element.className += ' sezzle-' + this.merchantID;
 };
 
+
+/**
+ * This function will render the checkout button
+ * @param configGroupIndex - Connfig group index
+ *
+ */
+SezzleJS.prototype.createSezzleButton = function (configGroupIndex) {
+  var checkoutButtonParent = document.getElementsByName('checkout')[0].parentElement;
+  if (checkoutButtonParent) {
+    const buttonConfig = this.configGroups[configGroupIndex].sezzleCheckoutButton;
+    var sezzleCheckoutButton = document.createElement('button');
+    sezzleCheckoutButton.innerHTML = this.parseButtonTemplate(buttonConfig.template, buttonConfig.theme);
+    switch (buttonConfig.borderType) {
+      case 'square':
+        sezzleCheckoutButton.style.borderRadius = '0px';
+        break;
+      case 'semi-rounded':
+        sezzleCheckoutButton.style.borderRadius = '5px';
+        break;
+      default:
+        sezzleCheckoutButton.style.borderRadius = '300px';
+    }
+    // Adding styles to the button
+    sezzleCheckoutButton.classList.add('sezzle-checkout-button');
+    sezzleCheckoutButton.classList.add(`sezzle-button-${buttonConfig.theme}`);
+    sezzleCheckoutButton.style.paddingLeft = buttonConfig.paddingX;
+    sezzleCheckoutButton.style.paddingRight = buttonConfig.paddingX;
+    this.embedButtonFont();
+    sezzleCheckoutButton.addEventListener('click', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      location.replace('/checkout');
+    });
+    checkoutButtonParent.append(sezzleCheckoutButton);
+  }
+}
+
+/**
+ * This function will load comforta to DOM for the button
+ */
+SezzleJS.prototype.embedButtonFont = function () {
+  var link = document.createElement('link');
+  link.setAttribute('rel', 'stylesheet');
+  link.setAttribute('type', 'text/css');
+  link.setAttribute('href', 'https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet');
+  document.head.appendChild(link);
+}
+
+/**
+ * This function will parse template buttonnConfig to generate inner html of the button
+ * @param template - Template of the newly created button
+ * @param theme -  Theme of the button supplied in the config
+ * @return templateString  -  Inner Html of the button
+ */
+SezzleJS.prototype.parseButtonTemplate = function (template, theme) {
+  const sezzleImage = {
+    dark: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg',
+    light: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg'
+  };
+  var chosenImage = sezzleImage[theme]
+  const templateArray = template.split(' ')
+  var templateString = '';
+  templateArray.forEach((subtemplate) => {
+    switch (subtemplate) {
+      case '%%logo%%':
+        templateString += `<img class='sezzle-button-logo-img' src=${chosenImage} />`;
+        break;
+      default:
+        templateString += `${subtemplate} `;
+    }
+  })
+  return templateString;
+}
+
 /**
  * Insert css class name in element
  * @param element to add class to
@@ -299,7 +366,6 @@ SezzleJS.prototype.insertWidgetTypeCSSClassInElement = function (element, config
       break;
     default:
       element.className += ' sezzle-product-page-widget';
-      break;
   }
 };
 
@@ -353,10 +419,10 @@ SezzleJS.prototype.setLogoSize = function (element, configGroupIndex) {
  * @return void
  */
 SezzleJS.prototype.setLogoStyle = function (element, configGroupIndex) {
-  Object.keys(this.configGroups[configGroupIndex].logoStyle).forEach(key=>{
+  Object.keys(this.configGroups[configGroupIndex].logoStyle).forEach(key => {
     element.style[key] = this.configGroups[configGroupIndex].logoStyle[key];
 
- });
+  });
 };
 
 /**
@@ -369,6 +435,8 @@ SezzleJS.prototype.setLogoStyle = function (element, configGroupIndex) {
  * @return void
  */
 SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index = 0, configGroupIndex) {
+  // Runninng Create Sezzle Checkout Button
+  this.createSezzleButton(configGroupIndex);
   // Do not render this product if it is not eligible
   var priceText = this.getPriceText(element, configGroupIndex);
   if (!this.isProductEligible(priceText, configGroupIndex)) return false;
@@ -414,7 +482,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
         logoNode.src = this.configGroups[configGroupIndex].imageURL;
         sezzleButtonText.appendChild(logoNode);
         this.setLogoSize(logoNode, configGroupIndex);
-        if(this.configGroups[configGroupIndex].logoStyle != {}) this.setLogoStyle(logoNode, configGroupIndex);
+        if (this.configGroups[configGroupIndex].logoStyle != {}) this.setLogoStyle(logoNode, configGroupIndex);
         break;
       // changed from learn-more to link as that is what current altVersionTemplates use
       case 'link':
@@ -437,13 +505,13 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
         sezzleButtonText.appendChild(questionMarkIconNode);
         break;
       case 'affirm-logo':
-          var affirmNode = document.createElementNS('http://www.w3.org/2000/svg','svg')
-          affirmNode.setAttribute('width','200.16');
-          affirmNode.setAttribute('height','199.56');
-          affirmNode.setAttribute('viewBox','0 0 400.16 199.56');
-          affirmNode.setAttribute('class',`sezzle-affirm-logo affirm-modal-info-link no-sezzle-info`);
-          affirmNode.setAttribute('style',`width:39px;height:21px;margin-bottom:5px !important; vertical-align:middle;`);
-          affirmNode.innerHTML = `<defs>
+        var affirmNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+        affirmNode.setAttribute('width', '200.16');
+        affirmNode.setAttribute('height', '199.56');
+        affirmNode.setAttribute('viewBox', '0 0 400.16 199.56');
+        affirmNode.setAttribute('class', `sezzle-affirm-logo affirm-modal-info-link no-sezzle-info`);
+        affirmNode.setAttribute('style', `width:39px;height:21px;margin-bottom:5px !important; vertical-align:middle;`);
+        affirmNode.innerHTML = `<defs>
           <polygon id="path-1" points="0.00278333333 0.357194444 63.9637833 0.357194444 63.9637833 73.2944444 0.00278333333 73.2944444"></polygon>
           <polygon id="path-3" points="0 167 418.529833 167 418.529833 0 0 0"></polygon>
         </defs>
@@ -468,7 +536,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
               <path d="M297.688633,0.00278333333 C244.508411,0.00278333333 197.108244,36.9190611 183.655467,84.3841722 L202.934689,84.3841722 C214.170078,49.0358389 252.311022,18.01095 297.688633,18.01095 C352.845022,18.01095 400.514244,60.0021722 400.514244,125.373394 C400.514244,140.050839 398.6123,153.28095 395.012522,164.97095 L413.716522,164.97095 L413.902078,164.330783 C416.963744,152.269672 418.522411,139.16945 418.522411,125.373394 C418.522411,52.4686167 365.397856,0.00278333333 297.688633,0.00278333333" id="Fill-12" fill="#0FA0EA" mask="url(#mask-4)"></path>
           </g>
         </g>`;
-          sezzleButtonText.appendChild(affirmNode)
+        sezzleButtonText.appendChild(affirmNode)
         break;
       case 'affirm-info-icon':
         var affirmInfoIconNode = document.createElement('code');
@@ -572,7 +640,6 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
       default:
         var widgetTextNode = document.createTextNode(subtemplate);
         sezzleButtonText.appendChild(widgetTextNode);
-        break;
     }
   }.bind(this));
   node.appendChild(sezzleButtonText);
@@ -714,7 +781,7 @@ SezzleJS.prototype.getPriceText = function (element, configGroupIndex) {
  * @param priceText (optional) if defined, it contains the proper price text parsed from element
  */
 SezzleJS.prototype.getFormattedPrice = function (element, configGroupIndex, priceText) {
-  if(!priceText) priceText = this.getPriceText(element, configGroupIndex);
+  if (!priceText) priceText = this.getPriceText(element, configGroupIndex);
   // Get the price string - useful for formtting Eg: 120.00(string)
   var priceString = Helper.parsePriceString(priceText, true);
   // Get the price in float from the element - useful for calculation Eg : 120.00(float)
@@ -757,11 +824,11 @@ SezzleJS.prototype.mutationCallBack = function (mutations, configGroupIndex) {
           // Price may change dynamically due to any reason,
           // like, updating product category
           var priceText = this.getPriceText(mutation.target, configGroupIndex);
-          if (!this.isProductEligible(priceText, configGroupIndex)){
+          if (!this.isProductEligible(priceText, configGroupIndex)) {
             sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
           }
         }
-      } catch(e) {
+      } catch (e) {
         console.warn(e);
       }
     }.bind(this));
@@ -782,7 +849,7 @@ SezzleJS.prototype.startObserve = function (element, callback) {
   return observer;
 };
 
-/** 
+/**
  * @description Adds/removes styles to stop body scroll when modal is open. Also
  *              records/restores the scroll position to avoid side effects of position: fixed
  * @param boolean -> disable/enable scroll
@@ -803,7 +870,7 @@ SezzleJS.prototype.disableBodyScroll = function (disable) {
     window.scrollTo(0, this.scrollDistance);
     bodyElement.style.top = 0;
     // reset modal scroll
-    document.querySelector('.sezzle-modal').scrollTo(0,0);
+    document.querySelector('.sezzle-modal').scrollTo(0, 0);
   }
 };
 
@@ -813,7 +880,7 @@ SezzleJS.prototype.disableBodyScroll = function (disable) {
  * to respective buttons
  */
 SezzleJS.prototype.renderModal = function () {
-  // Handler function when modal is closed. 
+  // Handler function when modal is closed.
   closeModalHandler = () => {
     // Event listener for close in modal
     Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), (el) => {
@@ -834,7 +901,7 @@ SezzleJS.prototype.renderModal = function () {
       event.stopPropagation();
     });
   };
-  
+
   // Renders modal via a http call to sezzle cdn
   var modalNode = document.createElement('div');
   if (!document.getElementsByClassName('sezzle-checkout-modal-lightbox').length) {
@@ -943,13 +1010,13 @@ SezzleJS.prototype.addClickEventForModal = function (sezzleElement, configGroupI
       if (!event.target.classList.contains('no-sezzle-info')) {
         var modalNode;
         // Makes sure to get rid of AP & QP modals in our Sezzle modal event listener
-        document.querySelectorAll('.sezzle-checkout-modal-lightbox').forEach(function(element){
-          if(!element.classList.contains('sezzle-ap-modal' || 'sezzle-qp-modal')) {
+        document.querySelectorAll('.sezzle-checkout-modal-lightbox').forEach(function (element) {
+          if (!element.classList.contains('sezzle-ap-modal' || 'sezzle-qp-modal')) {
             modalNode = element;
           }
         });
         if (modalNode) {
-         this.disableBodyScroll(true);
+          this.disableBodyScroll(true);
           modalNode.style.display = 'block'; // Remove hidden class to show the item
           var modals = modalNode.getElementsByClassName('sezzle-modal');
           if (modals.length) {
@@ -1053,17 +1120,17 @@ SezzleJS.prototype.getModal = function (modalNode, callback) {
       }
     }.bind(this);
     // Convert document.sezzleModalAvailableLanguages into Array
-    
-    var availableLanguages = document.sezzleModalAvailableLanguages.split(',').map(function(singleLanguage) {
+
+    var availableLanguages = document.sezzleModalAvailableLanguages.split(',').map(function (singleLanguage) {
       return singleLanguage.trim();
     });
     var modalLanguage;
-    if(availableLanguages.indexOf(this.language) > -1) {
-       modalLanguage = this.language;
+    if (availableLanguages.indexOf(this.language) > -1) {
+      modalLanguage = this.language;
     } else {
       modalLanguage = 'en';
     }
-     var url = 'https://media.sezzle.com/shopify-app/assets/' + document.sezzleDefaultModalVersion.replace("{%%s%%}", modalLanguage);
+    var url = 'https://media.sezzle.com/shopify-app/assets/' + document.sezzleDefaultModalVersion.replace("{%%s%%}", modalLanguage);
     httpRequest.open('GET', url, true);
     httpRequest.send();
   }
@@ -1243,7 +1310,7 @@ SezzleJS.prototype.initWidget = function () {
       this.renderQPModal();
     }
 
-    if(document.getElementsByClassName('affirm-modal-info-link').length > 0) {
+    if (document.getElementsByClassName('affirm-modal-info-link').length > 0) {
       this.renderAffirmModal()
     }
   }
