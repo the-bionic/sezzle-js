@@ -1,12 +1,14 @@
 /* eslint-disable class-methods-use-this */
 import RenderAwesomeSezzle from './renderAwesomeSezzle';
 import Utils from './utils';
+import Modal from './modal';
 
 class sezzleDOMFunctions {
   constructor() {
+    this._configInst = null;
+    this._modalInst = new Modal();
     this._renderAwesomeSezzleInst = new RenderAwesomeSezzle();
     this._allConfigsUsePriceClassElement = true;
-    this._configInst = null;
     this._els = [];
     this._intervalInMs = 2000;
     // Functions required in RenderAwesomeSezzle, will be sent as param! Didn't make sense to put in utils
@@ -17,6 +19,10 @@ class sezzleDOMFunctions {
       getElementsByXPath: this.getElementsByXPath,
     };
   }
+
+  /**
+   * ************* PUBLIC FUNCTIONS ***************
+  */
 
   /**
    * All steps required to show the widget
@@ -38,120 +44,8 @@ class sezzleDOMFunctions {
         this._allConfigsUsePriceClassElement = false;
       }
     });
-    if (!this._allConfigsUsePriceClassElement) this._sezzleWidgetCheckInterval.call(this);
-  }
-
-  /**
-	 * This function starts observing for change
-	 * in given Price element
-	 * @param element to be observed
-	 * @return void
-	*/
-  _startObserve(element, callback) {
-    // TODO : Need a way to unsubscribe to prevent memory leak
-    // Deleted elements should not be observed
-    // That is handled
-    const observer = new MutationObserver(callback);
-    observer.observe(element, this._configInst.mutationObserverConfig);
-    return observer;
-  }
-
-  /**
-	 * Mutation observer callback function
-	 * This observer observes for any change in a
-	 * given DOM element (Price element in our case)
-	 * and act on that
-	*/
-  _mutationCallBack(mutations, configGroupIndex) {
-    mutations.filter((mutation) => mutation.type === 'childList')
-      .forEach((mutation) => {
-        try {
-          const priceIndex = mutation.target.dataset.sezzleindex;
-          const price = this.getFormattedPrice(mutation.target, configGroupIndex);
-          const sezzlePriceElement = document.getElementsByClassName(`sezzleindex-${priceIndex}`)[0];
-          if (sezzlePriceElement) {
-            if (!/\d/.test(price)) {
-              sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
-            } else {
-              sezzlePriceElement.parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
-            }
-            sezzlePriceElement.textContent = price;
-            // Check if the price is still valid for widget
-            // Price may change dynamically due to any reason,
-            // like, updating product category
-            const priceText = this.getPriceText(mutation.target, configGroupIndex);
-            if (!this.isProductEligible(priceText, configGroupIndex)) {
-              sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
-            }
-          }
-        } catch (e) {
-          console.warn(e);
-        }
-      });
-  }
-
-  /**
-   * Looks for newly added price elements
-  */
-  _sezzleWidgetCheckInterval() {
-    this._configInst.configGroups.forEach((configGroup, index) => {
-      if (configGroup.xpath === []) return;
-      const elements = this.getElementsByXPath(configGroup.xpath);
-      elements.forEach((e) => {
-        if (!e.hasAttribute('data-sezzleindex')) {
-          this._els.push({
-            element: e,
-            toRenderElement: this._getElementToRender(e, index),
-            deleted: false,
-            observer: null,
-            configGroupIndex: index,
-          });
-        }
-      });
-    });
-    // add the sezzle widget to the price elements
-    this._els.forEach((el, index) => {
-      if (!el.element.hasAttribute('data-sezzleindex')) {
-        const sz = this._renderAwesomeSezzleInst.render(
-          el.element, el.toRenderElement,
-          index, el.configGroupIndex, this, this._configInst,
-        );
-        if (sz) {
-          el.observer = this._startObserve(el.element, (mutations) => {
-            this._mutationCallBack(mutations, el.configGroupIndex);
-          });
-          // TODO: do this in modal
-          // this._addClickEventForModal(sz, el.configGroupIndex);
-          // this._observeRelatedElements(el.element, sz, this._configInst.configGroups[el.configGroupIndex].relatedElementActions);
-        } else {
-          // remove the element from the els array
-          delete this._els[index];
-        }
-      }
-    });
-    // refresh the array
-    this._els = this._els.filter((e) => e !== undefined);
-    // Find the deleted price elements
-    // remove corresponding Sezzle widgets if exists
-    this._els.forEach((el, index) => {
-      if (el.element.parentElement === null && !el.deleted) { // element is deleted
-        // Stop observing for changes in the element
-        if (el.observer !== null) el.observer.disconnect();
-        // Mark that element as deleted
-        el.deleted = true;
-        // Delete the corresponding sezzle widget if exist
-        const tmp = document.getElementsByClassName(`sezzlewidgetindex-${index}`);
-        if (tmp.length) {
-          const sw = tmp[0];
-          sw.parentElement.removeChild(sw);
-        }
-      }
-    });
-    // Hide elements ex: afterpay
-    for (let index = 0, len = this._configInst.configGroups.length; index < len; index++) {
-      this._hideSezzleHideElements(index);
-    }
-    setTimeout(() => this._sezzleWidgetCheckInterval(), this._intervalInMs);
+    if (!this._allConfigsUsePriceClassElement) this._sezzleWidgetCheckInterval();
+    this._modalInst.renderModals(this._configInst);
   }
 
   /**
@@ -219,76 +113,6 @@ class sezzleDOMFunctions {
 
     children = children.filter((c) => c !== null);
     return this.getElementsByXPath(xpath, xindex + 1, children);
-  }
-
-  /**
-   * This function finds out the element where Sezzle's widget
-   * will be rendered. By default it would return the parent element
-   * of the given price element. If the over ride path is found and
-   * it leads to a valid element then that element will be returned
-   * @param element - This is the price element
-   * @param index - Index of the config group that element belongs to
-   * @return the element where Sezzle's widget will be rendered
-  */
-  _getElementToRender(element, index = 0) {
-    let toRenderElement = null;
-    if (this._configInst.configGroups[index].rendertopath !== null) {
-      const path = Utils.breakXPath(this._configInst.configGroups[index].rendertopath);
-      toRenderElement = element;
-      for (let i = 0; i < path.length; i++) {
-        const p = path[i];
-        if (toRenderElement === null) {
-          break;
-        } else if (p === '.') {
-          // eslint-disable-next-line no-continue
-          continue;
-        } else if (p === '..') {
-          // One level back
-          toRenderElement = toRenderElement.parentElement;
-        } else if (p[0] === '.') {
-          // The class in the element
-          toRenderElement = toRenderElement.getElementsByClassName(p.substr(1)).length
-            ? toRenderElement.getElementsByClassName(p.substr(1))[0]
-            : null;
-        } else if (p[0] === '#') {
-          // The ID in the element
-          toRenderElement = document.getElementById(p.substr(1));
-        } else if (p === '::first-child') {
-          // rendered as first child
-          toRenderElement = toRenderElement.children.length > 0
-            ? toRenderElement.firstElementChild
-            : null;
-          this._configInst.configGroups[index].widgetIsFirstChild = true;
-        } else {
-          // If this is a tag
-          // indexes are 0-indexed (e.g. span-2 means third span)
-          let indexToTake = 0;
-          if (p.split('-').length > 1) {
-            if (p.split('-')[1] >= 0) {
-              indexToTake = parseInt(p.split('-')[1], 10);
-            }
-          }
-          toRenderElement = toRenderElement.getElementsByTagName(p.split('-')[0]).length > indexToTake
-            ? toRenderElement.getElementsByTagName(p.split('-')[0])[indexToTake]
-            : null;
-        }
-      }
-    }
-    // return the element's parent if toRenderElement is null
-    return toRenderElement || element.parentElement;
-  }
-
-  /**
-	 * Hide elements pointed to by this.hideClasses
-	*/
-  _hideSezzleHideElements(configGroupIndex) {
-    this._configInst.configGroups[configGroupIndex].hideClasses.forEach((subpaths) => {
-      this.getElementsByXPath(subpaths).forEach((element) => {
-        if (!element.classList.contains('sezzle-hidden')) {
-          element.classList.add('sezzle-hidden');
-        }
-      });
-    });
   }
 
   /**
@@ -360,6 +184,221 @@ class sezzleDOMFunctions {
     this._configInst.configGroups[configGroupIndex].productPrice = price;
     const priceInCents = price * 100;
     return priceInCents >= this._configInst.minPrice && priceInCents <= this._configInst.maxPrice;
+  }
+
+  /**
+   * ************* PRIVATE FUNCTIONS ***************
+  */
+
+  /**
+	 * This function starts observing for change
+	 * in given Price element
+	 * @param element to be observed
+	 * @return void
+	*/
+  _startObserve(element, callback) {
+    // TODO : Need a way to unsubscribe to prevent memory leak
+    // Deleted elements should not be observed
+    // That is handled
+    const observer = new MutationObserver(callback);
+    observer.observe(element, this._configInst.mutationObserverConfig);
+    return observer;
+  }
+
+  /**
+	 * Mutation observer callback function
+	 * This observer observes for any change in a
+	 * given DOM element (Price element in our case)
+	 * and act on that
+	*/
+  _mutationCallBack(mutations, configGroupIndex) {
+    mutations.filter((mutation) => mutation.type === 'childList')
+      .forEach((mutation) => {
+        try {
+          const priceIndex = mutation.target.dataset.sezzleindex;
+          const price = this.getFormattedPrice(mutation.target, configGroupIndex);
+          const sezzlePriceElement = document.getElementsByClassName(`sezzleindex-${priceIndex}`)[0];
+          if (sezzlePriceElement) {
+            if (!/\d/.test(price)) {
+              sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
+            } else {
+              sezzlePriceElement.parentElement.parentElement.parentElement.classList.remove('sezzle-hidden');
+            }
+            sezzlePriceElement.textContent = price;
+            // Check if the price is still valid for widget
+            // Price may change dynamically due to any reason,
+            // like, updating product category
+            const priceText = this.getPriceText(mutation.target, configGroupIndex);
+            if (!this.isProductEligible(priceText, configGroupIndex)) {
+              sezzlePriceElement.parentElement.parentElement.parentElement.classList.add('sezzle-hidden');
+            }
+          }
+        } catch (e) {
+          console.warn(e);
+        }
+      });
+  }
+
+  /**
+   * This function start an observation on related elements to the price element
+   * for any change and perform an action based on that
+  */
+  _observeRelatedElements(priceElement, sezzleElement, targets) {
+    if (targets) {
+      targets.forEach((target) => {
+        if (typeof (target.relatedPath) === 'string'
+          && (typeof (target.action) === 'function' || typeof (target.initialAction) === 'function')) {
+          const elements = this.getElementsByXPath(
+            Utils.breakXPath(target.relatedPath),
+            0,
+            [priceElement],
+          );
+          if (elements.length > 0) {
+            if (typeof (target.action) === 'function') {
+              this._startObserve(elements[0], (mutation) => {
+                target.action(mutation, sezzleElement);
+              });
+            }
+            if (typeof (target.initialAction) === 'function') {
+              target.initialAction(elements[0], sezzleElement);
+            }
+          }
+        }
+      });
+    }
+  }
+
+  /**
+   * Looks for newly added price elements
+  */
+  _sezzleWidgetCheckInterval() {
+    this._configInst.configGroups.forEach((configGroup, index) => {
+      if (configGroup.xpath === []) return;
+      const elements = this.getElementsByXPath(configGroup.xpath);
+      elements.forEach((e) => {
+        if (!e.hasAttribute('data-sezzleindex')) {
+          this._els.push({
+            element: e,
+            toRenderElement: this._getElementToRender(e, index),
+            deleted: false,
+            observer: null,
+            configGroupIndex: index,
+          });
+        }
+      });
+    });
+    // add the sezzle widget to the price elements
+    this._els.forEach((el, index) => {
+      if (!el.element.hasAttribute('data-sezzleindex')) {
+        const sz = this._renderAwesomeSezzleInst.render(
+          el.element, el.toRenderElement,
+          index, el.configGroupIndex, this, this._configInst,
+        );
+        if (sz) {
+          el.observer = this._startObserve(el.element, (mutations) => {
+            this._mutationCallBack(mutations, el.configGroupIndex);
+          });
+          this._modalInst.addClickEventForModal(sz, el.configGroupIndex);
+          this._observeRelatedElements(el.element, sz, this._configInst.configGroups[el.configGroupIndex].relatedElementActions);
+        } else {
+          // remove the element from the els array
+          delete this._els[index];
+        }
+      }
+    });
+    // refresh the array
+    this._els = this._els.filter((e) => e !== undefined);
+    // Find the deleted price elements
+    // remove corresponding Sezzle widgets if exists
+    this._els.forEach((el, index) => {
+      if (el.element.parentElement === null && !el.deleted) { // element is deleted
+        // Stop observing for changes in the element
+        if (el.observer !== null) el.observer.disconnect();
+        // Mark that element as deleted
+        el.deleted = true;
+        // Delete the corresponding sezzle widget if exist
+        const tmp = document.getElementsByClassName(`sezzlewidgetindex-${index}`);
+        if (tmp.length) {
+          const sw = tmp[0];
+          sw.parentElement.removeChild(sw);
+        }
+      }
+    });
+    // Hide elements ex: afterpay
+    for (let index = 0, len = this._configInst.configGroups.length; index < len; index++) {
+      this._hideSezzleHideElements(index);
+    }
+    setTimeout(() => this._sezzleWidgetCheckInterval(), this._intervalInMs);
+  }
+
+  /**
+   * This function finds out the element where Sezzle's widget
+   * will be rendered. By default it would return the parent element
+   * of the given price element. If the over ride path is found and
+   * it leads to a valid element then that element will be returned
+   * @param element - This is the price element
+   * @param index - Index of the config group that element belongs to
+   * @return the element where Sezzle's widget will be rendered
+  */
+  _getElementToRender(element, index = 0) {
+    let toRenderElement = null;
+    if (this._configInst.configGroups[index].rendertopath !== null) {
+      const path = Utils.breakXPath(this._configInst.configGroups[index].rendertopath);
+      toRenderElement = element;
+      for (let i = 0; i < path.length; i++) {
+        const p = path[i];
+        if (toRenderElement === null) {
+          break;
+        } else if (p === '.') {
+          // eslint-disable-next-line no-continue
+          continue;
+        } else if (p === '..') {
+          // One level back
+          toRenderElement = toRenderElement.parentElement;
+        } else if (p[0] === '.') {
+          // The class in the element
+          toRenderElement = toRenderElement.getElementsByClassName(p.substr(1)).length
+            ? toRenderElement.getElementsByClassName(p.substr(1))[0]
+            : null;
+        } else if (p[0] === '#') {
+          // The ID in the element
+          toRenderElement = document.getElementById(p.substr(1));
+        } else if (p === '::first-child') {
+          // rendered as first child
+          toRenderElement = toRenderElement.children.length > 0
+            ? toRenderElement.firstElementChild
+            : null;
+          this._configInst.configGroups[index].widgetIsFirstChild = true;
+        } else {
+          // If this is a tag
+          // indexes are 0-indexed (e.g. span-2 means third span)
+          let indexToTake = 0;
+          if (p.split('-').length > 1) {
+            if (p.split('-')[1] >= 0) {
+              indexToTake = parseInt(p.split('-')[1], 10);
+            }
+          }
+          toRenderElement = toRenderElement.getElementsByTagName(p.split('-')[0]).length > indexToTake
+            ? toRenderElement.getElementsByTagName(p.split('-')[0])[indexToTake]
+            : null;
+        }
+      }
+    }
+    // return the element's parent if toRenderElement is null
+    return toRenderElement || element.parentElement;
+  }
+
+  /**
+	 * Hide elements pointed to by this.hideClasses
+	*/
+  _hideSezzleHideElements(configGroupIndex) {
+    this._configInst.configGroups[configGroupIndex].hideClasses.forEach((subpaths) => {
+      this.getElementsByXPath(subpaths).forEach((element) => {
+        if (!element.classList.contains('sezzle-hidden')) {
+          element.classList.add('sezzle-hidden');
+        }
+      });
+    });
   }
 
   /**

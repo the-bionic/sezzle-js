@@ -54,6 +54,10 @@ class sezzleConfig {
   }
 
   /**
+   * ************* Public FUNCTIONS ***************
+  */
+
+  /**
    * @description Initializes the sezzle config processing
    *  transforms old config into new,
    *  and validates it
@@ -67,6 +71,10 @@ class sezzleConfig {
     this._setConfigGroups();
     return this.sezzleConfig;
   }
+
+  /**
+   * ************* PRIVATE FUNCTIONS ***************
+  */
 
   /**
    * This is a helper function to convert an old
