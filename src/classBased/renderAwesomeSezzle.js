@@ -8,6 +8,10 @@ class renderAwesomeSezzle {
   }
 
   /**
+   * ************* PUBLIC FUNCTIONS ***************
+  */
+
+  /**
    * This function will set Sezzle's elements with
    * the price element in parallel
    * @param element - This is the price element
@@ -271,6 +275,10 @@ class renderAwesomeSezzle {
     Utils.logEvent('onload', this._configInst, configGroupIndex);
     return sezzle;
   }
+
+  /**
+   * ************* PRIVATE FUNCTIONS ***************
+  */
 
   /**
 	 * Insert css class name in element
