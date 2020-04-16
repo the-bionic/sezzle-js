@@ -330,8 +330,8 @@ SezzleJS.prototype.embedButtonFont = function () {
  */
 SezzleJS.prototype.parseButtonTemplate = function (template, theme) {
   const sezzleImage = {
-    dark: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg',
-    light: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg'
+    light: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg',
+    dark: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg'
   };
   var chosenImage = sezzleImage[theme]
   const templateArray = template.split(' ')
