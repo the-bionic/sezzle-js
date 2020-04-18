@@ -2,12 +2,12 @@ import 'regenerator-runtime/runtime';
 
 import SezzleConfig from './sezzleConfig';
 import Utils from './utils';
-import SezzleDOMFunctions from './sezzleDOMFunctions';
+import RenderAwesomeSezzle from './renderAwesomeSezzle';
 
 class SezzleJS {
   constructor(options) {
     this._configInst = new SezzleConfig(options).init();
-    this._domFunctionsInst = new SezzleDOMFunctions();
+    this._renderAwesomeSezzle = new RenderAwesomeSezzle(this._configInst);
     this._countryCode = '';
   }
 
@@ -32,7 +32,7 @@ class SezzleJS {
   async initializeWidget() {
     Utils.logEvent('request', this._configInst);
     await this._loadCSS();
-    this._domFunctionsInst.init(this._configInst);
+    this._renderAwesomeSezzle.initializeRendering();
     if (this._countryCode === 'US' || this._countryCode === 'CA') {
       const win = window.frames.szl;
       if (win && !this._configInst.noGtm) {
