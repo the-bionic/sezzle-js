@@ -1,15 +1,103 @@
 /* eslint-disable class-methods-use-this */
 import Utils from './utils';
-
+import SezzleDOMFunctions from './sezzleDOMFunctions';
+import Modal from './modal';
 /* eslint-disable max-len */
 class renderAwesomeSezzle {
-  constructor() {
-    this._configInst = null;
+  constructor(config) {
+    this._configInst = config;
+    this._allConfigsUsePriceClassElement = true;
+    this._els = [];
+    this._intervalInMs = 2000;
+
+    this._modalInst = new Modal();
+    this._sezzleDOMInst = new SezzleDOMFunctions(config);
   }
 
   /**
    * ************* PUBLIC FUNCTIONS ***************
   */
+  initializeRendering(_configInst) {
+    this._configInst.configGroups.forEach((configGroup, index) => {
+      if (configGroup.hasPriceClassElement) {
+        this.render(
+          configGroup.priceElements[0], configGroup.renderElements[0],
+          0, index,
+        );
+        this._sezzleDOMInst._startObserve(configGroup.priceElements[0], (mutations) => {
+          this._sezzleDOMInst._mutationCallBack(mutations, index);
+        });
+      } else {
+        this._allConfigsUsePriceClassElement = false;
+      }
+    });
+    if (!this._allConfigsUsePriceClassElement) this._sezzleWidgetCheckInterval();
+    this._modalInst.renderModals(this._configInst);
+  }
+
+
+  /**
+   * Looks for newly added price elements
+  */
+  _sezzleWidgetCheckInterval() {
+    this._configInst.configGroups.forEach((configGroup, index) => {
+      if (configGroup.xpath === []) return;
+      const elements = this._sezzleDOMInst.getElementsByXPath(configGroup.xpath);
+      elements.forEach((e) => {
+        if (!e.hasAttribute('data-sezzleindex')) {
+          this._els.push({
+            element: e,
+            toRenderElement: this._sezzleDOMInst.getElementToRender(e, index),
+            deleted: false,
+            observer: null,
+            configGroupIndex: index,
+          });
+        }
+      });
+    });
+    // add the sezzle widget to the price elements
+    this._els.forEach((el, index) => {
+      if (!el.element.hasAttribute('data-sezzleindex')) {
+        const sz = this.render(
+          el.element, el.toRenderElement,
+          index, el.configGroupIndex,
+        );
+        if (sz) {
+          el.observer = this._sezzleDOMInst._startObserve(el.element, (mutations) => {
+            this._sezzleDOMInst._mutationCallBack(mutations, el.configGroupIndex);
+          });
+          this._modalInst.addClickEventForModal(sz, el.configGroupIndex);
+          this._sezzleDOMInst._observeRelatedElements(el.element, sz, this._configInst.configGroups[el.configGroupIndex].relatedElementActions);
+        } else {
+          // remove the element from the els array
+          delete this._els[index];
+        }
+      }
+    });
+    // refresh the array
+    this._els = this._els.filter((e) => e !== undefined);
+    // Find the deleted price elements
+    // remove corresponding Sezzle widgets if exists
+    this._els.forEach((el, index) => {
+      if (el.element.parentElement === null && !el.deleted) { // element is deleted
+        // Stop observing for changes in the element
+        if (el.observer !== null) el.observer.disconnect();
+        // Mark that element as deleted
+        el.deleted = true;
+        // Delete the corresponding sezzle widget if exist
+        const tmp = document.getElementsByClassName(`sezzlewidgetindex-${index}`);
+        if (tmp.length) {
+          const sw = tmp[0];
+          sw.parentElement.removeChild(sw);
+        }
+      }
+    });
+    // Hide elements ex: afterpay
+    for (let index = 0, len = this._configInst.configGroups.length; index < len; index++) {
+      this._sezzleDOMInst._hideSezzleHideElements(index);
+    }
+    setTimeout(() => this._sezzleWidgetCheckInterval(), this._intervalInMs);
+  }
 
   /**
    * This function will set Sezzle's elements with
@@ -18,15 +106,12 @@ class renderAwesomeSezzle {
    * @param renderelement Element to render the widget to
    * @param index - Index of the element in the page
    * @param configGroupIndex Index of the config group
-   * @param _importedDOMFunctions Functions imported from sezzleDOMFunctions Class
-   * @param _configInst Instance of the sezzle config
    * @return void
    */
-  render(element, renderelement, index = 0, configGroupIndex, _importedDOMFunctions, _configInst) {
-    this._configInst = _configInst;
+  render(element, renderelement, index = 0, configGroupIndex) {
     // Do not render this product if it is not eligible
-    const priceText = _importedDOMFunctions.getPriceText(element, configGroupIndex);
-    if (!_importedDOMFunctions.isProductEligible(priceText, configGroupIndex)) return false;
+    const priceText = this._sezzleDOMInst.getPriceText(element, configGroupIndex);
+    if (!this._sezzleDOMInst.isProductEligible(priceText, configGroupIndex)) return false;
     // Do not render if sezzle ignored price element
     if (element.classList.contains('sezzle-ignored-price-element')) return false;
     // Set data index to each price element for tracking
@@ -59,7 +144,7 @@ class renderAwesomeSezzle {
       case 'price': {
         const priceSpanNode = document.createElement('span');
         priceSpanNode.className = `sezzle-payment-amount sezzle-button-text sezzleindex-${index}`;
-        const priceValueText = document.createTextNode(_importedDOMFunctions.getFormattedPrice(element, configGroupIndex, priceText));
+        const priceValueText = document.createTextNode(this._sezzleDOMInst.getFormattedPrice(element, configGroupIndex, priceText));
         priceSpanNode.appendChild(priceValueText);
         sezzleButtonText.appendChild(priceSpanNode);
         break;
@@ -216,7 +301,7 @@ class renderAwesomeSezzle {
         let priceSplitText = '';
         if (priceElemTexts.length === 1) { // if the text is not being splitted (this check is needed in order to support sites with multiple types of product pricing)
           // give the original element in the case there might be some ignored elements present
-          priceSplitText = _importedDOMFunctions.getFormattedPrice(element, configGroupIndex, priceText);
+          priceSplitText = this._sezzleDOMInst.getFormattedPrice(element, configGroupIndex, priceText);
         } else {
           const priceElems = [];
           priceElemTexts.forEach((text) => {
@@ -226,7 +311,7 @@ class renderAwesomeSezzle {
           });
           priceElems.forEach((elem, index) => {
             if (index === 0) {
-              priceSplitText = _importedDOMFunctions.getFormattedPrice(elem, configGroupIndex);
+              priceSplitText = this._sezzleDOMInst.getFormattedPrice(elem, configGroupIndex);
             } else {
               priceSplitText = `${priceSplitText} ${this._configInst.configGroups[configGroupIndex].splitPriceElementsOn} ${this._configInst.getFormattedPrice(elem, configGroupIndex)}`;
             }
@@ -259,7 +344,7 @@ class renderAwesomeSezzle {
         }
         if (customClass.index === index || customClass.index === -1) {
           const path = Utils.breakXPath(customClass.xpath);
-          _importedDOMFunctions.getElementsByXPath(path, 0, [sezzle])
+          this._sezzleDOMInst.getElementsByXPath(path, 0, [sezzle])
             .forEach((el) => {
               el.className += ` ${customClass.className}`;
             });
