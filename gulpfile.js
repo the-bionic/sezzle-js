@@ -226,7 +226,7 @@ gulp.task('post-modal-to-wrapper', function () {
  */
 
 gulp.task('bundlejs', function () {
-  return gulp.src('src/sezzle-init.js')
+  return gulp.src('src/classBased/sezzle-init.js')
     .pipe(webpack({
       module: {
         rules: [
@@ -246,7 +246,7 @@ gulp.task('bundlejs', function () {
         filename: buttonUploadName
       },
       optimization: {
-        minimize: false // <---- disables uglify.
+        minimize: true // <---- disables uglify.
       },
       mode: 'production'
     }))
