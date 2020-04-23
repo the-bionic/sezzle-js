@@ -437,7 +437,8 @@ SezzleJS.prototype.setLogoStyle = function (element, configGroupIndex) {
  */
 SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index = 0, configGroupIndex) {
   // Runninng Create Sezzle Checkout Button
-  this.createSezzleButton(configGroupIndex);
+  var sezzleCheckoutButton = document.getElementsByClassName('sezzle-checkout-button')[0]
+  if(!sezzleCheckoutButton) this.createSezzleButton(configGroupIndex);
   // Do not render this product if it is not eligible
   var priceText = this.getPriceText(element, configGroupIndex);
   if (!this.isProductEligible(priceText, configGroupIndex)) return false;
