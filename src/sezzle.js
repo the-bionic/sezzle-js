@@ -281,7 +281,8 @@ SezzleJS.prototype.insertStoreCSSClassInElement = function (element) {
  *
  */
 SezzleJS.prototype.createSezzleButton = function (configGroupIndex) {
-  var checkoutButtonParent = document.getElementsByName('checkout')[0].parentElement;
+  var checkoutButton = document.getElementsByName('checkout')[0]
+  var checkoutButtonParent = checkoutButton  ? checkoutButton.parentElement : null;
   if (checkoutButtonParent) {
     const buttonConfig = this.configGroups[configGroupIndex].sezzleCheckoutButton;
     var sezzleCheckoutButton = document.createElement('button');
