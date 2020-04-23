@@ -82,18 +82,36 @@ For further customization, please check out the available options [here](/widget
 If you run into any issues please contact merchantsupport@sezzle.com, or request Sezzle to add the widgets for you through your Merchant Dashboard > Setup Checklist > Add Widgets to Product Pages.
 
 
-##Sezzle Checkout Button 
+### Sezzle Checkout Button 
 
-Place the following in the cart page whereever you want to place the checkout button 
-```
-<sezzle-button  
-  theme='light' 
-  template= 'Pay with %%logo%%' 
-  borderType ='square'
-/>
-```
+Sezzle checkout Button or `sezzleCheckoutButton` is nnow an additional cart Config. 
+One can simply declare it in his cart config and the button would appear on the cart page.
+
+Here is example usage
 
 
-Theme can either be 'light' or 'dark'
-Template is what will be displayed on merchant website
-borderType can be -> rounded, square, semi-rounded
+document.sezzleConfig = {
+	"configGroups": [
+		{
+			"targetXPath": ".cart-price/.money",
+			"urlMatch": "cart",
+			"sezzleCheckoutButton": {
+				"template": "Checkout with %%logo%%",
+				"theme": "light",
+				"borderType": "semi-rounded"
+			}
+		},
+		{
+			"targetXPath": ".product-price/.price/SPAN-0",
+			"urlMatch": "product"
+		}
+	]
+}
+
+
+`theme` can either be 'light' or 'dark'
+`template` is what will be displayed on merchant website
+`borderType` can be -> rounded, square, semi-rounded
+
+
+Note: This button will not work on any page apart from cart page. Cart page must have a button with name - `checkout`
