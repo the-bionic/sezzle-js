@@ -71,7 +71,7 @@ Example: For the below code snippet, the following would all be valid as a targe
 ```
 <script type="text/javascript">
   document.sezzleConfig = {
-		targetXPath: '.money',
+	targetXPath: '.money',
     renderToPath: '..'
   }
 </script>
@@ -84,7 +84,7 @@ If you run into any issues please contact merchantsupport@sezzle.com, or request
 
 ### Sezzle Checkout Button 
 
-Sezzle checkout Button or `sezzleCheckoutButton` is nnow an additional cart Config. 
+Sezzle checkout Button or `sezzleCheckoutButton` is now an additional cart Config. 
 One can simply declare it in his cart config and the button would appear on the cart page.
 
 Here is example usage

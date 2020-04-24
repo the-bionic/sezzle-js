@@ -127,6 +127,9 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
   * %%quadpay-logo-grey%% - Quadpay logo image in greyscale
   * %%quadpay-logo-white%% - Quadpay logo image for dark mode
   * %%quadpay-info-icon%% - Info icon that, when clicked, opens the Quadpay modal HTML provided in qpModalHTML
+  * %%affirm-logo%% - Affirm logo image
+  * %%affirm-info-icon%% - Info icon that, when clicked, opens the Affirm modal HTML provided in affirmModalHTML
+  * %%affirm-link-icon%% - Info icon that, when clicked, opens the Affirm link provided in affirmLink
 
 `splitPriceElementsOn` (optional)
 
@@ -377,12 +380,18 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 **Purpose**: Competitor's modal window to be rendered when widget is clicked at competitor's logo.<br/>
 **Type**: string<br/>
 **Default**: ''
-<!-- 
+
+`affirmLink` (optional)
+
+**Purpose**: Link to competitor's terms of service when widget is clicked at competitor's link.<br/>
+**Type**: string<br/>
+**Default**: 'https://www.affirm.com/how-it-works'
+
 `affirmModalHTML` (optional) **deprecation in process**
 
 **Purpose**: Competitor's modal window to be rendered when widget is clicked at competitor's logo.<br/>
 **Type**: string<br/>
-**Default**: '' -->
+**Default**: ''
 <!-- 
 `countryCodes` (optional) **deprecated**
 
@@ -413,25 +422,29 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 **Options**: false, true<br/>
 **Default**: false
 
-`sezzleCheckoutButton` (Can only be a part of cart config; optional)
-**Purpose**: Show Sezzle Checkout Button on the Cart Page<br/>
+`sezzleCheckoutButton` (optional)
+
+**Purpose**: Shows the Sezzle Checkout Button on the Cart Page<br/>
 **Type**: Object<br/>
-**Options**: {
-  "template" : "Pay with %%logo%%",
-  "theme" : "light",
-  "borderType" : "square",
-  "paddingX" : "13px"
+**Options**: {<br/>
+  "template" : string using %%logo%%,<br/>
+  "theme" : "light", "dark",<br/>
+  "borderType" : "square", "semi-rounded", "rounded,<br/>
+  "paddingX" : number of px (left and right padding only)<br/>
 }<br/>
-**Default**: {
-  "template" : "Checkout with %%logo%%",
-  "theme" : "light",
-  "borderType" : "rounded",
-  "paddingX" : "13px"
+**Default**: {}<br/>
+**Additional Details**: This was created so Sezzle can be used on a merchant site that is using a cart extension app instead of Shopify native checkout. The key must be present in the cart configGroup to be applied. If the value is given as an empty object (ex: sezzleCheckoutButton: {}), the following default values will be applied: <br/>
+{<br/>
+  "template" : "Checkout with %%logo%%",<br/>
+  "theme" : "light",<br/>
+  "borderType" : "rounded",<br/>
+  "paddingX" : "13px"<br/>
 }
+
 <!-- 
 ## Status Definitions:
 
 
 * **deprecated** - removed from SezzleJS
-* **deprecation** in progress - in SezzleJS, but not operational
+* **deprecation in process** - in SezzleJS, but not operational
 * **obsolete** - in SezzleJS and operational, but not used -->
