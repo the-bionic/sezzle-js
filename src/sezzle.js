@@ -872,7 +872,7 @@ SezzleJS.prototype.disableBodyScroll = function (disable) {
     window.scrollTo(0, this.scrollDistance);
     bodyElement.style.top = 0;
     // reset modal scroll
-    document.querySelector('.sezzle-modal').scrollTo(0, 0);
+    document.getElementsByClassName('sezzle-modal')[0].scrollTop = 0;
   }
 };
 
@@ -1012,7 +1012,8 @@ SezzleJS.prototype.addClickEventForModal = function (sezzleElement, configGroupI
       if (!event.target.classList.contains('no-sezzle-info')) {
         var modalNode;
         // Makes sure to get rid of AP & QP modals in our Sezzle modal event listener
-        document.querySelectorAll('.sezzle-checkout-modal-lightbox').forEach(function (element) {
+        var modals = document.getElementsByClassName('sezzle-checkout-modal-lightbox');
+        Array.prototype.forEach.call(modals, function (element) {
           if (!element.classList.contains('sezzle-ap-modal' || 'sezzle-qp-modal')) {
             modalNode = element;
           }
