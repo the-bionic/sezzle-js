@@ -1051,6 +1051,16 @@ SezzleJS.prototype.addClickEventForModal = function (sezzleElement, configGroupI
       this.logEvent('onclick-quadpay', configGroupIndex);
     }.bind(this));
   }.bind(this));
+   // for Affirm
+  var affirmModalLinks = sezzleElement.getElementsByClassName('affirm-modal-info-link');
+  Array.prototype.forEach.call(affirmModalLinks, function (modalLink) {
+    modalLink.addEventListener('click', function () {
+      // Show modal node
+      document.getElementsByClassName('sezzle-affirm-modal')[0].style.display = 'block';
+      // log on click event
+      this.logEvent('onclick-affirm', configGroupIndex);
+    }.bind(this));
+  }.bind(this));
 };
 
 /**
