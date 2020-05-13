@@ -450,3 +450,4 @@ function constructWidgetTemplate(widgetTemplate, language, numberOfPayments) {
   }
   return widgetTemplate; //if widgetTemplate is string
 }
+
