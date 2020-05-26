@@ -2,8 +2,8 @@
 import Utils from './utils';
 
 class Modal {
-  constructor() {
-    this._configInst = null;
+  constructor(config) {
+    this._config = config;
     this._scrollDistance = 0;
     this._modalNode = null;
     this._sezzleElement = null;
@@ -23,8 +23,7 @@ class Modal {
     this._affirmAddClickEvent();
   }
 
-  renderModals(_configInst) {
-    this._configInst = _configInst;
+  renderModals() {
     // This should always happen before rendering the widget
     this._renderModal();
     // only render APModal if ap-modal-link exists
@@ -148,12 +147,12 @@ class Modal {
       // Convert document.sezzleModalAvailableLanguages into Array
       const availableLanguages = document.sezzleModalAvailableLanguages.split(',').map((singleLanguage) => singleLanguage.trim());
       let modalLanguage;
-      if (availableLanguages.indexOf(this._configInst.language) > -1) {
-        modalLanguage = this._configInst.language;
+      if (availableLanguages.indexOf(this._config.language) > -1) {
+        modalLanguage = this._config.language;
       } else {
         modalLanguage = 'en';
       }
-      const sezzleModalToGet = `${this._configInst.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', modalLanguage)}`;
+      const sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', modalLanguage)}`;
 
       const response = await Utils.httpRequestWrapper('GET', sezzleModalToGet);
       this._modalNode.innerHTML = response;
@@ -185,7 +184,7 @@ class Modal {
     modalNodeAP.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal sezzle-ap-modal';
     modalNodeAP.style = 'position: center';
     modalNodeAP.style.display = 'none';
-    modalNodeAP.innerHTML = this._configInst.apModalHTML;
+    modalNodeAP.innerHTML = this._config.apModalHTML;
     document.getElementsByTagName('html')[0].appendChild(modalNodeAP);
     // Event listener for close in modal
     Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), (el) => {
@@ -203,7 +202,7 @@ class Modal {
     modalNodeQP.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal sezzle-qp-modal';
     modalNodeQP.style = 'position: center';
     modalNodeQP.style.display = 'none';
-    modalNodeQP.innerHTML = this._configInst.qpModalHTML;
+    modalNodeQP.innerHTML = this._config.qpModalHTML;
     document.getElementsByTagName('html')[0].appendChild(modalNodeQP);
     // Event listener for close in modal
     Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), (el) => {
@@ -221,7 +220,7 @@ class Modal {
     modalNodeAffirm.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal sezzle-affirm-modal';
     modalNodeAffirm.style = 'position: center';
     modalNodeAffirm.style.display = 'none';
-    modalNodeAffirm.innerHTML = this._configInst.affirmModalHTML;
+    modalNodeAffirm.innerHTML = this._config.affirmModalHTML;
     document.getElementsByTagName('html')[0].appendChild(modalNodeAffirm);
     // Event listener for close in modal
     Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), (el) => {

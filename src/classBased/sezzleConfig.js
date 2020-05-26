@@ -51,30 +51,36 @@ class sezzleConfig {
         cssForMerchantURL: `https://widget.sezzle.com/v1/css/price-widget?uuid= + ${options.merchantID}`,
       },
     };
+
+    /**
+     * @description Initializes the sezzle config processing
+     *  transforms old config into new,
+     *  and validates it
+     */
+    this._modifySezzleConfig();
   }
 
   /**
    * ************* Public FUNCTIONS ***************
   */
 
+  get getSezzleConfig() {
+    let config = this.sezzleConfig;
+    return config;
+  }
+
   /**
-   * @description Initializes the sezzle config processing
-   *  transforms old config into new,
-   *  and validates it
-   */
-  init() {
+   * ************* PRIVATE FUNCTIONS ***************
+  */
+
+  _modifySezzleConfig() {
     this._makeCompatible();
     this._validateConfig();
     this._urlConfigFilter();
     this._configSetters();
     this._languageSetter();
     this._setConfigGroups();
-    return this.sezzleConfig;
   }
-
-  /**
-   * ************* PRIVATE FUNCTIONS ***************
-  */
 
   /**
    * This is a helper function to convert an old
