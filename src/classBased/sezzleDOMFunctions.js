@@ -4,7 +4,7 @@ import Utils from './utils';
 
 class sezzleDOMFunctions {
   constructor(config) {
-    this._configInst = config;
+    this._config = config;
   }
 
   /**
@@ -89,8 +89,8 @@ class sezzleDOMFunctions {
   */
   getElementToRender(element, index = 0) {
     let toRenderElement = null;
-    if (this._configInst.configGroups[index].rendertopath !== null) {
-      const path = Utils.breakXPath(this._configInst.configGroups[index].rendertopath);
+    if (this._config.configGroups[index].rendertopath !== null) {
+      const path = Utils.breakXPath(this._config.configGroups[index].rendertopath);
       toRenderElement = element;
       for (let i = 0; i < path.length; i++) {
         const p = path[i];
@@ -115,7 +115,7 @@ class sezzleDOMFunctions {
           toRenderElement = toRenderElement.children.length > 0
             ? toRenderElement.firstElementChild
             : null;
-          this._configInst.configGroups[index].widgetIsFirstChild = true;
+          this._config.configGroups[index].widgetIsFirstChild = true;
         } else {
           // If this is a tag
           // indexes are 0-indexed (e.g. span-2 means third span)
@@ -150,11 +150,11 @@ class sezzleDOMFunctions {
     // Will be used later to replace {price} with price / this.numberOfPayments Eg: ${price} USD
     let formatter = priceText.replace(priceString, '{price}');
     // replace other strings not wanted in text
-    this._configInst.configGroups[configGroupIndex].ignoredFormattedPriceText.forEach((ignoredString) => {
+    this._config.configGroups[configGroupIndex].ignoredFormattedPriceText.forEach((ignoredString) => {
       formatter = formatter.replace(ignoredString, '');
     });
     // get the sezzle installment price
-    const sezzleInstallmentPrice = (price / this._configInst.numberOfPayments).toFixed(2);
+    const sezzleInstallmentPrice = (price / this._config.numberOfPayments).toFixed(2);
     // format the string
     const sezzleInstallmentFormattedPrice = formatter.replace('{price}', sezzleInstallmentPrice);
     return sezzleInstallmentFormattedPrice;
@@ -165,11 +165,11 @@ class sezzleDOMFunctions {
 	 * @param element Element that contains the price text
 	*/
   getPriceText(element, configGroupIndex) {
-    if (this._configInst.configGroups[configGroupIndex].ignoredPriceElements === []) {
+    if (this._config.configGroups[configGroupIndex].ignoredPriceElements === []) {
       return element.textContent;
     }
 
-    this._configInst.configGroups[configGroupIndex].ignoredPriceElements.forEach((subpaths) => {
+    this._config.configGroups[configGroupIndex].ignoredPriceElements.forEach((subpaths) => {
       // get all elements pointed to by the xPath. Search is rooted at element
       this.getElementsByXPath(subpaths, 0, [element]).forEach((ignoredPriceElement) => {
         // mark the element to be ignored
@@ -201,9 +201,9 @@ class sezzleDOMFunctions {
 	*/
   isProductEligible(priceText, configGroupIndex) {
     const price = this._parsePrice(priceText);
-    this._configInst.configGroups[configGroupIndex].productPrice = price;
+    this._config.configGroups[configGroupIndex].productPrice = price;
     const priceInCents = price * 100;
-    return priceInCents >= this._configInst.minPrice && priceInCents <= this._configInst.maxPrice;
+    return priceInCents >= this._config.minPrice && priceInCents <= this._config.maxPrice;
   }
 
   /**
@@ -221,7 +221,7 @@ class sezzleDOMFunctions {
     // Deleted elements should not be observed
     // That is handled
     const observer = new MutationObserver(callback);
-    observer.observe(element, this._configInst.mutationObserverConfig);
+    observer.observe(element, this._config.mutationObserverConfig);
     return observer;
   }
 
@@ -292,7 +292,7 @@ class sezzleDOMFunctions {
 	 * Hide elements pointed to by this.hideClasses
 	*/
   _hideSezzleHideElements(configGroupIndex) {
-    this._configInst.configGroups[configGroupIndex].hideClasses.forEach((subpaths) => {
+    this._config.configGroups[configGroupIndex].hideClasses.forEach((subpaths) => {
       this.getElementsByXPath(subpaths).forEach((element) => {
         if (!element.classList.contains('sezzle-hidden')) {
           element.classList.add('sezzle-hidden');

@@ -6,7 +6,7 @@ import RenderAwesomeSezzle from './renderAwesomeSezzle';
 
 class SezzleJS {
   constructor(options) {
-    this._configInst = new SezzleConfig(options).init();
+    this._configInst = new SezzleConfig(options).getSezzleConfig();
     this._renderAwesomeSezzle = new RenderAwesomeSezzle(this._configInst);
     this._countryCode = '';
   }

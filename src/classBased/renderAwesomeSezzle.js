@@ -5,20 +5,20 @@ import Modal from './modal';
 /* eslint-disable max-len */
 class renderAwesomeSezzle {
   constructor(config) {
-    this._configInst = config;
+    this._config = config;
     this._allConfigsUsePriceClassElement = true;
     this._els = [];
     this._intervalInMs = 2000;
 
-    this._modalInst = new Modal();
+    this._modalInst = new Modal(config);
     this._sezzleDOMInst = new SezzleDOMFunctions(config);
   }
 
   /**
    * ************* PUBLIC FUNCTIONS ***************
   */
-  initializeRendering(_configInst) {
-    this._configInst.configGroups.forEach((configGroup, index) => {
+  initializeRendering() {
+    this._config.configGroups.forEach((configGroup, index) => {
       if (configGroup.hasPriceClassElement) {
         this.render(
           configGroup.priceElements[0], configGroup.renderElements[0],
@@ -32,7 +32,7 @@ class renderAwesomeSezzle {
       }
     });
     if (!this._allConfigsUsePriceClassElement) this._sezzleWidgetCheckInterval();
-    this._modalInst.renderModals(this._configInst);
+    this._modalInst.renderModals(this._config);
   }
 
 
@@ -40,7 +40,7 @@ class renderAwesomeSezzle {
    * Looks for newly added price elements
   */
   _sezzleWidgetCheckInterval() {
-    this._configInst.configGroups.forEach((configGroup, index) => {
+    this._config.configGroups.forEach((configGroup, index) => {
       if (configGroup.xpath === []) return;
       const elements = this._sezzleDOMInst.getElementsByXPath(configGroup.xpath);
       elements.forEach((e) => {
@@ -67,7 +67,7 @@ class renderAwesomeSezzle {
             this._sezzleDOMInst._mutationCallBack(mutations, el.configGroupIndex);
           });
           this._modalInst.addClickEventForModal(sz, el.configGroupIndex);
-          this._sezzleDOMInst._observeRelatedElements(el.element, sz, this._configInst.configGroups[el.configGroupIndex].relatedElementActions);
+          this._sezzleDOMInst._observeRelatedElements(el.element, sz, this._config.configGroups[el.configGroupIndex].relatedElementActions);
         } else {
           // remove the element from the els array
           delete this._els[index];
@@ -93,7 +93,7 @@ class renderAwesomeSezzle {
       }
     });
     // Hide elements ex: afterpay
-    for (let index = 0, len = this._configInst.configGroups.length; index < len; index++) {
+    for (let index = 0, len = this._config.configGroups.length; index < len; index++) {
       this._sezzleDOMInst._hideSezzleHideElements(index);
     }
     setTimeout(() => this._sezzleWidgetCheckInterval(), this._intervalInMs);
@@ -120,8 +120,8 @@ class renderAwesomeSezzle {
     const parent = renderelement;
     // get the alignment of the widget (if widgetAlignment is auto)
     // the alignment, when set to auto follows the text-align property of the price element
-    if (this._configInst.configGroups[configGroupIndex].alignment === 'auto') {
-      this._configInst.configGroups[configGroupIndex].alignment = this._guessWidgetAlignment(element);
+    if (this._config.configGroups[configGroupIndex].alignment === 'auto') {
+      this._config.configGroups[configGroupIndex].alignment = this._guessWidgetAlignment(element);
     }
     // root node for sezzle
     const sezzle = document.createElement('div');
@@ -130,7 +130,7 @@ class renderAwesomeSezzle {
     this._insertWidgetTypeCSSClassInElement(sezzle, configGroupIndex);
     this._insertStoreCSSClassInElement(sezzle);
     this._setElementMargins(sezzle, configGroupIndex);
-    if (this._configInst.configGroups[configGroupIndex].scaleFactor) this._setWidgetSize(sezzle, configGroupIndex);
+    if (this._config.configGroups[configGroupIndex].scaleFactor) this._setWidgetSize(sezzle, configGroupIndex);
     const node = document.createElement('div');
     node.className = 'sezzle-checkout-button-wrapper sezzle-modal-link';
     node.style.cursor = 'pointer';
@@ -139,7 +139,7 @@ class renderAwesomeSezzle {
     const sezzleButtonText = document.createElement('div');
     sezzleButtonText.className = 'sezzle-button-text';
     this._addCSSCustomisation(sezzleButtonText, configGroupIndex);
-    this._configInst.configGroups[configGroupIndex].widgetTemplate.forEach((subtemplate) => {
+    this._config.configGroups[configGroupIndex].widgetTemplate.forEach((subtemplate) => {
       switch (subtemplate) {
       case 'price': {
         const priceSpanNode = document.createElement('span');
@@ -151,11 +151,11 @@ class renderAwesomeSezzle {
       }
       case 'logo': {
         const logoNode = document.createElement('img');
-        logoNode.className = `sezzle-logo ${this._configInst.configGroups[configGroupIndex].imageClassName}`;
-        logoNode.src = this._configInst.configGroups[configGroupIndex].imageURL;
+        logoNode.className = `sezzle-logo ${this._config.configGroups[configGroupIndex].imageClassName}`;
+        logoNode.src = this._config.configGroups[configGroupIndex].imageURL;
         sezzleButtonText.appendChild(logoNode);
         this._setLogoSize(logoNode, configGroupIndex);
-        if (this._configInst.configGroups[configGroupIndex].logoStyle !== {}) this._setLogoStyle(logoNode, configGroupIndex);
+        if (this._config.configGroups[configGroupIndex].logoStyle !== {}) this._setLogoStyle(logoNode, configGroupIndex);
         break;
       }
       // changed from learn-more to link as that is what current altVersionTemplates use
@@ -225,7 +225,7 @@ class renderAwesomeSezzle {
       }
       case 'affirm-link-icon': {
         const affirmAnchor = document.createElement('a');
-        affirmAnchor.href = this._configInst.configGroups[configGroupIndex].affirmLink;
+        affirmAnchor.href = this._config.configGroups[configGroupIndex].affirmLink;
         affirmAnchor.target = '_blank';
         const affirmLinkIconNode = document.createElement('code');
         affirmLinkIconNode.className = 'affirm-info-link';
@@ -257,7 +257,7 @@ class renderAwesomeSezzle {
       }
       case 'afterpay-link-icon': {
         const apAnchor = document.createElement('a');
-        apAnchor.href = this._configInst.configGroups[configGroupIndex].apLink;
+        apAnchor.href = this._config.configGroups[configGroupIndex].apLink;
         apAnchor.target = '_blank';
         const apLinkIconNode = document.createElement('code');
         apLinkIconNode.className = 'ap-info-link';
@@ -297,7 +297,7 @@ class renderAwesomeSezzle {
       case 'price-split': {
         const priceSplitNode = document.createElement('span');
         priceSplitNode.className = `sezzle-payment-amount sezzle-price-split sezzleindex-${index}`;
-        const priceElemTexts = element.textContent.split(this._configInst.configGroups[configGroupIndex].splitPriceElementsOn);
+        const priceElemTexts = element.textContent.split(this._config.configGroups[configGroupIndex].splitPriceElementsOn);
         let priceSplitText = '';
         if (priceElemTexts.length === 1) { // if the text is not being splitted (this check is needed in order to support sites with multiple types of product pricing)
           // give the original element in the case there might be some ignored elements present
@@ -313,7 +313,7 @@ class renderAwesomeSezzle {
             if (index === 0) {
               priceSplitText = this._sezzleDOMInst.getFormattedPrice(elem, configGroupIndex);
             } else {
-              priceSplitText = `${priceSplitText} ${this._configInst.configGroups[configGroupIndex].splitPriceElementsOn} ${this._configInst.getFormattedPrice(elem, configGroupIndex)}`;
+              priceSplitText = `${priceSplitText} ${this._config.configGroups[configGroupIndex].splitPriceElementsOn} ${this._config.getFormattedPrice(elem, configGroupIndex)}`;
             }
           });
         }
@@ -337,7 +337,7 @@ class renderAwesomeSezzle {
     node.appendChild(sezzleButtonText);
     // Adding main node to sezzel node
     sezzle.appendChild(node);
-    this._configInst.configGroups[configGroupIndex].customClasses.forEach((customClass) => {
+    this._config.configGroups[configGroupIndex].customClasses.forEach((customClass) => {
       if (customClass.xpath && customClass.className) {
         if (typeof (customClass.index) !== 'number') {
           customClass.index = -1; // set the default value
@@ -352,12 +352,12 @@ class renderAwesomeSezzle {
       }
     });
     // Adding sezzle to parent node
-    if (this._configInst.configGroups[configGroupIndex].widgetIsFirstChild) {
+    if (this._config.configGroups[configGroupIndex].widgetIsFirstChild) {
       this._insertAsFirstChild(sezzle, parent);
     } else {
       this._insertAfter(sezzle, parent);
     }
-    Utils.logEvent('onload', this._configInst, configGroupIndex);
+    Utils.logEvent('onload', this._config, configGroupIndex);
     return sezzle;
   }
 
@@ -371,7 +371,7 @@ class renderAwesomeSezzle {
 	 * @param configGroupIndex index of the config group that element belongs to
 	*/
   _insertWidgetTypeCSSClassInElement(element, configGroupIndex) {
-    switch (this._configInst.configGroups[configGroupIndex].widgetType) {
+    switch (this._config.configGroups[configGroupIndex].widgetType) {
     case 'cart':
       element.className += ' sezzle-cart-page-widget';
       break;
@@ -413,7 +413,7 @@ class renderAwesomeSezzle {
 	 * @param element to add class to
 	*/
   _insertStoreCSSClassInElement(element) {
-    element.className += ` sezzle-${this._configInst.merchantID}`;
+    element.className += ` sezzle-${this._config.merchantID}`;
     return element;
   }
 
@@ -423,10 +423,10 @@ class renderAwesomeSezzle {
 	 * @param configGroupIndex index of the config group that element belongs to
 	*/
   _setElementMargins(element, configGroupIndex) {
-    element.style.marginTop = `${this._configInst.configGroups[configGroupIndex].marginTop}px`;
-    element.style.marginBottom = `${this._configInst.configGroups[configGroupIndex].marginBottom}px`;
-    element.style.marginLeft = `${this._configInst.configGroups[configGroupIndex].marginLeft}px`;
-    element.style.marginRight = `${this._configInst.configGroups[configGroupIndex].marginRight}px`;
+    element.style.marginTop = `${this._config.configGroups[configGroupIndex].marginTop}px`;
+    element.style.marginBottom = `${this._config.configGroups[configGroupIndex].marginBottom}px`;
+    element.style.marginLeft = `${this._config.configGroups[configGroupIndex].marginLeft}px`;
+    element.style.marginRight = `${this._config.configGroups[configGroupIndex].marginRight}px`;
   }
 
   /**
@@ -438,10 +438,10 @@ class renderAwesomeSezzle {
 	 * @return void
 	*/
   _setWidgetSize(element, configGroupIndex) {
-    element.style.transformOrigin = `top ${this._configInst.configGroups[configGroupIndex].alignment}`;
-    element.style.transform = `scale(${this._configInst.configGroups[configGroupIndex].scaleFactor})`;
-    if (this._configInst.configGroups[configGroupIndex].fixedHeight) {
-      element.style.height = `${this._configInst.configGroups[configGroupIndex].fixedHeight}px`;
+    element.style.transformOrigin = `top ${this._config.configGroups[configGroupIndex].alignment}`;
+    element.style.transform = `scale(${this._config.configGroups[configGroupIndex].scaleFactor})`;
+    if (this._config.configGroups[configGroupIndex].fixedHeight) {
+      element.style.height = `${this._config.configGroups[configGroupIndex].fixedHeight}px`;
       element.style.overflow = 'hidden';
     }
   }
@@ -453,14 +453,14 @@ class renderAwesomeSezzle {
 	*/
   _addCSSAlignment(element, configGroupIndex) {
     let newAlignment = '';
-    if (matchMedia && this._configInst.configGroups[configGroupIndex].alignmentSwitchMinWidth && this._configInst.configGroups[configGroupIndex].alignmentSwitchType) {
-      const queryString = `(min-width: ${this._configInst.configGroups[configGroupIndex].alignmentSwitchMinWidth}px)`;
+    if (matchMedia && this._config.configGroups[configGroupIndex].alignmentSwitchMinWidth && this._config.configGroups[configGroupIndex].alignmentSwitchType) {
+      const queryString = `(min-width: ${this._config.configGroups[configGroupIndex].alignmentSwitchMinWidth}px)`;
       const mq = window.matchMedia(queryString);
       if (!mq.matches) {
-        newAlignment = this._configInst.configGroups[configGroupIndex].alignmentSwitchType;
+        newAlignment = this._config.configGroups[configGroupIndex].alignmentSwitchType;
       }
     }
-    switch (newAlignment || this._configInst.configGroups[configGroupIndex].alignment) {
+    switch (newAlignment || this._config.configGroups[configGroupIndex].alignment) {
     case 'left':
       element.className += ' sezzle-left';
       break;
@@ -495,16 +495,16 @@ class renderAwesomeSezzle {
 	 * @param configGroupIndex index of the config group that element belongs to
 	*/
   _addCSSFontStyle(element, configGroupIndex) {
-    if (this._configInst.configGroups[configGroupIndex].fontWeight) {
-      element.style.fontWeight = this._configInst.configGroups[configGroupIndex].fontWeight;
+    if (this._config.configGroups[configGroupIndex].fontWeight) {
+      element.style.fontWeight = this._config.configGroups[configGroupIndex].fontWeight;
     }
-    if (this._configInst.configGroups[configGroupIndex].fontFamily) {
-      element.style.fontFamily = this._configInst.configGroups[configGroupIndex].fontFamily;
+    if (this._config.configGroups[configGroupIndex].fontFamily) {
+      element.style.fontFamily = this._config.configGroups[configGroupIndex].fontFamily;
     }
-    if (this._configInst.configGroups[configGroupIndex].fontSize !== 'inherit') {
-      element.style.fontSize = `${this._configInst.configGroups[configGroupIndex].fontSize}px`;
+    if (this._config.configGroups[configGroupIndex].fontSize !== 'inherit') {
+      element.style.fontSize = `${this._config.configGroups[configGroupIndex].fontSize}px`;
     }
-    element.style.lineHeight = this._configInst.configGroups[configGroupIndex].lineHeight || '13px';
+    element.style.lineHeight = this._config.configGroups[configGroupIndex].lineHeight || '13px';
   }
 
   /**
@@ -513,8 +513,8 @@ class renderAwesomeSezzle {
 	 * @param configGroupIndex index of the config group that element belongs to
 	*/
   _addCSSWidth(element, configGroupIndex) {
-    if (this._configInst.configGroups[configGroupIndex].maxWidth) {
-      element.style.maxWidth = `${this._configInst.configGroups[configGroupIndex].maxWidth}px`;
+    if (this._config.configGroups[configGroupIndex].maxWidth) {
+      element.style.maxWidth = `${this._config.configGroups[configGroupIndex].maxWidth}px`;
     }
   }
 
@@ -524,8 +524,8 @@ class renderAwesomeSezzle {
 	 * @param configGroupIndex index of the config group that element belongs to
 	 */
   _addCSSTextColor(element, configGroupIndex) {
-    if (this._configInst.configGroups[configGroupIndex].textColor) {
-      element.style.color = this._configInst.configGroups[configGroupIndex].textColor;
+    if (this._config.configGroups[configGroupIndex].textColor) {
+      element.style.color = this._config.configGroups[configGroupIndex].textColor;
     }
   }
 
@@ -535,7 +535,7 @@ class renderAwesomeSezzle {
 	 * @param configGroupIndex index of the config group that element belongs to
 	*/
   _addCSSTheme(element, configGroupIndex) {
-    switch (this._configInst.configGroups[configGroupIndex].theme) {
+    switch (this._config.configGroups[configGroupIndex].theme) {
     case 'dark':
       element.className += ' szl-dark';
       break;
@@ -554,8 +554,8 @@ class renderAwesomeSezzle {
 	 * @return void
 	 */
   _setLogoSize(element, configGroupIndex) {
-    element.style.transformOrigin = `top ${this._configInst.configGroups[configGroupIndex].alignment}`;
-    element.style.transform = `scale(${this._configInst.configGroups[configGroupIndex].logoSize})`;
+    element.style.transformOrigin = `top ${this._config.configGroups[configGroupIndex].alignment}`;
+    element.style.transform = `scale(${this._config.configGroups[configGroupIndex].logoSize})`;
   }
 
   /**
@@ -566,8 +566,8 @@ class renderAwesomeSezzle {
 	 * @return void
 	*/
   _setLogoStyle(element, configGroupIndex) {
-    Object.keys(this._configInst.configGroups[configGroupIndex].logoStyle).forEach((key) => {
-      element.style[key] = this._configInst.configGroups[configGroupIndex].logoStyle[key];
+    Object.keys(this._config.configGroups[configGroupIndex].logoStyle).forEach((key) => {
+      element.style[key] = this._config.configGroups[configGroupIndex].logoStyle[key];
     });
   }
 
