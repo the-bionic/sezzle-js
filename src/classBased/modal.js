@@ -51,7 +51,8 @@ class Modal {
         if (!event.target.classList.contains('no-sezzle-info')) {
           let modalNode;
           // Makes sure to get rid of AP, QP & Affirm modals in our Sezzle modal event listener
-          document.querySelectorAll('.sezzle-checkout-modal-lightbox').forEach((element) => {
+          const modals = document.getElementsByClassName('sezzle-checkout-modal-lightbox');
+          Array.prototype.forEach.call(modals, (element) => {
             if (!element.classList.contains('sezzle-ap-modal' || 'sezzle-qp-modal' || 'sezzle-affirm-modal')) {
               modalNode = element;
             }
@@ -129,7 +130,7 @@ class Modal {
       window.scrollTo(0, this._scrollDistance);
       bodyElement.style.top = 0;
       // reset modal scroll
-      document.querySelector('.sezzle-modal').scrollTo(0, 0);
+      document.getElementsByClassName('sezzle-modal')[0].scrollTop = 0;
     }
   }
 

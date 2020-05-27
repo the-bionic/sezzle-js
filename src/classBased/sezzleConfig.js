@@ -65,7 +65,7 @@ class sezzleConfig {
   */
 
   get getSezzleConfig() {
-    let config = this.sezzleConfig;
+    const config = this.sezzleConfig;
     return config;
   }
 
@@ -334,6 +334,15 @@ class sezzleConfig {
     // initialAction - this is a function to act upon a pre existing element's condition
     result.relatedElementActions = configGroup.relatedElementActions || (this.options.defaultConfig && this.options.defaultConfig.relatedElementActions) || [];
     result.ignoredPriceElements = configGroup.ignoredPriceElements || (this.options.defaultConfig && this.options.defaultConfig.ignoredPriceElements) || [];
+
+    // Below is for sezzle checkout button
+    result.sezzleCheckoutButton = configGroup.sezzleCheckoutButton;
+    if (result.sezzleCheckoutButton) {
+      result.sezzleCheckoutButton.theme = result.sezzleCheckoutButton.theme || 'light';
+      result.sezzleCheckoutButton.paddingX = result.sezzleCheckoutButton.paddingX || '13px';
+      result.sezzleCheckoutButton.template = result.sezzleCheckoutButton.template || 'Checkout with %%logo%%';
+      result.sezzleCheckoutButton.borderType = result.sezzleCheckoutButton.borderType || 'rounded';
+    }
 
     if (typeof (result.ignoredPriceElements) === 'string') {
       // Only one x-path is given

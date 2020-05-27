@@ -64,14 +64,14 @@ class Utils {
             cart_id: this._getCookie('cart'),
             ip_address: _configInstance.ip,
             merchant_site: window.location.hostname,
-            is_mobile_browser: this.isMobileBrowser(),
+            is_mobile_browser: this._isMobileBrowser(),
             user_agent: navigator.userAgent,
             merchant_uuid: _configInstance.merchantID,
             page_url: window.location.href,
             viewport,
             product_price: configGroupIndex !== undefined ? _configInstance.configGroups[configGroupIndex].productPrice : null,
             sezzle_config: JSON.stringify(_configInstance.config),
-          }, 'https://localhost:9091'); // TODO: Change link to tracking.sezzle.com
+          }, 'https://tracking.sezzle.com');
         }, 100);
       }
     }

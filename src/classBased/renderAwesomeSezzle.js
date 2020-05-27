@@ -109,6 +109,9 @@ class renderAwesomeSezzle {
    * @return void
    */
   render(element, renderelement, index = 0, configGroupIndex) {
+    // Runninng Create Sezzle Checkout Button
+    const sezzleCheckoutButton = document.getElementsByClassName('sezzle-checkout-button')[0];
+    if (!sezzleCheckoutButton && this._config.configGroups[configGroupIndex].sezzleCheckoutButton) this._createSezzleButton(configGroupIndex);
     // Do not render this product if it is not eligible
     const priceText = this._sezzleDOMInst.getPriceText(element, configGroupIndex);
     if (!this._sezzleDOMInst.isProductEligible(priceText, configGroupIndex)) return false;
@@ -364,6 +367,80 @@ class renderAwesomeSezzle {
   /**
    * ************* PRIVATE FUNCTIONS ***************
   */
+
+  /**
+   * This function will render the checkout button
+   * @param configGroupIndex - Connfig group index
+   *
+  */
+  _createSezzleButton(configGroupIndex) {
+    const checkoutButton = document.getElementsByName('checkout')[0];
+    const checkoutButtonParent = checkoutButton ? checkoutButton.parentElement : null;
+    if (checkoutButtonParent) {
+      const buttonConfig = this._config.configGroups[configGroupIndex].sezzleCheckoutButton;
+      const sezzleCheckoutButton = document.createElement('button');
+      sezzleCheckoutButton.innerHTML = this._parseButtonTemplate(buttonConfig.template, buttonConfig.theme);
+      switch (buttonConfig.borderType) {
+      case 'square':
+        sezzleCheckoutButton.style.borderRadius = '0px';
+        break;
+      case 'semi-rounded':
+        sezzleCheckoutButton.style.borderRadius = '5px';
+        break;
+      default:
+        sezzleCheckoutButton.style.borderRadius = '300px';
+      }
+      // Adding styles to the button
+      sezzleCheckoutButton.classList.add('sezzle-checkout-button');
+      sezzleCheckoutButton.classList.add(`sezzle-button-${buttonConfig.theme}`);
+      sezzleCheckoutButton.style.paddingLeft = buttonConfig.paddingX;
+      sezzleCheckoutButton.style.paddingRight = buttonConfig.paddingX;
+      this._embedButtonFont();
+      sezzleCheckoutButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        window.location.replace('/checkout');
+      });
+      checkoutButtonParent.append(sezzleCheckoutButton);
+    }
+  }
+
+  /**
+   * This function will parse template buttonnConfig to generate inner html of the button
+   * @param template - Template of the newly created button
+   * @param theme -  Theme of the button supplied in the config
+   * @return templateString  -  Inner Html of the button
+  */
+  _parseButtonTemplate(template, theme) {
+    const sezzleImage = {
+      light: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg',
+      dark: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg',
+    };
+    const chosenImage = sezzleImage[theme];
+    const templateArray = template.split(' ');
+    let templateString = '';
+    templateArray.forEach((subtemplate) => {
+      switch (subtemplate) {
+      case '%%logo%%':
+        templateString += `<img class='sezzle-button-logo-img' src=${chosenImage} />`;
+        break;
+      default:
+        templateString += `${subtemplate} `;
+      }
+    });
+    return templateString;
+  }
+
+  /**
+   * This function will load comforta to DOM for the button
+  */
+  _embedButtonFont() {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('type', 'text/css');
+    link.setAttribute('href', 'https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet');
+    document.head.appendChild(link);
+  }
 
   /**
 	 * Insert css class name in element

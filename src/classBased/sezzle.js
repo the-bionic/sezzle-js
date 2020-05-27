@@ -6,7 +6,7 @@ import RenderAwesomeSezzle from './renderAwesomeSezzle';
 
 class SezzleJS {
   constructor(options) {
-    this._configInst = new SezzleConfig(options).getSezzleConfig();
+    this._configInst = new SezzleConfig(options).getSezzleConfig;
     this._renderAwesomeSezzle = new RenderAwesomeSezzle(this._configInst);
     this._countryCode = '';
   }
@@ -36,8 +36,7 @@ class SezzleJS {
     if (this._countryCode === 'US' || this._countryCode === 'CA') {
       const win = window.frames.szl;
       if (win && !this._configInst.noGtm) {
-        // TODO: Change link to tracking.sezzle.com
-        setTimeout(() => win.postMessage('initGTMScript', 'localhost'), 100);
+        setTimeout(() => win.postMessage('initGTMScript', 'https://tracking.sezzle.com'), 100);
       }
     }
   }
