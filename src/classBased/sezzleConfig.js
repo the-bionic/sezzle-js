@@ -6,6 +6,7 @@ class sezzleConfig {
   constructor(options) {
     if (!options) options = {};
     this.options = options;
+    this.compatibleOptions = null;
 
     this._propsNotInConfigGroup = [
       'merchantID',
@@ -52,11 +53,6 @@ class sezzleConfig {
       },
     };
 
-    /**
-     * @description Initializes the sezzle config processing
-     *  transforms old config into new,
-     *  and validates it
-     */
     this._modifySezzleConfig();
   }
 
@@ -69,10 +65,20 @@ class sezzleConfig {
     return config;
   }
 
+  get getCompatibleOptions() {
+    const compatible = this.compatibleOptions;
+    return compatible;
+  }
+
   /**
    * ************* PRIVATE FUNCTIONS ***************
   */
 
+  /**
+   * @description Initializes the sezzle config processing
+   *  transforms old config into new,
+   *  and validates it
+  */
   _modifySezzleConfig() {
     this._makeCompatible();
     this._validateConfig();
@@ -98,6 +104,7 @@ class sezzleConfig {
     const compatible = this._factorize();
     compatible.configGroups = this._splitConfig();
     this.options = compatible;
+    this.compatibleOptions = compatible;
   }
 
   /**

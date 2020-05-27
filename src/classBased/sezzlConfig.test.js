@@ -5,15 +5,13 @@ const cloneDeep = require('lodash.clonedeep');
 
 const sezzleConfig = require('../sezzle.config.js');
 
-// TODO: describe('Backwards compatability function works as expected', () => {
-//   test('Properly converts old config structure to new config structure', () => {
-//     // deep object comparison
-//     const sezzleConfigInst = new SezzleConfig(sezzleConfig.oldConfig).init();
-//     console.log('received', sezzleConfigInst.configGroups);
-//     console.log('sezzle-config', sezzleConfig.newConfig.configGroups);
-//     expect(sezzleConfig.newConfig.configGroups).toEqual(sezzleConfigInst.configGroups);
-//   });
-// });
+describe('Backwards compatability function works as expected', () => {
+  test('Properly converts old config structure to new config structure', () => {
+    // deep object comparison
+    const sezzleConfigInst = new SezzleConfig(sezzleConfig.oldConfig).getCompatibleOptions;
+    expect(sezzleConfig.newConfig.configGroups).toEqual(sezzleConfigInst.configGroups);
+  });
+});
 
 describe('Config validator function works as expected', () => {
   test('Throws an error when configGroups is not an array', () => {
@@ -21,7 +19,7 @@ describe('Config validator function works as expected', () => {
     newConfig.configGroups = 'somethingWhichIsNotAnArray';
 
     expect(() => {
-      new SezzleConfig(newConfig).init();
+      new SezzleConfig(newConfig).getSezzleConfig;
     }).toThrow('options.configGroups is not an array');
   });
 
@@ -30,7 +28,7 @@ describe('Config validator function works as expected', () => {
     newConfig.configGroups = [];
 
     expect(() => {
-      new SezzleConfig(newConfig).init();
+      new SezzleConfig(newConfig).getSezzleConfig;
     }).toThrow('options.configGroups must have at least one config object');
   });
 
@@ -39,7 +37,7 @@ describe('Config validator function works as expected', () => {
     delete newConfig.configGroups[0].targetXPath;
 
     expect(() => {
-      new SezzleConfig(newConfig).init();
+      new SezzleConfig(newConfig).getSezzleConfig;
     }).toThrow('targetXPath must be specified in all configs in options.configGroups');
   });
 
@@ -48,7 +46,7 @@ describe('Config validator function works as expected', () => {
     newConfig.configGroups[0].targetXPath = [newConfig.configGroups[0].targetXPath];
 
     expect(() => {
-      new SezzleConfig(newConfig).init();
+      new SezzleConfig(newConfig).getSezzleConfig;
     }).toThrow('targetXPath must be of type string');
   });
 
@@ -57,7 +55,7 @@ describe('Config validator function works as expected', () => {
     newConfig.configGroups[0].renderToPath = [newConfig.configGroups[0].renderToPath];
 
     expect(() => {
-      new SezzleConfig(newConfig).init();
+      new SezzleConfig(newConfig).getSezzleConfig;
     }).toThrow('renderToPath must be of type string');
   });
 
@@ -66,14 +64,14 @@ describe('Config validator function works as expected', () => {
     newConfig.configGroups[0].merchantID = 'someMerchantID';
 
     expect(() => {
-      new SezzleConfig(newConfig).init();
+      new SezzleConfig(newConfig).getSezzleConfig;
     }).toThrow('merchantID is not a property of a configGroup. Specify this key at the outermost layer');
   });
 });
 
 describe('Constructor correctly sets the parameters', () => {
   test('Properly sets xpath value when there are multiple configs in the configGroups array', () => {
-    const sz = new SezzleConfig(sezzleConfig.newConfig).init();
+    const sz = new SezzleConfig(sezzleConfig.newConfig).getSezzleConfig;
     for (var i = 0, len = sz.configGroups.length; i < len; i++) {
       expect(sz.configGroups[i].xpath).toEqual(
         Utils.breakXPath(sezzleConfig.newConfig.configGroups[i].targetXPath)
@@ -82,7 +80,7 @@ describe('Constructor correctly sets the parameters', () => {
   });
 
   test('Properly sets rendertopath value when there are multiple configs in the configGroups array', () => {
-    const sz = new SezzleConfig(sezzleConfig.newConfig).init();
+    const sz = new SezzleConfig(sezzleConfig.newConfig).getSezzleConfig;
     for (var i = 0, len = sz.configGroups.length; i < len; i++) {
       expect(sz.configGroups[i].rendertopath).toEqual(sezzleConfig.newConfig.configGroups[i].renderToPath);
     }
@@ -97,7 +95,7 @@ describe('Constructor correctly sets the parameters', () => {
           ignoredPriceElements: '#id/.class'
         }
       };
-      const sz = new SezzleConfig(newConfig).init();
+      const sz = new SezzleConfig(newConfig).getSezzleConfig;
       for (var i = 0, len = sz.configGroups[i].length; i < len; i++) {
         expect(sz.configGroups[i].ignoredPriceElements)
           .toEqual([['#id', '.class']]);
@@ -107,7 +105,7 @@ describe('Constructor correctly sets the parameters', () => {
   test(`Properly sets ignoredPriceElements ` +
     `value when options.configGroups[i].ignoredPriceElements is` +
     `an array`, () => {
-      const sz = new SezzleConfig(sezzleConfig.newConfig).init();
+      const sz = new SezzleConfig(sezzleConfig.newConfig).getSezzleConfig;
       for (var i = 0, len = sz.configGroups.length; i < len; i++) {
         expect(sz.configGroups[i].ignoredPriceElements)
           .toEqual([['#id-4', '.class-4'], ['#id-5', '.class-5']]);
@@ -121,8 +119,9 @@ describe('Constructor correctly sets the parameters', () => {
         ...sezzleConfig.oldConfig,
         ignoredPriceElements: '#id/.class'
       };
-      const sz = new SezzleConfig(oldConfig).init();
+      const sz = new SezzleConfig(oldConfig).getSezzleConfig;
       for (var i = 0, len = sz.configGroups[i].length; i < len; i++) {
+        console.log('********', sz.configGroups[i])
         expect(sz.configGroups[i].ignoredPriceElements)
           .toEqual([['#id', '.class']]);
       }
@@ -131,7 +130,7 @@ describe('Constructor correctly sets the parameters', () => {
   test(`Properly duplicates ignoredPriceElements ` +
     `value when old config is passed and options.ignoredPriceElements is` +
     `an array`, () => {
-      const sz = new SezzleConfig(sezzleConfig.oldConfig).init();
+      const sz = new SezzleConfig(sezzleConfig.oldConfig).getSezzleConfig;
       for (var i = 0, len = sz.configGroups.length; i < len; i++) {
         expect(sz.configGroups[i].ignoredPriceElements)
           .toEqual([['#id-4', '.class-4'], ['#id-5', '.class-5']]);
