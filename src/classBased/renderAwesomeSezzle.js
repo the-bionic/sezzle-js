@@ -109,9 +109,6 @@ class renderAwesomeSezzle {
    * @return void
    */
   render(element, renderelement, index = 0, configGroupIndex) {
-    // Runninng Create Sezzle Checkout Button
-    const sezzleCheckoutButton = document.getElementsByClassName('sezzle-checkout-button')[0];
-    if (!sezzleCheckoutButton && this._config.configGroups[configGroupIndex].sezzleCheckoutButton) this._createSezzleButton(configGroupIndex);
     // Do not render this product if it is not eligible
     const priceText = this._sezzleDOMInst.getPriceText(element, configGroupIndex);
     if (!this._sezzleDOMInst.isProductEligible(priceText, configGroupIndex)) return false;
@@ -367,43 +364,6 @@ class renderAwesomeSezzle {
   /**
    * ************* PRIVATE FUNCTIONS ***************
   */
-
-  /**
-   * This function will render the checkout button
-   * @param configGroupIndex - Connfig group index
-   *
-  */
-  _createSezzleButton(configGroupIndex) {
-    const checkoutButton = document.getElementsByName('checkout')[0];
-    const checkoutButtonParent = checkoutButton ? checkoutButton.parentElement : null;
-    if (checkoutButtonParent) {
-      const buttonConfig = this._config.configGroups[configGroupIndex].sezzleCheckoutButton;
-      const sezzleCheckoutButton = document.createElement('button');
-      sezzleCheckoutButton.innerHTML = this._parseButtonTemplate(buttonConfig.template, buttonConfig.theme);
-      switch (buttonConfig.borderType) {
-      case 'square':
-        sezzleCheckoutButton.style.borderRadius = '0px';
-        break;
-      case 'semi-rounded':
-        sezzleCheckoutButton.style.borderRadius = '5px';
-        break;
-      default:
-        sezzleCheckoutButton.style.borderRadius = '300px';
-      }
-      // Adding styles to the button
-      sezzleCheckoutButton.classList.add('sezzle-checkout-button');
-      sezzleCheckoutButton.classList.add(`sezzle-button-${buttonConfig.theme}`);
-      sezzleCheckoutButton.style.paddingLeft = buttonConfig.paddingX;
-      sezzleCheckoutButton.style.paddingRight = buttonConfig.paddingX;
-      this._embedButtonFont();
-      sezzleCheckoutButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        window.location.replace('/checkout');
-      });
-      checkoutButtonParent.append(sezzleCheckoutButton);
-    }
-  }
 
   /**
    * This function will parse template buttonnConfig to generate inner html of the button
