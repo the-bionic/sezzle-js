@@ -1,3 +1,4 @@
+/* eslint-disable */
 var gulp = require('gulp'),
   sass = require('gulp-ruby-sass'),
   autoprefixer = require('gulp-autoprefixer'),
@@ -225,7 +226,7 @@ gulp.task('post-modal-to-wrapper', function () {
  */
 
 gulp.task('bundlejs', function () {
-  return gulp.src('src/sezzle-init.js')
+  return gulp.src('src/classBased/sezzle-init.js')
     .pipe(webpack({
       module: {
         rules: [
