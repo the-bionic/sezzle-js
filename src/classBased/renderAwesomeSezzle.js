@@ -366,43 +366,6 @@ class renderAwesomeSezzle {
   */
 
   /**
-   * This function will parse template buttonnConfig to generate inner html of the button
-   * @param template - Template of the newly created button
-   * @param theme -  Theme of the button supplied in the config
-   * @return templateString  -  Inner Html of the button
-  */
-  _parseButtonTemplate(template, theme) {
-    const sezzleImage = {
-      light: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg',
-      dark: 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg',
-    };
-    const chosenImage = sezzleImage[theme];
-    const templateArray = template.split(' ');
-    let templateString = '';
-    templateArray.forEach((subtemplate) => {
-      switch (subtemplate) {
-      case '%%logo%%':
-        templateString += `<img class='sezzle-button-logo-img' src=${chosenImage} />`;
-        break;
-      default:
-        templateString += `${subtemplate} `;
-      }
-    });
-    return templateString;
-  }
-
-  /**
-   * This function will load comforta to DOM for the button
-  */
-  _embedButtonFont() {
-    const link = document.createElement('link');
-    link.setAttribute('rel', 'stylesheet');
-    link.setAttribute('type', 'text/css');
-    link.setAttribute('href', 'https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet');
-    document.head.appendChild(link);
-  }
-
-  /**
 	 * Insert css class name in element
 	 * @param element to add class to
 	 * @param configGroupIndex index of the config group that element belongs to
@@ -497,20 +460,9 @@ class renderAwesomeSezzle {
         newAlignment = this._config.configGroups[configGroupIndex].alignmentSwitchType;
       }
     }
-    switch (newAlignment || this._config.configGroups[configGroupIndex].alignment) {
-    case 'left':
-      element.className += ' sezzle-left';
-      break;
-    case 'right':
-      element.className += ' sezzle-right';
-      break;
-    case 'center':
-      element.className += ' sezzle-center';
-      break;
-    default:
-      // if there is no alignment specified, it will be auto
-      break;
-    }
+
+    const alignment = newAlignment || this._config.configGroups[configGroupIndex].alignment || 'auto';
+    element.className += ` sezzle-${alignment}`;
   }
 
   /**
@@ -574,6 +526,8 @@ class renderAwesomeSezzle {
   _addCSSTheme(element, configGroupIndex) {
     switch (this._config.configGroups[configGroupIndex].theme) {
     case 'dark':
+    case 'white':
+    case 'white-flat':
       element.className += ' szl-dark';
       break;
     default:

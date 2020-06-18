@@ -422,25 +422,6 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 **Options**: false, true<br/>
 **Default**: false
 
-`sezzleCheckoutButton` (optional)
-
-**Purpose**: Shows the Sezzle Checkout Button on the Cart Page<br/>
-**Type**: Object<br/>
-**Options**: {<br/>
-  "template" : string using %%logo%%,<br/>
-  "theme" : "light", "dark",<br/>
-  "borderType" : "square", "semi-rounded", "rounded,<br/>
-  "paddingX" : number of px (left and right padding only)<br/>
-}<br/>
-**Default**: {}<br/>
-**Additional Details**: This was created so Sezzle can be used on a merchant site that is using a cart extension app instead of Shopify native checkout. The key must be present in the cart configGroup to be applied. If the value is given as an empty object (ex: sezzleCheckoutButton: {}), the following default values will be applied: <br/>
-{<br/>
-  "template" : "Checkout with %%logo%%",<br/>
-  "theme" : "light",<br/>
-  "borderType" : "rounded",<br/>
-  "paddingX" : "13px"<br/>
-}
-
 <!-- 
 ## Status Definitions:
 
