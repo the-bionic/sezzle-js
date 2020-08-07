@@ -237,14 +237,24 @@ class renderAwesomeSezzle {
       case 'afterpay-logo': {
         const apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
-        apNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/ap-logo-widget.png';
+        apNode.style.maxHeight = '19px';
+        apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget.png';
         sezzleButtonText.appendChild(apNode);
         break;
       }
-      case 'afterpay-logo-grey': {
+      case 'afterpay-logo-white': {
         const apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
-        apNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/ap-logo-widget-grayscale.png';
+        apNode.style.maxHeight = '19px';
+        apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget-white.png';
+        sezzleButtonText.appendChild(apNode);
+        break;
+      }
+      case 'afterpay-logo-greyscale': {
+        const apNode = document.createElement('img');
+        apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
+        apNode.style.maxHeight = '19px';
+        apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget-grayscale.png';
         sezzleButtonText.appendChild(apNode);
         break;
       }

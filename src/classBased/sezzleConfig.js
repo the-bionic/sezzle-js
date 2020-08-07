@@ -386,7 +386,7 @@ class sezzleConfig {
     // splitPriceElementsOn is used to deal with price ranges which are separated by arbitrary strings
     result.splitPriceElementsOn = configGroup.splitPriceElementsOn || (this.options.defaultConfig && this.options.defaultConfig.splitPriceElementsOn) || '';
     // after pay link
-    result.apLink = configGroup.apLink || (this.options.defaultConfig && this.options.defaultConfig.apLink) || 'https://www.afterpay.com/terms-of-service';
+    result.apLink = configGroup.apLink || (this.options.defaultConfig && this.options.defaultConfig.apLink) || 'https://www.afterpay.com/purchase-payment-agreement';
     // This option is to render custom class in sezzle widget
     // This option contains an array of objects
     // each of the objects should have two properties
