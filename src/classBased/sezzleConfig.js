@@ -271,7 +271,7 @@ class sezzleConfig {
       forcedShow: this.options.forcedShow || false,
       numberOfPayments: this.options.numberOfPayments || 4,
       minPrice: this.options.minPrice || 0,
-      maxPrice: this.options.maxPrice || 25000,
+      maxPrice: this.options.maxPrice || 250000,
       altModalHTML: this.options.altLightboxHTML || '',
       apModalHTML: this.options.apModalHTML || '',
       qpModalHTML: this.options.qpModalHTML || '',
