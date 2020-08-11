@@ -323,7 +323,7 @@ class renderAwesomeSezzle {
             if (index === 0) {
               priceSplitText = this._sezzleDOMInst.getFormattedPrice(elem, configGroupIndex);
             } else {
-              priceSplitText = `${priceSplitText} ${this._config.configGroups[configGroupIndex].splitPriceElementsOn} ${this._config.getFormattedPrice(elem, configGroupIndex)}`;
+              priceSplitText = `${priceSplitText} ${this._config.configGroups[configGroupIndex].splitPriceElementsOn} ${this._sezzleDOMInst.getFormattedPrice(elem, configGroupIndex)}`;
             }
           });
         }
