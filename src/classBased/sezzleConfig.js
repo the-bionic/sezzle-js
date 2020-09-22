@@ -17,6 +17,8 @@ class sezzleConfig {
       'altLightboxHTML',
       'apModalHTML',
       'qpModalHTML',
+      'affirmModalHTML',
+      'klarnaModalHTML',
       'noGtm',
       'noTracking',
       'testID',
@@ -36,6 +38,7 @@ class sezzleConfig {
       apModalHTML: null,
       qpModalHTML: null,
       affirmModalHTML: null,
+      klarnaModalHTML: null,
       supportedCountryCodes: null,
       noTracking: null,
       noGtm: null,
@@ -276,6 +279,7 @@ class sezzleConfig {
       apModalHTML: this.options.apModalHTML || '',
       qpModalHTML: this.options.qpModalHTML || '',
       affirmModalHTML: this.options.affirmModalHTML || '',
+      klarnaModalHTML: this.options.klarnaModalHTML || '',
       supportedCountryCodes: this.options.supportedCountryCodes || ['US', 'IN', 'CA'],
       noTracking: !!this.options.noTracking,
       noGtm: !!this.options.noGtm,
@@ -290,7 +294,7 @@ class sezzleConfig {
     else if (type === 'function') this.sezzleConfig.language = this.options.language();
     else this.sezzleConfig.language = this.browserLanguage;
 
-    if (this.options.language !== 'en' && this.options.language !== 'fr') this.sezzleConfig.language = this.options.browserLanguage;
+    if (this.options.language !== 'en' && this.options.language !== 'fr' && this.options.language !== 'de') this.sezzleConfig.language = this.options.browserLanguage;
   }
 
   /**
@@ -301,6 +305,7 @@ class sezzleConfig {
     const translations = {
       en: `or ${this.sezzleConfig.numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
       fr: `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
+      de: `oder ${this.sezzleConfig.numberOfPayments} zinslose Zahlungen von je %%price%% mit %%logo%% %%info%%`
     };
     return translations[this.sezzleConfig.language] || translations.en;
   }
@@ -433,7 +438,7 @@ class sezzleConfig {
       break;
     case 'grayscale':
       result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_Black.svg';
-      result.imageClassName = 'szl-dark-image';
+      result.imageClassName = 'szl-light-image';
       break;
     case 'white':
       result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_White.svg';
@@ -445,7 +450,7 @@ class sezzleConfig {
       break;
     case 'black-flat':
       result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_BlackAlt.svg';
-      result.imageClassName = 'szl-dark-image';
+      result.imageClassName = 'szl-light-image';
       break;
     default:
       result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg';
