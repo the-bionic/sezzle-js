@@ -153,6 +153,7 @@ class renderAwesomeSezzle {
         const logoNode = document.createElement('img');
         logoNode.className = `sezzle-logo ${this._config.configGroups[configGroupIndex].imageClassName}`;
         logoNode.src = this._config.configGroups[configGroupIndex].imageURL;
+        logoNode.alt = 'Sezzle';
         sezzleButtonText.appendChild(logoNode);
         this._setLogoSize(logoNode, configGroupIndex);
         if (this._config.configGroups[configGroupIndex].logoStyle !== {}) this._setLogoStyle(logoNode, configGroupIndex);
@@ -186,6 +187,7 @@ class renderAwesomeSezzle {
         affirmNode.className = 'sezzle-affirm-logo affirm-modal-info-link no-sezzle-info';
         affirmNode.style.maxHeight = '20px';
         affirmNode.src = 'https://cdn-assets.affirm.com/images/black_logo-transparent_bg.png';
+        affirmNode.alt = 'Affirm';
         sezzleButtonText.appendChild(affirmNode);
         break;
       }
@@ -194,6 +196,7 @@ class renderAwesomeSezzle {
         affirmNode.className = 'sezzle-affirm-logo affirm-modal-info-link no-sezzle-info';
         affirmNode.style.maxHeight = '20px';
         affirmNode.src = 'https://cdn-assets.affirm.com/images/all_black_logo-transparent_bg.png';
+        affirmNode.alt = 'Affirm';
         sezzleButtonText.appendChild(affirmNode);
         break;
       }
@@ -202,6 +205,7 @@ class renderAwesomeSezzle {
         affirmNode.className = 'sezzle-affirm-logo affirm-modal-info-link no-sezzle-info';
         affirmNode.style.maxHeight = '20px';
         affirmNode.src = 'https://cdn-assets.affirm.com/images/white_logo-transparent_bg.png';
+        affirmNode.alt = 'Affirm';
         sezzleButtonText.appendChild(affirmNode);
         break;
       }
@@ -228,6 +232,7 @@ class renderAwesomeSezzle {
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.style.maxHeight = '19px';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget.png';
+        apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
         break;
       }
@@ -236,6 +241,7 @@ class renderAwesomeSezzle {
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.style.maxHeight = '19px';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget-white.png';
+        apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
         break;
       }
@@ -244,6 +250,7 @@ class renderAwesomeSezzle {
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.style.maxHeight = '19px';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget-grayscale.png';
+        apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
         break;
       }
@@ -270,6 +277,7 @@ class renderAwesomeSezzle {
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
         klarnaNode.style.maxHeight = '25px';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg';
+        klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
         break;
       }
@@ -278,6 +286,7 @@ class renderAwesomeSezzle {
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
         klarnaNode.style.maxHeight = '25px';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/white/klarna.svg';
+        klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
         break;
       }
@@ -286,6 +295,7 @@ class renderAwesomeSezzle {
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
         klarnaNode.style.maxHeight = '25px';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/black/klarna.svg';
+        klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
         break;
       }
@@ -300,6 +310,7 @@ class renderAwesomeSezzle {
         const qpNode = document.createElement('img');
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget.png';
+        qpNode.alt = 'Quadpay';
         sezzleButtonText.appendChild(qpNode);
         break;
       }
@@ -307,6 +318,7 @@ class renderAwesomeSezzle {
         const qpNode = document.createElement('img');
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-grayscale.png';
+        qpNode.alt = 'Quadpay';
         sezzleButtonText.appendChild(qpNode);
         break;
       }
@@ -314,6 +326,7 @@ class renderAwesomeSezzle {
         const qpNode = document.createElement('img');
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-white.png';
+        qpNode.alt = 'Quadpay';
         sezzleButtonText.appendChild(qpNode);
         break;
       }
