@@ -153,6 +153,7 @@ class renderAwesomeSezzle {
         const logoNode = document.createElement('img');
         logoNode.className = `sezzle-logo ${this._config.configGroups[configGroupIndex].imageClassName}`;
         logoNode.src = this._config.configGroups[configGroupIndex].imageURL;
+        logoNode.alt = 'Sezzle';
         sezzleButtonText.appendChild(logoNode);
         this._setLogoSize(logoNode, configGroupIndex);
         if (this._config.configGroups[configGroupIndex].logoStyle !== {}) this._setLogoStyle(logoNode, configGroupIndex);
@@ -182,37 +183,29 @@ class renderAwesomeSezzle {
         break;
       }
       case 'affirm-logo': {
-        const affirmNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        affirmNode.setAttribute('width', '200.16');
-        affirmNode.setAttribute('height', '199.56');
-        affirmNode.setAttribute('viewBox', '0 0 400.16 199.56');
-        affirmNode.setAttribute('class', 'sezzle-affirm-logo affirm-modal-info-link no-sezzle-info');
-        affirmNode.setAttribute('style', 'width:39px;height:21px;margin-bottom:5px !important; vertical-align:middle;');
-        affirmNode.innerHTML = `<defs>
-              <polygon id="path-1" points="0.00278333333 0.357194444 63.9637833 0.357194444 63.9637833 73.2944444 0.00278333333 73.2944444"></polygon>
-              <polygon id="path-3" points="0 167 418.529833 167 418.529833 0 0 0"></polygon>
-            </defs>
-            <g id="black_logo-white_bg" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <rect fill="#FFFFFF" x="0" y="0" width="420" height="167"></rect>
-              <g id="Group-13">
-                  <g id="Group-3" transform="translate(0.000000, 93.705556)">
-                      <mask id="mask-2" fill="white">
-                          <use xlink:href="#path-1"></use>
-                      </mask>
-                      <g id="Clip-2"></g>
-                      <path d="M27.44645,58.90925 C22.26945,58.90925 19.6902278,56.3671389 19.6902278,52.1643056 C19.6902278,44.3895278 28.3927833,41.7268056 44.2763389,40.0475278 C44.2763389,50.4479167 37.2437833,58.90925 27.44645,58.90925 M34.29345,0.357194444 C22.9467278,0.357194444 9.88361667,5.71047222 2.79539444,11.3606389 L9.27128333,24.9896944 C14.9585611,19.7848611 24.1528389,15.3408056 32.4471722,15.3408056 C40.3240056,15.3408056 44.6752833,17.9756944 44.6752833,23.2733056 C44.6752833,26.8545278 41.7898944,28.6544167 36.3345611,29.3595278 C15.9791167,32.0129722 0.00278333333,37.6260278 0.00278333333,53.3240278 C0.00278333333,65.7655278 8.86306111,73.2990833 22.7055056,73.2990833 C32.5770611,73.2990833 41.3723944,67.8066389 45.5566722,60.5606944 L45.5566722,71.26725 L63.9637833,71.26725 L63.9637833,26.4091944 C63.9637833,7.88147222 51.0862278,0.357194444 34.29345,0.357194444" id="Fill-1" fill="#060809" mask="url(#mask-2)"></path>
-                  </g>
-                  <path d="M219.144822,96.0871611 L219.144822,164.974661 L238.850822,164.974661 L238.850822,131.78805 C238.850822,116.00655 248.397656,111.376939 255.0591,111.376939 C257.656878,111.376939 261.163878,112.128439 263.483322,113.863383 L267.073822,95.6511056 C264.030711,94.3522167 260.848433,94.0646056 258.241378,94.0646056 C248.110044,94.0646056 241.745489,98.55505 237.542656,107.665828 L237.542656,96.0871611 L219.144822,96.0871611 Z" id="Fill-4" fill="#060809"></path>
-                  <path d="M358.4154,94.0664611 C347.996456,94.0664611 340.2124,100.226906 336.158011,106.164683 C332.391233,98.4919611 324.412344,94.0664611 314.865511,94.0664611 C304.446567,94.0664611 297.237733,99.8557944 293.907011,106.507961 L293.907011,96.0890167 L274.9154,96.0890167 L274.9154,164.976517 L294.630678,164.976517 L294.630678,129.51685 C294.630678,116.778461 301.292122,110.682961 307.517511,110.682961 C313.149122,110.682961 318.326122,114.329128 318.326122,123.727517 L318.326122,164.976517 L338.013567,164.976517 L338.013567,129.51685 C338.013567,116.639294 344.526567,110.682961 351.039567,110.682961 C356.2444,110.682961 361.736844,114.468294 361.736844,123.58835 L361.736844,164.976517 L381.424289,164.976517 L381.424289,117.362961 C381.424289,101.87835 371.005344,94.0664611 358.4154,94.0664611" id="Fill-6" fill="#060809"></path>
-                  <path d="M171.184278,96.0871611 L153.333833,96.0871611 L153.333833,89.0824389 C153.333833,79.9716611 158.538667,77.3646056 163.029111,77.3646056 C167.983444,77.3646056 171.843,79.5634389 171.843,79.5634389 L177.919944,65.6746056 C177.919944,65.6746056 171.7595,61.64805 160.561222,61.64805 C147.971278,61.64805 133.646389,68.74555 133.646389,91.0214944 L133.646389,96.0871611 L103.762667,96.0871611 L103.762667,89.0824389 C103.762667,79.9716611 108.9675,77.3646056 113.448667,77.3646056 C116.000056,77.3646056 119.432833,77.9583833 122.271833,79.5634389 L128.348778,65.6746056 C124.721167,63.5407167 118.894722,61.64805 110.990056,61.64805 C98.4001111,61.64805 84.0752222,68.74555 84.0752222,91.0214944 L84.0752222,96.0871611 L72.645,96.0871611 L72.645,111.284161 L84.0752222,111.284161 L84.0752222,164.974661 L103.762667,164.974661 L103.762667,111.284161 L133.646389,111.284161 L133.646389,164.974661 L153.333833,164.974661 L153.333833,111.284161 L171.184278,111.284161 L171.184278,96.0871611 Z" id="Fill-8" fill="#060809"></path>
-                  <mask id="mask-4" fill="white">
-                      <use xlink:href="#path-3"></use>
-                  </mask>
-                  <g id="Clip-11"></g>
-                  <polygon id="Fill-10" fill="#060809" mask="url(#mask-4)" points="182.939222 164.977444 202.608111 164.977444 202.608111 96.0899444 182.939222 96.0899444"></polygon>
-                  <path d="M297.688633,0.00278333333 C244.508411,0.00278333333 197.108244,36.9190611 183.655467,84.3841722 L202.934689,84.3841722 C214.170078,49.0358389 252.311022,18.01095 297.688633,18.01095 C352.845022,18.01095 400.514244,60.0021722 400.514244,125.373394 C400.514244,140.050839 398.6123,153.28095 395.012522,164.97095 L413.716522,164.97095 L413.902078,164.330783 C416.963744,152.269672 418.522411,139.16945 418.522411,125.373394 C418.522411,52.4686167 365.397856,0.00278333333 297.688633,0.00278333333" id="Fill-12" fill="#0FA0EA" mask="url(#mask-4)"></path>
-              </g>
-            </g>`;
+        const affirmNode = document.createElement('img');
+        affirmNode.className = 'sezzle-affirm-logo affirm-modal-info-link no-sezzle-info';
+        affirmNode.style.maxHeight = '20px';
+        affirmNode.src = 'https://cdn-assets.affirm.com/images/black_logo-transparent_bg.png';
+        affirmNode.alt = 'Affirm';
+        sezzleButtonText.appendChild(affirmNode);
+        break;
+      }
+      case 'affirm-logo-greyscale': {
+        const affirmNode = document.createElement('img');
+        affirmNode.className = 'sezzle-affirm-logo affirm-modal-info-link no-sezzle-info';
+        affirmNode.style.maxHeight = '20px';
+        affirmNode.src = 'https://cdn-assets.affirm.com/images/all_black_logo-transparent_bg.png';
+        affirmNode.alt = 'Affirm';
+        sezzleButtonText.appendChild(affirmNode);
+        break;
+      }
+      case 'affirm-logo-white': {
+        const affirmNode = document.createElement('img');
+        affirmNode.className = 'sezzle-affirm-logo affirm-modal-info-link no-sezzle-info';
+        affirmNode.style.maxHeight = '20px';
+        affirmNode.src = 'https://cdn-assets.affirm.com/images/white_logo-transparent_bg.png';
+        affirmNode.alt = 'Affirm';
         sezzleButtonText.appendChild(affirmNode);
         break;
       }
@@ -239,6 +232,7 @@ class renderAwesomeSezzle {
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.style.maxHeight = '19px';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget.png';
+        apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
         break;
       }
@@ -247,6 +241,7 @@ class renderAwesomeSezzle {
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.style.maxHeight = '19px';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget-white.png';
+        apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
         break;
       }
@@ -255,6 +250,7 @@ class renderAwesomeSezzle {
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.style.maxHeight = '19px';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget-grayscale.png';
+        apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
         break;
       }
@@ -276,10 +272,45 @@ class renderAwesomeSezzle {
         sezzleButtonText.appendChild(apAnchor);
         break;
       }
+      case 'klarna-logo': {
+        const klarnaNode = document.createElement('img');
+        klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
+        klarnaNode.style.maxHeight = '25px';
+        klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg';
+        klarnaNode.alt = 'Klarna';
+        sezzleButtonText.appendChild(klarnaNode);
+        break;
+      }
+      case 'klarna-logo-white': {
+        const klarnaNode = document.createElement('img');
+        klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
+        klarnaNode.style.maxHeight = '25px';
+        klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/white/klarna.svg';
+        klarnaNode.alt = 'Klarna';
+        sezzleButtonText.appendChild(klarnaNode);
+        break;
+      }
+      case 'klarna-logo-greyscale': {
+        const klarnaNode = document.createElement('img');
+        klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
+        klarnaNode.style.maxHeight = '25px';
+        klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/black/klarna.svg';
+        klarnaNode.alt = 'Klarna';
+        sezzleButtonText.appendChild(klarnaNode);
+        break;
+      }
+      case 'klarna-info-icon': {
+        const klarnaInfoIconNode = document.createElement('code');
+        klarnaInfoIconNode.className = 'klarna-modal-info-link no-sezzle-info';
+        klarnaInfoIconNode.innerHTML = '&#9432;';
+        sezzleButtonText.appendChild(klarnaInfoIconNode);
+        break;
+      }
       case 'quadpay-logo': {
         const qpNode = document.createElement('img');
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget.png';
+        qpNode.alt = 'Quadpay';
         sezzleButtonText.appendChild(qpNode);
         break;
       }
@@ -287,6 +318,7 @@ class renderAwesomeSezzle {
         const qpNode = document.createElement('img');
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-grayscale.png';
+        qpNode.alt = 'Quadpay';
         sezzleButtonText.appendChild(qpNode);
         break;
       }
@@ -294,6 +326,7 @@ class renderAwesomeSezzle {
         const qpNode = document.createElement('img');
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-white.png';
+        qpNode.alt = 'Quadpay';
         sezzleButtonText.appendChild(qpNode);
         break;
       }

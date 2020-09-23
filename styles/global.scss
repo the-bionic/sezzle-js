@@ -771,6 +771,34 @@
   background-color: inherit;
 }
 
+.sezzle-affirm-logo {
+  vertical-align: middle !important;
+  max-height: 20px;
+  margin-bottom: 12px !important;
+  margin-left: -7px;
+}
+
+.affirm-modal-info-link {
+  cursor: pointer;
+  margin-left: -5px !important;
+  color: inherit;
+  background-color: inherit;
+}
+
+.sezzle-klarna-logo {
+  vertical-align: middle !important;
+  max-height: 25px;
+  margin-bottom: 4px !important;
+  margin-left: 2px;
+}
+
+.klarna-modal-info-link {
+  cursor: pointer;
+  margin-left: 3px !important;
+  color: inherit;
+  background-color: inherit;
+}
+
 // Magento styles
 .sezzle-payment {
   .sezzle-logo {

@@ -21,6 +21,7 @@ class Modal {
     this._apAddClickEvent();
     this._qpAddClickEvent();
     this._affirmAddClickEvent();
+    this._klarnaAddClickEvent();
   }
 
   renderModals() {
@@ -30,13 +31,17 @@ class Modal {
     if (document.getElementsByClassName('ap-modal-info-link').length > 0) {
       this._renderAPModal();
     }
-    // only render QPModal if ap-modal-link exists
+    // only render QPModal if qp-modal-link exists
     if (document.getElementsByClassName('quadpay-modal-info-link').length > 0) {
       this._renderQPModal();
     }
     // render affirm modal if affirm-modal-info-link exists
     if (document.getElementsByClassName('affirm-modal-info-link').length > 0) {
       this._renderAffirmModal();
+    }
+    // render klarna modal if klarna-modal-info-link exists
+    if (document.getElementsByClassName('klarna-modal-info-link').length > 0) {
+      this._renderKlarnaModal();
     }
   }
 
@@ -50,10 +55,10 @@ class Modal {
       modalLink.addEventListener('click', (event) => {
         if (!event.target.classList.contains('no-sezzle-info')) {
           let modalNode;
-          // Makes sure to get rid of AP, QP & Affirm modals in our Sezzle modal event listener
+          // Makes sure to get rid of AP, QP, Affirm, and Klarna modals in our Sezzle modal event listener
           const modals = document.getElementsByClassName('sezzle-checkout-modal-lightbox');
           Array.prototype.forEach.call(modals, (element) => {
-            if (!element.classList.contains('sezzle-ap-modal' || 'sezzle-qp-modal' || 'sezzle-affirm-modal')) {
+            if (!element.classList.contains('sezzle-ap-modal' || 'sezzle-qp-modal' || 'sezzle-affirm-modal' || 'sezzle-klarna-modal')) {
               modalNode = element;
             }
           });
@@ -108,6 +113,18 @@ class Modal {
     });
   }
 
+  _klarnaAddClickEvent() {
+    const klarnaModalLinks = this._sezzleElement.getElementsByClassName('klarna-modal-info-link');
+    Array.prototype.forEach.call(klarnaModalLinks, (modalLink) => {
+      modalLink.addEventListener('click', () => {
+        // Show modal node
+        document.getElementsByClassName('sezzle-klarna-modal')[0].style.display = 'block';
+        // log on click event
+        Utils.logEvent('onclick-klarna', this._configGroupIndex);
+      });
+    });
+  }
+
   /**
    * @description Adds/removes styles to stop body scroll when modal is open. Also
    * records/restores the scroll position to avoid side effects of position: fixed
@@ -143,8 +160,9 @@ class Modal {
     } else {
       this._modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
     }
-
-    if (document.sezzleDefaultModalVersion && document.sezzleModalAvailableLanguages) {
+    if (this._config.altModalHTML) {
+      this._modalNode.innerHTML = this._config.altModalHTML;
+    } else if (document.sezzleDefaultModalVersion && document.sezzleModalAvailableLanguages) {
       // Convert document.sezzleModalAvailableLanguages into Array
       const availableLanguages = document.sezzleModalAvailableLanguages.split(',').map((singleLanguage) => singleLanguage.trim());
       let modalLanguage;
@@ -154,13 +172,11 @@ class Modal {
         modalLanguage = 'en';
       }
       const sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', modalLanguage)}`;
-
       const response = await Utils.httpRequestWrapper('GET', sezzleModalToGet);
       this._modalNode.innerHTML = response;
-      document.getElementsByTagName('html')[0].appendChild(this._modalNode);
-
-      this._closeSezzleModalHandler();
     }
+    document.getElementsByTagName('html')[0].appendChild(this._modalNode);
+    this._closeSezzleModalHandler();
   }
 
   _closeSezzleModalHandler() {
@@ -226,6 +242,24 @@ class Modal {
     // Event listener for close in modal
     Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), (el) => {
       el.addEventListener('click', () => { modalNodeAffirm.style.display = 'none'; });
+    });
+    // Event listener to prevent close in modal if click happens within sezzle-checkout-modal
+    let sezzleModal = document.getElementsByClassName('sezzle-modal')[0];
+    // backwards compatability check
+    if (!sezzleModal) sezzleModal = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
+    sezzleModal.addEventListener('click', (event) => event.stopPropagation());
+  }
+
+  _renderKlarnaModal() {
+    const modalNodeKlarna = document.createElement('div');
+    modalNodeKlarna.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal sezzle-klarna-modal';
+    modalNodeKlarna.style = 'position: center';
+    modalNodeKlarna.style.display = 'none';
+    modalNodeKlarna.innerHTML = this._config.klarnaModalHTML;
+    document.getElementsByTagName('html')[0].appendChild(modalNodeKlarna);
+    // Event listener for close in modal
+    Array.prototype.forEach.call(document.getElementsByClassName('close-sezzle-modal'), (el) => {
+      el.addEventListener('click', () => { modalNodeKlarna.style.display = 'none'; });
     });
     // Event listener to prevent close in modal if click happens within sezzle-checkout-modal
     let sezzleModal = document.getElementsByClassName('sezzle-modal')[0];
