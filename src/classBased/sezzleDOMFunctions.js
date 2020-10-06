@@ -155,6 +155,8 @@ class sezzleDOMFunctions {
     });
     // get the sezzle installment price
     const sezzleInstallmentPrice = (price / this._config.numberOfPayments).toFixed(2);
+    //  Allyson bookmark
+    //  need to set up to convert based on includeComma parent function
     // format the string
     const sezzleInstallmentFormattedPrice = formatter.replace('{price}', sezzleInstallmentPrice);
     return sezzleInstallmentFormattedPrice;
@@ -340,6 +342,9 @@ class sezzleDOMFunctions {
     return formattedPrice;
   }
 
+  //  Allyson bookmark
+  //  need to update parsePrice function to send parsePriceString includeComma param via a function (to be built)
+  //  Should we receive parseMode option from config (static-widget), or auto-detect based on language and currency (shopify-buy-static-widget?
   /**
    * This function will format the price
    * @param price - string value
