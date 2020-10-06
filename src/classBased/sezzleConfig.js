@@ -305,7 +305,7 @@ class sezzleConfig {
     const translations = {
       en: `or ${this.sezzleConfig.numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
       fr: `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
-      de: `oder ${this.sezzleConfig.numberOfPayments} zinslose Zahlungen von je %%price%% mit %%logo%% %%info%%`
+      de: `oder ${this.sezzleConfig.numberOfPayments} zinslose Zahlungen von je %%price%% mit %%logo%% %%info%%`,
     };
     return translations[this.sezzleConfig.language] || translations.en;
   }

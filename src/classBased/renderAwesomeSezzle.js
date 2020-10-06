@@ -245,7 +245,7 @@ class renderAwesomeSezzle {
         sezzleButtonText.appendChild(apNode);
         break;
       }
-      case 'afterpay-logo-greyscale': {
+      case 'afterpay-logo-grey': {
         const apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.style.maxHeight = '19px';
@@ -275,7 +275,7 @@ class renderAwesomeSezzle {
       case 'klarna-logo': {
         const klarnaNode = document.createElement('img');
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
-        klarnaNode.style.maxHeight = '25px';
+        klarnaNode.style.maxHeight = '30px';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg';
         klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
@@ -284,7 +284,7 @@ class renderAwesomeSezzle {
       case 'klarna-logo-white': {
         const klarnaNode = document.createElement('img');
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
-        klarnaNode.style.maxHeight = '25px';
+        klarnaNode.style.maxHeight = '30px';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/white/klarna.svg';
         klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
@@ -293,7 +293,7 @@ class renderAwesomeSezzle {
       case 'klarna-logo-greyscale': {
         const klarnaNode = document.createElement('img');
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
-        klarnaNode.style.maxHeight = '25px';
+        klarnaNode.style.maxHeight = '30px';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/black/klarna.svg';
         klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
