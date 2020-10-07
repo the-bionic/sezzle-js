@@ -179,6 +179,7 @@ class renderAwesomeSezzle {
         const questionMarkIconNode = document.createElement('img');
         questionMarkIconNode.className = 'sezzle-question-mark-icon';
         questionMarkIconNode.src = 'https://d2uyik3j5wol98.cloudfront.net/images/question_mark_black.png';
+        questionMarkIconNode.alt = 'More Info';
         sezzleButtonText.appendChild(questionMarkIconNode);
         break;
       }
