@@ -1,5 +1,5 @@
 if (!window.frames.szlEndtoEnd) {
-  var sz_iframe = document.createElement('iframe');
+  const sz_iframe = document.createElement('iframe');
   sz_iframe.width = 0;
   sz_iframe.height = 0;
   sz_iframe.style.display = 'none';
