@@ -600,19 +600,27 @@
       text-decoration: underline;
       cursor: pointer;
       font-size: 8.5px;
+      background:none;
+      border: none;
+      padding: 0px;
     }
 
     .sezzle-info-icon {
       color: inherit;
       background-color: inherit;
       cursor: pointer;
+      border: none;
+      padding: 0px;
     }
 
     .sezzle-question-mark-icon {
-      height: 12px;
+      height: 12px;   
       width: auto;
       margin-bottom: -0.5px;
       cursor: pointer;
+      background:none;
+      border: none;
+      padding: 0px;
     }
   }
 
@@ -746,7 +754,7 @@
 
 .sezzle-afterpay-logo {
   vertical-align: middle !important;
-  max-height: 14px;
+  max-height: 18px;
   margin-bottom: -1px !important;
 }
 
@@ -754,7 +762,9 @@
   cursor: pointer;
   margin-left: 3px !important;
   color: inherit;
-  background-color: inherit;
+  background:none;
+  border: none;
+  padding: 0px;
 }
 
 .sezzle-quadpay-logo {
@@ -768,7 +778,9 @@
   cursor: pointer;
   margin-left: 3px !important;
   color: inherit;
-  background-color: inherit;
+  background:none;
+  border: none;
+  padding: 0px;
 }
 
 .sezzle-affirm-logo {
@@ -778,25 +790,29 @@
   margin-left: -7px;
 }
 
-.affirm-modal-info-link {
+button.affirm-modal-info-link {
   cursor: pointer;
   margin-left: -5px !important;
   color: inherit;
-  background-color: inherit;
+  background:none;
+  border: none;
+  padding: 0px;
 }
 
 .sezzle-klarna-logo {
   vertical-align: middle !important;
-  max-height: 25px;
-  margin-bottom: 4px !important;
-  margin-left: 2px;
+  max-height: 30px;
+  margin-bottom: 3px !important;
+  margin-left: 0px;
 }
 
 .klarna-modal-info-link {
   cursor: pointer;
   margin-left: 3px !important;
   color: inherit;
-  background-color: inherit;
+  background:none;
+  border: none;
+  padding: 0px;
 }
 
 // Magento styles

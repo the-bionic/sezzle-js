@@ -143,6 +143,8 @@ class sezzleDOMFunctions {
 	*/
   getFormattedPrice(element, configGroupIndex, priceText) {
     if (!priceText) priceText = this.getPriceText(element, configGroupIndex);
+    let includeComma = false;
+    includeComma = this._commaDelimited(priceText);
     // Get the price string - useful for formtting Eg: 120.00(string)
     const priceString = this._parsePriceString(priceText, true);
     // Get the price in float from the element - useful for calculation Eg : 120.00(float)
@@ -156,7 +158,10 @@ class sezzleDOMFunctions {
     // get the sezzle installment price
     const sezzleInstallmentPrice = (price / this._config.numberOfPayments).toFixed(2);
     // format the string
-    const sezzleInstallmentFormattedPrice = formatter.replace('{price}', sezzleInstallmentPrice);
+    let sezzleInstallmentFormattedPrice = formatter.replace('{price}', sezzleInstallmentPrice);
+    if (includeComma) {
+      sezzleInstallmentFormattedPrice = sezzleInstallmentFormattedPrice.replace('.', ',');
+    }
     return sezzleInstallmentFormattedPrice;
   }
 
@@ -320,6 +325,10 @@ class sezzleDOMFunctions {
     return /^[a-zA-Z()]+$/.test(n);
   }
 
+  _commaDelimited(priceText) {
+    return priceText.indexOf(',') > priceText.indexOf('.');
+  }
+
   /**
    * This function will return the price string
    * @param price - string value
@@ -337,6 +346,9 @@ class sezzleDOMFunctions {
         formattedPrice += price[i];
       }
     }
+    if (includeComma) {
+      formattedPrice.replace(',', '.');
+    }
     return formattedPrice;
   }
 
@@ -346,7 +358,9 @@ class sezzleDOMFunctions {
    * @return float
   */
   _parsePrice(price) {
-    return parseFloat(this._parsePriceString(price, false));
+    let includeComma = false;
+    includeComma = this._commaDelimited(price);
+    return parseFloat(this._parsePriceString(price, includeComma));
   }
 }
 

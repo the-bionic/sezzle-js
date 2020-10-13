@@ -309,18 +309,26 @@ $font-family: Comfortaa;
         height: 24px;
         opacity: 0.2;
         cursor: pointer;
-        
+        padding: 0px;
+        outline: none !important;
+        background: none;
+        border: none;
+
         &:hover {
             opacity: 1;
+        }
+        &:focus {
+            opacity: 0.5;
         }
 
         &:before, &:after {
             position: absolute;
-            left: 12px;
+            left: 10px;
             content: ' ';
             height: 24px;
             width: 3px;
             background-color: #f08570;
+            top: 0px;
         }
 
         &:before {

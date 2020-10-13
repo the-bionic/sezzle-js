@@ -133,6 +133,7 @@ class renderAwesomeSezzle {
     if (this._config.configGroups[configGroupIndex].scaleFactor) this._setWidgetSize(sezzle, configGroupIndex);
     const node = document.createElement('div');
     node.className = 'sezzle-checkout-button-wrapper sezzle-modal-link';
+    node.tabindex = 0;
     node.style.cursor = 'pointer';
     this._insertStoreCSSClassInElement(node);
     this._addCSSAlignment(node, configGroupIndex);
@@ -161,7 +162,9 @@ class renderAwesomeSezzle {
       }
       // changed from learn-more to link as that is what current altVersionTemplates use
       case 'link': {
-        const learnMoreNode = document.createElement('span');
+        const learnMoreNode = document.createElement('button');
+        learnMoreNode.role = 'button';
+        learnMoreNode.title = 'Learn More about Sezzle';
         learnMoreNode.className = 'sezzle-learn-more';
         const learnMoreText = document.createTextNode('Learn more');
         learnMoreNode.appendChild(learnMoreText);
@@ -169,17 +172,24 @@ class renderAwesomeSezzle {
         break;
       }
       case 'info': {
-        const infoIconNode = document.createElement('code');
+        const infoIconNode = document.createElement('button');
+        infoIconNode.role = 'button';
+        infoIconNode.title = 'Learn More about Sezzle';
         infoIconNode.className = 'sezzle-info-icon';
         infoIconNode.innerHTML = '&#9432;';
         sezzleButtonText.appendChild(infoIconNode);
         break;
       }
       case 'question-mark': {
+        const questionMarkButton = document.createElement('button');
+        questionMarkButton.role = 'button';
+        questionMarkButton.title = 'Learn More about Sezzle';
         const questionMarkIconNode = document.createElement('img');
         questionMarkIconNode.className = 'sezzle-question-mark-icon';
         questionMarkIconNode.src = 'https://d2uyik3j5wol98.cloudfront.net/images/question_mark_black.png';
-        sezzleButtonText.appendChild(questionMarkIconNode);
+        questionMarkIconNode.alt = 'More Info';
+        questionMarkButton.appendChild(questionMarkIconNode);
+        sezzleButtonText.appendChild(questionMarkButton);
         break;
       }
       case 'affirm-logo': {
@@ -210,7 +220,9 @@ class renderAwesomeSezzle {
         break;
       }
       case 'affirm-info-icon': {
-        const affirmInfoIconNode = document.createElement('code');
+        const affirmInfoIconNode = document.createElement('button');
+        affirmInfoIconNode.role = 'button';
+        affirmInfoIconNode.title = 'Learn More about Affirm';
         affirmInfoIconNode.className = 'affirm-modal-info-link no-sezzle-info';
         affirmInfoIconNode.innerHTML = '&#9432;';
         sezzleButtonText.appendChild(affirmInfoIconNode);
@@ -221,6 +233,7 @@ class renderAwesomeSezzle {
         affirmAnchor.href = this._config.configGroups[configGroupIndex].affirmLink;
         affirmAnchor.target = '_blank';
         const affirmLinkIconNode = document.createElement('code');
+        affirmLinkIconNode.title = 'Open Affirm in a new tab';
         affirmLinkIconNode.className = 'affirm-info-link';
         affirmLinkIconNode.innerHTML = '&#9432;';
         affirmAnchor.appendChild(affirmLinkIconNode);
@@ -230,7 +243,7 @@ class renderAwesomeSezzle {
       case 'afterpay-logo': {
         const apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
-        apNode.style.maxHeight = '19px';
+        apNode.style.maxHeight = '18px';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget.png';
         apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
@@ -239,23 +252,25 @@ class renderAwesomeSezzle {
       case 'afterpay-logo-white': {
         const apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
-        apNode.style.maxHeight = '19px';
+        apNode.style.maxHeight = '16px';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget-white.png';
         apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
         break;
       }
-      case 'afterpay-logo-greyscale': {
+      case 'afterpay-logo-grey': {
         const apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
-        apNode.style.maxHeight = '19px';
+        apNode.style.maxHeight = '16px';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget-grayscale.png';
         apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
         break;
       }
       case 'afterpay-info-icon': {
-        const apInfoIconNode = document.createElement('code');
+        const apInfoIconNode = document.createElement('button');
+        apInfoIconNode.role = 'button';
+        apInfoIconNode.title = 'Learn More about Afterpay';
         apInfoIconNode.className = 'ap-modal-info-link no-sezzle-info';
         apInfoIconNode.innerHTML = '&#9432;';
         sezzleButtonText.appendChild(apInfoIconNode);
@@ -266,6 +281,7 @@ class renderAwesomeSezzle {
         apAnchor.href = this._config.configGroups[configGroupIndex].apLink;
         apAnchor.target = '_blank';
         const apLinkIconNode = document.createElement('code');
+        apLinkIconNode.title = 'Open Afterpay in a new tab';
         apLinkIconNode.className = 'ap-info-link';
         apLinkIconNode.innerHTML = '&#9432;';
         apAnchor.appendChild(apLinkIconNode);
@@ -275,7 +291,7 @@ class renderAwesomeSezzle {
       case 'klarna-logo': {
         const klarnaNode = document.createElement('img');
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
-        klarnaNode.style.maxHeight = '25px';
+        klarnaNode.style.maxHeight = '30px';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg';
         klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
@@ -284,7 +300,7 @@ class renderAwesomeSezzle {
       case 'klarna-logo-white': {
         const klarnaNode = document.createElement('img');
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
-        klarnaNode.style.maxHeight = '25px';
+        klarnaNode.style.maxHeight = '30px';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/white/klarna.svg';
         klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
@@ -293,14 +309,16 @@ class renderAwesomeSezzle {
       case 'klarna-logo-greyscale': {
         const klarnaNode = document.createElement('img');
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
-        klarnaNode.style.maxHeight = '25px';
+        klarnaNode.style.maxHeight = '30px';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/black/klarna.svg';
         klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
         break;
       }
       case 'klarna-info-icon': {
-        const klarnaInfoIconNode = document.createElement('code');
+        const klarnaInfoIconNode = document.createElement('button');
+        klarnaInfoIconNode.role = 'button';
+        klarnaInfoIconNode.title = 'Learn More about Klarna';
         klarnaInfoIconNode.className = 'klarna-modal-info-link no-sezzle-info';
         klarnaInfoIconNode.innerHTML = '&#9432;';
         sezzleButtonText.appendChild(klarnaInfoIconNode);
@@ -331,7 +349,9 @@ class renderAwesomeSezzle {
         break;
       }
       case 'quadpay-info-icon': {
-        const quadpayInfoIconNode = document.createElement('code');
+        const quadpayInfoIconNode = document.createElement('button');
+        quadpayInfoIconNode.role = 'button';
+        quadpayInfoIconNode.title = 'Learn More about Quadpay';
         quadpayInfoIconNode.className = 'quadpay-modal-info-link no-sezzle-info';
         quadpayInfoIconNode.innerHTML = '&#9432;';
         sezzleButtonText.appendChild(quadpayInfoIconNode);
