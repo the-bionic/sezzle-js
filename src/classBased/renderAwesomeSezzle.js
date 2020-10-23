@@ -283,6 +283,7 @@ class renderAwesomeSezzle {
       case 'afterpay-info-icon': {
         const apInfoIconNode = document.createElement('button');
         apInfoIconNode.role = 'button';
+        apInfoIconNode.type = 'button';
         apInfoIconNode.title = 'Learn More about Afterpay';
         apInfoIconNode.className = 'ap-modal-info-link no-sezzle-info';
         apInfoIconNode.innerHTML = '&#9432;';
