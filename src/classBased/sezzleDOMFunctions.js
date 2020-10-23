@@ -150,7 +150,7 @@ class sezzleDOMFunctions {
     // Get the price in float from the element - useful for calculation Eg : 120.00(float)
     const price = this._parsePrice(priceText);
     // Will be used later to replace {price} with price / this.numberOfPayments Eg: ${price} USD
-    let formatter = priceText.replace(priceString, '{price}');
+    let formatter = includeComma ? (priceText.replace('.', '')).replace(priceString, '{price}') : (priceText.replace(',', '')).replace(priceString, '{price}');
     // replace other strings not wanted in text
     this._config.configGroups[configGroupIndex].ignoredFormattedPriceText.forEach((ignoredString) => {
       formatter = formatter.replace(ignoredString, '');
@@ -326,7 +326,23 @@ class sezzleDOMFunctions {
   }
 
   _commaDelimited(priceText) {
-    return priceText.indexOf(',') > priceText.indexOf('.');
+    let priceOnly = '';
+    for (let i = 0; i < priceText.length; i++) {
+      if (this.isNumeric(priceText[i]) || priceText[i] === '.' || priceText[i] === ',') {
+        priceOnly += priceText[i];
+      }
+    }
+    let isComma = false;
+    if (priceOnly.indexOf(',') > -1 && priceOnly.indexOf('.') > -1) {
+      isComma = priceOnly.indexOf(',') > priceOnly.indexOf('.');
+    } else if (priceOnly.indexOf(',') > -1) {
+      isComma = priceOnly[priceOnly.length - 3] === ',';
+    } else if (priceOnly.indexOf('.') > -1) {
+      isComma = priceOnly[priceOnly.length - 3] !== '.';
+    } else {
+      isComma = false;
+    }
+    return isComma;
   }
 
   /**
@@ -338,7 +354,7 @@ class sezzleDOMFunctions {
   _parsePriceString(price, includeComma) {
     let formattedPrice = '';
     for (let i = 0; i < price.length; i++) {
-      if (this._isNumeric(price[i]) || price[i] === '.' || (includeComma && price[i] === ',')) {
+      if (this._isNumeric(price[i]) || (!includeComma && price[i] === '.') || (includeComma && price[i] === ',')) {
         // If current is a . and previous is a character, it can be something like Rs.
         // so ignore it
         // eslint-disable-next-line no-continue
