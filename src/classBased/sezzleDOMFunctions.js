@@ -146,7 +146,7 @@ class sezzleDOMFunctions {
     let includeComma = false;
     includeComma = this._commaDelimited(priceText);
     // Get the price string - useful for formtting Eg: 120.00(string)
-    const priceString = this._parsePriceString(priceText, true);
+    const priceString = this._parsePriceString(priceText, includeComma);
     // Get the price in float from the element - useful for calculation Eg : 120.00(float)
     const price = this._parsePrice(priceText);
     // Will be used later to replace {price} with price / this.numberOfPayments Eg: ${price} USD
@@ -328,7 +328,7 @@ class sezzleDOMFunctions {
   _commaDelimited(priceText) {
     let priceOnly = '';
     for (let i = 0; i < priceText.length; i++) {
-      if (this.isNumeric(priceText[i]) || priceText[i] === '.' || priceText[i] === ',') {
+      if (this._isNumeric(priceText[i]) || priceText[i] === '.' || priceText[i] === ',') {
         priceOnly += priceText[i];
       }
     }
