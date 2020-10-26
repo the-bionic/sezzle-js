@@ -63,29 +63,49 @@ describe('Testing isAlphabet helper function', () => {
 
 describe('Testing parsePriceString function', () => {
   const testCases = [{
-    value: '10000',
+    value: '1234.56',
     includeComma: false,
-    result: '10000'
+    result: '1234.56'
   }, {
-    value: 'Rs. 10000',
+    value: '1234,56',
+    includeComma: true,
+    result: '1234,56'
+  }, {
+    value: '$ 1234.56',
     includeComma: false,
-    result: '10000'
+    result: '1234.56'
   }, {
-    value: 'Rs. 10, 000',
+    value: '1234,56 $',
+    includeComma: true,
+    result: '1234,56'
+  }, {
+    value: '$ 1,234.56',
     includeComma: false,
-    result: '10000'
+    result: '1234.56'
   }, {
-    value: 'Rs. 10, 000',
+    value: '1.234,56 $',
     includeComma: true,
-    result: '10,000'
+    result: '1234,56'
   }, {
-    value: '$10,000',
-    includeComma: true,
-    result: '10,000'
+    value: '$ 1234',
+    includeComma: false,
+    result: '1234'
   }, {
-    value: '$80.30',
+    value: '1234',
     includeComma: true,
-    result: '80.30'
+    result: '1234'
+  }, {
+    value: 'Rs. 1,234.56',
+    includeComma: false,
+    result: '1234.56'
+  }, {
+    value: 'Rs. 1234.56',
+    includeComma: false,
+    result: '1234.56'
+  }, {
+    value: 'Rs. 1234,56',
+    includeComma: true,
+    result: '1234,56'
   }];
 
   for (let i = 0; i < testCases.length; i++) {

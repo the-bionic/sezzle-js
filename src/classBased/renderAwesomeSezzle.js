@@ -155,6 +155,8 @@ class renderAwesomeSezzle {
         logoNode.className = `sezzle-logo ${this._config.configGroups[configGroupIndex].imageClassName}`;
         logoNode.src = this._config.configGroups[configGroupIndex].imageURL;
         logoNode.alt = 'Sezzle';
+        logoNode.style.height = '18px';
+        logoNode.style.verticalAlign = 'baseline';
         sezzleButtonText.appendChild(logoNode);
         this._setLogoSize(logoNode, configGroupIndex);
         if (this._config.configGroups[configGroupIndex].logoStyle !== {}) this._setLogoStyle(logoNode, configGroupIndex);
@@ -164,6 +166,7 @@ class renderAwesomeSezzle {
       case 'link': {
         const learnMoreNode = document.createElement('button');
         learnMoreNode.role = 'button';
+        learnMoreNode.type = 'button';
         learnMoreNode.title = 'Learn More about Sezzle';
         learnMoreNode.className = 'sezzle-learn-more';
         const learnMoreText = document.createTextNode('Learn more');
@@ -174,15 +177,18 @@ class renderAwesomeSezzle {
       case 'info': {
         const infoIconNode = document.createElement('button');
         infoIconNode.role = 'button';
+        infoIconNode.type = 'button';
         infoIconNode.title = 'Learn More about Sezzle';
         infoIconNode.className = 'sezzle-info-icon';
         infoIconNode.innerHTML = '&#9432;';
+        infoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
         sezzleButtonText.appendChild(infoIconNode);
         break;
       }
       case 'question-mark': {
         const questionMarkButton = document.createElement('button');
         questionMarkButton.role = 'button';
+        questionMarkButton.type = 'button';
         questionMarkButton.title = 'Learn More about Sezzle';
         const questionMarkIconNode = document.createElement('img');
         questionMarkIconNode.className = 'sezzle-question-mark-icon';
@@ -196,6 +202,7 @@ class renderAwesomeSezzle {
         const affirmNode = document.createElement('img');
         affirmNode.className = 'sezzle-affirm-logo affirm-modal-info-link no-sezzle-info';
         affirmNode.style.maxHeight = '20px';
+        affirmNode.style.verticalAlign = 'middle';
         affirmNode.src = 'https://cdn-assets.affirm.com/images/black_logo-transparent_bg.png';
         affirmNode.alt = 'Affirm';
         sezzleButtonText.appendChild(affirmNode);
@@ -205,6 +212,7 @@ class renderAwesomeSezzle {
         const affirmNode = document.createElement('img');
         affirmNode.className = 'sezzle-affirm-logo affirm-modal-info-link no-sezzle-info';
         affirmNode.style.maxHeight = '20px';
+        affirmNode.style.verticalAlign = 'middle';
         affirmNode.src = 'https://cdn-assets.affirm.com/images/all_black_logo-transparent_bg.png';
         affirmNode.alt = 'Affirm';
         sezzleButtonText.appendChild(affirmNode);
@@ -214,6 +222,7 @@ class renderAwesomeSezzle {
         const affirmNode = document.createElement('img');
         affirmNode.className = 'sezzle-affirm-logo affirm-modal-info-link no-sezzle-info';
         affirmNode.style.maxHeight = '20px';
+        affirmNode.style.verticalAlign = 'middle';
         affirmNode.src = 'https://cdn-assets.affirm.com/images/white_logo-transparent_bg.png';
         affirmNode.alt = 'Affirm';
         sezzleButtonText.appendChild(affirmNode);
@@ -222,9 +231,11 @@ class renderAwesomeSezzle {
       case 'affirm-info-icon': {
         const affirmInfoIconNode = document.createElement('button');
         affirmInfoIconNode.role = 'button';
+        affirmInfoIconNode.type = 'button';
         affirmInfoIconNode.title = 'Learn More about Affirm';
         affirmInfoIconNode.className = 'affirm-modal-info-link no-sezzle-info';
         affirmInfoIconNode.innerHTML = '&#9432;';
+        affirmInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
         sezzleButtonText.appendChild(affirmInfoIconNode);
         break;
       }
@@ -244,6 +255,7 @@ class renderAwesomeSezzle {
         const apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.style.maxHeight = '18px';
+        apNode.style.verticalAlign = 'middle';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget.png';
         apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
@@ -253,6 +265,7 @@ class renderAwesomeSezzle {
         const apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.style.maxHeight = '16px';
+        apNode.style.verticalAlign = 'middle';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget-white.png';
         apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
@@ -262,6 +275,7 @@ class renderAwesomeSezzle {
         const apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
         apNode.style.maxHeight = '16px';
+        apNode.style.verticalAlign = 'middle';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget-grayscale.png';
         apNode.alt = 'Afterpay';
         sezzleButtonText.appendChild(apNode);
@@ -270,9 +284,11 @@ class renderAwesomeSezzle {
       case 'afterpay-info-icon': {
         const apInfoIconNode = document.createElement('button');
         apInfoIconNode.role = 'button';
+        apInfoIconNode.type = 'button';
         apInfoIconNode.title = 'Learn More about Afterpay';
         apInfoIconNode.className = 'ap-modal-info-link no-sezzle-info';
         apInfoIconNode.innerHTML = '&#9432;';
+        apInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
         sezzleButtonText.appendChild(apInfoIconNode);
         break;
       }
@@ -291,7 +307,8 @@ class renderAwesomeSezzle {
       case 'klarna-logo': {
         const klarnaNode = document.createElement('img');
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
-        klarnaNode.style.maxHeight = '30px';
+        klarnaNode.style.height = '30px';
+        klarnaNode.style.verticalAlign = 'middle';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/klarna.svg';
         klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
@@ -300,7 +317,8 @@ class renderAwesomeSezzle {
       case 'klarna-logo-white': {
         const klarnaNode = document.createElement('img');
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
-        klarnaNode.style.maxHeight = '30px';
+        klarnaNode.style.height = '30px';
+        klarnaNode.style.verticalAlign = 'middle';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/white/klarna.svg';
         klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
@@ -309,7 +327,8 @@ class renderAwesomeSezzle {
       case 'klarna-logo-greyscale': {
         const klarnaNode = document.createElement('img');
         klarnaNode.className = 'sezzle-klarna-logo klarna-modal-info-link no-sezzle-info';
-        klarnaNode.style.maxHeight = '30px';
+        klarnaNode.style.height = '30px';
+        klarnaNode.style.verticalAlign = 'middle';
         klarnaNode.src = 'https://x.klarnacdn.net/payment-method/assets/badges/generic/black/klarna.svg';
         klarnaNode.alt = 'Klarna';
         sezzleButtonText.appendChild(klarnaNode);
@@ -318,9 +337,11 @@ class renderAwesomeSezzle {
       case 'klarna-info-icon': {
         const klarnaInfoIconNode = document.createElement('button');
         klarnaInfoIconNode.role = 'button';
+        klarnaInfoIconNode.type = 'button';
         klarnaInfoIconNode.title = 'Learn More about Klarna';
         klarnaInfoIconNode.className = 'klarna-modal-info-link no-sezzle-info';
         klarnaInfoIconNode.innerHTML = '&#9432;';
+        klarnaInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
         sezzleButtonText.appendChild(klarnaInfoIconNode);
         break;
       }
@@ -329,6 +350,7 @@ class renderAwesomeSezzle {
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget.png';
         qpNode.alt = 'Quadpay';
+        qpNode.style.verticalAlign = 'middle';
         sezzleButtonText.appendChild(qpNode);
         break;
       }
@@ -337,6 +359,7 @@ class renderAwesomeSezzle {
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-grayscale.png';
         qpNode.alt = 'Quadpay';
+        qpNode.style.verticalAlign = 'middle';
         sezzleButtonText.appendChild(qpNode);
         break;
       }
@@ -345,15 +368,18 @@ class renderAwesomeSezzle {
         qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-white.png';
         qpNode.alt = 'Quadpay';
+        qpNode.style.verticalAlign = 'middle';
         sezzleButtonText.appendChild(qpNode);
         break;
       }
       case 'quadpay-info-icon': {
         const quadpayInfoIconNode = document.createElement('button');
         quadpayInfoIconNode.role = 'button';
+        quadpayInfoIconNode.type = 'button';
         quadpayInfoIconNode.title = 'Learn More about Quadpay';
         quadpayInfoIconNode.className = 'quadpay-modal-info-link no-sezzle-info';
         quadpayInfoIconNode.innerHTML = '&#9432;';
+        quadpayInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
         sezzleButtonText.appendChild(quadpayInfoIconNode);
         break;
       }
