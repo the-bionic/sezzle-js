@@ -155,6 +155,7 @@ class renderAwesomeSezzle {
         logoNode.className = `sezzle-logo ${this._config.configGroups[configGroupIndex].imageClassName}`;
         logoNode.src = this._config.configGroups[configGroupIndex].imageURL;
         logoNode.alt = 'Sezzle';
+        logoNode.style.height = '18px';
         logoNode.style.verticalAlign = 'baseline';
         sezzleButtonText.appendChild(logoNode);
         this._setLogoSize(logoNode, configGroupIndex);
