@@ -326,7 +326,7 @@ class renderAwesomeSezzle {
       }
       case 'quadpay-logo': {
         const qpNode = document.createElement('img');
-        qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
+        qpNode.className = 'sezzle-quadpay-logo qp-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget.png';
         qpNode.alt = 'Quadpay';
         sezzleButtonText.appendChild(qpNode);
@@ -334,7 +334,7 @@ class renderAwesomeSezzle {
       }
       case 'quadpay-logo-grey': {
         const qpNode = document.createElement('img');
-        qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
+        qpNode.className = 'sezzle-quadpay-logo qp-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-grayscale.png';
         qpNode.alt = 'Quadpay';
         sezzleButtonText.appendChild(qpNode);
@@ -342,7 +342,7 @@ class renderAwesomeSezzle {
       }
       case 'quadpay-logo-white': {
         const qpNode = document.createElement('img');
-        qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
+        qpNode.className = 'sezzle-quadpay-logo qp-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-white.png';
         qpNode.alt = 'Quadpay';
         sezzleButtonText.appendChild(qpNode);
@@ -352,7 +352,7 @@ class renderAwesomeSezzle {
         const quadpayInfoIconNode = document.createElement('button');
         quadpayInfoIconNode.role = 'button';
         quadpayInfoIconNode.title = 'Learn More about Quadpay';
-        quadpayInfoIconNode.className = 'quadpay-modal-info-link no-sezzle-info';
+        quadpayInfoIconNode.className = 'qp-modal-info-link no-sezzle-info';
         quadpayInfoIconNode.innerHTML = '&#9432;';
         sezzleButtonText.appendChild(quadpayInfoIconNode);
         break;
