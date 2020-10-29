@@ -49,33 +49,33 @@ class Utils {
    * @param {object} _configInstance
    * @param {number} configGroupIndex
    */
-  static logEvent(eventName, _configInstance, configGroupIndex) {
-    if (!_configInstance.noTracking) {
-      const sezzleFrame = window.frames.szl;
-      if (sezzleFrame) {
-        const viewport = { width: null, height: null };
-        viewport.width = window.screen && window.screen.width ? window.screen.width : console.log('Cant fetch viewport width');
-        viewport.height = window.screen && window.screen.height ? window.screen.height : console.log('Cant fetch viewport height');
+  // static logEvent(eventName, _configInstance, configGroupIndex) {
+  //   if (!_configInstance.noTracking) {
+  //     const sezzleFrame = window.frames.szl;
+  //     if (sezzleFrame) {
+  //       const viewport = { width: null, height: null };
+  //       viewport.width = window.screen && window.screen.width ? window.screen.width : console.log('Cant fetch viewport width');
+  //       viewport.height = window.screen && window.screen.height ? window.screen.height : console.log('Cant fetch viewport height');
 
-        setTimeout(() => {
-          sezzleFrame.postMessage({
-            event_name: eventName,
-            button_version: document.sezzleButtonVersion,
-            cart_id: this._getCookie('cart'),
-            ip_address: _configInstance.ip,
-            merchant_site: window.location.hostname,
-            is_mobile_browser: this._isMobileBrowser(),
-            user_agent: navigator.userAgent,
-            merchant_uuid: _configInstance.merchantID,
-            page_url: window.location.href,
-            viewport,
-            product_price: configGroupIndex !== undefined ? _configInstance.configGroups[configGroupIndex].productPrice : null,
-            sezzle_config: JSON.stringify(_configInstance.config),
-          }, 'https://tracking.sezzle.com');
-        }, 100);
-      }
-    }
-  }
+  //       setTimeout(() => {
+  //         sezzleFrame.postMessage({
+  //           event_name: eventName,
+  //           button_version: document.sezzleButtonVersion,
+  //           cart_id: this._getCookie('cart'),
+  //           ip_address: _configInstance.ip,
+  //           merchant_site: window.location.hostname,
+  //           is_mobile_browser: this._isMobileBrowser(),
+  //           user_agent: navigator.userAgent,
+  //           merchant_uuid: _configInstance.merchantID,
+  //           page_url: window.location.href,
+  //           viewport,
+  //           product_price: configGroupIndex !== undefined ? _configInstance.configGroups[configGroupIndex].productPrice : null,
+  //           sezzle_config: JSON.stringify(_configInstance.config),
+  //         }, 'https://tracking.sezzle.com');
+  //       }, 100);
+  //     }
+  //   }
+  // }
 
   /**
    * This is a helper function to break xpath into array

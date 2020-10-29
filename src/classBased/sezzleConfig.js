@@ -19,8 +19,8 @@ class sezzleConfig {
       'qpModalHTML',
       'affirmModalHTML',
       'klarnaModalHTML',
-      'noGtm',
-      'noTracking',
+      // 'noGtm',
+      // 'noTracking',
       'testID',
       'language',
     ];
@@ -40,8 +40,8 @@ class sezzleConfig {
       affirmModalHTML: null,
       klarnaModalHTML: null,
       supportedCountryCodes: null,
-      noTracking: null,
-      noGtm: null,
+      // noTracking: null,
+      // noGtm: null,
       countryCode: null,
       ip: null,
       fingerprint: null,
@@ -281,8 +281,8 @@ class sezzleConfig {
       affirmModalHTML: this.options.affirmModalHTML || '',
       klarnaModalHTML: this.options.klarnaModalHTML || '',
       supportedCountryCodes: this.options.supportedCountryCodes || ['US', 'IN', 'CA'],
-      noTracking: !!this.options.noTracking,
-      noGtm: !!this.options.noGtm,
+      // noTracking: !!this.options.noTracking,
+      // noGtm: !!this.options.noGtm,
     };
 
     this.sezzleConfig = { ...this.sezzleConfig, ...modifiedSezzleConfig };
