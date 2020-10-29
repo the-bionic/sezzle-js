@@ -347,7 +347,7 @@ class renderAwesomeSezzle {
       }
       case 'quadpay-logo': {
         const qpNode = document.createElement('img');
-        qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
+        qpNode.className = 'sezzle-quadpay-logo qp-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget.png';
         qpNode.alt = 'Quadpay';
         qpNode.style.verticalAlign = 'middle';
@@ -356,7 +356,7 @@ class renderAwesomeSezzle {
       }
       case 'quadpay-logo-grey': {
         const qpNode = document.createElement('img');
-        qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
+        qpNode.className = 'sezzle-quadpay-logo qp-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-grayscale.png';
         qpNode.alt = 'Quadpay';
         qpNode.style.verticalAlign = 'middle';
@@ -365,7 +365,7 @@ class renderAwesomeSezzle {
       }
       case 'quadpay-logo-white': {
         const qpNode = document.createElement('img');
-        qpNode.className = 'sezzle-quadpay-logo quadpay-modal-info-link no-sezzle-info';
+        qpNode.className = 'sezzle-quadpay-logo qp-modal-info-link no-sezzle-info';
         qpNode.src = 'https://d34uoa9py2cgca.cloudfront.net/sezzle-credit-website-assets/qp-logo-widget-white.png';
         qpNode.alt = 'Quadpay';
         qpNode.style.verticalAlign = 'middle';
@@ -377,7 +377,7 @@ class renderAwesomeSezzle {
         quadpayInfoIconNode.role = 'button';
         quadpayInfoIconNode.type = 'button';
         quadpayInfoIconNode.title = 'Learn More about Quadpay';
-        quadpayInfoIconNode.className = 'quadpay-modal-info-link no-sezzle-info';
+        quadpayInfoIconNode.className = 'qp-modal-info-link no-sezzle-info';
         quadpayInfoIconNode.innerHTML = '&#9432;';
         quadpayInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
         sezzleButtonText.appendChild(quadpayInfoIconNode);
