@@ -33,12 +33,12 @@ class SezzleJS {
     Utils.logEvent('request', this._configInst);
     await this._loadCSS();
     this._renderAwesomeSezzle.initializeRendering();
-    if (this._countryCode === 'US' || this._countryCode === 'CA') {
-      const win = window.frames.szl;
-      if (win && !this._configInst.noGtm) {
-        setTimeout(() => win.postMessage('initGTMScript', 'https://tracking.sezzle.com'), 100);
-      }
-    }
+    // if (this._countryCode === 'US' || this._countryCode === 'CA') {
+    //   const win = window.frames.szl;
+    //   if (win && !this._configInst.noGtm) {
+    //     setTimeout(() => win.postMessage('initGTMScript', 'https://tracking.sezzle.com'), 100);
+    //   }
+    // }
   }
 
   /**

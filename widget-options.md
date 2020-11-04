@@ -118,9 +118,10 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
   * %%info%% - Inherited color info icon that, when clicked, opens the Sezzle modal
   * %%question-mark%% - Black info icon that, when clicked, opens the Sezzle modal
   * %%line-break%% - Breaks the widget content into a new line
-  * %%price-split%% - 
+  <!-- * %%price-split%% - Renders the two prices on either side of the splitPriceElementsOn value -->
   * %%afterpay-logo%% - Afterpay logo image
   * %%afterpay-logo-grey%% - Afterpay logo image in greyscale
+  * %%afterpay-logo-white%% - Afterpay logo image for dark mode
   * %%afterpay-info-icon%% - Info icon that, when clicked, opens the Afterpay modal HTML provided in apModalHTML
   * %%afterpay-link-icon%% - Info icon that, when clicked, opens the Afterpay link provided in apLink
   * %%quadpay-logo%% - Quadpay logo image
@@ -128,8 +129,14 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
   * %%quadpay-logo-white%% - Quadpay logo image for dark mode
   * %%quadpay-info-icon%% - Info icon that, when clicked, opens the Quadpay modal HTML provided in qpModalHTML
   * %%affirm-logo%% - Affirm logo image
+  * %%affirm-logo-greyscale%% - Affirm logo image in greyscale
+  * %%affirm-logo-white%% - Affirm logo image for dark mode
   * %%affirm-info-icon%% - Info icon that, when clicked, opens the Affirm modal HTML provided in affirmModalHTML
   * %%affirm-link-icon%% - Info icon that, when clicked, opens the Affirm link provided in affirmLink
+  * %%klarna-logo%% - Klarna logo image
+  * %%klarna-logo-grey%% - Klarna logo image in greyscale
+  * %%klarna-logo-white%% - Klarna logo image for dark mode
+  * %%klarna-info-icon%% - Info icon that, when clicked, opens the Klarna modal HTML provided in klarnaModalHTML
 
 `splitPriceElementsOn` (optional)
 
@@ -150,7 +157,7 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 **Purpose**: Functions related to Sezzle widget. Listen for changes on the webpage after the Sezzle widget loads.<br/>
 **Type**: array of objects<br/>
 **Default**: []<br/>
-**Additional Details**: Each object in the array has three available keys: `relatedPath`, which targets an element in relation to the `targetXPath` (in the same manner as `renderToPath`); `action`; and `initialAction`, which performs the provided function
+**Additional Details**: Each object in the array has three available keys: `relatedPath`, which targets an element in relation to the `targetXPath` (in the same manner as `renderToPath`); `action`; and `initialAction`, with preset params corresponding to the relatedPath element and the current widget which performs the provided function as the widget is rendering
   
 `ignoredPriceElements` (optional)
 
@@ -320,19 +327,19 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 **Type**: number<br/>
 **Default**: 250000
 
-`noTracking` (optional)
+<!-- `noTracking` (optional) **deprecated**
 
 **Purpose**: Enables or disables Sezzle tracking used to monitor widget health and conversion analytics.<br/>
 **Type**: boolean<br/>
 **Options**: false, true<br/>
-**Default**: false
+**Default**: false -->
 
-`noGtm` (optional)
+<!-- `noGtm` (optional) **deprecated**
 
 **Purpose**: Enables or disables Google Analytics tracking click events for Sezzle reporting.<br/>
 **Type**: boolean<br/>
 **Options**: false, true<br/>
-**Default**: false
+**Default**: false -->
 <!-- 
 `bannerURL` (optional) **deprecation in process**
 
@@ -354,12 +361,12 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 **Type**: string<br/>
 **Default**: ''<br/>
 **Additional Details**:  -->
-<!-- 
-`altLightboxHTML` (optional) **deprecation in process**
+
+`altLightboxHTML` (optional)
 
 **Purpose**: Custom Sezzle modal window to be rendered when widget is clicked.<br/>
 **Type**: string<br/>
-**Default**: ''<br/> -->
+**Default**: ''<br/>
 <!-- 
 - **{includeAPModal} {includeQPModal}** (Optional) - Boolean (To enable modals in dual widgets) -->
 
@@ -387,11 +394,18 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 **Type**: string<br/>
 **Default**: 'https://www.affirm.com/how-it-works'
 
-`affirmModalHTML` (optional) **deprecation in process**
+`affirmModalHTML` (optional)
 
 **Purpose**: Competitor's modal window to be rendered when widget is clicked at competitor's logo.<br/>
 **Type**: string<br/>
 **Default**: ''
+
+`klarnaModalHTML` (optional)
+
+**Purpose**: Competitor's modal window to be rendered when widget is clicked at competitor's logo.<br/>
+**Type**: string<br/>
+**Default**: ''
+
 <!-- 
 `countryCodes` (optional) **deprecated**
 
@@ -411,9 +425,9 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 
 **Purpose**: Language in which the widget text should be rendered.<br/>
 **Type**: string<br/>
-**Options**: 'en', 'fr'<br/>
+**Options**: 'en', 'fr', 'de'<br/>
 **Default**: navigator.language<br/>
-**Additional Details**: To match the selected language in the window instead of the user's default browser language, use document.querySelector('html').lang. Currently, SezzleJS only supports 'en' and 'fr'
+**Additional Details**: To match the selected language in the window instead of the user's default browser language, use document.querySelector('html').lang. Currently, SezzleJS only supports 'en', 'fr', and 'de', but additional languages can be added through `altVersionTemplate` and `altLightboxHTML`
 
 `forcedShow` (optional) 
 
