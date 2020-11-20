@@ -254,7 +254,7 @@ class renderAwesomeSezzle {
       case 'afterpay-logo': {
         const apNode = document.createElement('img');
         apNode.className = 'sezzle-afterpay-logo ap-modal-info-link no-sezzle-info';
-        apNode.style.maxHeight = '18px';
+        apNode.style.maxHeight = '30px';
         apNode.style.verticalAlign = 'middle';
         apNode.src = 'https://media.sezzle.com/sezzle-credit-website-assets/ap-logo-widget.png';
         apNode.alt = 'Afterpay';
