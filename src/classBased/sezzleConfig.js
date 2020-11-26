@@ -1,4 +1,5 @@
 import Utils from './utils';
+import Language from './language';
 
 const cloneDeep = require('lodash.clonedeep');
 
@@ -45,8 +46,9 @@ class sezzleConfig {
       countryCode: null,
       ip: null,
       fingerprint: null,
-      language: null,
+      language: null, //TODO: Could be removed
       // pre-defined config properties
+      //TODO: Could be removed
       browserLanguage: (navigator.language || navigator.browserLanguage || 'en').substring(0, 2).toLowerCase(),
       mutationObserverConfig: { attributes: true, childList: true, characterData: true },
       apiEndpoints: {
@@ -87,7 +89,7 @@ class sezzleConfig {
     this._validateConfig();
     this._urlConfigFilter();
     this._configSetters();
-    this._languageSetter();
+    this._languageSetter(); //TODO: Could be removed
     this._setConfigGroups();
   }
 
@@ -296,7 +298,7 @@ class sezzleConfig {
 
     if (this.options.language !== 'en' && this.options.language !== 'fr' && this.options.language !== 'de') this.sezzleConfig.language = this.options.browserLanguage;
   }
-
+  //TODO: Remove because -> Language class function.
   /**
    * This function returns widget string based on language if it's defined, else returns 'en' version
    * @returns {String} Default widget template
@@ -322,6 +324,7 @@ class sezzleConfig {
     if (typeof (widgetTemplate) === 'object' && widgetTemplate != null) {
       if (!widgetTemplate.en && !widgetTemplate[this.sezzleConfig.language]) {
         console.warn("Please specify atleast 'en' key in altVersionTemplate, rendering default widget template.");
+        //TODO: Replace with Language class function.
         return this._widgetLanguageTranslation(this.sezzleConfig.language, this.sezzleConfig.numberOfPayments); // return default widget template
       }
       return widgetTemplate[this.sezzleConfig.language] || widgetTemplate.en; // returns specific language if present else return en key
