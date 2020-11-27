@@ -18,7 +18,7 @@ class language {
 
   getTranslation() {
     if(this._checkIfLanguageIsValid()){
-    return this._translations[this._language];
+      return this._translations[this._language];
     }
     return this._translations[this._defaultLanguage];
   }
@@ -46,7 +46,7 @@ class language {
     let validityCounter =  0;
     let availableLanguages = Object.getOwnPropertyNames(this._translations);
     availableLanguages.forEach(lang=>{
-    if(lang === this._language) validityCounter ++;
+      if(lang === this._language) validityCounter ++;
     });
     return validityCounter>0;
   }
@@ -57,7 +57,7 @@ class language {
         console.warn("Please specify atleast 'en' key in altVersionTemplate, rendering default widget template.");
         return this.getTranslation(this._numberOfPayments); 
       }
-      return widgetTemplate[this.sezzleConfig.language] || widgetTemplate.en;
+      return widgetTemplate[this._language] || widgetTemplate.en;
     }
     return widgetTemplate;
   }

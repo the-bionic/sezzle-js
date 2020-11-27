@@ -46,10 +46,7 @@ class sezzleConfig {
       countryCode: null,
       ip: null,
       fingerprint: null,
-      language: null, //TODO: Could be removed
-      // pre-defined config properties
-      //TODO: Could be removed
-      browserLanguage: (navigator.language || navigator.browserLanguage || 'en').substring(0, 2).toLowerCase(),
+      language: null, 
       mutationObserverConfig: { attributes: true, childList: true, characterData: true },
       apiEndpoints: {
         sezzleAssetsCDN: 'https://media.sezzle.com/shopify-app/assets/',
@@ -89,7 +86,7 @@ class sezzleConfig {
     this._validateConfig();
     this._urlConfigFilter();
     this._configSetters();
-    this._languageSetter(); //TODO: Could be removed
+    this._languageSetter();
     this._setConfigGroups();
   }
 
@@ -291,47 +288,11 @@ class sezzleConfig {
   }
 
   _languageSetter() {
-    const type = typeof (this.options.language);
-    if (type === 'string') this.sezzleConfig.language = this.options.language;
-    else if (type === 'function') this.sezzleConfig.language = this.options.language();
-    else this.sezzleConfig.language = this.browserLanguage;
-
-    if (this.options.language !== 'en' && this.options.language !== 'fr' && this.options.language !== 'de') this.sezzleConfig.language = this.options.browserLanguage;
+    var Lang = new Language(this.options.numberOfPayments).init();
+    Lang.setLanguage(this.options.language);
+    this.sezzleConfig.language = Lang.getLanguage();
   }
-  //TODO: Remove because -> Language class function.
-  /**
-   * This function returns widget string based on language if it's defined, else returns 'en' version
-   * @returns {String} Default widget template
-   */
-  _widgetLanguageTranslation() {
-    const translations = {
-      en: `or ${this.sezzleConfig.numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
-      fr: `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
-      de: `oder ${this.sezzleConfig.numberOfPayments} zinslose Zahlungen von je %%price%% mit %%logo%% %%info%%`,
-    };
-    return translations[this.sezzleConfig.language] || translations.en;
-  }
-
-  /*
-   * Returns altVersionTemplate, based on config provided
-   * If it's a string, it doesn't do anything and just returns the string
-   * If it's an object it will return the key which matches with language else returns 'en' key if specified->
-   *  if en or language key both are not present it calls widgetLanguageTranslation with browser Language as 'en'
-   * @param {Object, String} widgetTemplate
-   * @returns String
-   */
-  _constructWidgetTemplate(widgetTemplate) {
-    if (typeof (widgetTemplate) === 'object' && widgetTemplate != null) {
-      if (!widgetTemplate.en && !widgetTemplate[this.sezzleConfig.language]) {
-        console.warn("Please specify atleast 'en' key in altVersionTemplate, rendering default widget template.");
-        //TODO: Replace with Language class function.
-        return this._widgetLanguageTranslation(this.sezzleConfig.language, this.sezzleConfig.numberOfPayments); // return default widget template
-      }
-      return widgetTemplate[this.sezzleConfig.language] || widgetTemplate.en; // returns specific language if present else return en key
-    }
-    return widgetTemplate; // if widgetTemplate is string
-  }
-
+ 
   /**
    * Maps the props of configGroups passed by input into a default configGroup object
    * @param configGroup input by user
@@ -410,9 +371,9 @@ class sezzleConfig {
     result.customClasses = Array.isArray(configGroup.customClasses) ? configGroup.customClasses : [];
     result.widgetTemplate = configGroup.altVersionTemplate || (this.options.defaultConfig && this.options.defaultConfig.altVersionTemplate);
     if (result.widgetTemplate) {
-      result.widgetTemplate = (this._constructWidgetTemplate(result.widgetTemplate, this.language, this.numberOfPayments)).split('%%');
+      result.widgetTemplate = (Lang.constructWidgetTemplate(result.widgetTemplate)).split('%%');
     } else {
-      const defaultWidgetTemplate = this._widgetLanguageTranslation(this.language, this.numberOfPayments);
+      const defaultWidgetTemplate = Lang.getTranslation();
       result.widgetTemplate = defaultWidgetTemplate.split('%%');
     }
     if (result.splitPriceElementsOn) {
