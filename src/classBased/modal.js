@@ -53,7 +53,7 @@ class Modal {
               modals[0].className = 'sezzle-modal';
             }
             // log on click event
-           // Utils.logEvent('onclick', this._configGroupIndex);
+            Utils.logEvent('onclick', this._configGroupIndex);
           }
         }
       });
@@ -70,7 +70,7 @@ class Modal {
           document.getElementsByClassName(`sezzle-${vendor}-modal`)[0].style.display = 'block';
           document.body.ariaHidden = true;
           // log on click event
-         // Utils.logEvent(`onclick-${vendor}`, this._configGroupIndex);
+          Utils.logEvent(`onclick-${vendor}`, this._configGroupIndex);
         });
       });
     });
