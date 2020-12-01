@@ -8,7 +8,7 @@ class sezzleConfig {
     if (!options) options = {};
     this.options = options;
     this.compatibleOptions = null;
-
+    this.Language = null;
     this._propsNotInConfigGroup = [
       'merchantID',
       'forcedShow',
@@ -288,9 +288,11 @@ class sezzleConfig {
   }
 
   _languageSetter() {
-    var Lang = new Language(this.options.numberOfPayments).init();
-    Lang.setLanguage(this.options.language);
-    this.sezzleConfig.language = Lang.getLanguage();
+    this.Language = new Language(this.options.numberOfPayments || 4);
+    this.Language.init();
+    console.log(this.options.language);
+    this.Language.setLanguage(this.options.language);
+    this.sezzleConfig.language = this.Language.getLanguage();
   }
  
   /**
@@ -371,9 +373,9 @@ class sezzleConfig {
     result.customClasses = Array.isArray(configGroup.customClasses) ? configGroup.customClasses : [];
     result.widgetTemplate = configGroup.altVersionTemplate || (this.options.defaultConfig && this.options.defaultConfig.altVersionTemplate);
     if (result.widgetTemplate) {
-      result.widgetTemplate = (Lang.constructWidgetTemplate(result.widgetTemplate)).split('%%');
+      result.widgetTemplate = (this.Language.constructWidgetTemplate(result.widgetTemplate)).split('%%');
     } else {
-      const defaultWidgetTemplate = Lang.getTranslation();
+      const defaultWidgetTemplate = this.Language.getTranslation();
       result.widgetTemplate = defaultWidgetTemplate.split('%%');
     }
     if (result.splitPriceElementsOn) {

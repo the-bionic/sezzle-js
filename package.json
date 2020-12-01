@@ -69,11 +69,16 @@
     "stylelint-config-standard": "^17.0.0",
     "terser": "^3.14.0",
     "webpack-cli": "^3.3.7",
-    "webpack-dev-server": "^3.8.0",
+    "webpack-dev-server": "^3.11.0",
     "webpack-stream": "^5.2.1",
     "yargs": "^12.0.5"
   },
-  "keywords": ["sezzle", "merchant", "js", "widget"],
+  "keywords": [
+    "sezzle",
+    "merchant",
+    "js",
+    "widget"
+  ],
   "dependencies": {
     "core-js": "^3.2.1",
     "lodash.clonedeep": "^4.5.0",

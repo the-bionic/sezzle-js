@@ -17,7 +17,7 @@ class language {
   }
 
   getTranslation() {
-    if(this._checkIfLanguageIsValid()){
+    if(this._checkIfLanguageIsValid(this._language)){
       return this._translations[this._language];
     }
     return this._translations[this._defaultLanguage];
@@ -25,7 +25,7 @@ class language {
 
   setLanguage(lang) {
     const typeOfLanguageOption = typeof(lang);
-    if(!this._checkIfLanguageIsValid()) {
+    if(!this._checkIfLanguageIsValid(lang)) {
       this._language = this._browserLanguage;
     } else {
       switch(typeOfLanguageOption) {
@@ -42,11 +42,11 @@ class language {
     }
   }
 
-  _checkIfLanguageIsValid() {
+  _checkIfLanguageIsValid(lang) {
     let validityCounter =  0;
     let availableLanguages = Object.getOwnPropertyNames(this._translations);
-    availableLanguages.forEach(lang=>{
-      if(lang === this._language) validityCounter ++;
+    availableLanguages.forEach(l=>{
+      if(l === lang) validityCounter++;
     });
     return validityCounter>0;
   }
