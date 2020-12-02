@@ -70,34 +70,7 @@ class Utils {
         page_url: window.location.href,
         product_price: configGroupIndex !== undefined ? _configInstance.configGroups[configGroupIndex].productPrice : null,
         sezzle_config: JSON.stringify(_configInstance.config),
-      }).then((r)=>{
-        console.log(r)
-      },e=>{
-        console.log(e)
-      })
-      // const sezzleFrame = window.frames.szl;
-      // if (sezzleFrame) {
-      //   const viewport = { width: null, height: null };
-      //   viewport.width = window.screen && window.screen.width ? window.screen.width : console.log('Cant fetch viewport width');
-      //   viewport.height = window.screen && window.screen.height ? window.screen.height : console.log('Cant fetch viewport height');
-
-      //   setTimeout(() => {
-      //     sezzleFrame.postMessage({
-      //       event_name: eventName,
-      //       button_version: document.sezzleButtonVersion,
-      //       cart_id: this._getCookie('cart'),
-      //       ip_address: _configInstance.ip,
-      //       merchant_site: window.location.hostname,
-      //       is_mobile_browser: this._isMobileBrowser(),
-      //       user_agent: navigator.userAgent,
-      //       merchant_uuid: _configInstance.merchantID,
-      //       page_url: window.location.href,
-      //       viewport,
-      //       product_price: configGroupIndex !== undefined ? _configInstance.configGroups[configGroupIndex].productPrice : null,
-      //       sezzle_config: JSON.stringify(_configInstance.config),
-      //     }, 'https://tracking.sezzle.com');
-      //   }, 100);
-      // }
+      });
     }
   }
 
