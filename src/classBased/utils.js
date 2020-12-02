@@ -52,7 +52,7 @@ class Utils {
   }
 
   /**
-   * @description sends payload as message to the sezzle iframe which further logs event
+   * @description sends payload to widget-server which further logs event
    * @param {string} eventName
    * @param {object} _configInstance
    * @param {number} configGroupIndex
