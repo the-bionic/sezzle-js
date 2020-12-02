@@ -10,7 +10,7 @@ class Utils {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url, true);
-      if(body=== null){
+      if(body !== null){
         xhr.setRequestHeader("Content-Type", "application/json");
       }
       xhr.onload = function () {
