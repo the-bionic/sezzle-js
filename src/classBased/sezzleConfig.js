@@ -280,7 +280,7 @@ class sezzleConfig {
       qpModalHTML: this.options.qpModalHTML || '',
       affirmModalHTML: this.options.affirmModalHTML || '',
       klarnaModalHTML: this.options.klarnaModalHTML || '',
-      supportedCountryCodes: this.options.supportedCountryCodes || ['US', 'IN', 'CA'],
+      supportedCountryCodes: this.options.supportedCountryCodes || ['US', 'CA', 'IN', 'GU', 'PR', 'VI', 'AS', 'MP'],
       // noTracking: !!this.options.noTracking,
       // noGtm: !!this.options.noGtm,
     };
@@ -294,7 +294,7 @@ class sezzleConfig {
     else if (type === 'function') this.sezzleConfig.language = this.options.language();
     else this.sezzleConfig.language = this.browserLanguage;
 
-    if (this.options.language !== 'en' && this.options.language !== 'fr' && this.options.language !== 'de') this.sezzleConfig.language = this.options.browserLanguage;
+    if (this.options.language !== 'en' && this.options.language !== 'fr' && this.options.language !== 'de' && this.options.language !== 'es') this.sezzleConfig.language = this.options.browserLanguage;
   }
 
   /**
@@ -306,6 +306,7 @@ class sezzleConfig {
       en: `or ${this.sezzleConfig.numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
       fr: `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
       de: `oder ${this.sezzleConfig.numberOfPayments} zinslose Zahlungen von je %%price%% mit %%logo%% %%info%%`,
+      es: `o ${this.sezzleConfig.numberOfPayments} pagos sin intereses de %%price%% con %%logo%% %%info%%`,
     };
     return translations[this.sezzleConfig.language] || translations.en;
   }
