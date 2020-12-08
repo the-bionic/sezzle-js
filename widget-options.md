@@ -425,9 +425,9 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 
 **Purpose**: Language in which the widget text should be rendered.<br/>
 **Type**: string<br/>
-**Options**: 'en', 'fr', 'de'<br/>
+**Options**: 'en', 'fr', 'de', 'es'<br/>
 **Default**: navigator.language<br/>
-**Additional Details**: To match the selected language in the window instead of the user's default browser language, use document.querySelector('html').lang. Currently, SezzleJS only supports 'en', 'fr', and 'de', but additional languages can be added through `altVersionTemplate` and `altLightboxHTML`
+**Additional Details**: To match the selected language in the window instead of the user's default browser language, use document.querySelector('html').lang. Currently, SezzleJS only supports 'en', 'fr', 'de', and 'es', but additional languages can be added through `altVersionTemplate` and `altLightboxHTML`
 
 `forcedShow` (optional)
 
