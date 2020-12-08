@@ -362,9 +362,6 @@ class sezzleDOMFunctions {
         formattedPrice += price[i];
       }
     }
-    if (includeComma) {
-      formattedPrice.replace(',', '.');
-    }
     return formattedPrice;
   }
 
@@ -376,7 +373,7 @@ class sezzleDOMFunctions {
   _parsePrice(price) {
     let includeComma = false;
     includeComma = this._commaDelimited(price);
-    return parseFloat(this._parsePriceString(price, includeComma));
+    return parseFloat(this._parsePriceString(price, includeComma).replace(',','.'));
   }
 }
 
