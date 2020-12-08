@@ -280,7 +280,7 @@ class sezzleConfig {
       qpModalHTML: this.options.qpModalHTML || '',
       affirmModalHTML: this.options.affirmModalHTML || '',
       klarnaModalHTML: this.options.klarnaModalHTML || '',
-      supportedCountryCodes: this.options.supportedCountryCodes || ['US', 'IN', 'CA'],
+      supportedCountryCodes: this.options.supportedCountryCodes || ['US', 'CA', 'IN', 'GU', 'PR', 'VI', 'AS', 'MP'],
       // noTracking: !!this.options.noTracking,
       // noGtm: !!this.options.noGtm,
     };
