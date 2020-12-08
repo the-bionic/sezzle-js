@@ -23,11 +23,7 @@ class Utils {
       xhr.onerror = function () {
         reject(new Error('Something went wrong, contact the Sezzle team!'));
       };
-      if(body === null){
-        xhr.send();
-      }else{
-        xhr.send(JSON.stringify(body))
-      }
+      body === null?xhr.send():xhr.send(JSON.stringify(body));
     });
   }
 
