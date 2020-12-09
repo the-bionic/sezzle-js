@@ -30,6 +30,7 @@ class SezzleJS {
    * Also logs initGTMScript event if condition matches
    */
   async initializeWidget() {
+    Utils.logEvent('request', this._configInst);
     await this._loadCSS();
     this._renderAwesomeSezzle.initializeRendering();
     // if (this._countryCode === 'US' || this._countryCode === 'CA') {
