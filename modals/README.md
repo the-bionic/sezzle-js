@@ -26,6 +26,7 @@ Follow the same process as for javascript
 - Open a pull request and reach out to someone with Approver access to review and merge
 
 ### Developing a new modal vesion
+
 - Decide the new modal version. It should increment from the current modal version following the same convention as CSS
 - Create a new directory under `modals` called `modals-<version-number>`.
 	- For example, if your version is `2.0.1` then the directory name should be `modals-2.0.1`
