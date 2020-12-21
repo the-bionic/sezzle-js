@@ -87,8 +87,12 @@ function postButtonCssToWrapper(url) {
     })
 }
 
-gulp.task('post-button-css-to-wrapper', postButtonCssToWrapper('https://widget.sezzle.com/v1/css/price-widget/version'));
-gulp.task('post-button-css-to-wrapper-eu', postButtonCssToWrapper('https://widget.eu.sezzle.com/v1/css/price-widget/version'));
+gulp.task('post-button-css-to-wrapper', function(){
+  postButtonCssToWrapper('https://widget.sezzle.com/v1/css/price-widget/version');
+});
+gulp.task('post-button-css-to-wrapper-eu', function(){
+  postButtonCssToWrapper('https://widget.eu.sezzle.com/v1/css/price-widget/version');
+});
 
 /**
  * Tasks for the modal
@@ -224,8 +228,12 @@ function postModalToWrapper(url) {
     })
 }
 
-gulp.task('post-modal-to-wrapper', postModalToWrapper('https://widget.sezzle.com/v1/modal/price-widget/version'));
-gulp.task('post-modal-to-wrapper-eu', postModalToWrapper('https://widget.eu.sezzle.com/v1/modal/price-widget/version'));
+gulp.task('post-modal-to-wrapper', function(){
+  postModalToWrapper('https://widget.sezzle.com/v1/modal/price-widget/version');
+});
+gulp.task('post-modal-to-wrapper-eu', function(){
+  postModalToWrapper('https://widget.eu.sezzle.com/v1/modal/price-widget/version')
+});
 
 /**
  * Tasks for the sezzle-js widget
@@ -290,8 +298,12 @@ function postButtonToWidgetServer(url) {
     })
 }
 
-gulp.task('post-button-to-widget-server', postButtonToWidgetServer('https://widget.sezzle.com/v1/javascript/price-widget/version'));
-gulp.task('post-button-to-widget-server-eu', postButtonToWidgetServer('https://widget.eu.sezzle.com/v1/javascript/price-widget/version'));
+gulp.task('post-button-to-widget-server', function(){
+  postButtonToWidgetServer('https://widget.sezzle.com/v1/javascript/price-widget/version');
+});
+gulp.task('post-button-to-widget-server-eu', function(){
+  postButtonToWidgetServer('https://widget.eu.sezzle.com/v1/javascript/price-widget/version');
+});
 
 function versionCheck(oldVersion) {
   newVersion = argv.newversion;
