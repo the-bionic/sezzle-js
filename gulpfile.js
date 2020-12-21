@@ -67,11 +67,11 @@ gulp.task('cssupload', function () {
       }))
 });
 
-gulp.task('post-button-css-to-wrapper', function () {
+function postButtonCssToWrapper(url) {
   console.log('Posting css version to shopify gateway')
   var options = {
     method: 'POST',
-    uri: 'https://widget.sezzle.com/v1/css/price-widget/version',
+    uri: url,
     body: {
       'version_name': globalCssUploadName
     },
@@ -85,7 +85,10 @@ gulp.task('post-button-css-to-wrapper', function () {
       console.log('Post failed with sezzle pay, ')
       console.log(err);
     })
-});
+}
+
+gulp.task('post-button-css-to-wrapper', postButtonCssToWrapper('https://widget.sezzle.com/v1/css/price-widget/version'));
+gulp.task('post-button-css-to-wrapper-eu', postButtonCssToWrapper('https://widget.eu.sezzle.com/v1/css/price-widget/version'));
 
 /**
  * Tasks for the modal
@@ -200,11 +203,11 @@ gulp.task('modalupload-update', function () {
   return merge(steams);
 });
 
-gulp.task('post-modal-to-wrapper', function () {
+function postModalToWrapper(url) {
   console.log('Posting modal version to shopify gateway')
   var options = {
     method: 'POST',
-    uri: 'https://widget.sezzle.com/v1/modal/price-widget/version',
+    uri: url,
     body: {
       'version': `sezzle-modal-${pjson.modalversion}-{%%s%%}.html`,
       'languages': language[pjson.modalversion]
@@ -219,7 +222,10 @@ gulp.task('post-modal-to-wrapper', function () {
       console.log('Post failed with sezzle pay, ')
       console.log(err);
     })
-});
+}
+
+gulp.task('post-modal-to-wrapper', postModalToWrapper('https://widget.sezzle.com/v1/modal/price-widget/version'));
+gulp.task('post-modal-to-wrapper-eu', postModalToWrapper('https://widget.eu.sezzle.com/v1/modal/price-widget/version'));
 
 /**
  * Tasks for the sezzle-js widget
@@ -265,10 +271,10 @@ gulp.task('upload-widget', function (done) {
       }));
 });
 
-gulp.task('post-button-to-widget-server', function () {
+function postButtonToWidgetServer(url) {
   var options = {
     method: 'POST',
-    uri: 'https://widget.sezzle.com/v1/javascript/price-widget/version',
+    uri: url,
     body: {
       'version_name': buttonUploadName
     },
@@ -282,7 +288,10 @@ gulp.task('post-button-to-widget-server', function () {
       console.log('Post failed with shopify, ')
       console.log(err);
     })
-});
+}
+
+gulp.task('post-button-to-widget-server', postButtonToWidgetServer('https://widget.sezzle.com/v1/javascript/price-widget/version'));
+gulp.task('post-button-to-widget-server-eu', postButtonToWidgetServer('https://widget.eu.sezzle.com/v1/javascript/price-widget/version'));
 
 function versionCheck(oldVersion) {
   newVersion = argv.newversion;
@@ -492,9 +501,9 @@ gulp.task('uploadtracker', function () {
     }))
 });
 
-gulp.task('deploywidget', gulp.series('bundlejs', 'upload-widget', 'post-button-to-widget-server'));
-gulp.task('deploycss', gulp.series('styles', 'cssupload', 'post-button-css-to-wrapper'));
-gulp.task('deploymodal', gulp.series('cleanmodal', 'csscompile-modal', 'minify-modal', 'modalupload', 'post-modal-to-wrapper'));
+gulp.task('deploywidget', gulp.series('bundlejs', 'upload-widget', 'post-button-to-widget-server', 'post-button-to-widget-server-eu'));
+gulp.task('deploycss', gulp.series('styles', 'cssupload', 'post-button-css-to-wrapper', 'post-button-css-to-wrapper-eu'));
+gulp.task('deploymodal', gulp.series('cleanmodal', 'csscompile-modal', 'minify-modal', 'modalupload', 'post-modal-to-wrapper', 'post-modal-to-wrapper-eu'));
 gulp.task('deploytracker', gulp.series('bundletracker', 'uploadtracker'));
 
 // local processes
