@@ -545,7 +545,7 @@ function versionCheckForUpdate(oldVersion) {
     !(/^\d{1,2}\.\d{1,2}\.\d{1,2}$/.test(update_version)) ||
     compareVersions(oldVersion, update_version) === -1
   ) {
-    throw 'Invalid value for updateversion';
+    throw 'Invalid value for updateversion' + update_version + ', ' + oldVersion + ', ' + compareVersions(oldVersion, update_version);
   };
 }
 

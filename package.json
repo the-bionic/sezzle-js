@@ -2,7 +2,7 @@
   "name": "sezzle-js",
   "version": "20.12.0",
   "cssversion": "2.0.13",
-  "modalversion": "2.0.1",
+  "modalversion": "2.0.2",
   "description": "Sezzle Sales Widget Price Watcher",
   "main": "sezzle.js",
   "scripts": {
