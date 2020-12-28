@@ -1,4 +1,6 @@
-const Helper = require('./helper');
+import Helper from './helper';
+import Utils from './classBased/utils';
+
 const SezzleJS = function (options) {
   if (!options) options = {};
   // Convert to new config if options passed in is old config
@@ -31,9 +33,9 @@ const SezzleJS = function (options) {
   // Non configurable options
   this._config = { attributes: true, childList: true, characterData: true };
   // URL to request to get ip of request
-  this.countryFromIPRequestURL = 'https://geoip.sezzle.com/v1/geoip/ipdetails';
+  this.countryFromIPRequestURL = `${Utils.getGeoIpBaseUrl()}/v1/geoip/ipdetails`;
   // URL to request to get css details
-  this.cssForMerchantURL = 'https://widget.sezzle.com/v1/css/price-widget?uuid=' + this.merchantID;
+  this.cssForMerchantURL = `${Utils.getWidgetBaseUrl()}/v1/css/price-widget?uuid=${this.merchantID}`;
   // no tracking
   this.noTracking = !!options.noTracking;
   // no gtm
