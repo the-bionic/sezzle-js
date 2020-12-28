@@ -1,4 +1,4 @@
-const trackingURL = document.widgetServerBaseUrl ? document.widgetServerBaseUrl + "/v1/event/log" : "https://widget.sezzle.com/v1/event/log"
+const trackingURL = document.widgetServerBaseUrl ? `${document.widgetServerBaseUrl}/v1/event/log` : "https://widget.sezzle.com/v1/event/log"
 
 /* eslint-disable class-methods-use-this */
 class Utils {
