@@ -67,6 +67,37 @@ describe('Config validator function works as expected', () => {
       new SezzleConfig(newConfig).getSezzleConfig;
     }).toThrow('merchantID is not a property of a configGroup. Specify this key at the outermost layer');
   });
+
+  test('Get css for merchant URL when it is not defined in the `widgetServerBaseUrl` variable', () => {
+    const newConfig = cloneDeep(sezzleConfig.newConfig);
+    const sz = new SezzleConfig(newConfig).getSezzleConfig;
+    expect(sz.apiEndpoints.cssForMerchantURL).toEqual('https://widget.sezzle.com/v1/css/price-widget?uuid=49261e2d-72af-4358-bf97-3035ce9f11a1')
+  });
+
+  test('Get css for merchant URL when it exists in the `widgetServerBaseUrl` variable', () => {
+    document.widgetServerBaseUrl = 'https://my-widget-url'
+
+    const newConfig = cloneDeep(sezzleConfig.newConfig);
+    const sz = new SezzleConfig(newConfig).getSezzleConfig;
+    expect(sz.apiEndpoints.cssForMerchantURL).toEqual('https://my-widget-url/v1/css/price-widget?uuid=49261e2d-72af-4358-bf97-3035ce9f11a1')
+    document.widgetServerBaseUrl = undefined;
+  });
+
+  test('Get endpoint to get user country when it is not defined in the `geoIpBaseUrl` variable', () => {
+    const newConfig = cloneDeep(sezzleConfig.newConfig);
+    const sz = new SezzleConfig(newConfig).getSezzleConfig;
+    expect(sz.apiEndpoints.countryFromIPRequestURL).toEqual('https://geoip.sezzle.com/v1/geoip/ipdetails')
+  });
+
+  test('Get endpoint to get user country when it exists in the `geoIpBaseUrl` variable', () => {
+    document.geoIpBaseUrl = 'https://my-geo-ip-url'
+
+    const newConfig = cloneDeep(sezzleConfig.newConfig);
+    const sz = new SezzleConfig(newConfig).getSezzleConfig;
+    expect(sz.apiEndpoints.countryFromIPRequestURL).toEqual('https://my-geo-ip-url/v1/geoip/ipdetails')
+    document.widgetServerBaseUrl = undefined;
+  });
+
 });
 
 describe('Constructor correctly sets the parameters', () => {
