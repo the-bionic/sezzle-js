@@ -1,4 +1,5 @@
-const trackingURL = "https://widget.sezzle.com/v1/event/log"
+const trackingURL = document.widgetServerBaseUrl ? `${document.widgetServerBaseUrl}/v1/event/log` : "https://widget.sezzle.com/v1/event/log"
+
 /* eslint-disable class-methods-use-this */
 class Utils {
   /**
@@ -78,6 +79,14 @@ class Utils {
   // eslint-disable-next-line class-methods-use-this
   static breakXPath(xpath) {
     return xpath.split('/').filter((subpath) => subpath !== '');
+  }
+
+  static getWidgetBaseUrl() {
+    return document.widgetServerBaseUrl || 'https://widget.sezzle.com';
+  }
+
+  static getGeoIpBaseUrl() {
+    return document.geoIpBaseUrl || 'https://geoip.sezzle.com';
   }
 }
 

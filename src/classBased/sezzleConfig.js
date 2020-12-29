@@ -51,8 +51,8 @@ class sezzleConfig {
       mutationObserverConfig: { attributes: true, childList: true, characterData: true },
       apiEndpoints: {
         sezzleAssetsCDN: 'https://media.sezzle.com/shopify-app/assets/',
-        countryFromIPRequestURL: 'https://geoip.sezzle.com/v1/geoip/ipdetails',
-        cssForMerchantURL: `https://widget.sezzle.com/v1/css/price-widget?uuid= + ${options.merchantID}`,
+        countryFromIPRequestURL: `${Utils.getGeoIpBaseUrl()}/v1/geoip/ipdetails`,
+        cssForMerchantURL: `${Utils.getWidgetBaseUrl()}/v1/css/price-widget?uuid=${options.merchantID}`,
       },
     };
 

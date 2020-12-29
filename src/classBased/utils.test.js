@@ -20,3 +20,39 @@ describe('Testing breakXPath helper function', () => {
     });
   }
 });
+
+describe('Testing getWidgetBaseUrl() function', () => {
+
+  afterEach(() => {
+    document.widgetServerBaseUrl = undefined;
+  });
+
+  it("should return widget url which is defined in the script", () => {
+    const expectedWidgetUrl = "https://my-widget-url";
+    document.widgetServerBaseUrl = expectedWidgetUrl
+    expect(Utils.getWidgetBaseUrl()).toEqual(expectedWidgetUrl);
+  });
+
+  it("should return default widget url when it's not defined", () => {
+    expect(Utils.getWidgetBaseUrl()).toEqual("https://widget.sezzle.com");
+  });
+
+});
+
+describe('Testing getGeoIpBaseUrl() function', () => {
+
+  afterEach(() => {
+    document.geoIpBaseUrl = undefined;
+  });
+
+  it("should return widget url which is defined in the script", () => {
+    const expectedGeoIpUrl = "https://my-geo-ip-url";
+    document.geoIpBaseUrl = expectedGeoIpUrl
+    expect(Utils.getGeoIpBaseUrl()).toEqual(expectedGeoIpUrl);
+  });
+
+  it("should return default widget url when it's not defined", () => {
+    expect(Utils.getGeoIpBaseUrl()).toEqual("https://geoip.sezzle.com");
+  });
+
+});
