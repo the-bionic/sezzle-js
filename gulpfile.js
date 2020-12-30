@@ -310,7 +310,7 @@ function postButtonToWidgetServer(url, done) {
 gulp.task('post-button-to-widget-server', function(done){
   postButtonToWidgetServer(`${widgetServerUS}/v1/javascript/price-widget/version`, done);
 });
-gulp.task('post-button-to-widget-server-eu', function(){
+gulp.task('post-button-to-widget-server-eu', function(done){
   postButtonToWidgetServer(`${widgetServerEU}/v1/javascript/price-widget/version`, done);
 });
 
