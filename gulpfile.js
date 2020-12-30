@@ -30,6 +30,9 @@ var gulp = require('gulp'),
 var buttonUploadName = `sezzle-widget${pjson.version}.js`;
 var globalCssUploadName = `sezzle-styles-global${pjson.cssversion}.css`;
 
+const widgetServerUS = argv.local ? 'http://localhost:12121' : 'https://widget.sezzle.com';
+const widgetServerEU = argv.local ? 'http://localhost:12121' : 'https://widget.eu.sezzle.com';
+
 /**
  * Tasks for the CSS
  */
@@ -67,7 +70,7 @@ gulp.task('cssupload', function () {
       }))
 });
 
-function postButtonCssToWrapper(url) {
+function postButtonCssToWrapper(url, done) {
   console.log('Posting css version to shopify gateway')
   var options = {
     method: 'POST',
@@ -80,18 +83,20 @@ function postButtonCssToWrapper(url) {
   return rp(options)
     .then(function (body) {
       console.log('Posted new version to shopify wrapper')
+      done();
     })
     .catch(function (err) {
       console.log('Post failed with sezzle pay, ')
       console.log(err);
+      done(err);
     })
 }
 
-gulp.task('post-button-css-to-wrapper', function(){
-  postButtonCssToWrapper('https://widget.sezzle.com/v1/css/price-widget/version');
+gulp.task('post-button-css-to-wrapper', function(done){
+  postButtonCssToWrapper(`${widgetServerUS}/v1/css/price-widget/version`, done);
 });
-gulp.task('post-button-css-to-wrapper-eu', function(){
-  postButtonCssToWrapper('https://widget.eu.sezzle.com/v1/css/price-widget/version');
+gulp.task('post-button-css-to-wrapper-eu', function(done){
+  postButtonCssToWrapper(`${widgetServerEU}/v1/css/price-widget/version`, done);
 });
 
 /**
@@ -207,9 +212,9 @@ gulp.task('modalupload-update', function () {
   return merge(steams);
 });
 
-function postModalToWrapper(url) {
+function postModalToWrapper(url, done) {
   console.log('Posting modal version to shopify gateway')
-  var options = {
+  const options = {
     method: 'POST',
     uri: url,
     body: {
@@ -221,18 +226,20 @@ function postModalToWrapper(url) {
   return rp(options)
     .then(function (body) {
       console.log('Posted new modal version to shopify wrapper')
+      done();
     })
     .catch(function (err) {
       console.log('Post failed with sezzle pay, ')
       console.log(err);
+      done(err);
     })
 }
 
-gulp.task('post-modal-to-wrapper', function(){
-  postModalToWrapper('https://widget.sezzle.com/v1/modal/price-widget/version');
+gulp.task('post-modal-to-wrapper', function(done){
+  postModalToWrapper(`${widgetServerUS}/v1/modal/price-widget/version`, done);
 });
-gulp.task('post-modal-to-wrapper-eu', function(){
-  postModalToWrapper('https://widget.eu.sezzle.com/v1/modal/price-widget/version')
+gulp.task('post-modal-to-wrapper-eu', function(done){
+  postModalToWrapper(`${widgetServerEU}/v1/modal/price-widget/version`, done);
 });
 
 /**
@@ -279,7 +286,7 @@ gulp.task('upload-widget', function (done) {
       }));
 });
 
-function postButtonToWidgetServer(url) {
+function postButtonToWidgetServer(url, done) {
   var options = {
     method: 'POST',
     uri: url,
@@ -291,18 +298,20 @@ function postButtonToWidgetServer(url) {
   return rp(options)
     .then(function (body) {
       console.log('Posted new version to shopify wrapper')
+      done();
     })
     .catch(function (err) {
       console.log('Post failed with shopify, ')
       console.log(err);
+      done(err);
     })
 }
 
-gulp.task('post-button-to-widget-server', function(){
-  postButtonToWidgetServer('https://widget.sezzle.com/v1/javascript/price-widget/version');
+gulp.task('post-button-to-widget-server', function(done){
+  postButtonToWidgetServer(`${widgetServerUS}/v1/javascript/price-widget/version`, done);
 });
 gulp.task('post-button-to-widget-server-eu', function(){
-  postButtonToWidgetServer('https://widget.eu.sezzle.com/v1/javascript/price-widget/version');
+  postButtonToWidgetServer(`${widgetServerEU}/v1/javascript/price-widget/version`, done);
 });
 
 function versionCheck(oldVersion) {
@@ -513,9 +522,9 @@ gulp.task('uploadtracker', function () {
     }))
 });
 
-gulp.task('deploywidget', gulp.series('bundlejs', 'upload-widget', 'post-button-to-widget-server', 'post-button-to-widget-server-eu'));
-gulp.task('deploycss', gulp.series('styles', 'cssupload', 'post-button-css-to-wrapper', 'post-button-css-to-wrapper-eu'));
-gulp.task('deploymodal', gulp.series('cleanmodal', 'csscompile-modal', 'minify-modal', 'modalupload', 'post-modal-to-wrapper', 'post-modal-to-wrapper-eu'));
+gulp.task('deploywidget', gulp.series('bundlejs', 'upload-widget', gulp.parallel('post-button-to-widget-server', 'post-button-to-widget-server-eu')));
+gulp.task('deploycss', gulp.series('styles', 'cssupload', gulp.parallel('post-button-css-to-wrapper', 'post-button-css-to-wrapper-eu')));
+gulp.task('deploymodal', gulp.series('cleanmodal', 'csscompile-modal', 'minify-modal', 'modalupload', gulp.parallel('post-modal-to-wrapper', 'post-modal-to-wrapper-eu')));
 gulp.task('deploytracker', gulp.series('bundletracker', 'uploadtracker'));
 
 // local processes
