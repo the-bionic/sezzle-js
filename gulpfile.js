@@ -1,5 +1,10 @@
+const config = {
+  useIAM: true,
+};
+
 /* eslint-disable */
 var gulp = require('gulp'),
+  // dotenv = require('dotenv').config(),
   sass = require('gulp-ruby-sass'),
   autoprefixer = require('gulp-autoprefixer'),
   cssnano = require('cssnano'),
@@ -8,7 +13,6 @@ var gulp = require('gulp'),
   del = require('del'),
   s3 = require('gulp-s3-upload')(config),
   rp = require('request-promise'),
-  config = { useIAM: true },
   webpack = require('webpack-stream'),
   pjson = require('./package.json'),
   uh = require('./update_history.json'),
