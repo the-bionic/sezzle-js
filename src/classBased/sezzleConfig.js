@@ -23,6 +23,7 @@ class sezzleConfig {
       // 'noTracking',
       'testID',
       'language',
+      'parseMode',
     ];
 
     // Sezzle Config starts here
@@ -46,6 +47,7 @@ class sezzleConfig {
       ip: null,
       fingerprint: null,
       language: null,
+      parseMode: null,
       // pre-defined config properties
       browserLanguage: (navigator.language || navigator.browserLanguage || 'en').substring(0, 2).toLowerCase(),
       mutationObserverConfig: { attributes: true, childList: true, characterData: true },
@@ -283,6 +285,7 @@ class sezzleConfig {
       supportedCountryCodes: this.options.supportedCountryCodes || ['US', 'CA', 'IN', 'GU', 'PR', 'VI', 'AS', 'MP'],
       // noTracking: !!this.options.noTracking,
       // noGtm: !!this.options.noGtm,
+      parseMode: this.options.parseMode || '',
     };
 
     this.sezzleConfig = { ...this.sezzleConfig, ...modifiedSezzleConfig };
@@ -451,6 +454,14 @@ class sezzleConfig {
       break;
     case 'black-flat':
       result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_BlackAlt.svg';
+      result.imageClassName = 'szl-light-image';
+      break;
+    case 'white-pill':
+      result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_WhitePill.svg';
+      result.imageClassName = 'szl-dark-image';
+      break;
+    case 'purple-pill':
+      result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_PurplePill.svg';
       result.imageClassName = 'szl-light-image';
       break;
     default:

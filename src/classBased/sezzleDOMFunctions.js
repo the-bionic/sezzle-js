@@ -333,7 +333,11 @@ class sezzleDOMFunctions {
       }
     }
     let isComma = false;
-    if (priceOnly.indexOf(',') > -1 && priceOnly.indexOf('.') > -1) {
+    if (this._config.parseMode === 'comma') {
+      isComma = true;
+    } else if (this._config.parseMode === 'period') {
+      isComma = false;
+    } else if (priceOnly.indexOf(',') > -1 && priceOnly.indexOf('.') > -1) {
       isComma = priceOnly.indexOf(',') > priceOnly.indexOf('.');
     } else if (priceOnly.indexOf(',') > -1) {
       isComma = priceOnly[priceOnly.length - 3] === ',';
@@ -373,7 +377,7 @@ class sezzleDOMFunctions {
   _parsePrice(price) {
     let includeComma = false;
     includeComma = this._commaDelimited(price);
-    return parseFloat(this._parsePriceString(price, includeComma).replace(',','.'));
+    return parseFloat(this._parsePriceString(price, includeComma).replace(',', '.'));
   }
 }
 
