@@ -280,8 +280,7 @@ p {
         font-size: 24px;
         font-weight: bold;
         color: #047066;
-        margin-top: 2px;
-        margin: auto;
+        margin: 2px auto 10px;
         line-height: 1.4;
 
         @media screen and (max-width: $breakpoint-small ){
@@ -289,7 +288,6 @@ p {
             font-size: 23px;
             font-weight: bold;
             color: #047066;
-            margin-top: 20px auto 10px;
         }
 
         @media screen and (max-width: 727px) {
