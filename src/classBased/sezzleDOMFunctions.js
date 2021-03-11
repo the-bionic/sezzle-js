@@ -144,7 +144,7 @@ class sezzleDOMFunctions {
   getFormattedPrice(element, configGroupIndex, priceText) {
     if (!priceText) priceText = this.getPriceText(element, configGroupIndex);
     let includeComma = false;
-    includeComma = this._commaDelimited(priceText);
+    includeComma = this._config.parseMode === 'comma' || this._commaDelimited(priceText);
     // Get the price string - useful for formtting Eg: 120.00(string)
     const priceString = this._parsePriceString(priceText, includeComma);
     // Get the price in float from the element - useful for calculation Eg : 120.00(float)
@@ -333,11 +333,7 @@ class sezzleDOMFunctions {
       }
     }
     let isComma = false;
-    if (this._config.parseMode === 'comma') {
-      isComma = true;
-    } else if (this._config.parseMode === 'period') {
-      isComma = false;
-    } else if (priceOnly.indexOf(',') > -1 && priceOnly.indexOf('.') > -1) {
+    if (priceOnly.indexOf(',') > -1 && priceOnly.indexOf('.') > -1) {
       isComma = priceOnly.indexOf(',') > priceOnly.indexOf('.');
     } else if (priceOnly.indexOf(',') > -1) {
       isComma = priceOnly[priceOnly.length - 3] === ',';
