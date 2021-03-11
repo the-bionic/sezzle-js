@@ -195,7 +195,7 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 
 **Purpose**: Font size of the widget text in pixels.<br/>
 **Type**: number<br/>
-**Default**: 12<br/>
+**Default**: 14<br/>
 **Additional Details**: Enter numbers only. Do not enter the unit (e.g. *px*)!
 
 `fontWeight` (optional)

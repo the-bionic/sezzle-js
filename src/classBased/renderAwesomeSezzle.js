@@ -241,7 +241,7 @@ class renderAwesomeSezzle {
       }
       case 'affirm-link-icon': {
         const affirmAnchor = document.createElement('a');
-        affirmAnchor.href = this._config.configGroups[configGroupIndex].affirmLink;
+        affirmAnchor.href = this._config.affirmLink;
         affirmAnchor.target = '_blank';
         const affirmLinkIconNode = document.createElement('code');
         affirmLinkIconNode.title = 'Open Affirm in a new tab';
