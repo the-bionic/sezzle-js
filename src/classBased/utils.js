@@ -1,4 +1,5 @@
-const trackingURL = document.widgetServerBaseUrl ? `${document.widgetServerBaseUrl}/v1/event/log` : "https://widget.sezzle.com/v1/event/log"
+const trackingURL = document.widgetServerBaseUrl ? `${document.widgetServerBaseUrl}/v1/event/log` : "https://widget.sezzle.com/v1/event/log";
+const sezzleWidgetWrapperClass = "sezzle-shopify-info-button";
 
 /* eslint-disable class-methods-use-this */
 class Utils {
@@ -40,6 +41,14 @@ class Utils {
     }
   }
 
+
+  /**
+   * @description - Checks for more than one widget on merchant websites for logging
+   */
+  static _checkForWidgetDuplicacy() {
+    return document.getElementsByClassName(sezzleWidgetWrapperClass).length > 1 
+
+  }
   /*
 	* Is Mobile Browser
 	*/
@@ -56,17 +65,12 @@ class Utils {
    */
   static logEvent(eventName, _configInstance, configGroupIndex) {
     if (!_configInstance.noTracking) {
+      const widget_duplicate =  this._checkForWidgetDuplicacy();
       this.httpRequestWrapper('post',trackingURL,{
         event_name: eventName,
-        button_version: document.sezzleButtonVersion,
-        ip_address: _configInstance.ip,
         merchant_site: window.location.hostname,
-        is_mobile_browser: this._isMobileBrowser(),
-        user_agent: navigator.userAgent,
-        merchant_uuid: _configInstance.merchantID,
         page_url: window.location.href,
-        product_price: configGroupIndex !== undefined ? _configInstance.configGroups[configGroupIndex].productPrice : null,
-        sezzle_config: JSON.stringify(_configInstance.config),
+        widget_duplicate: widget_duplicate
       });
     }
   }
