@@ -303,9 +303,9 @@ class sezzleConfig {
    */
   _widgetLanguageTranslation() {
     const translations = {
-      en: `or ${this.sezzleConfig.numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
+      en: `or ${this.sezzleConfig.numberOfPayments} payments of %%price%% with %%logo%% %%info%% - no fee`,
       fr: `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
-      de: `oder ${this.sezzleConfig.numberOfPayments} zinslose Zahlungen von je %%price%% mit %%logo%% %%info%%`,
+      de: `oder ${this.sezzleConfig.numberOfPayments} mal %%price%% mit %%logo%% %%info%% - kostenlos`,
       es: `o ${this.sezzleConfig.numberOfPayments} pagos sin intereses de %%price%% con %%logo%% %%info%%`,
     };
     return translations[this.sezzleConfig.language] || translations.en;
