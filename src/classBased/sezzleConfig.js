@@ -302,13 +302,34 @@ class sezzleConfig {
    * @returns {String} Default widget template
    */
   _widgetLanguageTranslation() {
-    const translations = {
-      en: `or ${this.sezzleConfig.numberOfPayments} payments of %%price%% with %%logo%% %%info%% - no fee`,
+    const northAmerica = {
+      en: `or ${this.sezzleConfig.numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
       fr: `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
-      de: `oder ${this.sezzleConfig.numberOfPayments} mal %%price%% mit %%logo%% %%info%% - kostenlos`,
+      de: `oder ${this.sezzleConfig.numberOfPayments} zinslose Zahlungen von je %%price%% mit %%logo%% %%info%%`,
       es: `o ${this.sezzleConfig.numberOfPayments} pagos sin intereses de %%price%% con %%logo%% %%info%%`,
     };
-    return translations[this.sezzleConfig.language] || translations.en;
+
+    const europe = {
+      'en-gb': `or ${this.sezzleConfig.numberOfPayments} payments of %%price%% with %%logo%% %%info%% - no fee`,
+      'fr-fr': `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% avec %%logo%% %%info%% – pas de frais`,
+      'de-de': `oder ${this.sezzleConfig.numberOfPayments} mal %%price%% mit %%logo%% %%info%% - kostenlos`,
+    };
+
+    const translations = {
+      en: northAmerica.en,
+      'en-us': northAmerica.en,
+      fr: northAmerica.fr,
+      'fr-ca': northAmerica.fr,
+      de: northAmerica.de,
+      es: northAmerica.es,
+
+      'en-gb': europe['en-gb'],
+      'fr-fr': europe['fr-fr'],
+      'de-de': europe['de-de'],
+    };
+
+    const language = this.sezzleConfig.language && this.sezzleConfig.language.toLowerCase();
+    return translations[language] || translations.en;
   }
 
   /*
