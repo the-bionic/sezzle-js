@@ -82,7 +82,7 @@ class Utils {
       'fr-fr',
     ];
 
-    return euLocales.some((locale) => locale.toLowerCase() === userLocale.toLowerCase());
+    return euLocales.includes(userLocale.toLowerCase());
   }
 
   /**
