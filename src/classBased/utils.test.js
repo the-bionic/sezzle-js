@@ -23,6 +23,26 @@ describe('Testing breakXPath helper function', () => {
 
 describe('Testing getWidgetBaseUrl() function', () => {
 
+  it("should return true if locale is in EU region", () => {
+    const testCases = [
+      'en-gb',
+      'de-de',
+      'fr-fr',
+    ];
+    
+    for (let i = 0; i < testCases.length; i++) {
+      expect(Utils.isSupportedEULocale(testCases[i])).toEqual(true);
+    }
+  });
+
+  it("should return false if locale is not in EU region", () => {
+    expect(Utils.isSupportedEULocale('en-US')).toEqual(false);
+  });
+
+});
+
+describe('Testing getWidgetBaseUrl() function', () => {
+
   afterEach(() => {
     document.widgetServerBaseUrl = undefined;
   });

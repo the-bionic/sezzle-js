@@ -72,6 +72,20 @@ class Utils {
   }
 
   /**
+ * @description detects if the script is run in one of our supported EU countries.
+ * @param {string} userLocale defaults to user's browser locale
+ */
+  static isSupportedEULocale(userLocale = (navigator.language || navigator.browserLanguage || '')) {
+    const euLocales = [
+      'en-gb',
+      'de-de',
+      'fr-fr',
+    ];
+
+    return euLocales.some((locale) => locale.toLowerCase() === userLocale.toLowerCase());
+  }
+
+  /**
    * This is a helper function to break xpath into array
    * @param xpath string Ex: './.class1/#id'
    * @returns string[] Ex: ['.', '.class', '#id']

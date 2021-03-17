@@ -46,6 +46,7 @@ class sezzleConfig {
       ip: null,
       fingerprint: null,
       language: null,
+      locale: null,
       // pre-defined config properties
       browserLanguage: (navigator.language || navigator.browserLanguage || 'en').substring(0, 2).toLowerCase(),
       mutationObserverConfig: { attributes: true, childList: true, characterData: true },
@@ -88,6 +89,7 @@ class sezzleConfig {
     this._urlConfigFilter();
     this._configSetters();
     this._languageSetter();
+    this._localeSetter();
     this._setConfigGroups();
   }
 
@@ -297,6 +299,10 @@ class sezzleConfig {
     if (this.options.language !== 'en' && this.options.language !== 'fr' && this.options.language !== 'de' && this.options.language !== 'es') this.sezzleConfig.language = this.options.browserLanguage;
   }
 
+  _localeSetter() {
+    this.sezzleConfig.locale = this.options.locale || navigator.language || navigator.browserLanguage;
+  }
+
   /**
    * This function returns widget string based on language if it's defined, else returns 'en' version
    * @returns {String} Default widget template
@@ -327,9 +333,11 @@ class sezzleConfig {
       'fr-fr': europe['fr-fr'],
       'de-de': europe['de-de'],
     };
-
-    const language = this.sezzleConfig.language && this.sezzleConfig.language.toLowerCase();
-    return translations[language] || translations.en;
+    let translationKey = this.sezzleConfig.language;
+    if (Utils.isSupportedEULocale()) {
+      translationKey = this.sezzleConfig.locale && this.sezzleConfig.locale.toLowerCase();
+    }
+    return translations[translationKey] || translations.en;
   }
 
   /*
