@@ -335,7 +335,7 @@ class sezzleConfig {
     };
     let translationKey = this.sezzleConfig.language;
     if (Utils.isSupportedEULocale()) {
-      translationKey = this.sezzleConfig.locale && this.sezzleConfig.locale.toLowerCase();
+      translationKey = (this.sezzleConfig.locale && this.sezzleConfig.locale.toLowerCase()) || 'en-gb';
     }
     return translations[translationKey] || translations.en;
   }
