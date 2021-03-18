@@ -300,7 +300,7 @@ class sezzleConfig {
   }
 
   _localeSetter() {
-    this.sezzleConfig.locale = this.options.locale || navigator.language || navigator.browserLanguage;
+    this.sezzleConfig.locale = this.options.locale || navigator.language || navigator.browserLanguage || '';
   }
 
   /**
@@ -323,11 +323,11 @@ class sezzleConfig {
 
     const translations = {
       en: northAmerica.en,
-      'en-us': northAmerica.en,
       fr: northAmerica.fr,
-      'fr-ca': northAmerica.fr,
       de: northAmerica.de,
       es: northAmerica.es,
+      'en-us': northAmerica.en,
+      'fr-ca': northAmerica.fr,
 
       'en-gb': europe['en-gb'],
       'fr-fr': europe['fr-fr'],
