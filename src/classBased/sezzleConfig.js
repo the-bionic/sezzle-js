@@ -333,11 +333,13 @@ class sezzleConfig {
       'fr-fr': europe['fr-fr'],
       'de-de': europe['de-de'],
     };
-    let translationKey = this.sezzleConfig.language;
+    // Add support for EU locale translations. Still maintaining `language` attribute.
     if (Utils.isSupportedEULocale()) {
-      translationKey = (this.sezzleConfig.locale && this.sezzleConfig.locale.toLowerCase()) || 'en-gb';
+      const translationKey = this.sezzleConfig.locale && this.sezzleConfig.locale.toLowerCase();
+      return translations[translationKey] || translations['en-gb'];
     }
-    return translations[translationKey] || translations.en;
+
+    return translations[this.sezzleConfig.language] || translations.en;
   }
 
   /*
