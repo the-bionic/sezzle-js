@@ -75,7 +75,7 @@ class Utils {
  * @description detects if the script is run in one of our supported EU countries.
  * @param {string} userLocale defaults to user's browser locale
  */
-  static isSupportedEULocale(userLocale = (navigator.language || navigator.browserLanguage || '')) {
+  static isSupportedEULocale(userLocale = navigator.language || navigator.browserLanguage || '') {
     const euLocales = [
       'en-gb',
       'de-de',
