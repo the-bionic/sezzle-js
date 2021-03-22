@@ -150,8 +150,7 @@ class sezzleDOMFunctions {
     // Get the price in float from the element - useful for calculation Eg : 120.00(float)
     const price = this._parsePrice(priceText);
     // Will be used later to replace {price} with price / this.numberOfPayments Eg: ${price} USD
-    const pricePlaceholder = '{price}';
-    let formatter = includeComma ? (priceText.replace('.', '')).replace(priceString, pricePlaceholder) : (priceText.replace(',', '')).replace(priceString, pricePlaceholder);
+    let formatter = includeComma ? (priceText.replace('.', '')).replace(priceString, '{price}') : (priceText.replace(',', '')).replace(priceString, '{price}');
     // replace other strings not wanted in text
     this._config.configGroups[configGroupIndex].ignoredFormattedPriceText.forEach((ignoredString) => {
       formatter = formatter.replace(ignoredString, '');
