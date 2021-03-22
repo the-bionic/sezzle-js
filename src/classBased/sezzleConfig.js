@@ -48,7 +48,7 @@ class sezzleConfig {
       language: null,
       locale: null,
       // pre-defined config properties
-      browserLanguage: (navigator.language || navigator.browserLanguage || 'en').substring(0, 2).toLowerCase(),
+      browserLanguage: navigator.language || navigator.browserLanguage || 'en',
       mutationObserverConfig: { attributes: true, childList: true, characterData: true },
       apiEndpoints: {
         sezzleAssetsCDN: 'https://media.sezzle.com/shopify-app/assets/',
@@ -89,7 +89,6 @@ class sezzleConfig {
     this._urlConfigFilter();
     this._configSetters();
     this._languageSetter();
-    this._localeSetter();
     this._setConfigGroups();
   }
 
@@ -294,13 +293,7 @@ class sezzleConfig {
     const type = typeof (this.options.language);
     if (type === 'string') this.sezzleConfig.language = this.options.language;
     else if (type === 'function') this.sezzleConfig.language = this.options.language();
-    else this.sezzleConfig.language = this.browserLanguage;
-
-    if (this.options.language !== 'en' && this.options.language !== 'fr' && this.options.language !== 'de' && this.options.language !== 'es') this.sezzleConfig.language = this.options.browserLanguage;
-  }
-
-  _localeSetter() {
-    this.sezzleConfig.locale = this.options.locale || navigator.language || navigator.browserLanguage || '';
+    else this.sezzleConfig.language = this.sezzleConfig.browserLanguage;
   }
 
   /**
@@ -308,36 +301,15 @@ class sezzleConfig {
    * @returns {String} Default widget template
    */
   _widgetLanguageTranslation() {
-    const northAmerica = {
+    const translations = {
       en: `or ${this.sezzleConfig.numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
       fr: `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
       de: `oder ${this.sezzleConfig.numberOfPayments} zinslose Zahlungen von je %%price%% mit %%logo%% %%info%%`,
       es: `o ${this.sezzleConfig.numberOfPayments} pagos sin intereses de %%price%% con %%logo%% %%info%%`,
+      'en-GB': `or ${this.sezzleConfig.numberOfPayments} payments of %%price%% with %%logo%% %%info%% - no fee`,
+      'fr-FR': `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% avec %%logo%% %%info%% – pas de frais`,
+      'de-DE': `oder ${this.sezzleConfig.numberOfPayments} mal %%price%% mit %%logo%% %%info%% - kostenlos`,
     };
-
-    const europe = {
-      'en-gb': `or ${this.sezzleConfig.numberOfPayments} payments of %%price%% with %%logo%% %%info%% - no fee`,
-      'fr-fr': `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% avec %%logo%% %%info%% – pas de frais`,
-      'de-de': `oder ${this.sezzleConfig.numberOfPayments} mal %%price%% mit %%logo%% %%info%% - kostenlos`,
-    };
-
-    const translations = {
-      en: northAmerica.en,
-      fr: northAmerica.fr,
-      de: northAmerica.de,
-      es: northAmerica.es,
-      'en-us': northAmerica.en,
-      'fr-ca': northAmerica.fr,
-
-      'en-gb': europe['en-gb'],
-      'fr-fr': europe['fr-fr'],
-      'de-de': europe['de-de'],
-    };
-    // Add support for EU locale translations. Still maintaining `language` attribute.
-    if (Utils.isSupportedEULocale()) {
-      const translationKey = this.sezzleConfig.locale && this.sezzleConfig.locale.toLowerCase();
-      return translations[translationKey] || translations['en-gb'];
-    }
 
     return translations[this.sezzleConfig.language] || translations.en;
   }

@@ -156,10 +156,6 @@ class sezzleDOMFunctions {
     this._config.configGroups[configGroupIndex].ignoredFormattedPriceText.forEach((ignoredString) => {
       formatter = formatter.replace(ignoredString, '');
     });
-    // for EU we want the format {price}(Euros symbol) as opposed to ${price} for North America
-    if (Utils.isSupportedEULocale() && !formatter.startsWith(pricePlaceholder)) {
-      formatter = `${pricePlaceholder} ${formatter.replace(pricePlaceholder, '')}`;
-    }
     // get the sezzle installment price
     const sezzleInstallmentPrice = (price / this._config.numberOfPayments).toFixed(2);
     // format the string
