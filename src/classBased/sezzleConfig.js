@@ -46,7 +46,6 @@ class sezzleConfig {
       ip: null,
       fingerprint: null,
       language: null,
-      locale: null,
       // pre-defined config properties
       browserLanguage: navigator.language || navigator.browserLanguage || 'en',
       mutationObserverConfig: { attributes: true, childList: true, characterData: true },
