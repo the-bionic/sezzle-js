@@ -77,7 +77,7 @@ gulp.task('cssupload', function () {
 gulp.task('cssuploadupdate', function () {
   // bucket base url https://d3svog4tlx445w.cloudfront.net/
   const cssUpdateName = `sezzle-styles-global${uh.css}.css`;
-  var indexPath = './dist/global-css/global.min.css'
+  const indexPath = './dist/global-css/global.min.css'
   return gulp.src(indexPath)
     .pipe(rename(`shopify-app/assets/${cssUpdateName}`))
     .pipe(s3({
