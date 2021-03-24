@@ -649,7 +649,7 @@ gulp.task('pushversioncss-css', function (done) {
 });
 
 gulp.task('update-css', gulp.series('css-version-check-for-update', 'branchupdate-css', 'logupdate-css', 'commitupdate-css', 'pushversioncss-css'));
-gulp.task('deployupdatecss', gulp.series('styles', 'cssupload'));
+gulp.task('deployupdatecss', gulp.series('styles', 'cssuploadupdate'));
 
 // CI processes
 gulp.task('deploy', function (done) {
