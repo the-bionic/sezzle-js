@@ -1,5 +1,5 @@
-const trackingURL = document.widgetServerBaseUrl ? `${document.widgetServerBaseUrl}/v1/event/log` : "https://widget.sezzle.com/v1/event/log";
-const sezzleWidgetWrapperClass = "sezzle-shopify-info-button";
+const trackingURL = document.widgetServerBaseUrl ? `${document.widgetServerBaseUrl}/v1/event/log` : 'https://widget.sezzle.com/v1/event/log';
+const sezzleWidgetWrapperClass = 'sezzle-shopify-info-button';
 
 /* eslint-disable class-methods-use-this */
 class Utils {
@@ -12,8 +12,8 @@ class Utils {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url, true);
-      if(body !== null){
-        xhr.setRequestHeader("Content-Type", "application/json");
+      if (body !== null) {
+        xhr.setRequestHeader('Content-Type', 'application/json');
       }
       xhr.onload = function () {
         if (this.status >= 200 && this.status < 300) {
@@ -25,7 +25,7 @@ class Utils {
       xhr.onerror = function () {
         reject(new Error('Something went wrong, contact the Sezzle team!'));
       };
-      body === null?xhr.send():xhr.send(JSON.stringify(body));
+      body === null ? xhr.send() : xhr.send(JSON.stringify(body));
     });
   }
 
@@ -46,8 +46,7 @@ class Utils {
    * @description - Checks for more than one widget on merchant websites for logging
    */
   static _checkForWidgetDuplicacy() {
-    return document.getElementsByClassName(sezzleWidgetWrapperClass).length > 1 
-
+    return document.getElementsByClassName(sezzleWidgetWrapperClass).length > 1;
   }
 
   /**
@@ -58,12 +57,12 @@ class Utils {
    */
   static logEvent(eventName, _configInstance, configGroupIndex) {
     if (!_configInstance.noTracking) {
-      const widget_duplicate =  this._checkForWidgetDuplicacy();
-      this.httpRequestWrapper('post',trackingURL,{
+      const widgetDuplicate = this._checkForWidgetDuplicacy();
+      this.httpRequestWrapper('post', trackingURL, {
         event_name: eventName,
         merchant_site: window.location.hostname,
         page_url: window.location.href,
-        widget_duplicate: widget_duplicate
+        widget_duplicate: widgetDuplicate,
       });
     }
   }

@@ -20,7 +20,7 @@
 ### Developing a new css version
 Follow the same process as for javascript
 
-### Developing a new css version
+### Releasing a new css version
 - Once the branch is merged to master, run `git checkout master` and `git pull origin master`
 - Run `npm run release-css -- --newversion=${new-version-number}` such that the new version number increments following the convention ${major rewrite}.${feature change}.${iteration}
 - Open a pull request and reach out to someone with Approver access to review and merge

@@ -418,7 +418,7 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 
 **Purpose**: List of countries in which to show the widget. This option is used instead of `forcedShow` when the widget should be visible in only a specific set of countries.<br/>
 **Type**: array of strings<br/>
-**Default**: ['US,'CA','IN','GU','PR','VI','AS','MP']<br/>
+**Default**: ['US','CA','IN','GU','PR','VI','AS','MP']<br/>
 **Additional Details**: Not compatible with simple configuration. Must be used with configGroups.
 
 `language` (optional)
