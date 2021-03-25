@@ -278,7 +278,7 @@
 
 .sezzle-checkout-modal-lightbox .sezzle-checkout-modal-hidden {
   transition: all 0.4s ease;
-  margin-top: -1500vh;
+  margin-top: 0;
 }
 
 .sezzle-checkout-modal-lightbox .sezzle-checkout-modal {
@@ -583,7 +583,7 @@
 
     .sezzle-payment-amount {
       font-weight: 900;
-      font-size: 1.1rem;
+      font-size: 1.2em;
     }
 
     .szl-light-image,
@@ -615,7 +615,7 @@
     }
 
     .sezzle-question-mark-icon {
-      height: 12px;   
+      height: 12px;
       width: auto;
       margin-bottom: -0.5px;
       cursor: pointer;
@@ -744,7 +744,7 @@
 }
 
 .sezzle-shopify-info-button {
-  overflow: auto;
+  overflow: unset;
   &.sezzle-right {
     text-align: right;
     justify-content: right;
@@ -752,11 +752,39 @@
     margin: 0;
   }
 }
+.sezzle-payment-amount {
+	zoom: 1;
+	float: none;
+	font-size: inherit;
+	font-weight: inherit;
+}
+
+.sezzle-logo {
+	opacity: 1;
+	float: none;
+	background: none;
+	vertical-align:baseline;
+}
+
+.sezzle-info-icon {
+	display: inline;
+	font-size: inherit;
+	margin: unset;
+	padding: unset;
+	max-height: unset;
+	max-width: unset;
+	min-height: unset;
+	min-width: unset;
+	height: unset;
+	width: unset;
+	background: none;
+	border: none;
+}
 
 .sezzle-afterpay-logo {
-  vertical-align: middle !important;
+  vertical-align: baseline;
   max-height: 18px;
-  margin-bottom: -1px !important;
+  margin-bottom: -1px;
 }
 
 .ap-modal-info-link {
@@ -769,7 +797,7 @@
 }
 
 .sezzle-quadpay-logo {
-  vertical-align: middle !important;
+  vertical-align: baseline;
   max-height: 10px;
   margin-bottom: -1px !important;
   margin-right: 2px;
@@ -785,7 +813,7 @@
 }
 
 .sezzle-affirm-logo {
-  vertical-align: middle !important;
+  vertical-align: baseline;
   max-height: 20px;
   margin-bottom: 12px !important;
   margin-left: -7px;
@@ -801,7 +829,7 @@ button.affirm-modal-info-link {
 }
 
 .sezzle-klarna-logo {
-  vertical-align: middle !important;
+  vertical-align: baseline;
   max-height: 30px;
   margin-bottom: 3px !important;
   margin-left: 0px;

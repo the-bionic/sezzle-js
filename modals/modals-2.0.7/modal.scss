@@ -136,7 +136,7 @@ p {
 
         @media screen and (max-width: 727px) {
             font-size: 22px;
-            margin: 25px auto 0;
+            margin: 10px auto 0;
         }
     }
 
@@ -286,7 +286,7 @@ p {
 
         @media screen and (max-width: $breakpoint-small ){
             margin-bottom: .7rem;
-            font-size: 23px;
+            font-size: 16px;
             font-weight: bold;
             color: #047066;
         }
@@ -361,7 +361,7 @@ p {
 .sezzle-hiw-pie-bg {
     box-sizing: border-box;
     height: 110px;
-    width: 353px;
+    width: 360px;
     background-color: white;
     box-shadow: -1px 2px 15px 0px rgba(0,0,0,0.23);
     border-radius: 5rem;
@@ -379,7 +379,7 @@ p {
     width: 250px;
     padding-left: .9rem;
     justify-content: space-between;
-    margin-top: .3rem;
+    margin-top: .8rem;
     position: absolute;
 }
 
@@ -448,13 +448,13 @@ p {
     .sezzle-hiw-pie-bg {
         margin-top: 2rem;
         margin-bottom: 1rem;
-        width: 230px;
+        width: 310px;
         padding: 1rem 2.7rem 1rem 2rem;
     }
 
     .sezzle-hiw-pie-bg .breakdown-row {
-        width: 220px;
-        padding-left: .5rem;
+        width: 235px;
+        padding-left: 0.5rem;
     }
 
     .sezzle-hiw-pie-bg .breakdown-row span {
@@ -503,8 +503,12 @@ p {
     letter-spacing: 2.5;
     text-align: center;
     margin-bottom: 0;
-    margin-top: 1.5rem;
+    margin-top: 1.2rem;
     color: #6f6f6f;
+
+    @media screen and (max-width: $breakpoint-small) {
+        margin-top: 0.5em;
+    }
 }
 
 .mobile-only-flex {
