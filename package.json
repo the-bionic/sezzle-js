@@ -13,6 +13,7 @@
     "release-css": "gulp release-css",
     "release-modal": "gulp release-modal",
     "update-modal": "gulp update-modal",
+    "update-css": "gulp update-css",
     "modal": "http-server ./modal -p 8081",
     "build-tracker": "gulp bundleTrackerJS"
   },

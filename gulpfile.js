@@ -74,6 +74,20 @@ gulp.task('cssupload', function () {
       }))
 });
 
+gulp.task('cssuploadupdate', function () {
+  // bucket base url https://d3svog4tlx445w.cloudfront.net/
+  const cssUpdateName = `sezzle-styles-global${uh.css}.css`;
+  const indexPath = './dist/global-css/global.min.css'
+  return gulp.src(indexPath)
+    .pipe(rename(`shopify-app/assets/${cssUpdateName}`))
+    .pipe(s3({
+      Bucket: 'sezzlemedia', //  Required
+      ACL: 'public-read'       //  Needs to be user-defined
+    }, {
+        maxRetries: 5
+      }))
+});
+
 function postButtonCssToWrapper(url, done) {
   console.log('Posting css version to shopify gateway')
   var options = {
@@ -609,6 +623,34 @@ gulp.task('pushversionmodal-modal', function (done) {
 gulp.task('update-modal', gulp.series('modal-version-check-for-update', 'branchupdate-modal', 'logupdate-modal', 'commitupdate-modal', 'pushversionmodal-modal'));
 gulp.task('deployupdatemodal', gulp.series('cleanmodal', 'csscompile-modal-update', 'minify-modal-update', 'modalupload-update'));
 
+// Update existing css version
+gulp.task('css-version-check-for-update', function(done) {
+  versionCheckForUpdate(pjson.cssversion);
+  done();
+});
+
+gulp.task('branchupdate-css', function(done) {
+  createBranch(getUpdateBranchName('css'), done);
+})
+
+gulp.task('logupdate-css', function() {
+  let param = {};
+  param[`css-${argv.updateversion}`] = (new Date()).toUTCString();
+  param['css'] = argv.updateversion;
+  return logUpdateHistory(param);
+});
+
+gulp.task('commitupdate-css', function() {
+  return commitUpdateVersion('css', argv.updateversion);
+});
+
+gulp.task('pushversioncss-css', function (done) {
+  pushBranch(getUpdateBranchName('css'), done);
+});
+
+gulp.task('update-css', gulp.series('css-version-check-for-update', 'branchupdate-css', 'logupdate-css', 'commitupdate-css', 'pushversioncss-css'));
+gulp.task('deployupdatecss', gulp.series('styles', 'cssuploadupdate'));
+
 // CI processes
 gulp.task('deploy', function (done) {
   // Check if there is any version commit
@@ -652,6 +694,13 @@ gulp.task('deploy', function (done) {
       } else if (versionCommit.indexOf('updated modal version:') > -1) {
         console.log('Updating Modal');
         exec('npx gulp deployupdatemodal', function (err, stdout, stderr) {
+          if (err) throw err;
+          console.log(stdout);
+          done();
+        })
+      } else if (versionCommit.indexOf('updated css version:') > -1) {
+        console.log('Updating CSS');
+        exec('npx gulp deployupdatecss', function (err, stdout, stderr) {
           if (err) throw err;
           console.log(stdout);
           done();
