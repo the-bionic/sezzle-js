@@ -455,7 +455,7 @@ class renderAwesomeSezzle {
     } else {
       this._insertAfter(sezzle, parent);
     }
-    Utils.logEvent('onload', this._config, configGroupIndex);
+    Utils.logEvent('sezzle-widget-onload', this._config, configGroupIndex);
     return sezzle;
   }
 
