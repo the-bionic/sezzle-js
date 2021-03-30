@@ -1,5 +1,6 @@
 const trackingURL = document.widgetServerBaseUrl ? `${document.widgetServerBaseUrl}/v1/event/log` : 'https://widget.sezzle.com/v1/event/log';
 const sezzleWidgetWrapperClass = 'sezzle-shopify-info-button';
+const eventNames  = [];
 
 /* eslint-disable class-methods-use-this */
 class Utils {
@@ -8,6 +9,7 @@ class Utils {
    * @param {string} method
    * @param {string} url
   */
+  
   static httpRequestWrapper(method, url, body = null) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
