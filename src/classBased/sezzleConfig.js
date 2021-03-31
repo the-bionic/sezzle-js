@@ -1,4 +1,5 @@
 import Utils from './utils';
+import Language from './language';
 
 const cloneDeep = require('lodash.clonedeep');
 
@@ -7,7 +8,7 @@ class sezzleConfig {
     if (!options) options = {};
     this.options = options;
     this.compatibleOptions = null;
-
+    this.Language = null;
     this._propsNotInConfigGroup = [
       'merchantID',
       'forcedShow',
@@ -49,7 +50,6 @@ class sezzleConfig {
       language: null,
       parseMode: null,
       // pre-defined config properties
-      browserLanguage: navigator.language || navigator.browserLanguage || 'en',
       mutationObserverConfig: { attributes: true, childList: true, characterData: true },
       apiEndpoints: {
         sezzleAssetsCDN: 'https://media.sezzle.com/shopify-app/assets/',
@@ -292,48 +292,12 @@ class sezzleConfig {
   }
 
   _languageSetter() {
-    const type = typeof (this.options.language);
-    if (type === 'string') this.sezzleConfig.language = this.options.language;
-    else if (type === 'function') this.sezzleConfig.language = this.options.language();
-    else this.sezzleConfig.language = this.sezzleConfig.browserLanguage;
+    this.Language = new Language(this.options.numberOfPayments || 4);
+    this.Language.init();
+    this.Language.setLanguage(this.options.language);
+    this.sezzleConfig.language = this.Language.getLanguage();
   }
 
-  /**
-   * This function returns widget string based on language if it's defined, else returns 'en' version
-   * @returns {String} Default widget template
-   */
-  _widgetLanguageTranslation() {
-    const translations = {
-      en: `or ${this.sezzleConfig.numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
-      fr: `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
-      de: `oder ${this.sezzleConfig.numberOfPayments} zinslose Zahlungen von je %%price%% mit %%logo%% %%info%%`,
-      es: `o ${this.sezzleConfig.numberOfPayments} pagos sin intereses de %%price%% con %%logo%% %%info%%`,
-      'en-GB': `or ${this.sezzleConfig.numberOfPayments} payments of %%price%% with %%logo%% %%info%% - no fee`,
-      'fr-FR': `ou ${this.sezzleConfig.numberOfPayments} paiements de %%price%% avec %%logo%% %%info%% – pas de frais`,
-      'de-DE': `oder ${this.sezzleConfig.numberOfPayments} mal %%price%% mit %%logo%% %%info%% - kostenlos`,
-    };
-
-    return translations[this.sezzleConfig.language] || translations.en;
-  }
-
-  /*
-   * Returns altVersionTemplate, based on config provided
-   * If it's a string, it doesn't do anything and just returns the string
-   * If it's an object it will return the key which matches with language else returns 'en' key if specified->
-   *  if en or language key both are not present it calls widgetLanguageTranslation with browser Language as 'en'
-   * @param {Object, String} widgetTemplate
-   * @returns String
-   */
-  _constructWidgetTemplate(widgetTemplate) {
-    if (typeof (widgetTemplate) === 'object' && widgetTemplate != null) {
-      if (!widgetTemplate.en && !widgetTemplate[this.sezzleConfig.language]) {
-        console.warn("Please specify atleast 'en' key in altVersionTemplate, rendering default widget template.");
-        return this._widgetLanguageTranslation(this.sezzleConfig.language, this.sezzleConfig.numberOfPayments); // return default widget template
-      }
-      return widgetTemplate[this.sezzleConfig.language] || widgetTemplate.en; // returns specific language if present else return en key
-    }
-    return widgetTemplate; // if widgetTemplate is string
-  }
 
   /**
    * Maps the props of configGroups passed by input into a default configGroup object
@@ -413,9 +377,9 @@ class sezzleConfig {
     result.customClasses = Array.isArray(configGroup.customClasses) ? configGroup.customClasses : [];
     result.widgetTemplate = configGroup.altVersionTemplate || (this.options.defaultConfig && this.options.defaultConfig.altVersionTemplate);
     if (result.widgetTemplate) {
-      result.widgetTemplate = (this._constructWidgetTemplate(result.widgetTemplate, this.language, this.numberOfPayments)).split('%%');
+      result.widgetTemplate = (this.Language.constructWidgetTemplate(result.widgetTemplate)).split('%%');
     } else {
-      const defaultWidgetTemplate = this._widgetLanguageTranslation(this.language, this.numberOfPayments);
+      const defaultWidgetTemplate = this.Language.getTranslation();
       result.widgetTemplate = defaultWidgetTemplate.split('%%');
     }
     if (result.splitPriceElementsOn) {

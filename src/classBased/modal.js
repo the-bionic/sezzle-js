@@ -1,6 +1,8 @@
 /* eslint-disable prefer-destructuring */
 import Utils from './utils';
 
+import Translations from './modalTranslations';
+
 class Modal {
   constructor(config) {
     this._config = config;
@@ -60,6 +62,18 @@ class Modal {
     });
   }
 
+  changeInnerHTML() {
+    if(document.sezzleLanguage !== "en"){
+      window.setTimeout(()=>{
+       let toBeEditedNodes  = document.getElementsByClassName('sezzle-fill');
+       Array.prototype.forEach.call(toBeEditedNodes, (el, i) => {
+        let translatedArray = Translations[document.sezzleLanguage]
+        el.innerText =  translatedArray[i].text
+       })
+      },100)
+     }
+   }
+
   _addClickEventForOtherVendors() {
     this._vendorsSupportedForDualInstall.forEach((vendor) => {
       const modalLinks = this._sezzleElement.getElementsByClassName(`${vendor}-modal-info-link`);
@@ -69,8 +83,6 @@ class Modal {
           // Show modal node
           document.getElementsByClassName(`sezzle-${vendor}-modal`)[0].style.display = 'block';
           document.body.ariaHidden = true;
-          // log on click event
-          Utils.logEvent(`onclick-${vendor}`, this._configGroupIndex);
         });
       });
     });
@@ -127,7 +139,12 @@ class Modal {
       } else {
         modalLanguage = 'en';
       }
-      const sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', modalLanguage)}`;
+      let sezzleModalToGet;
+      if(document.sezzleDefaultModalVersion === "sezzle-modal-3.0.0-{%%s%%}.html"){
+        sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', "en")}`;
+      } else {
+        sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', modalLanguage)}`;
+      }
       const response = await Utils.httpRequestWrapper('GET', sezzleModalToGet);
       this._modalNode.innerHTML = response;
     }
