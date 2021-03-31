@@ -1,6 +1,6 @@
 const trackingURL = document.widgetServerBaseUrl ? `${document.widgetServerBaseUrl}/v1/event/log` : 'https://widget.sezzle.com/v1/event/log';
 const sezzleWidgetWrapperClass = 'sezzle-shopify-info-button';
-const competitorClasses = ['afterpay-paragraph', 'affirm-as-low-as', 'qp-widget-container']
+const competitorClasses = ['afterpay-paragraph', 'affirm-as-low-as', 'qp-widget-container'];
 
 /* eslint-disable class-methods-use-this */
 class Utils {
@@ -55,7 +55,7 @@ class Utils {
   static checkForCompetitorWidget() {
     var count = 0;
     Array.prototype.forEach.call(competitorClasses, (el) => {
-        if(document.getElementsByClassName(el)) count++
+        if(document.getElementsByClassName(el)) count++;
     });
     return count > 0;
   }
@@ -64,9 +64,8 @@ class Utils {
    * @description sends payload to widget-server which further logs event
    * @param {string} eventName
    * @param {object} _configInstance
-   * @param {number} configGroupIndex
    */
-  static logEvent(eventName, _configInstance, configGroupIndex) {
+  static logEvent(eventName, _configInstance) {
     if (!_configInstance.noTracking) {
       this.httpRequestWrapper('post', trackingURL, {
         event_name: eventName,
