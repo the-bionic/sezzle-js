@@ -2,6 +2,7 @@ import 'regenerator-runtime/runtime';
 
 import SezzleConfig from './sezzleConfig';
 import Utils from './utils';
+import Modal from './modal';
 import RenderAwesomeSezzle from './renderAwesomeSezzle';
 
 class SezzleJS {
@@ -30,15 +31,19 @@ class SezzleJS {
    * Also logs initGTMScript event if condition matches
    */
   async initializeWidget() {
-    Utils.logEvent('request', this._configInst);
+    Utils.logEvent('sezzle-widget-request', this._configInst);
     await this._loadCSS();
     this._renderAwesomeSezzle.initializeRendering();
-    // if (this._countryCode === 'US' || this._countryCode === 'CA') {
-    //   const win = window.frames.szl;
-    //   if (win && !this._configInst.noGtm) {
-    //     setTimeout(() => win.postMessage('initGTMScript', 'https://tracking.sezzle.com'), 100);
-    //   }
-    // }
+    if(document.sezzleDefaultModalVersion === "sezzle-modal-3.0.0-{%%s%%}.html"){
+      var modal = new Modal
+      modal.changeInnerHTML()
+    }
+    if(Utils.checkForWidgetDuplicacy()){
+      Utils.logEvent('duplicate-widget', this._configInst);
+    }
+    if(Utils.checkForCompetitorWidget()) {
+      Utils.logEvent('competitor-widget', this._configInst);
+    }
   }
 
   /**

@@ -1,5 +1,6 @@
 const trackingURL = document.widgetServerBaseUrl ? `${document.widgetServerBaseUrl}/v1/event/log` : 'https://widget.sezzle.com/v1/event/log';
 const sezzleWidgetWrapperClass = 'sezzle-shopify-info-button';
+const competitorClasses = ['afterpay-paragraph', 'affirm-as-low-as', 'qp-widget-container'];
 
 /* eslint-disable class-methods-use-this */
 class Utils {
@@ -8,6 +9,7 @@ class Utils {
    * @param {string} method
    * @param {string} url
   */
+  
   static httpRequestWrapper(method, url, body = null) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -45,24 +47,29 @@ class Utils {
   /**
    * @description - Checks for more than one widget on merchant websites for logging
    */
-  static _checkForWidgetDuplicacy() {
+  static checkForWidgetDuplicacy() {
     return document.getElementsByClassName(sezzleWidgetWrapperClass).length > 1;
+  }
+
+
+  static checkForCompetitorWidget() {
+    var count = 0;
+    Array.prototype.forEach.call(competitorClasses, (el) => {
+        if(document.getElementsByClassName(el)) count++;
+    });
+    return count > 0;
   }
 
   /**
    * @description sends payload to widget-server which further logs event
    * @param {string} eventName
    * @param {object} _configInstance
-   * @param {number} configGroupIndex
    */
-  static logEvent(eventName, _configInstance, configGroupIndex) {
+  static logEvent(eventName, _configInstance) {
     if (!_configInstance.noTracking) {
-      const widgetDuplicate = this._checkForWidgetDuplicacy();
       this.httpRequestWrapper('post', trackingURL, {
         event_name: eventName,
-        merchant_site: window.location.hostname,
-        page_url: window.location.href,
-        widget_duplicate: widgetDuplicate,
+        merchant_uuid: _configInstance.merchantID,
       });
     }
   }
