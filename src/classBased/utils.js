@@ -1,6 +1,6 @@
 const trackingURL = document.widgetServerBaseUrl ? `${document.widgetServerBaseUrl}/v1/event/log` : 'https://widget.sezzle.com/v1/event/log';
 const sezzleWidgetWrapperClass = 'sezzle-shopify-info-button';
-const competitorClasses = ['afterpay-parragraph', 'affirm-as-low-as',]
+const competitorClasses = ['afterpay-paragraph', 'affirm-as-low-as', 'qp-widget-container']
 
 /* eslint-disable class-methods-use-this */
 class Utils {
