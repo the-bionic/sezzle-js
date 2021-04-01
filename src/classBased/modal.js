@@ -2,6 +2,7 @@
 import Utils from './utils';
 
 import Translations from './modalTranslations';
+import Language from './language'
 
 class Modal {
   constructor(config) {
@@ -141,6 +142,8 @@ class Modal {
       }
       let sezzleModalToGet;
       if(document.sezzleDefaultModalVersion === "sezzle-modal-3.0.0-{%%s%%}.html"){
+        sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', "en")}`;
+      } else if(document.sezzleDefaultModalVersion === "sezzle-modal-3.0.1-{%%s%%}.html"){
         sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', "en")}`;
       } else {
         sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', modalLanguage)}`;

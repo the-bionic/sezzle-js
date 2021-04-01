@@ -19,10 +19,42 @@ class language {
     _setBrowserLanguage() {
       this._browserLanguage = navigator.language || navigator.browserLanguage || this._defaultLanguage
     }
-  
+
+    getLanguageLocale(lang){
+      const northAmericaRegion = ['US', 'CA', 'MX', 'IN', 'GU', 'PR', 'AS', 'MP', 'VI', '', null, undefined];
+      let coreLang = lang.split('-')[0].substring(0,2).toLowerCase();;
+      if(this._checkIfLanguageIsValid(lang)) {
+        let locale = lang.split('-')[1];
+        if(northAmericaRegion.indexOf(locale) > -1){
+          return {
+            region:'US',
+            locale: 'US',
+            language: coreLang,
+            error: null
+
+          };
+        } else {
+          return {
+            region:'EU',
+            locale: locale,
+            language: lang,
+            error: null
+          };
+        }
+      } else {
+        return {
+          error: 'Invalid language'
+        };
+      }
+    }
+
     getTranslation() {
       if(this._checkIfLanguageIsValid(this._language)){
-        return this._translations[this._language];
+        const langVar =  this.getLanguageLocale(this._language)
+        console.log(langVar)
+        if(langVar.error === null && this._translations[langVar.language] !== undefined) {
+            return this._translations[langVar.language];      
+        }  
       }
       return this._translations[this._defaultLanguage];
     }
@@ -34,7 +66,12 @@ class language {
       } else {
         switch(typeOfLanguageOption) {
           case "string":
-            this._language = lang;
+            let locale = this.getLanguageLocale(lang);
+            if(locale.error === null && locale.region === "US"){
+              this._language = locale.language;
+            } else {
+              this._language = lang;
+            }
             break;
           case "function":
             this._language = lang();
@@ -48,10 +85,11 @@ class language {
     }
   
     _checkIfLanguageIsValid(lang) {
+      const coreLang =  lang.split("-")[0]
       let validityCounter =  0;
       let availableLanguages = Object.getOwnPropertyNames(this._translations);
       availableLanguages.forEach(l=>{
-        if(l === lang) validityCounter++;
+        if(l === coreLang) validityCounter++;
       });
       return validityCounter>0;
     }
