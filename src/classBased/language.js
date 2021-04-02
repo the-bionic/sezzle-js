@@ -22,7 +22,7 @@ class language {
 
     getLanguageLocale(lang){
       const northAmericaRegion = ['US', 'CA', 'MX', 'IN', 'GU', 'PR', 'AS', 'MP', 'VI', '', null, undefined];
-      let coreLang = lang.split('-')[0].substring(0,2).toLowerCase();;
+      let coreLang = lang.split('-')[0].substring(0,2).toLowerCase();
       if(this._checkIfLanguageIsValid(lang)) {
         let locale = lang.split('-')[1];
         if(northAmericaRegion.indexOf(locale) > -1){
@@ -51,7 +51,6 @@ class language {
     getTranslation() {
       if(this._checkIfLanguageIsValid(this._language)){
         const langVar =  this.getLanguageLocale(this._language)
-        console.log(langVar)
         if(langVar.error === null && this._translations[langVar.language] !== undefined) {
             return this._translations[langVar.language];      
         }  
