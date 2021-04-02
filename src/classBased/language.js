@@ -50,9 +50,9 @@ class language {
 
     getTranslation() {
       if(this._checkIfLanguageIsValid(this._language)){
-        const langVar =  this.getLanguageLocale(this._language)
+        const langVar =  this.getLanguageLocale(this._language);
         if(langVar.error === null && this._translations[langVar.language] !== undefined) {
-            return this._translations[langVar.language];      
+          return this._translations[langVar.language];      
         }  
       }
       return this._translations[this._defaultLanguage];
@@ -84,7 +84,7 @@ class language {
     }
   
     _checkIfLanguageIsValid(lang) {
-      const coreLang =  lang.split("-")[0]
+      const coreLang =  lang.split("-")[0];
       let validityCounter =  0;
       let availableLanguages = Object.getOwnPropertyNames(this._translations);
       availableLanguages.forEach(l=>{
