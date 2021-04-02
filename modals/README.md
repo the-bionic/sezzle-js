@@ -25,6 +25,8 @@ Follow the same process as for javascript
 - Run `npm run release-css -- --newversion=${new-version-number}` such that the new version number increments following the convention ${major rewrite}.${feature change}.${iteration}
 - Open a pull request and reach out to someone with Approver access to review and merge
 
+- To update an existing css, run `git checkout master` and `git pull origin master` then `npm run update-css -- --updateversion=${version-number}`
+	- For example, `npm run update-css -- --updateversion=2.0.1`.
 ### Developing a new modal vesion
 
 - Decide the new modal version. It should increment from the current modal version following the same convention as CSS

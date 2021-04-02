@@ -1,6 +1,6 @@
 {
   "name": "sezzle-js",
-  "version": "21.3.0",
+  "version": "21.3.2",
   "cssversion": "2.0.14",
   "modalversion": "3.0.0",
   "description": "Sezzle Sales Widget Price Watcher",
@@ -13,6 +13,7 @@
     "release-css": "gulp release-css",
     "release-modal": "gulp release-modal",
     "update-modal": "gulp update-modal",
+    "update-css": "gulp update-css",
     "modal": "http-server ./modal -p 8081",
     "build-tracker": "gulp bundleTrackerJS"
   },
