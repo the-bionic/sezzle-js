@@ -27,6 +27,7 @@ Follow the same process as for javascript
 
 - To update an existing css, run `git checkout master` and `git pull origin master` then `npm run update-css -- --updateversion=${version-number}`
 	- For example, `npm run update-css -- --updateversion=2.0.1`.
+	
 ### Developing a new modal vesion
 
 - Decide the new modal version. It should increment from the current modal version following the same convention as CSS
