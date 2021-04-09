@@ -1,3 +1,6 @@
+import Utils from './utils';
+
+
 class language {
 
     constructor(numberOfPayments) {
@@ -22,22 +25,26 @@ class language {
 
     getLanguageLocale(lang){
       const northAmericaRegion = ['US', 'CA', 'MX', 'IN', 'GU', 'PR', 'AS', 'MP', 'VI', '', null, undefined];
-      let coreLang = lang.split('-')[0].substring(0,2).toLowerCase();
+      let countryCode = document.sezzleCountryCode;
       if(this._checkIfLanguageIsValid(lang)) {
-        let locale = lang.split('-')[1];
-        if(northAmericaRegion.indexOf(locale) > -1){
+        if(northAmericaRegion.indexOf(countryCode) > -1){
           return {
             region:'US',
-            locale: 'US',
-            language: coreLang,
+            language: lang.split("-")[0],
             error: null
-
           };
         } else {
+          var language = null;
+          if(!lang.split("-")[1]){
+            if (lang==="en") {
+              language = "en-GB"
+            } else {
+              language = this._checkIfLanguageIsValid(`${lang}-${lang.toUpperCase()}`) ? `${lang}-${lang.toUpperCase()}`: lang;
+            }
+          }
           return {
             region:'EU',
-            locale: locale,
-            language: lang,
+            language: language || lang,
             error: null
           };
         }
@@ -50,7 +57,7 @@ class language {
 
     getTranslation() {
       if(this._checkIfLanguageIsValid(this._language)){
-        const langVar =  this.getLanguageLocale(this._language);
+        const langVar = this.getLanguageLocale(this._language);
         if(langVar.error === null && this._translations[langVar.language] !== undefined) {
           return this._translations[langVar.language];      
         }  
@@ -60,35 +67,23 @@ class language {
   
     setLanguage(lang) {
       const typeOfLanguageOption = typeof(lang);
-      if(!this._checkIfLanguageIsValid(lang)) {
+      let languageCovertedToString = typeOfLanguageOption === "string" ? lang : (typeOfLanguageOption === "function" ? lang() : null);
+      let locale = typeOfLanguageOption === "string" || typeOfLanguageOption === "function" ?  this.getLanguageLocale(languageCovertedToString)  : {error: 'Invalid language'};
+      if (languageCovertedToString === null || locale.error != null || !this._checkIfLanguageIsValid(languageCovertedToString)){
         this._language = this._browserLanguage;
       } else {
-        switch(typeOfLanguageOption) {
-          case "string":
-            let locale = this.getLanguageLocale(lang);
-            if(locale.error === null && locale.region === "US"){
-              this._language = locale.language;
-            } else {
-              this._language = lang;
-            }
-            break;
-          case "function":
-            this._language = lang();
-            break;
-          default:
-            this._language = this._browserLanguage;
-            break;
-        }
+        this._language = locale.language
       }
       document.sezzleLanguage = this._language;
     }
+
+
   
     _checkIfLanguageIsValid(lang) {
-      const coreLang =  lang.split("-")[0];
       let validityCounter =  0;
       let availableLanguages = Object.getOwnPropertyNames(this._translations);
       availableLanguages.forEach(l=>{
-        if(l === coreLang) validityCounter++;
+        if(l === lang) validityCounter++;
       });
       return validityCounter>0;
     }

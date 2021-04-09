@@ -20,6 +20,7 @@ class SezzleJS {
    */
   async init() {
     this._countryCode = await this._getCountryCodeFromIP();
+    document.sezzleCountryCode  = this._countryCode;
     if (
       this._configInst.configGroups.length
       && (this._configInst.forcedShow || this._configInst.supportedCountryCodes.includes(this._countryCode))

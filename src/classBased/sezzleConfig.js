@@ -459,7 +459,7 @@ class sezzleConfig {
   /**
    * @description map config group props
    */
-  _setConfigGroups() {
+   _setConfigGroups() {
     this.sezzleConfig.configGroups = [];
     this.options.configGroups.forEach((configGroup) => {
       this.sezzleConfig.configGroups

@@ -91,6 +91,7 @@ class Utils {
   static getGeoIpBaseUrl() {
     return document.geoIpBaseUrl || 'https://geoip.sezzle.com';
   }
+
 }
 
 // eslint-disable-next-line import/prefer-default-export

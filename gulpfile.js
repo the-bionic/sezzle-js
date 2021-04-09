@@ -264,7 +264,7 @@ gulp.task('post-modal-to-wrapper-eu', function(done){
  * Tasks for the sezzle-js widget
  */
 
-gulp.task('bundlejs', function () {
+gulp.task('bundlejs', function (done) {
   return gulp.src('src/classBased/sezzle-init.js')
     .pipe(webpack({
       module: {
@@ -290,6 +290,7 @@ gulp.task('bundlejs', function () {
       mode: 'production'
     }))
     .pipe(gulp.dest('dist/'));
+    
 });
 
 gulp.task('upload-widget', function (done) {
