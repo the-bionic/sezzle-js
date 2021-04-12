@@ -14,6 +14,7 @@ class sezzleConfig {
       'forcedShow',
       'minPrice',
       'maxPrice',
+      'modalTheme',
       'numberOfPayments',
       'altLightboxHTML',
       'apModalHTML',
@@ -42,6 +43,7 @@ class sezzleConfig {
       affirmModalHTML: null,
       klarnaModalHTML: null,
       supportedCountryCodes: null,
+      modalTheme: 'default',
       // noTracking: null,
       // noGtm: null,
       countryCode: null,
@@ -277,6 +279,7 @@ class sezzleConfig {
       numberOfPayments: this.options.numberOfPayments || 4,
       minPrice: this.options.minPrice || 0,
       maxPrice: this.options.maxPrice || 250000,
+      modalTheme: this.options.modalTheme || 'default',
       altModalHTML: this.options.altLightboxHTML || '',
       apModalHTML: this.options.apModalHTML || '',
       qpModalHTML: this.options.qpModalHTML || '',
@@ -289,6 +292,7 @@ class sezzleConfig {
     };
 
     this.sezzleConfig = { ...this.sezzleConfig, ...modifiedSezzleConfig };
+    document.sezzleModalTheme = modifiedSezzleConfig.modalTheme;
   }
 
   _languageSetter() {
@@ -431,8 +435,14 @@ class sezzleConfig {
       result.imageClassName = 'szl-light-image';
       break;
     default:
-      result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg';
-      result.imageClassName = 'szl-light-image';
+      const bgTheme = Utils.predictBackgroundtheme();
+      if (bgTheme == 'dark') {
+        result.imageURL = configGroup.imageUrl ||  'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg';
+        result.imageClassName = 'szl-dark-image';
+      } else {
+        result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg';
+        result.imageClassName = 'szl-light-image';
+      }
       break;
     }
     result.hideClasses = configGroup.hideClasses || (this.options.defaultConfig && this.options.defaultConfig.hideClasses) || [];
