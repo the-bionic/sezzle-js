@@ -141,9 +141,7 @@ class Modal {
         modalLanguage = 'en';
       }
       let sezzleModalToGet;
-      if(document.sezzleDefaultModalVersion === "sezzle-modal-3.0.0-{%%s%%}.html"){
-        sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', "en")}`;
-      } else if(document.sezzleDefaultModalVersion === "sezzle-modal-3.0.1-{%%s%%}.html"){
+      if(document.sezzleDefaultModalVersion === "sezzle-modal-3.0.0-{%%s%%}.html" || document.sezzleDefaultModalVersion === "sezzle-modal-3.0.1-{%%s%%}.html"){
         sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', "en")}`;
       } else {
         sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', modalLanguage)}`;
