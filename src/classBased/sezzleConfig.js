@@ -61,6 +61,7 @@ class sezzleConfig {
     };
 
     this._modifySezzleConfig();
+    this.supportedCountryCodesDefault = Utils.getWidgetBaseUrl() === 'https://widget.eu.sezzle.com' ? ['DE'] : ['US', 'CA', 'IN', 'GU', 'PR', 'VI', 'AS', 'MP'];
   }
 
   /**
@@ -285,7 +286,7 @@ class sezzleConfig {
       qpModalHTML: this.options.qpModalHTML || '',
       affirmModalHTML: this.options.affirmModalHTML || '',
       klarnaModalHTML: this.options.klarnaModalHTML || '',
-      supportedCountryCodes: this.options.supportedCountryCodes || ['US', 'CA', 'IN', 'GU', 'PR', 'VI', 'AS', 'MP'],
+      supportedCountryCodes: this.options.supportedCountryCodes || this.supportedCountryCodesDefault,
       // noTracking: !!this.options.noTracking,
       // noGtm: !!this.options.noGtm,
       parseMode: this.options.parseMode || '',
