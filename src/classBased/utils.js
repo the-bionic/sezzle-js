@@ -119,7 +119,7 @@ class Utils {
     0.114 * (b * b)
     );
     // Using the HSP value, determine whether the color is light or dark
-    return hsp>127.5 ? 'light' : 'dark';
+    return hsp > 134 ? 'light' : 'dark';
   }
 
 }
