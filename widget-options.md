@@ -444,6 +444,14 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 **Options**: false, true<br/>
 **Default**: false
 
+`modalTheme` (optional)
+
+**Purpose**: Option used for toggling between grayscale and default modal. 
+**Type**: string <br/>
+**Options**: 'grayscale', 'default'<br/>
+**Default**: 'default'<br/>
+**Additional Details**: Works only on modal version 3.0.0 & 3.0.1 
+
 <!--
 ## Status Definitions:
 

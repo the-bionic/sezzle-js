@@ -14,6 +14,7 @@ class sezzleConfig {
       'forcedShow',
       'minPrice',
       'maxPrice',
+      'modalTheme',
       'numberOfPayments',
       'altLightboxHTML',
       'apModalHTML',
@@ -42,6 +43,7 @@ class sezzleConfig {
       affirmModalHTML: null,
       klarnaModalHTML: null,
       supportedCountryCodes: null,
+      modalTheme: 'default',
       // noTracking: null,
       // noGtm: null,
       countryCode: null,
@@ -56,8 +58,8 @@ class sezzleConfig {
         countryFromIPRequestURL: `${Utils.getGeoIpBaseUrl()}/v1/geoip/ipdetails`,
         cssForMerchantURL: `${Utils.getWidgetBaseUrl()}/v1/css/price-widget?uuid=${options.merchantID}`,
       },
-    };
-
+    };   
+    this.supportedCountryCodesDefault = Utils.getWidgetBaseUrl() === 'https://widget.eu.sezzle.com' ? ['DE'] : ['US', 'CA', 'IN', 'GU', 'PR', 'VI', 'AS', 'MP'];
     this._modifySezzleConfig();
   }
 
@@ -277,18 +279,18 @@ class sezzleConfig {
       numberOfPayments: this.options.numberOfPayments || 4,
       minPrice: this.options.minPrice || 0,
       maxPrice: this.options.maxPrice || 250000,
+      modalTheme: this.options.modalTheme || 'default',
       altModalHTML: this.options.altLightboxHTML || '',
       apModalHTML: this.options.apModalHTML || '',
       qpModalHTML: this.options.qpModalHTML || '',
       affirmModalHTML: this.options.affirmModalHTML || '',
       klarnaModalHTML: this.options.klarnaModalHTML || '',
-      supportedCountryCodes: this.options.supportedCountryCodes || ['US', 'CA', 'IN', 'GU', 'PR', 'VI', 'AS', 'MP'],
-      // noTracking: !!this.options.noTracking,
-      // noGtm: !!this.options.noGtm,
+      supportedCountryCodes: this.options.supportedCountryCodes || this.supportedCountryCodesDefault,
       parseMode: this.options.parseMode || '',
     };
 
     this.sezzleConfig = { ...this.sezzleConfig, ...modifiedSezzleConfig };
+    document.sezzleModalTheme = modifiedSezzleConfig.modalTheme;
   }
 
   _languageSetter() {
@@ -431,8 +433,14 @@ class sezzleConfig {
       result.imageClassName = 'szl-light-image';
       break;
     default:
-      result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg';
-      result.imageClassName = 'szl-light-image';
+      const bgTheme = Utils.predictBackgroundtheme();
+      if (bgTheme == 'dark') {
+        result.imageURL = configGroup.imageUrl ||  'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg';
+        result.imageClassName = 'szl-dark-image';
+      } else {
+        result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg';
+        result.imageClassName = 'szl-light-image';
+      }
       break;
     }
     result.hideClasses = configGroup.hideClasses || (this.options.defaultConfig && this.options.defaultConfig.hideClasses) || [];
@@ -459,7 +467,7 @@ class sezzleConfig {
   /**
    * @description map config group props
    */
-  _setConfigGroups() {
+   _setConfigGroups() {
     this.sezzleConfig.configGroups = [];
     this.options.configGroups.forEach((configGroup) => {
       this.sezzleConfig.configGroups

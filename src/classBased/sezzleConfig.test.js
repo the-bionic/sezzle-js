@@ -152,7 +152,6 @@ describe('Constructor correctly sets the parameters', () => {
       };
       const sz = new SezzleConfig(oldConfig).getSezzleConfig;
       for (var i = 0, len = sz.configGroups[i].length; i < len; i++) {
-        console.log('********', sz.configGroups[i])
         expect(sz.configGroups[i].ignoredPriceElements)
           .toEqual([['#id', '.class']]);
       }

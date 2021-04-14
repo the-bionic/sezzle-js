@@ -3,7 +3,8 @@ function includeCSS(callback) {
   var link = document.createElement('link');
   link.type = 'text/css';
   link.rel = 'stylesheet';
-  link.href = `modals-${process.env.VERSION}/modal.scss`;
+  theme = (process.env.VERSION === '3.0.0' || process.env.VERSION === '3.0.1') ? (document.sezzleModalTheme || 'default') : 'default';
+  link.href = theme === 'grayscale' ? `modals-${process.env.VERSION}/modal_grayscale.scss`:`modals-${process.env.VERSION}/modal.scss`
   head.appendChild(link);
   link.onload = callback;
   link.onerror = callback;

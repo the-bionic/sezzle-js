@@ -1,5 +1,5 @@
-export const Translations = {
-    en: [
+const Translations = {
+    "en": [
       {id: "sezzle-header", text: "Sezzle it now."},
       {id: "desktop-header", text: "Pay us back later."},
       {id: "mobile-header", text: "Pay us back later."},
@@ -23,7 +23,7 @@ export const Translations = {
       {id: "mobile-footer-2", text: "at checkout!"},
       {id: "terms", text: "Subject to approval."},
     ],
-    fr: [
+    "fr": [
       {id: "sezzle-header", text: "Sezzlez maintenant."},
       {id: "desktop-header", text: "Payez-nous plus tard."},
       {id: "mobile-header", text: "Payez-nous plus tard."},
@@ -47,7 +47,7 @@ export const Translations = {
       {id: "mobile-footer-2", text: "au moment de régler"},
       {id: "terms", text: "Sous réserve d'approbation."}, 
     ],
-    de:[
+    "de":[
       {id: "sezzle-header", text: "Jetzt Sezzlen."},
       {id: "desktop-header", text: "Später zahlen."},
       {id: "mobile-header", text: "Später zahlen."},
@@ -71,7 +71,7 @@ export const Translations = {
       {id: "mobile-footer-2", text: "beim Checkout wählen!"},
       {id: "terms", text: "Vorbehaltlich unserer Zustimmung."},
     ],
-    es:[
+    "es":[
       {id: "sezzle-header", text: "Sezzle ahora."},
       {id: "desktop-header", text: "Páganos más tarde."},
       {id: "mobile-header", text: "Páganos más tarde."},
@@ -94,5 +94,76 @@ export const Translations = {
       {id: "mobile-footer-1", text: "¡Simplemente seleccione Sezzle"},
       {id: "mobile-footer-2", text: "al finalizar la compra!"},
       {id: "terms", text: "Sujeto a aprobación."},
+    ],
+    "en-GB": [
+      {id: "tagline", text: "fast and secure"},
+      {id: "desktop-header-1", text: "Pay only a part of your"},
+      {id: "desktop-header-2", text: "order today."},
+      {id: "mobile-header", text: "Pay only a part of your order today."},
+      {id: "checkmark-1", text: "4 easy payments"},
+      {id: "checkmark-2", text: "Free of charge"},
+      {id: "checkmark-3", text: "Less than a minute to setup"},
+      {id: "pie-1", text: "today"},
+      {id: "pie-2", text: "next"},
+      {id: "pie-3", text: "2nd"},
+      {id: "pie-4", text: "3rd"},
+      {id: "pie-5", text: "month"},
+      {id: "pie-6", text: "month"},
+      {id: "pie-7", text: "month"},
+      {id: "mobile-base-1", text: "check-regular (4)"},
+      {id: "mobile-base-2", text: "4 easy payments"},
+      {id: "checkmark-4", text: "check-regular (1)"},
+      {id: "checkmark-5", text: "Free of charge"},
+      {id: "highlight", text: "Less than a minute to setup"},
+      {id: "footer-1", text: "Select Sezzle at checkout"},
+      {id: "footer-2", text: "to split your payment into 4"},
+    ],
+    "fr-FR": [
+        {id: "tagline", text: "rapide et sécurisé"},
+        {id: "desktop-header-1", text: "Ne payez qu'une fraction de votre commande"},
+        {id: "desktop-header-2", text:  "aujourd'hui."},
+        {id: "mobile-header", text:  "Ne payez qu'une fraction de votre commande aujourd'hui."},
+        {id: "checkmark-1", text:  "4 paiements abordables"},
+        {id: "checkmark-2", text:  "Gratuit"},
+        {id: "checkmark-3", text:  "Configurer prend moins d'une minute"},
+        {id: "pie-1", text: "À l'achat"},
+        {id: "pie-2", text:  "Dans 1"},
+        {id: "pie-3", text:  "Dans 2"},
+        {id: "pie-4", text:  "Dans 3"},
+        {id: "pie-5", text:  "mois"},
+        {id: "pie-6", text:  "mois"},
+        {id: "pie-7", text:  "mois"},
+        {id: "mobile-base-1", text:  "check-regular (4)"},
+        {id: "mobile-base-2", text:  "4 paiements abordables"},
+        {id: "checkmark-4", text:  "check-regular (1)"},
+        {id: "checkmark-5", text:  "Gratuit"},
+        {id: "highlight", text:  "Configurer prend moins d'une minute"},
+        {id: "footer-1", text:  "Sélectionnez Sezzle au passage"},
+        {id: "footer-2", text:  "en caisse pour payer en 4 fois"},
+    ],
+    "de-DE": [
+        {id: "tagline", text:  "schnell und sicher"},
+        {id: "desktop-header-1", text:  "Heute nur einen kleinen"},
+        {id: "desktop-header-2", text:  "Teil des Gesamtpreises zahlen."},
+        {id: "mobile-header", text:  "Heute nur einen kleinen Teil des Gesamtpreises zahlen."},
+        {id: "checkmark-1", text:  "4 einfache Raten"},
+        {id: "checkmark-2", text:  "Kostenfrei"},
+        {id: "checkmark-3", text:  "weniger als 1 Minute"},
+        {id: "pie-1", text:  "heute"},
+        {id: "pie-2", text:  "nachsten"},
+        {id: "pie-3", text:  "im 2."},
+        {id: "pie-4", text:  "im 3."},
+        {id: "pie-5", text:  "Monat"},
+        {id: "pie-6", text:  "Monat"},
+        {id: "pie-7", text:  "Monat"},
+        {id: "mobile-base-1", text:  "check-regular (4)"},
+        {id: "mobile-base-2", text:  "4 einfache Raten"},
+        {id: "checkmark-4", text:  "check-regular (1)"},
+        {id: "checkmark-5", text:  "Kostenfrei"},
+        {id: "highlight", text:  "weniger als 1 Minute"},
+        {id: "footer-1", text:  "Einfach Sezzle"},
+        {id: "footer-2", text:  "beim Zahlvorgang wählen!"},
     ]
   }
+
+  export default Translations;

@@ -1,8 +1,12 @@
+import Utils from './utils';
+
+
 class language {
 
     constructor(numberOfPayments) {
       this._numberOfPayments  = numberOfPayments;
-      this._defaultLanguage = "en";
+      this._isEU = Utils.getWidgetBaseUrl() === 'https://widget.eu.sezzle.com';
+      this._defaultLanguage = this._isEU ? "en-GB" : "en";
       this._translations = {
         'en': `or ${this._numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
         'fr': `ou ${this._numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
@@ -19,33 +23,41 @@ class language {
     _setBrowserLanguage() {
       this._browserLanguage = navigator.language || navigator.browserLanguage || this._defaultLanguage
     }
-  
+
     getTranslation() {
-      if(this._checkIfLanguageIsValid(this._language)){
-        return this._translations[this._language];
-      }
-      return this._translations[this._defaultLanguage];
+      return this._translations[this._language];
     }
   
     setLanguage(lang) {
-      const typeOfLanguageOption = typeof(lang);
-      if(!this._checkIfLanguageIsValid(lang)) {
-        this._language = this._browserLanguage;
+      let language;
+      if(typeof(lang) === 'function') {
+        language = lang();
       } else {
-        switch(typeOfLanguageOption) {
-          case "string":
-            this._language = lang;
-            break;
-          case "function":
-            this._language = lang();
-            break;
-          default:
-            this._language = this._browserLanguage;
-            break;
+        language = lang;
+      }
+      if (!language || typeof(language) !== 'string') {
+        this._language = this._defaultLanguage ;
+        return;
+      }
+      const langCode = language.substring(0,2).toLowerCase();
+      const locale = language.split('-')[1];
+      if (this._isEU) {
+        if(locale && this._checkIfLanguageIsValid(language)) {
+          this._language = language;
+        } else if(this._checkIfLanguageIsValid(`${langCode}-${langCode.toUpperCase()}`)) {
+          this._language = `${langCode}-${langCode.toUpperCase()}`;
+        } else {
+          this._language = this._defaultLanguage;
         }
+      } else if(this._checkIfLanguageIsValid(langCode)) {
+        this._language = langCode;
+      } else {
+        this._language = this._defaultLanguage;
       }
       document.sezzleLanguage = this._language;
     }
+
+
   
     _checkIfLanguageIsValid(lang) {
       let validityCounter =  0;
