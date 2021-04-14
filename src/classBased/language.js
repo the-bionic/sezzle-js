@@ -5,7 +5,8 @@ class language {
 
     constructor(numberOfPayments) {
       this._numberOfPayments  = numberOfPayments;
-      this._defaultLanguage = "en";
+      this._isEU = Utils.getWidgetBaseUrl() === 'https://widget.eu.sezzle.com';
+      this._defaultLanguage = this._isEU ? "en-GB" : "en";
       this._translations = {
         'en': `or ${this._numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
         'fr': `ou ${this._numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
@@ -23,56 +24,35 @@ class language {
       this._browserLanguage = navigator.language || navigator.browserLanguage || this._defaultLanguage
     }
 
-    getLanguageLocale(lang){
-      const northAmericaRegion = ['US', 'CA', 'MX', 'IN', 'GU', 'PR', 'AS', 'MP', 'VI', '', null, undefined];
-      let countryCode = document.sezzleCountryCode;
-      if(this._checkIfLanguageIsValid(lang)) {
-        if(northAmericaRegion.indexOf(countryCode) > -1){
-          return {
-            region:'US',
-            language: lang.split("-")[0],
-            error: null
-          };
-        } else {
-          var language = null;
-          if(!lang.split("-")[1]){
-            if (lang==="en") {
-              language = "en-GB"
-            } else {
-              language = this._checkIfLanguageIsValid(`${lang}-${lang.toUpperCase()}`) ? `${lang}-${lang.toUpperCase()}`: lang;
-            }
-          }
-          return {
-            region:'EU',
-            language: language || lang,
-            error: null
-          };
-        }
-      } else {
-        return {
-          error: 'Invalid language'
-        };
-      }
-    }
-
     getTranslation() {
-      if(this._checkIfLanguageIsValid(this._language)){
-        const langVar = this.getLanguageLocale(this._language);
-        if(langVar.error === null && this._translations[langVar.language] !== undefined) {
-          return this._translations[langVar.language];      
-        }  
-      }
-      return this._translations[this._defaultLanguage];
+      return this._translations[this._language];
     }
   
     setLanguage(lang) {
-      const typeOfLanguageOption = typeof(lang);
-      let languageCovertedToString = typeOfLanguageOption === "string" ? lang : (typeOfLanguageOption === "function" ? lang() : null);
-      let locale = typeOfLanguageOption === "string" || typeOfLanguageOption === "function" ?  this.getLanguageLocale(languageCovertedToString)  : {error: 'Invalid language'};
-      if (languageCovertedToString === null || locale.error != null || !this._checkIfLanguageIsValid(languageCovertedToString)){
-        this._language = this._browserLanguage;
+      let language;
+      if(typeof(lang) === 'function') {
+        language = lang();
       } else {
-        this._language = locale.language
+        language = lang;
+      }
+      if (!language || typeof(language) !== 'string') {
+        this._language = this._defaultLanguage ;
+        return;
+      }
+      const langCode = language.substring(0,2).toLowerCase();
+      const locale = language.split('-')[1];
+      if (this._isEU) {
+        if(locale && this._checkIfLanguageIsValid(language)) {
+          this._language = language;
+        } else if(this._checkIfLanguageIsValid(`${langCode}-${langCode.toUpperCase()}`)) {
+          this._language = `${langCode}-${langCode.toUpperCase()}`;
+        } else {
+          this._language = this._defaultLanguage;
+        }
+      } else if(this._checkIfLanguageIsValid(langCode)) {
+        this._language = langCode;
+      } else {
+        this._language = this._defaultLanguage;
       }
       document.sezzleLanguage = this._language;
     }

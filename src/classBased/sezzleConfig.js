@@ -58,10 +58,9 @@ class sezzleConfig {
         countryFromIPRequestURL: `${Utils.getGeoIpBaseUrl()}/v1/geoip/ipdetails`,
         cssForMerchantURL: `${Utils.getWidgetBaseUrl()}/v1/css/price-widget?uuid=${options.merchantID}`,
       },
-    };
-
-    this._modifySezzleConfig();
+    };   
     this.supportedCountryCodesDefault = Utils.getWidgetBaseUrl() === 'https://widget.eu.sezzle.com' ? ['DE'] : ['US', 'CA', 'IN', 'GU', 'PR', 'VI', 'AS', 'MP'];
+    this._modifySezzleConfig();
   }
 
   /**
@@ -287,8 +286,6 @@ class sezzleConfig {
       affirmModalHTML: this.options.affirmModalHTML || '',
       klarnaModalHTML: this.options.klarnaModalHTML || '',
       supportedCountryCodes: this.options.supportedCountryCodes || this.supportedCountryCodesDefault,
-      // noTracking: !!this.options.noTracking,
-      // noGtm: !!this.options.noGtm,
       parseMode: this.options.parseMode || '',
     };
 
