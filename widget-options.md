@@ -327,19 +327,20 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 **Type**: number<br/>
 **Default**: 250000
 
-<!-- `noTracking` (optional) **deprecated**
+`noTracking` (optional)
 
 **Purpose**: Enables or disables Sezzle tracking used to monitor widget health and conversion analytics.<br/>
 **Type**: boolean<br/>
 **Options**: false, true<br/>
-**Default**: false -->
+**Default**: false
 
-<!-- `noGtm` (optional) **deprecated**
+`noGtm` (optional)
 
 **Purpose**: Enables or disables Google Analytics tracking click events for Sezzle reporting.<br/>
 **Type**: boolean<br/>
 **Options**: false, true<br/>
-**Default**: false -->
+**Default**: false
+
 <!--
 `bannerURL` (optional) **deprecation in process**
 
@@ -446,11 +447,11 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 
 `modalTheme` (optional)
 
-**Purpose**: Option used for toggling between grayscale and default modal. 
+**Purpose**: Option used for toggling between grayscale and default modal.
 **Type**: string <br/>
 **Options**: 'grayscale', 'default'<br/>
 **Default**: 'default'<br/>
-**Additional Details**: Works only on modal version 3.0.0 & 3.0.1 
+**Additional Details**: Works only on modal version 3.0.0 & 3.0.1
 
 <!--
 ## Status Definitions:

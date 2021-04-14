@@ -31,10 +31,10 @@ class SezzleJS {
    * Also logs initGTMScript event if condition matches
    */
   async initializeWidget() {
-    Utils.logEvent('sezzle-widget-request', this._configInst);
+    Utils.logEvent('request', this._configInst);
     await this._loadCSS();
     this._renderAwesomeSezzle.initializeRendering();
-    if(document.sezzleDefaultModalVersion === "sezzle-modal-3.0.0-{%%s%%}.html"){
+    if(document.sezzleDefaultModalVersion === "sezzle-modal-3.0.0-{%%s%%}.html" || document.sezzleDefaultModalVersion === "sezzle-modal-3.0.1-{%%s%%}.html"){
       var modal = new Modal
       modal.changeInnerHTML()
     }
