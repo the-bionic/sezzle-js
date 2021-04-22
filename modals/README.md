@@ -103,7 +103,8 @@ Follow the same process as for javascript.
 - Identify 75-100 merchants for a test batch.
 - Pull a report of the merchants' original versions in case we need to roll back.
 - Format the list of UUIDs as an array.
-- In `widget-server/deploy/production.deploy.yaml`, write a CRON job to update the applicable version(s), using the UUID array as the "include" list for the job.
+- In `widget-server/internal/batch`, write a CRON job to update the applicable version(s), using the UUID array as the "include" list for the job.
+	- You will need to list the job name in `widget-server/main.go`.
 - Open a merge request and reach out to someone with Approver access to review and merge.
 - Once the job is merged to Production, go to <a href="https://deploy.sso.sezzle.com/jobs" target="_blank">https://deploy.sso.sezzle.com/jobs</a>, find the job name, and click Run Job.
 - Manually review these merchants to confirm the update was successful and widgets are still working as expected, following the same checklist as well.
@@ -115,7 +116,7 @@ Follow the same process as for javascript.
 	- Resolve any errors and run again. Repeat until there are no errors.
 - Identify any merchants with deprecated config options or other version-specific requirements.
 	- If the merchant is no longer an active account, the config option is obsolete, or the config can be rewritten to no longer require the old config option, update the config accordingly.
-	- If the merchant must remain on the older widget version for any reason, add their UUID to a new array in `widget-server/deploy/production.deploy.yaml`.
+	- If the merchant must remain on the older widget version for any reason, add their UUID to a new array in `widget-server/internal/batch`.
 - Update the CRON job to update the applicable version(s), using the UUID array as the "exclude" list for the job.
 - Open a merge request and reach out to someone with Approver access to review and merge.
 - Once the job is merged to Production, go to <a href="https://deploy.sso.sezzle.com/jobs" target="_blank">https://deploy.sso.sezzle.com/jobs</a>, find the job name, and click Run Job.
