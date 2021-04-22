@@ -360,7 +360,7 @@ p {
 
 .sezzle-hiw-pie-bg {
     box-sizing: border-box;
-    height: 115px;
+    height: 120px;
     width: 360px;
     background-color: white;
     box-shadow: -1px 2px 15px 0px rgba(0,0,0,0.23);
@@ -380,10 +380,10 @@ p {
 
 .sezzle-hiw-pie-bg .breakdown-row {
     text-align: left;
-    width: 250px;
-    padding-left: .9rem;
+    width: 257px;
+    padding-left: 0.3rem;
     justify-content: space-between;
-    margin-top: .8rem;
+    margin-top: 1.1rem;
     position: absolute;
 }
 
@@ -399,36 +399,33 @@ p {
     color: #382757;
 }
 
-.sezzle-hiw-pie-bg .breakdown-row .breakdown.highlight-breakdown span {
+.sezzle-hiw-pie-bg .breakdown-row .breakdown.highlight-breakdown + span {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1.5;
-    font-size: .6rem;
+    font-size: 0.6rem;
     line-height: 12px;
     color: #382757;
+    text-align: center;
 }
-
-.sezzle-hiw-pie-bg .breakdown-row .highlight-breakdown.french span {
-    font-size: .5rem;
+  
+.sezzle-hiw-pie-bg .breakdown-row .highlight-breakdown.french + span {
+    font-size: 0.5rem;
     color: #382757;
+    text-align: center;
 }
 
-.sezzle-hiw-pie-bg .breakdown-row span {
+.sezzle-hiw-pie-bg .breakdown-row .breakdown-date {
     color: #6f6f6f;
-    font-size: .6rem;
+    font-size: 0.6rem;
     line-height: 1.2;
     font-weight: 600;
     margin: 0;
-}
-
+    text-align: center;
+    margin-top: 0.3rem;
+  }
 
 @media screen and (max-width: 767px) {
-
-    .sezzle-hiw-pie-bg .breakdown-row span {
-        font-size: .2rem;
-        line-height: 16px;
-    }
-
     .sezzle-hiw-pie-bg .breakdown-row .breakdown {
         font-size: 1rem;
         line-height: .6rem;
@@ -554,4 +551,8 @@ p {
 .checkmark {
     margin-right: .5rem;
     display: inline-block;
+}
+
+.direction-column {
+    flex-direction: column;
 }
