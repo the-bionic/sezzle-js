@@ -13,6 +13,7 @@ $font-family: Comfortaa;
 p {
     margin-block-start: 0;
     margin-block-end: 0;
+    font-family: Comfortaa;
 }
 
 @mixin absolute-center {
@@ -36,8 +37,8 @@ p {
 .sezzle-checkout-modal-hidden {
     width: 100%;
     height: 100%;
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
+    padding-right: 24px;
+    padding-left: 24px;
     -webkit-font-smoothing: antialiased;
 
     @media screen and (min-width: 0px) and (max-width: $breakpoint-minimum) {
@@ -283,9 +284,26 @@ p {
         color: #047066;
         margin: 2px auto 10px;
         line-height: 1.4;
+        font-family: $font-family;
+
+        .desktop-only {
+            font-size: 24px;
+            font-weight: bold;
+            color: #047066;
+            margin: 2px auto 10px;
+            line-height: 1.4;
+            font-family: $font-family;
+
+            @media screen and (max-width: $breakpoint-small ){
+                margin-bottom: 12px;
+                font-size: 16px;
+                font-weight: bold;
+                color: #047066;
+            }
+        }
 
         @media screen and (max-width: $breakpoint-small ){
-            margin-bottom: .7rem;
+            margin-bottom: 12px;
             font-size: 16px;
             font-weight: bold;
             color: #047066;
@@ -364,8 +382,8 @@ p {
     width: 360px;
     background-color: white;
     box-shadow: -1px 2px 15px 0px rgba(0,0,0,0.23);
-    border-radius: 5rem;
-    padding: 1rem 3.7rem 1rem 3rem;
+    border-radius: 80px;
+    padding: 15px 52px 16px 48px;
     margin: 15px auto 30px;
     position: relative;
 
@@ -381,16 +399,16 @@ p {
 .sezzle-hiw-pie-bg .breakdown-row {
     text-align: left;
     width: 257px;
-    padding-left: 0.3rem;
+    padding-left: 5px;
     justify-content: space-between;
-    margin-top: 1.1rem;
+    margin-top: 18px;
     position: absolute;
 }
 
 .sezzle-hiw-pie-bg .breakdown-row .breakdown {
     line-height: 15px;
     color: #6f6f6f;
-    font-size: 1.2rem;
+    font-size: 20px;
     font-weight: bold;
     margin: 0px;
 }
@@ -403,44 +421,45 @@ p {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1.5;
-    font-size: 0.6rem;
+    font-size: 10px;
     line-height: 12px;
     color: #382757;
     text-align: center;
 }
   
 .sezzle-hiw-pie-bg .breakdown-row .highlight-breakdown.french + span {
-    font-size: 0.5rem;
+    font-size: 8px;
     color: #382757;
     text-align: center;
 }
 
 .sezzle-hiw-pie-bg .breakdown-row .breakdown-date {
     color: #6f6f6f;
-    font-size: 0.6rem;
+    font-size: 10px;
     line-height: 1.2;
     font-weight: 600;
     margin: 0;
     text-align: center;
-    margin-top: 0.3rem;
+    margin-top: 5px;
+    font-family: $font-family;
   }
 
 @media screen and (max-width: 767px) {
     .sezzle-hiw-pie-bg .breakdown-row .breakdown {
-        font-size: 1rem;
-        line-height: .6rem;
+        font-size: 16px;
+        line-height: 10px;
     }
 }
 
 @media screen and (max-width: 800px) and (min-width: $breakpoint-small) {
 
     .sezzle-hiw-pie-bg .breakdown-row span {
-        font-size: .5rem;
+        font-size: 8px;
         line-height: 10px;
     }
 
     .sezzle-hiw-pie-bg .breakdown-row .breakdown {
-        font-size: 1rem;
+        font-size: 16px;
         line-height: 15px;
     }
 }
@@ -448,32 +467,33 @@ p {
 @media screen and (max-width: $breakpoint-small) {
 
     .sezzle-hiw-pie-bg {
-        margin-top: 2rem;
-        margin-bottom: 1rem;
+        margin-top: 32px;
+        margin-bottom: 16px;
         width: 310px;
-        padding: 1rem 2.7rem 1rem 2rem;
+        padding: 16px 44px 16px 32px;
     }
 
     .sezzle-hiw-pie-bg .breakdown-row {
         width: 235px;
-        padding-left: 0.5rem;
-        margin-top: 0.5rem;
+        padding-left: 8px;
+        margin-top: 8px;
     }
 
     .sezzle-hiw-pie-bg .breakdown-row span {
-        font-size: .5rem;
+        font-size: 8px;
         line-height: 10px;
     }
 
     .sezzle-hiw-pie-bg .breakdown-row .breakdown {
-        font-size: 1rem;
+        font-size: 16px;
         line-height: 15px;
+        font-family: 'Comfortaa';
     }
 }
 
 .sezzle-highlights.desktop-only {
-    padding-top: 1.7rem;
-    padding-bottom: .8rem;
+    padding-top: 28px;
+    padding-bottom: 13px;
 }
 
 .sezzle-highlights {
@@ -481,20 +501,20 @@ p {
     justify-content: space-evenly;
     align-items: center;
     font-weight: 600;
-    padding-top: .8rem;
+    padding-top: 13px;
     
     @media screen and (max-width: $breakpoint-small) {
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
         text-align: left;
-        margin-bottom: 1rem;
+        margin-bottom: 16px;
 
         .sezzle-highlight {
             display: flex;
-            margin-block-end: .7rem;
-            margin-block-start: .7rem;
-            padding: 0 1rem;
+            margin-block-end: 12px;
+            margin-block-start: 12px;
+            padding: 0 16px;
         }
     }
 }
@@ -502,11 +522,11 @@ p {
 .tagline {
     text-transform: uppercase;
     font-weight: normal;
-    font-size: .8rem;
+    font-size: 13px;
     letter-spacing: 2.5;
     text-align: center;
     margin-bottom: 0;
-    margin-top: 1.2rem;
+    margin-top: 20px;
     color: #6f6f6f;
 
     @media screen and (max-width: $breakpoint-small) {
@@ -549,7 +569,7 @@ p {
 }
 
 .checkmark {
-    margin-right: .5rem;
+    margin-right: 8px;
     display: inline-block;
 }
 
