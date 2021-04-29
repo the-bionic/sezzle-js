@@ -70,6 +70,7 @@ class Utils {
       this.httpRequestWrapper('post', trackingURL, {
         event_name: eventName,
         merchant_uuid: _configInstance.merchantID,
+        merchant_site: window.location.hostname
       });
     }
   }
