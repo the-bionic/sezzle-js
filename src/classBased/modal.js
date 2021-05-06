@@ -64,7 +64,7 @@ class Modal {
   }
 
   changeInnerHTML() {
-    if(document.sezzleLanguage !== "en"){
+    if(document.sezzleLanguage !== "en" || document.sezzleLanguage === undefined){
       window.setTimeout(()=>{
        let toBeEditedNodes  = document.getElementsByClassName('sezzle-fill');
        Array.prototype.forEach.call(toBeEditedNodes, (el, i) => {
