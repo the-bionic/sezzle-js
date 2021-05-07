@@ -95,9 +95,7 @@ class Utils {
 
   static predictBackgroundtheme() {
     var color =  window.getComputedStyle(document.body).getPropertyValue("background-color");
-    // Removing white spaces from color eg: rgba(0, 0, 0, 0) becomes rgba(0,0,0,0)
-    color = color.replace(/ +/g, "") 
-    if(color  === 'transparent' || color === 'rgba(0,0,0,0)') {
+    if(color  === 'transparent' || color === 'rgba(0, 0, 0, 0)') {
       return 'light'
     }
     // Variables for red, green, blue values
