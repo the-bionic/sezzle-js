@@ -334,7 +334,7 @@ class sezzleDOMFunctions {
     }
     let isComma = false;
     if (priceOnly.indexOf(',') > -1 && priceOnly.indexOf('.') > -1) {
-      isComma = priceOnly.indexOf(',') > priceOnly.indexOf('.');
+      isComma = priceOnly.lastIndexOf(',') > priceOnly.lastIndexOf('.');
     } else if (priceOnly.indexOf(',') > -1) {
       isComma = priceOnly[priceOnly.length - 3] === ',';
     } else if (priceOnly.indexOf('.') > -1) {
