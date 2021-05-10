@@ -95,7 +95,7 @@ class Utils {
 
   static predictBackgroundtheme() {
     var color =  window.getComputedStyle(document.body).getPropertyValue("background-color");
-    if(color  === 'transparent') {
+    if(color  === 'transparent' || color === 'rgba(0, 0, 0, 0)') {
       return 'light'
     }
     // Variables for red, green, blue values
