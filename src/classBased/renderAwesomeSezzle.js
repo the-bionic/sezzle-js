@@ -96,7 +96,13 @@ class renderAwesomeSezzle {
     for (let index = 0, len = this._config.configGroups.length; index < len; index++) {
       this._sezzleDOMInst._hideSezzleHideElements(index);
     }
+
     setTimeout(() => this._sezzleWidgetCheckInterval(), this._intervalInMs);
+    // Hiding additional elements eg:-  `sezzle-`
+    elementToHide = document.getElementsByClassName('sezzle-')[0]
+    if(elementToHide) {
+      elementToHide.classList.add('sezzle-hidden')
+    }
   }
 
   /**
