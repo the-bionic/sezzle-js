@@ -352,7 +352,7 @@ class sezzleConfig {
     result.fontFamily = configGroup.fontFamily || (this.options.defaultConfig && this.options.defaultConfig.fontFamily) || 'inherit';
     result.textColor = configGroup.color || (this.options.defaultConfig && this.options.defaultConfig.color) || 'inherit';
     result.fontSize = configGroup.fontSize || (this.options.defaultConfig && this.options.defaultConfig.fontSize) || 14;
-    result.maxWidth = configGroup.maxWidth || (this.options.defaultConfig && this.options.defaultConfig.maxWidth) || 400; // pixels
+    result.maxWidth = configGroup.maxWidth || (this.options.defaultConfig && this.options.defaultConfig.maxWidth) || 485; // pixels
     result.fixedHeight = configGroup.fixedHeight || (this.options.defaultConfig && this.options.defaultConfig.fixedHeight) || 0; // pixels
     // This is used to get price of element
     result.priceElementClass = configGroup.priceElementClass || (this.options.defaultConfig && this.options.defaultConfig.priceElementClass) || 'sezzle-price-element';

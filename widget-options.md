@@ -260,7 +260,7 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 
 **Purpose**: Maximum width of the widget element in pixels.<br/>
 **Type**: number<br/>
-**Default**: 400<br/>
+**Default**: 485<br/>
 **Additional Details**: 200 to render the widget nicely on 2 lines, 120 for 3 lines.
 
 `marginTop` (optional)
