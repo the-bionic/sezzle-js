@@ -100,7 +100,7 @@ class renderAwesomeSezzle {
     setTimeout(() => this._sezzleWidgetCheckInterval(), this._intervalInMs);
     // Hiding additional elements eg:-  `sezzle-`
     elementToHide = document.getElementsByClassName('sezzle-')[0]
-    if(elementToHide) {
+    if(elementToHide && !elementToHide.classList.contains('sezzle-hidden')) {
       elementToHide.classList.add('sezzle-hidden')
     }
   }
