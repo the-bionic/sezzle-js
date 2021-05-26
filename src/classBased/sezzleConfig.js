@@ -408,6 +408,10 @@ class sezzleConfig {
       result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg';
       result.imageClassName = 'szl-dark-image';
       break;
+    case 'light':
+      result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg';
+      result.imageClassName = 'szl-light-image';
+      break;
     case 'grayscale':
       result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_Black.svg';
       result.imageClassName = 'szl-light-image';
