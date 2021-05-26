@@ -125,7 +125,9 @@ class Utils {
       b = color & 255;
     }
     // Luminance
-    const l = (r * 0.2126) + (g * 0.7152) + (b * 0.0722);
+    const lumin = (r * 0.2126) + (g * 0.7152) + (b * 0.0722);
+    // Lumosity
+    const lumos = (Math.max(r, g, b) + Math.min(r, g, b)) / 2;
     // HSP (Highly Sensitive Poo) equation
     const hsp = Math.sqrt(
       0.299 * (r * r)
@@ -133,7 +135,7 @@ class Utils {
       + 0.114 * (b * b),
     );
     // Using the HSP value, determine whether the color is light or dark
-    if (hsp <= 186.1669 || l <= 175) {
+    if (hsp <= 180 && lumin <= 180 && lumos <= 180) {
       return 'dark';
     }
     return 'light';
