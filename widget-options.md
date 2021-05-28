@@ -83,7 +83,8 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 **Purpose**: Updates the logo color to coordinate and contrast with different background colors of websites.<br/>
 **Type**: string<br/>
 **Options**: dark, light, grayscale, black-flat, white, white-flat, white-pill, purple-pill<br/>
-**Default**: 'light'
+**Default**: ''
+**Additional Details**: If theme is not specified, the widget will attempt to detect the background color and apply the appropriate contrasting logo.
 
 `scaleFactor` (optional) **obsolete**
 

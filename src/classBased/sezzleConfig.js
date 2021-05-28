@@ -396,7 +396,7 @@ class sezzleConfig {
     if (result.priceElements.length === 1) {
       result.hasPriceClassElement = true;
     }
-    result.theme = configGroup.theme || (this.options.defaultConfig && this.options.defaultConfig.theme) || 'light';
+    result.theme = configGroup.theme || (this.options.defaultConfig && this.options.defaultConfig.theme) || '';
     /* Theme can now be
       a) dark (for dark backgrounds)
       b) greyscale
@@ -437,9 +437,10 @@ class sezzleConfig {
       result.imageClassName = 'szl-light-image';
       break;
     default:
+      // eslint-disable-next-line no-case-declarations
       const bgTheme = Utils.predictBackgroundtheme();
-      if (bgTheme == 'dark') {
-        result.imageURL = configGroup.imageUrl ||  'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg';
+      if (bgTheme === 'dark') {
+        result.imageURL = configGroup.imageUrl || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor_WhiteWM.svg';
         result.imageClassName = 'szl-dark-image';
       } else {
         result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_FullColor.svg';
@@ -471,7 +472,7 @@ class sezzleConfig {
   /**
    * @description map config group props
    */
-   _setConfigGroups() {
+  _setConfigGroups() {
     this.sezzleConfig.configGroups = [];
     this.options.configGroups.forEach((configGroup) => {
       this.sezzleConfig.configGroups
