@@ -135,7 +135,7 @@ class Utils {
       + 0.114 * (b * b),
     );
     // Using the HSP value, determine whether the color is light or dark
-    if (hsp / 52.3424 < 3.44) {
+    if (hsp <= 180 && lumin <= 180 && lumos <= 180) {
       return 'dark';
     }
     return 'light';
