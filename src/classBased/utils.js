@@ -9,7 +9,7 @@ class Utils {
    * @param {string} method
    * @param {string} url
   */
-  
+
   static httpRequestWrapper(method, url, body = null) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -27,6 +27,7 @@ class Utils {
       xhr.onerror = function () {
         reject(new Error('Something went wrong, contact the Sezzle team!'));
       };
+      // eslint-disable-next-line no-unused-expressions
       body === null ? xhr.send() : xhr.send(JSON.stringify(body));
     });
   }
@@ -53,9 +54,9 @@ class Utils {
 
 
   static checkForCompetitorWidget() {
-    var count = 0;
+    let count = 0;
     Array.prototype.forEach.call(competitorClasses, (el) => {
-        if(document.getElementsByClassName(el)) count++;
+      if (document.getElementsByClassName(el)) count++;
     });
     return count > 0;
   }
@@ -70,7 +71,7 @@ class Utils {
       this.httpRequestWrapper('post', trackingURL, {
         event_name: eventName,
         merchant_uuid: _configInstance.merchantID,
-        merchant_site: window.location.hostname
+        merchant_site: window.location.hostname,
       });
     }
   }
@@ -94,38 +95,52 @@ class Utils {
   }
 
   static predictBackgroundtheme() {
-    var color =  window.getComputedStyle(document.body).getPropertyValue("background-color");
-    if(color  === 'transparent' || color === 'rgba(0, 0, 0, 0)') {
-      return 'light'
+    let color = window.getComputedStyle(document.body).getPropertyValue('background-color');
+    if (color === 'transparent' || color === 'rgba(0, 0, 0, 0)') {
+      return 'light';
     }
     // Variables for red, green, blue values
-    var r, g, b, hsp;
+    let r;
+    let g;
+    let b;
     // Check the format of the color, HEX or RGB?
     if (color.match(/^rgb/)) {
       // If RGB --> store the red, green, blue values in separate variables
       color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
-      r = color[1]; g = color[2]; b = color[3];
+      // eslint-disable-next-line prefer-destructuring
+      r = color[1];
+      // eslint-disable-next-line prefer-destructuring
+      g = color[2];
+      // eslint-disable-next-line prefer-destructuring
+      b = color[3];
     } else {
       // If hex --> Convert it to RGB
-      color = +("0x" + color.slice(1).replace( 
-      color.length < 5 && /./g, '$&$&'));
+      color = +(`0x${color.slice(1).replace(color.length < 5 && /./g, '$&$&')}`);
+      // eslint-disable-next-line no-bitwise
       r = color >> 16;
+      // eslint-disable-next-line no-bitwise
+      // eslint-disable-next-line no-mixed-operators
       g = color >> 8 & 255;
+      // eslint-disable-next-line no-bitwise
       b = color & 255;
     }
-    // HSP (Highly Sensitive Poo) equation 
-    hsp = Math.sqrt(
-    0.299 * (r * r) +
-    0.587 * (g * g) +
-    0.114 * (b * b)
+    // Luminance
+    const lumin = (r * 0.2126) + (g * 0.7152) + (b * 0.0722);
+    // Lumosity
+    const lumos = (Math.max(r, g, b) + Math.min(r, g, b)) / 2;
+    // HSP (Highly Sensitive Poo) equation
+    const hsp = Math.sqrt(
+      0.299 * (r * r)
+      + 0.587 * (g * g)
+      + 0.114 * (b * b),
     );
     // Using the HSP value, determine whether the color is light or dark
-    return hsp > 134 ? 'light' : 'dark';
+    if (hsp <= 180 && lumin <= 180 && lumos <= 180) {
+      return 'dark';
+    }
+    return 'light';
   }
-
 }
-
-
 
 // eslint-disable-next-line import/prefer-default-export
 // export const { httpRequestWrapper } = new Utils();
