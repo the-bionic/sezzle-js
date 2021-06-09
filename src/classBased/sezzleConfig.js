@@ -338,7 +338,7 @@ class sezzleConfig {
 
     result.alignment = configGroup.alignment || (this.options.defaultConfig && this.options.defaultConfig.alignment) || 'auto';
     result.widgetType = configGroup.widgetType || (this.options.defaultConfig && this.options.defaultConfig.widgetType) || 'product-page';
-    result.fontWeight = configGroup.fontWeight || (this.options.defaultConfig && this.options.defaultConfig.fontWeight) || 300;
+    result.fontWeight = configGroup.fontWeight || (this.options.defaultConfig && this.options.defaultConfig.fontWeight) || 500;
     result.lineHeight = configGroup.lineHeight || (this.options.defaultConfig && this.options.defaultConfig.lineHeight) || '13px';
     result.alignmentSwitchMinWidth = configGroup.alignmentSwitchMinWidth || (this.options.defaultConfig && this.options.defaultConfig.alignmentSwitchMinWidth); // pixels
     result.alignmentSwitchType = configGroup.alignmentSwitchType || (this.options.defaultConfig && this.options.defaultConfig.alignmentSwitchType);
