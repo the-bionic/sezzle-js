@@ -436,6 +436,10 @@ class sezzleConfig {
       result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_PurplePill.svg';
       result.imageClassName = 'szl-light-image';
       break;
+    case 'pride-pill':
+      result.imageURL = configGroup.imageUrl || (this.options.defaultConfig && this.options.defaultConfig.imageUrl) || 'https://media.sezzle.com/branding/2.0/Sezzle_Logo_Pride_PurplePill.svg';
+      result.imageClassName = 'szl-light-image';
+      break;
     default:
       // eslint-disable-next-line no-case-declarations
       const bgTheme = Utils.predictBackgroundtheme();
