@@ -203,7 +203,7 @@ As with targetXPath, prepend IDs with '#', classes with '.', and append tag name
 
 **Purpose**: Boldness of the widget text.<br/>
 **Type**: number<br/>
-**Default**: 300<br/>
+**Default**: 500<br/>
 **Additional Details**: 100 is the lightest, 900 is the boldest.
 <!--
 - **{textColor}** (Optional) - String -->
