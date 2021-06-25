@@ -119,6 +119,32 @@ class Modal {
     }
   }
 
+  modalKeyboardNavigation (){
+    let focusableElements = document.querySelector('.sezzle-checkout-modal-lightbox').querySelectorAll('[tabIndex="0"]');
+    let firstFocusableElement = focusableElements[0];
+    let lastFocusableElement = focusableElements[focusableElements.length - 1];
+    ///keeps tabbing withing modal when modal is rendered
+    document.addEventListener('keydown', function(event){
+        if(event.key === 'Tab'){
+            if(event.shiftKey && document.activeElement === firstFocusableElement){
+                lastFocusableElement.focus();
+                e.preventDefault()
+            } else if(document.activeElement === lastFocusableElement){
+                firstFocusableElement.focus();
+                e.preventDefault();
+            }
+        ///allows closing of modal with esc key
+        } else if(event.key === 'Escape') {
+            let modals = document.getElementsByClassName('sezzle-checkout-modal-lightbox');
+            for(let i = 0; i < modals.length; i++) {
+                modals[i].style.display = 'none';
+                
+            }
+            document.querySelector('.sezzle-checkout-button-wrapper').getElementsByTagName('button')[0].focus();
+        }
+    })
+}
+
   async _renderModal() {
     this._modalNode = document.createElement('div');
     if (!document.getElementsByClassName('sezzle-checkout-modal-lightbox').length) {
@@ -128,7 +154,7 @@ class Modal {
       this._modalNode.tabindex = 0;
       this._modalNode.role = 'dialog';
       this.modalNode.ariaModal= 'true';
-      this.modalNode.ariaLabel= 'Sezzle Information';
+      this.modalNode.ariaLabel= `${vendor} Information`;
       this._modalNode.style.maxHeight = '100%';
     } else {
       this._modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
@@ -155,7 +181,7 @@ class Modal {
     }
     document.getElementsByTagName('html')[0].appendChild(this._modalNode);
     this._closeSezzleModalHandler();
-    window.addEventListener('keydown', Utils.modalKeyboardNavigation());
+    window.addEventListener('keydown', this.modalKeyboardNavigation);
   }
 
   /**
@@ -194,7 +220,7 @@ class Modal {
         modalNode.tabIndex=0;
         modalNode.role = 'dialog';
         modalNode.ariaModal= 'true';
-        modalNode.ariaLabel= 'Sezzle Information';
+        modalNode.ariaLabel= `${vendor} Information`;
         modalNode.innerHTML = this._config[`${vendor}ModalHTML`] || '';
         document.getElementsByTagName('html')[0].appendChild(modalNode);
         // Event listener for close in modal

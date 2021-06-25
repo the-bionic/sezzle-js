@@ -346,8 +346,15 @@ $font-family: Comfortaa, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
         // always show x for mobile
         @media screen and (max-width: $breakpoint-small) {
-            opacity: 1;
+            opacity: 0.8;
+            &:focus {
+                opacity: 1;
+            }
         }
+
+        &:focus-visible {
+            outline: -webkit-focus-ring-color auto 1px;
+    }
     }
 }
 

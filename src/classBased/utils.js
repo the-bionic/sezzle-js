@@ -140,29 +140,6 @@ class Utils {
     }
     return 'light';
   }
-
-  modalKeyboardNavigation (){
-    let focusableElements = document.querySelector('.sezzle-checkout-modal-lightbox').querySelectorAll('[tabIndex="0"]');
-    let firstFocusableElement = focusableElements[0];
-    let lastFocusableElement = focusableElements[focusableElements.length - 1];
-    document.addEventListener('keydown', function(event){
-        if(event.key === 'Tab'){
-            if(event.shiftKey && document.activeElement === firstFocusableElement){
-                lastFocusableElement.focus();
-                e.preventDefault()
-            } else if(document.activeElement === lastFocusableElement){
-                firstFocusableElement.focus();
-                e.preventDefault();
-            }
-        } else if(event.key === 'Escape') {
-            let modals = document.getElementsByClassName('sezzle-checkout-modal-lightbox');
-            for(let i = 0; i < modals.length; i++) {
-                modals[i].style.display = 'none';
-            }
-            document.querySelector('.sezzle-checkout-button-wrapper').getElementsByTagName('button')[0].focus();
-        }
-    })
-}
 }
 
 // eslint-disable-next-line import/prefer-default-export
