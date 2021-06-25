@@ -125,8 +125,10 @@ class Modal {
       this._modalNode.className = 'sezzle-checkout-modal-lightbox close-sezzle-modal';
       this._modalNode.style.display = 'none';
       document.body.ariaHidden = false;
-      this._modalNode.tabindex = '-1';
+      this._modalNode.tabindex = 0;
       this._modalNode.role = 'dialog';
+      this.modalNode.ariaModal= 'true';
+      this.modalNode.ariaLabel= 'Sezzle Information';
       this._modalNode.style.maxHeight = '100%';
     } else {
       this._modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
@@ -153,6 +155,7 @@ class Modal {
     }
     document.getElementsByTagName('html')[0].appendChild(this._modalNode);
     this._closeSezzleModalHandler();
+    window.addEventListener('keydown', Utils.modalKeyboardNavigation());
   }
 
   /**
@@ -188,8 +191,10 @@ class Modal {
         modalNode.style = 'position: center';
         modalNode.style.display = 'none';
         document.body.ariaHidden = false;
-        modalNode.tabindex = '-1';
+        modalNode.tabIndex=0;
         modalNode.role = 'dialog';
+        modalNode.ariaModal= 'true';
+        modalNode.ariaLabel= 'Sezzle Information';
         modalNode.innerHTML = this._config[`${vendor}ModalHTML`] || '';
         document.getElementsByTagName('html')[0].appendChild(modalNode);
         // Event listener for close in modal
