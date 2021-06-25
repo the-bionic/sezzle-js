@@ -154,7 +154,7 @@ class Modal {
       this._modalNode.tabindex = 0;
       this._modalNode.role = 'dialog';
       this.modalNode.ariaModal= 'true';
-      this.modalNode.ariaLabel= `${vendor} Information`;
+      this.modalNode.ariaLabel= 'Sezzle Information';
       this._modalNode.style.maxHeight = '100%';
     } else {
       this._modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
@@ -181,7 +181,7 @@ class Modal {
     }
     document.getElementsByTagName('html')[0].appendChild(this._modalNode);
     this._closeSezzleModalHandler();
-    window.addEventListener('keydown', this.modalKeyboardNavigation);
+    window.addEventListener('keydown', this.modalKeyboardNavigation());
   }
 
   /**

@@ -188,7 +188,7 @@ class renderAwesomeSezzle {
         const infoIconNode = document.createElement('button');
         infoIconNode.role = 'button';
         infoIconNode.type = 'button';
-        infoIconNode.title = 'Learn More about Sezzle';
+        infoIconNode.ariaLabel = 'Learn More about Sezzle';
         infoIconNode.className = 'sezzle-info-icon';
         infoIconNode.innerHTML = '&#9432;';
         infoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
@@ -242,7 +242,7 @@ class renderAwesomeSezzle {
         const affirmInfoIconNode = document.createElement('button');
         affirmInfoIconNode.role = 'button';
         affirmInfoIconNode.type = 'button';
-        affirmInfoIconNode.title = 'Learn More about Affirm';
+        affirmInfoIconNode.ariaLabel = 'Learn More about Affirm';
         affirmInfoIconNode.className = 'affirm-modal-info-link no-sezzle-info';
         affirmInfoIconNode.innerHTML = '&#9432;';
         affirmInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
@@ -254,7 +254,7 @@ class renderAwesomeSezzle {
         affirmAnchor.href = this._config.affirmLink;
         affirmAnchor.target = '_blank';
         const affirmLinkIconNode = document.createElement('code');
-        affirmLinkIconNode.title = 'Open Affirm in a new tab';
+        affirmLinkIconNode.ariaLabel = 'Open Affirm in a new tab';
         affirmLinkIconNode.className = 'affirm-info-link';
         affirmLinkIconNode.innerHTML = '&#9432;';
         affirmAnchor.appendChild(affirmLinkIconNode);
@@ -298,7 +298,7 @@ class renderAwesomeSezzle {
         const apInfoIconNode = document.createElement('button');
         apInfoIconNode.role = 'button';
         apInfoIconNode.type = 'button';
-        apInfoIconNode.title = 'Learn More about Afterpay';
+        apInfoIconNode.ariaLabel = 'Learn More about Afterpay';
         apInfoIconNode.className = 'ap-modal-info-link no-sezzle-info';
         apInfoIconNode.innerHTML = '&#9432;';
         apInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
@@ -310,7 +310,7 @@ class renderAwesomeSezzle {
         apAnchor.href = this._config.configGroups[configGroupIndex].apLink;
         apAnchor.target = '_blank';
         const apLinkIconNode = document.createElement('code');
-        apLinkIconNode.title = 'Open Afterpay in a new tab';
+        apLinkIconNode.ariaLabel = 'Open Afterpay in a new tab';
         apLinkIconNode.className = 'ap-info-link';
         apLinkIconNode.innerHTML = '&#9432;';
         apAnchor.appendChild(apLinkIconNode);
@@ -351,7 +351,7 @@ class renderAwesomeSezzle {
         const klarnaInfoIconNode = document.createElement('button');
         klarnaInfoIconNode.role = 'button';
         klarnaInfoIconNode.type = 'button';
-        klarnaInfoIconNode.title = 'Learn More about Klarna';
+        klarnaInfoIconNode.ariaLabel = 'Learn More about Klarna';
         klarnaInfoIconNode.className = 'klarna-modal-info-link no-sezzle-info';
         klarnaInfoIconNode.innerHTML = '&#9432;';
         klarnaInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
@@ -395,7 +395,7 @@ class renderAwesomeSezzle {
         const quadpayInfoIconNode = document.createElement('button');
         quadpayInfoIconNode.role = 'button';
         quadpayInfoIconNode.type = 'button';
-        quadpayInfoIconNode.title = 'Learn More about Quadpay';
+        quadpayInfoIconNode.ariaLabel = 'Learn More about Quadpay';
         quadpayInfoIconNode.className = 'qp-modal-info-link no-sezzle-info';
         quadpayInfoIconNode.innerHTML = '&#9432;';
         quadpayInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
