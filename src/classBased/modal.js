@@ -2,7 +2,7 @@
 import Utils from './utils';
 
 import Translations from './modalTranslations';
-import Language from './language'
+import Language from './language';
 
 class Modal {
   constructor(config) {
@@ -63,17 +63,18 @@ class Modal {
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   changeInnerHTML() {
-    if(document.sezzleLanguage !== "en"){
-      window.setTimeout(()=>{
-       let toBeEditedNodes  = document.getElementsByClassName('sezzle-fill');
-       Array.prototype.forEach.call(toBeEditedNodes, (el, i) => {
-        let translatedArray = Translations[document.sezzleLanguage]
-        el.innerText =  translatedArray[i].text
-       })
-      },100)
-     }
-   }
+    if (document.sezzleLanguage !== 'en') {
+      window.setTimeout(() => {
+        const toBeEditedNodes = document.getElementsByClassName('sezzle-fill');
+        Array.prototype.forEach.call(toBeEditedNodes, (el, i) => {
+          const translatedArray = Translations[document.sezzleLanguage];
+          el.innerText = translatedArray[i].text;
+        });
+      }, 100);
+    }
+  }
 
   _addClickEventForOtherVendors() {
     this._vendorsSupportedForDualInstall.forEach((vendor) => {
@@ -119,31 +120,31 @@ class Modal {
     }
   }
 
-  modalKeyboardNavigation (){
-    let focusableElements = document.querySelector('.sezzle-checkout-modal-lightbox').querySelectorAll('[tabIndex="0"]');
-    let firstFocusableElement = focusableElements[0];
-    let lastFocusableElement = focusableElements[focusableElements.length - 1];
-    ///keeps tabbing withing modal when modal is rendered
-    document.addEventListener('keydown', function(event){
-        if(event.key === 'Tab'){
-            if(event.shiftKey && document.activeElement === firstFocusableElement){
-                lastFocusableElement.focus();
-                e.preventDefault()
-            } else if(document.activeElement === lastFocusableElement){
-                firstFocusableElement.focus();
-                e.preventDefault();
-            }
-        ///allows closing of modal with esc key
-        } else if(event.key === 'Escape') {
-            let modals = document.getElementsByClassName('sezzle-checkout-modal-lightbox');
-            for(let i = 0; i < modals.length; i++) {
-                modals[i].style.display = 'none';
-                
-            }
-            document.querySelector('.sezzle-checkout-button-wrapper').getElementsByTagName('button')[0].focus();
+  // eslint-disable-next-line class-methods-use-this
+  modalKeyboardNavigation() {
+    const focusableElements = document.querySelector('.sezzle-checkout-modal-lightbox').querySelectorAll('[tabIndex="0"]');
+    const firstFocusableElement = focusableElements[0];
+    const lastFocusableElement = focusableElements[focusableElements.length - 1];
+    // keeps tabbing withing modal when modal is rendered
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Tab') {
+        if (event.shiftKey && document.activeElement === firstFocusableElement) {
+          lastFocusableElement.focus();
+          event.preventDefault();
+        } else if (document.activeElement === lastFocusableElement) {
+          firstFocusableElement.focus();
+          event.preventDefault();
         }
-    })
-}
+        // allows closing of modal with esc key
+      } else if (event.key === 'Escape') {
+        const modals = document.getElementsByClassName('sezzle-checkout-modal-lightbox');
+        for (let i = 0; i < modals.length; i++) {
+          modals[i].style.display = 'none';
+        }
+        document.querySelector('.sezzle-checkout-button-wrapper').getElementsByTagName('button')[0].focus();
+      }
+    });
+  }
 
   async _renderModal() {
     this._modalNode = document.createElement('div');
@@ -153,8 +154,8 @@ class Modal {
       document.body.ariaHidden = false;
       this._modalNode.tabindex = 0;
       this._modalNode.role = 'dialog';
-      this.modalNode.ariaModal= 'true';
-      this.modalNode.ariaLabel= 'Sezzle Information';
+      this.modalNode.ariaModal = 'true';
+      this.modalNode.ariaLabel = 'Sezzle Information';
       this._modalNode.style.maxHeight = '100%';
     } else {
       this._modalNode = document.getElementsByClassName('sezzle-checkout-modal-lightbox')[0];
@@ -171,8 +172,8 @@ class Modal {
         modalLanguage = 'en';
       }
       let sezzleModalToGet;
-      if(document.sezzleDefaultModalVersion === "sezzle-modal-3.0.0-{%%s%%}.html" || document.sezzleDefaultModalVersion === "sezzle-modal-3.0.1-{%%s%%}.html"){
-        sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', "en")}`;
+      if (document.sezzleDefaultModalVersion === 'sezzle-modal-3.0.0-{%%s%%}.html' || document.sezzleDefaultModalVersion === 'sezzle-modal-3.0.1-{%%s%%}.html') {
+        sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', 'en')}`;
       } else {
         sezzleModalToGet = `${this._config.apiEndpoints.sezzleAssetsCDN}${document.sezzleDefaultModalVersion.replace('{%%s%%}', modalLanguage)}`;
       }
@@ -217,10 +218,10 @@ class Modal {
         modalNode.style = 'position: center';
         modalNode.style.display = 'none';
         document.body.ariaHidden = false;
-        modalNode.tabIndex=0;
+        modalNode.tabIndex = 0;
         modalNode.role = 'dialog';
-        modalNode.ariaModal= 'true';
-        modalNode.ariaLabel= `${vendor} Information`;
+        modalNode.ariaModal = 'true';
+        modalNode.ariaLabel = `${vendor} Information`;
         modalNode.innerHTML = this._config[`${vendor}ModalHTML`] || '';
         document.getElementsByTagName('html')[0].appendChild(modalNode);
         // Event listener for close in modal
