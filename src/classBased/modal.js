@@ -2,7 +2,6 @@
 import Utils from './utils';
 
 import Translations from './modalTranslations';
-import Language from './language';
 
 class Modal {
   constructor(config) {
