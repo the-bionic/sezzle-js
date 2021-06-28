@@ -177,7 +177,7 @@ class renderAwesomeSezzle {
         const learnMoreNode = document.createElement('button');
         learnMoreNode.role = 'button';
         learnMoreNode.type = 'button';
-        learnMoreNode.title = 'Learn More about Sezzle';
+        learnMoreNode.ariaLabel = 'Learn More about Sezzle';
         learnMoreNode.className = 'sezzle-learn-more';
         const learnMoreText = document.createTextNode('Learn more');
         learnMoreNode.appendChild(learnMoreText);
@@ -191,6 +191,7 @@ class renderAwesomeSezzle {
         infoIconNode.ariaLabel = 'Learn More about Sezzle';
         infoIconNode.className = 'sezzle-info-icon';
         infoIconNode.innerHTML = '&#9432;';
+        infoIconNode.ariaHasPopup='true';
         infoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
         sezzleButtonText.appendChild(infoIconNode);
         break;
@@ -199,7 +200,7 @@ class renderAwesomeSezzle {
         const questionMarkButton = document.createElement('button');
         questionMarkButton.role = 'button';
         questionMarkButton.type = 'button';
-        questionMarkButton.title = 'Learn More about Sezzle';
+        questionMarkButton.ariaLabel = 'Learn More about Sezzle';
         const questionMarkIconNode = document.createElement('img');
         questionMarkIconNode.className = 'sezzle-question-mark-icon';
         questionMarkIconNode.src = 'https://d2uyik3j5wol98.cloudfront.net/images/question_mark_black.png';
@@ -354,6 +355,7 @@ class renderAwesomeSezzle {
         klarnaInfoIconNode.ariaLabel = 'Learn More about Klarna';
         klarnaInfoIconNode.className = 'klarna-modal-info-link no-sezzle-info';
         klarnaInfoIconNode.innerHTML = '&#9432;';
+        klarnaInfoIconNode.ariaHasPopup='true';
         klarnaInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
         sezzleButtonText.appendChild(klarnaInfoIconNode);
         break;
@@ -398,6 +400,7 @@ class renderAwesomeSezzle {
         quadpayInfoIconNode.ariaLabel = 'Learn More about Quadpay';
         quadpayInfoIconNode.className = 'qp-modal-info-link no-sezzle-info';
         quadpayInfoIconNode.innerHTML = '&#9432;';
+        quadpayInfoIconNode.ariaHasPopup='true';
         quadpayInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
         sezzleButtonText.appendChild(quadpayInfoIconNode);
         break;
