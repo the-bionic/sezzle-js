@@ -560,7 +560,7 @@ p {
     }
 }
 
-.flex {
+.sezzle-flex {
     display: flex;
 }
 
@@ -568,7 +568,7 @@ p {
     justify-content: center;
 }
 
-.items-center {
+.sezzle-items-center {
     align-items: center
 }
 
@@ -577,6 +577,6 @@ p {
     display: inline-block;
 }
 
-.direction-column {
+.sezzle-direction-column {
     flex-direction: column;
 }
