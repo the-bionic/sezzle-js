@@ -179,6 +179,7 @@ class renderAwesomeSezzle {
         learnMoreNode.type = 'button';
         learnMoreNode.ariaLabel = 'Learn More about Sezzle';
         learnMoreNode.className = 'sezzle-learn-more';
+        learnMoreNode.ariaHasPopup='true';
         const learnMoreText = document.createTextNode('Learn more');
         learnMoreNode.appendChild(learnMoreText);
         sezzleButtonText.appendChild(learnMoreNode);
@@ -201,6 +202,7 @@ class renderAwesomeSezzle {
         questionMarkButton.role = 'button';
         questionMarkButton.type = 'button';
         questionMarkButton.ariaLabel = 'Learn More about Sezzle';
+        questionMarkButton.ariaHasPopup='true';
         const questionMarkIconNode = document.createElement('img');
         questionMarkIconNode.className = 'sezzle-question-mark-icon';
         questionMarkIconNode.src = 'https://d2uyik3j5wol98.cloudfront.net/images/question_mark_black.png';
@@ -246,6 +248,7 @@ class renderAwesomeSezzle {
         affirmInfoIconNode.ariaLabel = 'Learn More about Affirm';
         affirmInfoIconNode.className = 'affirm-modal-info-link no-sezzle-info';
         affirmInfoIconNode.innerHTML = '&#9432;';
+        affirmInfoIconNode.ariaHasPopup='true';
         affirmInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
         sezzleButtonText.appendChild(affirmInfoIconNode);
         break;
@@ -300,6 +303,7 @@ class renderAwesomeSezzle {
         apInfoIconNode.role = 'button';
         apInfoIconNode.type = 'button';
         apInfoIconNode.ariaLabel = 'Learn More about Afterpay';
+        apInfoIconNode.ariaHasPopup='true';
         apInfoIconNode.className = 'ap-modal-info-link no-sezzle-info';
         apInfoIconNode.innerHTML = '&#9432;';
         apInfoIconNode.style = `display: inline; width: auto; min-height: 9px; max-height: 20px; font-size: ${this._config.configGroups[configGroupIndex].fontSize}px;`;
