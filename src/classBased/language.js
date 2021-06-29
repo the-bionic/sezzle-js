@@ -3,23 +3,31 @@ import Utils from './utils';
 
 class language {
 
-    constructor(numberOfPayments) {
-      this._numberOfPayments  = numberOfPayments;
-      this._isEU = Utils.getWidgetBaseUrl() === 'https://widget.eu.sezzle.com';
-      this._defaultLanguage = this._isEU ? "en-GB" : "en";
-      this._translations = {
-        'en': `or ${this._numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
-        'fr': `ou ${this._numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
-        'de': `oder ${this._numberOfPayments} zinslose Zahlungen von je %%price%% mit %%logo%% %%info%%`,
-        'es': `o ${this._numberOfPayments} pagos sin intereses de %%price%% con %%logo%% %%info%%`,
-        'en-GB': `or ${this._numberOfPayments} payments of %%price%% with %%logo%% %%info%% - no fee`,
-        'fr-FR': `ou ${this._numberOfPayments} paiements de %%price%% avec %%logo%% %%info%% – pas de frais`,
-        'de-DE': `oder ${this._numberOfPayments} mal %%price%% mit %%logo%% %%info%% - kostenlos`,
-        'es-ES': `o ${this._numberOfPayments} cuotas de %%price%% con %%logo%% %%info%% - sin coste`,
-      };
-      this._language =  null;
-      this._browserLanguage = null;
-    }
+  constructor(numberOfPayments) {
+    this._numberOfPayments = numberOfPayments;
+    this._isEU = Utils.getWidgetBaseUrl() === 'https://widget.eu.sezzle.com';
+    this._defaultLanguage = this._isEU ? 'en-GB' : 'en';
+    this._translations = {
+      en: `or ${this._numberOfPayments} interest-free payments of %%price%% with %%logo%% %%info%%`,
+      fr: `ou ${this._numberOfPayments} paiements de %%price%% sans intérêts avec %%logo%% %%info%%`,
+      de: `oder ${this._numberOfPayments} zinslose Zahlungen von je %%price%% mit %%logo%% %%info%%`,
+      es: `o ${this._numberOfPayments} pagos sin intereses de %%price%% con %%logo%% %%info%%`,
+      'en-GB': `or ${this._numberOfPayments} payments of %%price%% with %%logo%% %%info%% - no fee`,
+      'fr-FR': `ou ${this._numberOfPayments} paiements de %%price%% avec %%logo%% %%info%% – pas de frais`,
+      'de-DE': `oder ${this._numberOfPayments} mal %%price%% mit %%logo%% %%info%% - kostenlos`,
+      'es-ES': `o ${this._numberOfPayments} cuotas de %%price%% con %%logo%% %%info%% - sin coste`,
+    };
+    this._language = null;
+    this._browserLanguage = null;
+  }
+
+  _setBrowserLanguage() {
+    this._browserLanguage = navigator.language || navigator.browserLanguage || this._defaultLanguage;
+  }
+
+  getTranslation() {
+    return this._translations[this._language];
+  }
 
   setLanguage(lang) {
     let language;
