@@ -432,7 +432,8 @@ p {
 }
   
 .sezzle-hiw-pie-bg .breakdown-row .highlight-breakdown.french + span {
-    font-size: 8px;
+    font-size: 9px;
+    margin-right: -10px;
     color: #382757;
     text-align: center;
 }
@@ -560,7 +561,7 @@ p {
     }
 }
 
-.flex {
+.sezzle-flex {
     display: flex;
 }
 
@@ -568,7 +569,7 @@ p {
     justify-content: center;
 }
 
-.items-center {
+.sezzle-items-center {
     align-items: center
 }
 
@@ -577,6 +578,6 @@ p {
     display: inline-block;
 }
 
-.direction-column {
+.sezzle-direction-column {
     flex-direction: column;
 }
