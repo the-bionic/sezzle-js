@@ -2,7 +2,6 @@ import Utils from './utils';
 
 
 class language {
-
   constructor(numberOfPayments) {
     this._numberOfPayments = numberOfPayments;
     this._isEU = Utils.getWidgetBaseUrl() === 'https://widget.eu.sezzle.com';
