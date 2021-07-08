@@ -122,7 +122,7 @@ p {
 
     .sezzle-header {
         margin: 0 auto;
-        width: 90%;
+        width: 70%;
         font-size: 28px;
         line-height: 32px;
         font-weight: 700;
@@ -130,6 +130,7 @@ p {
         @media screen and (max-width: $breakpoint-small) {
             font-size: 24px;
             margin: -10px auto 0;
+            width: 80%;
         }
 
         @media screen and (max-width: $breakpoint-small) {
